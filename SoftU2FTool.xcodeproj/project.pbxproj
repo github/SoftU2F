@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */; };
+		515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835E1E3803BE00F40024 /* DataReaderTests.swift */; };
+		515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835F1E3803BE00F40024 /* DataWriterTests.swift */; };
+		515E83631E38048C00F40024 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090441E37F90300F03AD3 /* CoreExtensions.swift */; };
+		515E83641E38048F00F40024 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090451E37F90300F03AD3 /* DataReader.swift */; };
+		515E83651E38049200F40024 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090461E37F90300F03AD3 /* DataWriter.swift */; };
+		515E83661E38049400F40024 /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090471E37F90300F03AD3 /* Endian.swift */; };
 		51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */; };
 		51F090121E37E8C600F03AD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090111E37E8C600F03AD3 /* ViewController.swift */; };
 		51F090141E37E8C600F03AD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F090131E37E8C600F03AD3 /* Assets.xcassets */; };
 		51F090171E37E8C600F03AD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51F090151E37E8C600F03AD3 /* Main.storyboard */; };
 		51F090221E37E8C600F03AD3 /* SoftU2FToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090211E37E8C600F03AD3 /* SoftU2FToolTests.swift */; };
+		51F090481E37F90300F03AD3 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090441E37F90300F03AD3 /* CoreExtensions.swift */; };
+		51F090491E37F90300F03AD3 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090451E37F90300F03AD3 /* DataReader.swift */; };
+		51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090461E37F90300F03AD3 /* DataWriter.swift */; };
+		51F0904B1E37F90300F03AD3 /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090471E37F90300F03AD3 /* Endian.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensionsTests.swift; path = DataTests/CoreExtensionsTests.swift; sourceTree = "<group>"; };
+		515E835E1E3803BE00F40024 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
+		515E835F1E3803BE00F40024 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
 		51F0900C1E37E8C600F03AD3 /* SoftU2FTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoftU2FTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51F090111E37E8C600F03AD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +48,10 @@
 		51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftU2FToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F090211E37E8C600F03AD3 /* SoftU2FToolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftU2FToolTests.swift; sourceTree = "<group>"; };
 		51F090231E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51F090441E37F90300F03AD3 /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensions.swift; path = Data/CoreExtensions.swift; sourceTree = "<group>"; };
+		51F090451E37F90300F03AD3 /* DataReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReader.swift; path = Data/DataReader.swift; sourceTree = "<group>"; };
+		51F090461E37F90300F03AD3 /* DataWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriter.swift; path = Data/DataWriter.swift; sourceTree = "<group>"; };
+		51F090471E37F90300F03AD3 /* Endian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endian.swift; path = Data/Endian.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +72,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		515E835C1E38038800F40024 /* DataTests */ = {
+			isa = PBXGroup;
+			children = (
+				515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */,
+				515E835E1E3803BE00F40024 /* DataReaderTests.swift */,
+				515E835F1E3803BE00F40024 /* DataWriterTests.swift */,
+			);
+			name = DataTests;
+			sourceTree = "<group>";
+		};
 		51F090031E37E8C500F03AD3 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +103,8 @@
 		51F0900E1E37E8C600F03AD3 /* SoftU2FTool */ = {
 			isa = PBXGroup;
 			children = (
+				51F090431E37F8F900F03AD3 /* Data */,
+				51F0902C1E37F7BA00F03AD3 /* APDU */,
 				51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */,
 				51F090111E37E8C600F03AD3 /* ViewController.swift */,
 				51F090131E37E8C600F03AD3 /* Assets.xcassets */,
@@ -87,10 +117,29 @@
 		51F090201E37E8C600F03AD3 /* SoftU2FToolTests */ = {
 			isa = PBXGroup;
 			children = (
+				515E835C1E38038800F40024 /* DataTests */,
 				51F090211E37E8C600F03AD3 /* SoftU2FToolTests.swift */,
 				51F090231E37E8C600F03AD3 /* Info.plist */,
 			);
 			path = SoftU2FToolTests;
+			sourceTree = "<group>";
+		};
+		51F0902C1E37F7BA00F03AD3 /* APDU */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = APDU;
+			sourceTree = "<group>";
+		};
+		51F090431E37F8F900F03AD3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				51F090441E37F90300F03AD3 /* CoreExtensions.swift */,
+				51F090451E37F90300F03AD3 /* DataReader.swift */,
+				51F090461E37F90300F03AD3 /* DataWriter.swift */,
+				51F090471E37F90300F03AD3 /* Endian.swift */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,10 +192,12 @@
 				TargetAttributes = {
 					51F0900B1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = VEKTX9H2N7;
 						ProvisioningStyle = Automatic;
 					};
 					51F0901C1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = VEKTX9H2N7;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 51F0900B1E37E8C600F03AD3;
 					};
@@ -195,8 +246,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51F090491E37F90300F03AD3 /* DataReader.swift in Sources */,
+				51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */,
 				51F090121E37E8C600F03AD3 /* ViewController.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
+				51F090481E37F90300F03AD3 /* CoreExtensions.swift in Sources */,
+				51F0904B1E37F90300F03AD3 /* Endian.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +259,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */,
+				515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */,
+				515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */,
+				515E83651E38049200F40024 /* DataWriter.swift in Sources */,
+				515E83631E38048C00F40024 /* CoreExtensions.swift in Sources */,
+				515E83641E38048F00F40024 /* DataReader.swift in Sources */,
+				515E83661E38049400F40024 /* Endian.swift in Sources */,
 				51F090221E37E8C600F03AD3 /* SoftU2FToolTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,7 +386,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
@@ -337,7 +401,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
@@ -351,7 +417,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
@@ -366,7 +434,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
@@ -395,6 +465,7 @@
 				51F090281E37E8C600F03AD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		51F090291E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2FToolTests" */ = {
 			isa = XCConfigurationList;
@@ -403,6 +474,7 @@
 				51F0902B1E37E8C600F03AD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
