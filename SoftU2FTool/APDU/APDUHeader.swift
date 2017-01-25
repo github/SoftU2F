@@ -58,7 +58,7 @@ struct APDUHeader {
                 let lc:UInt16 = try reader.read()
                 dataLength = Int(lc)
             }
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             throw APDUError.BadSize
         }
     }

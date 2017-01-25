@@ -27,13 +27,13 @@ class DataWriterTests: XCTestCase {
         
         do {
             try writer.writeData("AB".data(using: String.Encoding.utf8)!)
-        } catch CappedDataWriter.CDWError.MaxExceeded {
+        } catch CappedDataWriterError.MaxExceeded {
             // pass
         }
         
         do {
             try writer.write(UInt16(0x0102))
-        } catch CappedDataWriter.CDWError.MaxExceeded {
+        } catch CappedDataWriterError.MaxExceeded {
             // pass
         }
         

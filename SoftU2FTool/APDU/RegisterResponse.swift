@@ -40,7 +40,7 @@ struct RegisterResponse: APDUResponseDataProtocol {
             certificate = try reader.readData(certLen)
             
             signature = reader.rest
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             throw APDUError.BadSize
         }
     }

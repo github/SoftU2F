@@ -36,11 +36,11 @@ class DataWriter: DataWriterProtocol {
     }
 }
 
+enum CappedDataWriterError: Error {
+    case MaxExceeded
+}
+
 class CappedDataWriter: DataWriterProtocol {
-    enum CDWError: Error {
-        case MaxExceeded
-    }
-    
     var max: Int
     var buffer: Data { return writer.buffer }
     var isFinished: Bool { return buffer.count == max }
@@ -53,7 +53,7 @@ class CappedDataWriter: DataWriterProtocol {
     
     func write<T: EndianProtocol>(_ val:T, endian: Endian = .Big) throws {
         if buffer.count + MemoryLayout<T>.size > max {
-            throw CDWError.MaxExceeded
+            throw CappedDataWriterError.MaxExceeded
         }
         
         writer.write(val, endian: endian)
@@ -61,7 +61,7 @@ class CappedDataWriter: DataWriterProtocol {
     
     func writeData(_ d: Data) throws {
         if buffer.count + d.count > max {
-            throw CDWError.MaxExceeded
+            throw CappedDataWriterError.MaxExceeded
         }
         
         writer.writeData(d)

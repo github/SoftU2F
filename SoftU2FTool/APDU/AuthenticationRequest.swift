@@ -52,7 +52,7 @@ struct AuthenticationRequest: APDUCommandDataProtocol {
             applicationParameter = try reader.readData(U2F_APPID_SIZE)
             let khLen:UInt8 = try reader.read()
             keyHandle = try reader.readData(khLen)
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             throw APDUError.BadSize
         }
         

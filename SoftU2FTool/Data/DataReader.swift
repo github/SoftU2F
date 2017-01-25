@@ -8,12 +8,12 @@
 
 import Foundation
 
+enum DataReaderError: Error {
+    case End
+    case TypeError
+}
+
 class DataReader {
-    enum DRError: Error {
-        case End
-        case TypeError
-    }
-    
     let data: Data
     var offset: Int
 
@@ -30,7 +30,7 @@ class DataReader {
     
     // Read a number from the data, advancing our offset into the data.
     func read<T:EndianProtocol>(endian: Endian = .Big) throws -> T {
-        guard let val:T = peek(endian: endian) else { throw DRError.End }
+        guard let val:T = peek(endian: endian) else { throw DataReaderError.End }
         offset += MemoryLayout<T>.size
         return val
     }
@@ -47,9 +47,9 @@ class DataReader {
 
     // Read an enum from the data, advancing our offset into the data.
     func read<T:EndianEnumProtocol>(endian: Endian = .Big) throws -> T {
-        guard let raw:T.RawValue = peek()       else { throw DRError.End }
+        guard let raw:T.RawValue = peek()       else { throw DataReaderError.End }
         offset += MemoryLayout<T.RawValue>.size
-        guard let val:T = T.init(rawValue: raw) else { throw DRError.TypeError }
+        guard let val:T = T.init(rawValue: raw) else { throw DataReaderError.TypeError }
         return val
     }
 
@@ -93,7 +93,7 @@ class DataReader {
         let intN = Int(n.toIntMax())
 
         guard let d = peekData(intN) else {
-            throw DRError.End
+            throw DataReaderError.End
         }
 
         offset += intN

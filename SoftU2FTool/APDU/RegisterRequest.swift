@@ -26,7 +26,7 @@ struct RegisterRequest: APDUCommandDataProtocol {
         do {
             challengeParameter = try reader.readData(U2F_CHAL_SIZE)
             applicationParameter = try reader.readData(U2F_APPID_SIZE)
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             throw APDUError.BadSize
         }
 

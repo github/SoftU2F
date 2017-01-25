@@ -37,7 +37,7 @@ class DataReaderTests: XCTestCase {
         do {
             res = try reader.read()
             XCTAssert(false, "expected exception")
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             // pass
         }
         
@@ -71,7 +71,7 @@ class DataReaderTests: XCTestCase {
         do {
             res = try reader.read()
             XCTAssert(false, "expected exception")
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             // pass
         }
         
@@ -116,7 +116,7 @@ class DataReaderTests: XCTestCase {
         do {
             res = try reader.readData(4)
             XCTAssert(false, "expected exception")
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             // pass
         }
         
@@ -145,7 +145,7 @@ class DataReaderTests: XCTestCase {
         do {
             res = try reader.readData(UInt64(4))
             XCTAssert(false, "expected exception")
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             // pass
         }
         
@@ -187,7 +187,7 @@ class DataReaderTests: XCTestCase {
         do {
             p = try reader.read()
             XCTFail("expected an exception")
-        } catch DataReader.DRError.TypeError {
+        } catch DataReaderError.TypeError {
             // pass.
         }
         
@@ -198,7 +198,7 @@ class DataReaderTests: XCTestCase {
         do {
             p = try reader.read()
             XCTFail("expected an exception")
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             // pass
         }
     }

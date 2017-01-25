@@ -32,7 +32,7 @@ struct AuthenticationResponse: APDUResponseDataProtocol {
             userPresence = try reader.read()
             counter = try reader.read()
             signature = reader.rest
-        } catch DataReader.DRError.End {
+        } catch DataReaderError.End {
             throw APDUError.BadSize
         }
     }
