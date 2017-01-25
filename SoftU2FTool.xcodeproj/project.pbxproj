@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51203C391E39234000F661DF /* U2FHIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51203C381E39234000F661DF /* U2FHIDTests.swift */; };
 		51213EC01E383344005454E0 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2145F1E3823E7005B2864 /* SHA256.swift */; };
 		51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC11E3834F8005454E0 /* TestUtil.swift */; };
 		51213EC41E3904A8005454E0 /* SelfSignedCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */; };
+		51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC51E3916EB005454E0 /* U2FHID.swift */; };
+		51213EC71E3916EB005454E0 /* U2FHID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC51E3916EB005454E0 /* U2FHID.swift */; };
+		51213EDE1E391E9E005454E0 /* libsoftu2f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51213EC81E391720005454E0 /* libsoftu2f.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */; };
 		515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835E1E3803BE00F40024 /* DataReaderTests.swift */; };
 		515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835F1E3803BE00F40024 /* DataWriterTests.swift */; };
@@ -71,8 +75,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		51203C381E39234000F661DF /* U2FHIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FHIDTests.swift; sourceTree = "<group>"; };
 		51213EC11E3834F8005454E0 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfSignedCertificateTests.swift; sourceTree = "<group>"; };
+		51213EC51E3916EB005454E0 /* U2FHID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FHID.swift; sourceTree = "<group>"; };
+		51213EC81E391720005454E0 /* libsoftu2f.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsoftu2f.a; path = "../../Library/Developer/Xcode/DerivedData/SoftU2F-anxsjiaglenmrofviwcnmradlhmx/Build/Products/Debug/libsoftu2f.a"; sourceTree = "<group>"; };
 		515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensionsTests.swift; path = DataTests/CoreExtensionsTests.swift; sourceTree = "<group>"; };
 		515E835E1E3803BE00F40024 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
 		515E835F1E3803BE00F40024 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
@@ -122,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51213EDE1E391E9E005454E0 /* libsoftu2f.a in Frameworks */,
 				51E214461E381E0C005B2864 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +158,7 @@
 		518537C61E380FAE00600911 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				51213EC81E391720005454E0 /* libsoftu2f.a */,
 				51E214431E381B06005B2864 /* libcrypto.a */,
 				51A0DA161E3813B900152E9B /* libcrypto.a */,
 				51A0DA171E3813B900152E9B /* libssl.a */,
@@ -197,6 +206,7 @@
 				51F090111E37E8C600F03AD3 /* ViewController.swift */,
 				51E2145F1E3823E7005B2864 /* SHA256.swift */,
 				51E214611E382521005B2864 /* WebSafeBase64.swift */,
+				51213EC51E3916EB005454E0 /* U2FHID.swift */,
 				518537C21E380EF500600911 /* SelfSignedCertificate.m */,
 				518537C51E380F0A00600911 /* SelfSignedCertificate.h */,
 				518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */,
@@ -211,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				51E2145D1E3823E0005B2864 /* SHA256Tests.swift */,
+				51203C381E39234000F661DF /* U2FHIDTests.swift */,
 				51E214631E382529005B2864 /* WebSafeBase64Tests.swift */,
 				51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */,
 				51213EC11E3834F8005454E0 /* TestUtil.swift */,
@@ -366,6 +377,7 @@
 				518537B41E380C0A00600911 /* APDUMessageDataProtocol.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
 				51F090481E37F90300F03AD3 /* CoreExtensions.swift in Sources */,
+				51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */,
 				518537B21E380C0A00600911 /* APDUError.swift in Sources */,
 				518537B51E380C0A00600911 /* APDUMessageProtocol.swift in Sources */,
 				51E214601E3823E7005B2864 /* SHA256.swift in Sources */,
@@ -393,7 +405,9 @@
 				51E2144D1E3821F8005B2864 /* APDUResponse.swift in Sources */,
 				51E2144A1E3821F8005B2864 /* APDUHeader.swift in Sources */,
 				51E2145E1E3823E0005B2864 /* SHA256Tests.swift in Sources */,
+				51213EC71E3916EB005454E0 /* U2FHID.swift in Sources */,
 				51E2145C1E382380005B2864 /* APDUResponseTests.swift in Sources */,
+				51203C391E39234000F661DF /* U2FHIDTests.swift in Sources */,
 				51E2145B1E382380005B2864 /* APDUHeaderTests.swift in Sources */,
 				51E2144B1E3821F8005B2864 /* APDUMessageDataProtocol.swift in Sources */,
 				515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */,
@@ -544,6 +558,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/openssl/1.0.2j/lib,
+					/usr/local/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -571,6 +586,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/openssl/1.0.2j/lib,
+					/usr/local/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";

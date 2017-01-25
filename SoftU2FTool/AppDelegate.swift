@@ -10,12 +10,22 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    var u2fThread: Thread?
 
-  func applicationDidFinishLaunching(_ aNotification: Notification) {
-  }
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        U2FHID.shared?.handle(.Msg) { (_ msg:softu2f_hid_message) -> Bool in
+            print("received message!")
+            return true
+        }
 
-  func applicationWillTerminate(_ aNotification: Notification) {
-  }
+        if !(U2FHID.shared?.run() ?? false) {
+            print("Error starting U2FHID thread")
+        }
+    }
 
+    func applicationWillTerminate(_ aNotification: Notification) {
+        if !(U2FHID.shared?.stop() ?? false) {
+            print("Error stopping U2FHID thread")
+        }
+    }
 }
-
