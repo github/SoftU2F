@@ -23,15 +23,15 @@ struct APDUTrailer {
     
     let status: Status
     
-    var raw: NSData {
-        return NSData(int: status.rawValue)
+    var raw: Data {
+        return Data(int: status.rawValue)
     }
     
     init(data: APDUResponseDataProtocol) {
-        status = data.dynamicType.status
+        status = type(of: data).status
     }
     
-    init(raw: NSData) throws {
+    init(raw: Data) throws {
         let reader = DataReader(data: raw)
         status = try reader.read()
     }

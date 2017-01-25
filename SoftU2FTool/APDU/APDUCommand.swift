@@ -17,26 +17,25 @@ struct APDUCommand: APDUMessageProtocol {
     typealias DataType = APDUCommandDataProtocol
     
     let header: APDUHeader
-    let data: APDUCommandDataProtocol
+    let data: DataType
     
-    init(data d: APDUCommandDataProtocol) throws {
+    init(data d: DataType) throws {
         header = try APDUHeader(cmdData: d)
         data = d
     }
     
-    init(raw: NSData) throws {
+    init(raw: Data) throws {
         header = try APDUHeader(raw: raw)
         
         guard let cmdType = APDUCommand.commandTypeForCode(header.ins) else { throw APDUError.BadCode }
         
-        let dOffset = header.raw.length
-        let dRange = NSMakeRange(dOffset, raw.length - dOffset)
-        let dData = raw.subdataWithRange(dRange)
+        let dOffset = header.raw.count
+        let dData = raw.subdata(in: dOffset..<raw.count)
 
         data = try cmdType.init(raw: dData)
     }
     
-    var raw: NSData {
+    var raw: Data {
         let writer = DataWriter()
         writer.writeData(header.raw)
         writer.writeData(data.raw)
@@ -46,7 +45,7 @@ struct APDUCommand: APDUMessageProtocol {
     var registerRequest:       RegisterRequest?       { return data as? RegisterRequest }
     var authenticationRequest: AuthenticationRequest? { return data as? AuthenticationRequest }
     
-    static func commandTypeForCode(code: APDUHeader.CommandCode) -> APDUCommandDataProtocol.Type? {
+    static func commandTypeForCode(_ code: APDUHeader.CommandCode) -> DataType.Type? {
         return APDUCommandTypes.lazy.filter({ $0.cmdCode == code }).first
     }
 }

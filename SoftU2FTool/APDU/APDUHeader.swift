@@ -28,15 +28,15 @@ struct APDUHeader {
     let dataLength: Int
     
     init(cmdData: APDUCommandDataProtocol) throws {
-        cla = cmdData.dynamicType.cmdClass
-        ins = cmdData.dynamicType.cmdCode
+        cla = type(of: cmdData).cmdClass
+        ins = type(of: cmdData).cmdCode
         p1 = 0x00
         p2 = 0x00
-        dataLength = cmdData.raw.length
+        dataLength = cmdData.raw.count
         if dataLength > 0xFFFF { throw APDUError.BadSize }
     }
     
-    init(raw: NSData) throws {
+    init(raw: Data) throws {
         let reader = DataReader(data: raw)
         
         do {
@@ -58,12 +58,12 @@ struct APDUHeader {
                 let lc:UInt16 = try reader.read()
                 dataLength = Int(lc)
             }
-        } catch DataReader.Error.End {
+        } catch DataReader.DRError.End {
             throw APDUError.BadSize
         }
     }
     
-    var raw: NSData {
+    var raw: Data {
         let writer = DataWriter()
         
         writer.write(cla.rawValue)

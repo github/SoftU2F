@@ -10,8 +10,7 @@ import XCTest
 
 class DataReaderTests: XCTestCase {
     func testUInt8() throws {
-        var raw:[UInt8] = [0x00, 0x01, 0x02]
-        let data = Data(bytes: &raw, count: raw.count)
+        let data = Data(bytes: [0x00, 0x01, 0x02])
         let reader = DataReader(data: data, offset: 1)
         var ores:UInt8?
         var res:UInt8
@@ -46,8 +45,7 @@ class DataReaderTests: XCTestCase {
     }
     
     func testUInt16() throws {
-        var raw:[UInt8] = [0x00, 0x01, 0x02, 0x03, 0x04]
-        let data = Data(bytes: &raw, count: raw.count)
+        let data = Data(bytes: [0x00, 0x01, 0x02, 0x03, 0x04])
         let reader = DataReader(data: data, offset: 0)
         var ores:UInt16?
         var res:UInt16
@@ -81,8 +79,7 @@ class DataReaderTests: XCTestCase {
     }
     
     func testReadOptionalUInt8() {
-        var raw:[UInt8] = [0x00]
-        let data = Data(bytes: &raw, count: raw.count)
+        let data = Data(bytes: [0x00])
         let reader = DataReader(data: data)
         var ores:UInt8?
         
@@ -98,13 +95,12 @@ class DataReaderTests: XCTestCase {
     }
     
     func testReadBytes() throws {
-        var raw:[UInt8] = [0x00, 0x01, 0x02, 0x03, 0x04]
-        let data = Data(bytes: &raw, count: raw.count)
+        let data = Data(bytes: [0x00, 0x01, 0x02, 0x03, 0x04])
         let reader = DataReader(data: data, offset: 0)
         var ores: Data?
         var res: Data
         
-        let expected = data.subdata(in: 0..<3)
+        let expected = data.subdata(in: 0..<2)
         XCTAssertEqual(5, reader.remaining)
         ores = reader.peekData(2)
         XCTAssertEqual(ores, expected)
@@ -128,13 +124,12 @@ class DataReaderTests: XCTestCase {
     }
     
     func testReadBytesWithUIntArgs() throws {
-        var raw:[UInt8] = [0x00, 0x01, 0x02, 0x03, 0x04]
-        let data = Data(bytes: &raw, count: raw.count)
+        let data = Data(bytes: [0x00, 0x01, 0x02, 0x03, 0x04])
         let reader = DataReader(data: data, offset: 0)
         var ores: Data?
         var res: Data
         
-        let expected = data.subdata(in: 0..<3)
+        let expected = data.subdata(in: 0..<2)
         XCTAssertEqual(5, reader.remaining)
         ores = reader.peekData(UInt8(2))
         XCTAssertEqual(ores, expected)

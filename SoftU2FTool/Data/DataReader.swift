@@ -81,22 +81,33 @@ class DataReader {
     
     // Read an enum from the data, without advancing our offset into the data.
     func peek<T:EndianEnumProtocol>(endian: Endian = .Big) -> T? {
-        guard let raw:T.RawValue = peek() else { return nil }
+        guard let raw:T.RawValue = peek() else {
+            return nil
+        }
+
         return T.init(rawValue: raw)
     }
     
     // Read n bytes from the data, advancing our offset into the data.
     func readData<I:Integer>(_ n: I) throws -> Data {
         let intN = Int(n.toIntMax())
-        guard let d = peekData(intN) else { throw DRError.End }
+
+        guard let d = peekData(intN) else {
+            throw DRError.End
+        }
+
         offset += intN
         return d
     }
     
     // Read n bytes from the data, without advancing our offset into the data.
     func peekData<I:Integer>(_ n: I) -> Data? {
-        let intN = Int(n.toIntMax()) + 1
-        if remaining < intN { return nil }
-        return data.subdata(in: 0..<intN)
+        let intN = Int(n.toIntMax())
+
+        if remaining < intN {
+            return nil
+        }
+
+        return rest.subdata(in: 0..<intN)
     }
 }

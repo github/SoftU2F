@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum APDUError: ErrorType {
+enum APDUError: Error {
     case BadSize
     case BadClass
     case BadCode

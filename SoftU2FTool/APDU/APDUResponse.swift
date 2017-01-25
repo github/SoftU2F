@@ -14,7 +14,7 @@ struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol 
     let data: ResponseType
     let trailer: APDUTrailer
     
-    var raw: NSData {
+    var raw: Data {
         let writer = DataWriter()
         writer.writeData(data.raw)
         writer.writeData(trailer.raw)
@@ -26,7 +26,7 @@ struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol 
         trailer = APDUTrailer(data: data)
     }
     
-    init(raw: NSData) throws {
+    init(raw: Data) throws {
         let reader = DataReader(data: raw)
         
         let dData = try reader.readData(reader.remaining - 2)

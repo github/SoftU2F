@@ -9,11 +9,11 @@
 import Foundation
 
 protocol APDUMessageDataProtocol {
-    var raw: NSData { get }
-    init(raw: NSData) throws
+    var raw: Data { get }
+    init(raw: Data) throws
     
     func apduWrapped() throws -> APDUMessageProtocol
-    func bleWrapped()  throws -> BLEMessage
+    // func bleWrapped()  throws -> BLEMessage
 }
 
 protocol APDUCommandDataProtocol: APDUMessageDataProtocol {
@@ -28,10 +28,10 @@ extension APDUCommandDataProtocol {
     }
     
     // Register request wrapped in BLE packets.
-    func bleWrapped()  throws -> BLEMessage {
-        let apdu = try apduWrapped()
-        return BLEMessage(command: .Msg, data: apdu.raw)
-    }
+    // func bleWrapped()  throws -> BLEMessage {
+    //    let apdu = try apduWrapped()
+    //    return BLEMessage(command: .Msg, data: apdu.raw)
+    // }
 }
 
 protocol APDUResponseDataProtocol: APDUMessageDataProtocol {
@@ -45,8 +45,8 @@ extension APDUResponseDataProtocol {
     }
 
     // Register request wrapped in BLE packets.
-    func bleWrapped()  throws -> BLEMessage {
-    let apdu = try apduWrapped()
-    return BLEMessage(command: .Msg, data: apdu.raw)
-    }
+    // func bleWrapped()  throws -> BLEMessage {
+    //   let apdu = try apduWrapped()
+    //   return BLEMessage(command: .Msg, data: apdu.raw)
+    // }
 }

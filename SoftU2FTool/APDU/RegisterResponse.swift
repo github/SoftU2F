@@ -11,26 +11,26 @@ import Foundation
 struct RegisterResponse: APDUResponseDataProtocol {
     static let status = APDUTrailer.Status.NoError
     
-    let publicKey:   NSData
-    let keyHandle:   NSData
-    let certificate: NSData
-    let signature:   NSData
+    let publicKey:   Data
+    let keyHandle:   Data
+    let certificate: Data
+    let signature:   Data
     
-    init(publicKey pk: NSData, keyHandle kh: NSData, certificate cert: NSData, signature sig: NSData) {
+    init(publicKey pk: Data, keyHandle kh: Data, certificate cert: Data, signature sig: Data) {
         publicKey = pk
         keyHandle = kh
         certificate = cert
         signature = sig
     }
     
-    init(raw: NSData) throws {
+    init(raw: Data) throws {
         let reader = DataReader(data: raw)
         
         do {
             // reserved byte
             let _:UInt8 = try reader.read()
             
-            publicKey = try reader.readData(sizeof(U2F_EC_POINT))
+            publicKey = try reader.readData(MemoryLayout<U2F_EC_POINT>.size)
             
             let khLen:UInt8 = try reader.read()
             keyHandle = try reader.readData(Int(khLen))
@@ -40,17 +40,17 @@ struct RegisterResponse: APDUResponseDataProtocol {
             certificate = try reader.readData(certLen)
             
             signature = reader.rest
-        } catch DataReader.Error.End {
+        } catch DataReader.DRError.End {
             throw APDUError.BadSize
         }
     }
     
-    var raw: NSData {
+    var raw: Data {
         let writer = DataWriter()
         
         writer.write(UInt8(0x05))
         writer.writeData(publicKey)
-        writer.write(UInt8(keyHandle.length))
+        writer.write(UInt8(keyHandle.count))
         writer.writeData(keyHandle)
         writer.writeData(certificate)
         writer.writeData(signature)
@@ -59,9 +59,9 @@ struct RegisterResponse: APDUResponseDataProtocol {
     }
     
     // Parse a DER formatted X509 certificate from the beginning of a datum and return its length.
-    static func certLength(fromData d: NSData) throws -> Int {
+    static func certLength(fromData d: Data) throws -> Int {
         var size: Int = 0
-        if SelfSignedCertificate.parseX509(d, consumed: &size) == 1 {
+        if SelfSignedCertificate.parseX509(d, consumed: &size) {
             return size
         } else {
             throw APDUError.BadCert

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51213EC01E383344005454E0 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2145F1E3823E7005B2864 /* SHA256.swift */; };
+		51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC11E3834F8005454E0 /* TestUtil.swift */; };
+		51213EC41E3904A8005454E0 /* SelfSignedCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */; };
 		515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */; };
 		515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835E1E3803BE00F40024 /* DataReaderTests.swift */; };
 		515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835F1E3803BE00F40024 /* DataWriterTests.swift */; };
@@ -14,11 +17,43 @@
 		515E83641E38048F00F40024 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090451E37F90300F03AD3 /* DataReader.swift */; };
 		515E83651E38049200F40024 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090461E37F90300F03AD3 /* DataWriter.swift */; };
 		515E83661E38049400F40024 /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090471E37F90300F03AD3 /* Endian.swift */; };
+		518537B11E380C0A00600911 /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A61E380C0A00600911 /* APDUCommand.swift */; };
+		518537B21E380C0A00600911 /* APDUError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A71E380C0A00600911 /* APDUError.swift */; };
+		518537B31E380C0A00600911 /* APDUHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A81E380C0A00600911 /* APDUHeader.swift */; };
+		518537B41E380C0A00600911 /* APDUMessageDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A91E380C0A00600911 /* APDUMessageDataProtocol.swift */; };
+		518537B51E380C0A00600911 /* APDUMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */; };
+		518537B61E380C0A00600911 /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AB1E380C0A00600911 /* APDUResponse.swift */; };
+		518537B71E380C0A00600911 /* APDUTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AC1E380C0A00600911 /* APDUTrailer.swift */; };
+		518537B81E380C0A00600911 /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AD1E380C0A00600911 /* AuthenticationRequest.swift */; };
+		518537B91E380C0A00600911 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AE1E380C0A00600911 /* AuthenticationResponse.swift */; };
+		518537BA1E380C0A00600911 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AF1E380C0A00600911 /* RegisterRequest.swift */; };
+		518537BB1E380C0A00600911 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537B01E380C0A00600911 /* RegisterResponse.swift */; };
+		518537C31E380EF500600911 /* SelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 518537C21E380EF500600911 /* SelfSignedCertificate.m */; };
+		51E214461E381E0C005B2864 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A0DA161E3813B900152E9B /* libcrypto.a */; };
+		51E214471E38215C005B2864 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A0DA161E3813B900152E9B /* libcrypto.a */; };
+		51E214481E3821F0005B2864 /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A61E380C0A00600911 /* APDUCommand.swift */; };
+		51E214491E3821F4005B2864 /* APDUError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A71E380C0A00600911 /* APDUError.swift */; };
+		51E2144A1E3821F8005B2864 /* APDUHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A81E380C0A00600911 /* APDUHeader.swift */; };
+		51E2144B1E3821F8005B2864 /* APDUMessageDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A91E380C0A00600911 /* APDUMessageDataProtocol.swift */; };
+		51E2144C1E3821F8005B2864 /* APDUMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */; };
+		51E2144D1E3821F8005B2864 /* APDUResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AB1E380C0A00600911 /* APDUResponse.swift */; };
+		51E2144E1E3821F8005B2864 /* APDUTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AC1E380C0A00600911 /* APDUTrailer.swift */; };
+		51E2144F1E3821F8005B2864 /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AD1E380C0A00600911 /* AuthenticationRequest.swift */; };
+		51E214501E3821F8005B2864 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AE1E380C0A00600911 /* AuthenticationResponse.swift */; };
+		51E214511E3821F8005B2864 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AF1E380C0A00600911 /* RegisterRequest.swift */; };
+		51E214521E3821F8005B2864 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537B01E380C0A00600911 /* RegisterResponse.swift */; };
+		51E2145A1E382380005B2864 /* APDUCommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214571E382380005B2864 /* APDUCommandTests.swift */; };
+		51E2145B1E382380005B2864 /* APDUHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214581E382380005B2864 /* APDUHeaderTests.swift */; };
+		51E2145C1E382380005B2864 /* APDUResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214591E382380005B2864 /* APDUResponseTests.swift */; };
+		51E2145E1E3823E0005B2864 /* SHA256Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2145D1E3823E0005B2864 /* SHA256Tests.swift */; };
+		51E214601E3823E7005B2864 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2145F1E3823E7005B2864 /* SHA256.swift */; };
+		51E214621E382521005B2864 /* WebSafeBase64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214611E382521005B2864 /* WebSafeBase64.swift */; };
+		51E214641E382529005B2864 /* WebSafeBase64Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214631E382529005B2864 /* WebSafeBase64Tests.swift */; };
+		51E214651E3826DB005B2864 /* WebSafeBase64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214611E382521005B2864 /* WebSafeBase64.swift */; };
 		51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */; };
 		51F090121E37E8C600F03AD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090111E37E8C600F03AD3 /* ViewController.swift */; };
 		51F090141E37E8C600F03AD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F090131E37E8C600F03AD3 /* Assets.xcassets */; };
 		51F090171E37E8C600F03AD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51F090151E37E8C600F03AD3 /* Main.storyboard */; };
-		51F090221E37E8C600F03AD3 /* SoftU2FToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090211E37E8C600F03AD3 /* SoftU2FToolTests.swift */; };
 		51F090481E37F90300F03AD3 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090441E37F90300F03AD3 /* CoreExtensions.swift */; };
 		51F090491E37F90300F03AD3 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090451E37F90300F03AD3 /* DataReader.swift */; };
 		51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090461E37F90300F03AD3 /* DataWriter.swift */; };
@@ -36,9 +71,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		51213EC11E3834F8005454E0 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
+		51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfSignedCertificateTests.swift; sourceTree = "<group>"; };
 		515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensionsTests.swift; path = DataTests/CoreExtensionsTests.swift; sourceTree = "<group>"; };
 		515E835E1E3803BE00F40024 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
 		515E835F1E3803BE00F40024 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
+		518537A61E380C0A00600911 /* APDUCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommand.swift; path = APDU/APDUCommand.swift; sourceTree = "<group>"; };
+		518537A71E380C0A00600911 /* APDUError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUError.swift; path = APDU/APDUError.swift; sourceTree = "<group>"; };
+		518537A81E380C0A00600911 /* APDUHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUHeader.swift; path = APDU/APDUHeader.swift; sourceTree = "<group>"; };
+		518537A91E380C0A00600911 /* APDUMessageDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUMessageDataProtocol.swift; path = APDU/APDUMessageDataProtocol.swift; sourceTree = "<group>"; };
+		518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUMessageProtocol.swift; path = APDU/APDUMessageProtocol.swift; sourceTree = "<group>"; };
+		518537AB1E380C0A00600911 /* APDUResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUResponse.swift; path = APDU/APDUResponse.swift; sourceTree = "<group>"; };
+		518537AC1E380C0A00600911 /* APDUTrailer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUTrailer.swift; path = APDU/APDUTrailer.swift; sourceTree = "<group>"; };
+		518537AD1E380C0A00600911 /* AuthenticationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationRequest.swift; path = APDU/AuthenticationRequest.swift; sourceTree = "<group>"; };
+		518537AE1E380C0A00600911 /* AuthenticationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationResponse.swift; path = APDU/AuthenticationResponse.swift; sourceTree = "<group>"; };
+		518537AF1E380C0A00600911 /* RegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterRequest.swift; path = APDU/RegisterRequest.swift; sourceTree = "<group>"; };
+		518537B01E380C0A00600911 /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResponse.swift; path = APDU/RegisterResponse.swift; sourceTree = "<group>"; };
+		518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FTool-Bridging-Header.h"; sourceTree = "<group>"; };
+		518537C21E380EF500600911 /* SelfSignedCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfSignedCertificate.m; sourceTree = "<group>"; };
+		518537C51E380F0A00600911 /* SelfSignedCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfSignedCertificate.h; sourceTree = "<group>"; };
+		518537C71E380FAE00600911 /* libssl.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.0.0.dylib; path = ../../../../usr/local/Cellar/openssl/1.0.2j/lib/libssl.1.0.0.dylib; sourceTree = "<group>"; };
+		518537C91E380FC600600911 /* libcrypto.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.0.0.dylib; path = ../../../../usr/local/Cellar/openssl/1.0.2j/lib/libcrypto.1.0.0.dylib; sourceTree = "<group>"; };
+		51A0DA161E3813B900152E9B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/Cellar/openssl/1.0.2j/lib/libcrypto.a; sourceTree = "<group>"; };
+		51A0DA171E3813B900152E9B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../../../../usr/local/Cellar/openssl/1.0.2j/lib/libssl.a; sourceTree = "<group>"; };
+		51E214431E381B06005B2864 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = SoftU2FTool/lib/libcrypto.a; sourceTree = "<group>"; };
+		51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FToolTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		51E214571E382380005B2864 /* APDUCommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandTests.swift; path = APDUTests/APDUCommandTests.swift; sourceTree = "<group>"; };
+		51E214581E382380005B2864 /* APDUHeaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUHeaderTests.swift; path = APDUTests/APDUHeaderTests.swift; sourceTree = "<group>"; };
+		51E214591E382380005B2864 /* APDUResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUResponseTests.swift; path = APDUTests/APDUResponseTests.swift; sourceTree = "<group>"; };
+		51E2145D1E3823E0005B2864 /* SHA256Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256Tests.swift; sourceTree = "<group>"; };
+		51E2145F1E3823E7005B2864 /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
+		51E214611E382521005B2864 /* WebSafeBase64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSafeBase64.swift; sourceTree = "<group>"; };
+		51E214631E382529005B2864 /* WebSafeBase64Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSafeBase64Tests.swift; sourceTree = "<group>"; };
 		51F0900C1E37E8C600F03AD3 /* SoftU2FTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoftU2FTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51F090111E37E8C600F03AD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +110,6 @@
 		51F090161E37E8C600F03AD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		51F090181E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftU2FToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		51F090211E37E8C600F03AD3 /* SoftU2FToolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftU2FToolTests.swift; sourceTree = "<group>"; };
 		51F090231E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51F090441E37F90300F03AD3 /* CoreExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensions.swift; path = Data/CoreExtensions.swift; sourceTree = "<group>"; };
 		51F090451E37F90300F03AD3 /* DataReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReader.swift; path = Data/DataReader.swift; sourceTree = "<group>"; };
@@ -59,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E214461E381E0C005B2864 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E214471E38215C005B2864 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,12 +147,35 @@
 			name = DataTests;
 			sourceTree = "<group>";
 		};
+		518537C61E380FAE00600911 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				51E214431E381B06005B2864 /* libcrypto.a */,
+				51A0DA161E3813B900152E9B /* libcrypto.a */,
+				51A0DA171E3813B900152E9B /* libssl.a */,
+				518537C91E380FC600600911 /* libcrypto.1.0.0.dylib */,
+				518537C71E380FAE00600911 /* libssl.1.0.0.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		51E214561E382376005B2864 /* APDUTests */ = {
+			isa = PBXGroup;
+			children = (
+				51E214571E382380005B2864 /* APDUCommandTests.swift */,
+				51E214581E382380005B2864 /* APDUHeaderTests.swift */,
+				51E214591E382380005B2864 /* APDUResponseTests.swift */,
+			);
+			name = APDUTests;
+			sourceTree = "<group>";
+		};
 		51F090031E37E8C500F03AD3 = {
 			isa = PBXGroup;
 			children = (
 				51F0900E1E37E8C600F03AD3 /* SoftU2FTool */,
 				51F090201E37E8C600F03AD3 /* SoftU2FToolTests */,
 				51F0900D1E37E8C600F03AD3 /* Products */,
+				518537C61E380FAE00600911 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +195,11 @@
 				51F0902C1E37F7BA00F03AD3 /* APDU */,
 				51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */,
 				51F090111E37E8C600F03AD3 /* ViewController.swift */,
+				51E2145F1E3823E7005B2864 /* SHA256.swift */,
+				51E214611E382521005B2864 /* WebSafeBase64.swift */,
+				518537C21E380EF500600911 /* SelfSignedCertificate.m */,
+				518537C51E380F0A00600911 /* SelfSignedCertificate.h */,
+				518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */,
 				51F090131E37E8C600F03AD3 /* Assets.xcassets */,
 				51F090151E37E8C600F03AD3 /* Main.storyboard */,
 				51F090181E37E8C600F03AD3 /* Info.plist */,
@@ -117,8 +210,13 @@
 		51F090201E37E8C600F03AD3 /* SoftU2FToolTests */ = {
 			isa = PBXGroup;
 			children = (
+				51E2145D1E3823E0005B2864 /* SHA256Tests.swift */,
+				51E214631E382529005B2864 /* WebSafeBase64Tests.swift */,
+				51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */,
+				51213EC11E3834F8005454E0 /* TestUtil.swift */,
+				51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */,
+				51E214561E382376005B2864 /* APDUTests */,
 				515E835C1E38038800F40024 /* DataTests */,
-				51F090211E37E8C600F03AD3 /* SoftU2FToolTests.swift */,
 				51F090231E37E8C600F03AD3 /* Info.plist */,
 			);
 			path = SoftU2FToolTests;
@@ -127,6 +225,17 @@
 		51F0902C1E37F7BA00F03AD3 /* APDU */ = {
 			isa = PBXGroup;
 			children = (
+				518537A61E380C0A00600911 /* APDUCommand.swift */,
+				518537A71E380C0A00600911 /* APDUError.swift */,
+				518537A81E380C0A00600911 /* APDUHeader.swift */,
+				518537A91E380C0A00600911 /* APDUMessageDataProtocol.swift */,
+				518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */,
+				518537AB1E380C0A00600911 /* APDUResponse.swift */,
+				518537AC1E380C0A00600911 /* APDUTrailer.swift */,
+				518537AD1E380C0A00600911 /* AuthenticationRequest.swift */,
+				518537AE1E380C0A00600911 /* AuthenticationResponse.swift */,
+				518537AF1E380C0A00600911 /* RegisterRequest.swift */,
+				518537B01E380C0A00600911 /* RegisterResponse.swift */,
 			);
 			name = APDU;
 			sourceTree = "<group>";
@@ -193,11 +302,13 @@
 					51F0900B1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = VEKTX9H2N7;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					51F0901C1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = VEKTX9H2N7;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 51F0900B1E37E8C600F03AD3;
 					};
@@ -246,12 +357,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				518537B31E380C0A00600911 /* APDUHeader.swift in Sources */,
 				51F090491E37F90300F03AD3 /* DataReader.swift in Sources */,
+				518537B11E380C0A00600911 /* APDUCommand.swift in Sources */,
+				518537B71E380C0A00600911 /* APDUTrailer.swift in Sources */,
 				51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */,
 				51F090121E37E8C600F03AD3 /* ViewController.swift in Sources */,
+				518537B41E380C0A00600911 /* APDUMessageDataProtocol.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
 				51F090481E37F90300F03AD3 /* CoreExtensions.swift in Sources */,
+				518537B21E380C0A00600911 /* APDUError.swift in Sources */,
+				518537B51E380C0A00600911 /* APDUMessageProtocol.swift in Sources */,
+				51E214601E3823E7005B2864 /* SHA256.swift in Sources */,
+				518537B81E380C0A00600911 /* AuthenticationRequest.swift in Sources */,
+				518537B61E380C0A00600911 /* APDUResponse.swift in Sources */,
+				518537B91E380C0A00600911 /* AuthenticationResponse.swift in Sources */,
+				518537BA1E380C0A00600911 /* RegisterRequest.swift in Sources */,
+				51E214621E382521005B2864 /* WebSafeBase64.swift in Sources */,
 				51F0904B1E37F90300F03AD3 /* Endian.swift in Sources */,
+				518537BB1E380C0A00600911 /* RegisterResponse.swift in Sources */,
+				518537C31E380EF500600911 /* SelfSignedCertificate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,14 +384,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E214651E3826DB005B2864 /* WebSafeBase64.swift in Sources */,
+				51E2145A1E382380005B2864 /* APDUCommandTests.swift in Sources */,
 				515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */,
 				515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */,
+				51E214641E382529005B2864 /* WebSafeBase64Tests.swift in Sources */,
+				51E214511E3821F8005B2864 /* RegisterRequest.swift in Sources */,
+				51E2144D1E3821F8005B2864 /* APDUResponse.swift in Sources */,
+				51E2144A1E3821F8005B2864 /* APDUHeader.swift in Sources */,
+				51E2145E1E3823E0005B2864 /* SHA256Tests.swift in Sources */,
+				51E2145C1E382380005B2864 /* APDUResponseTests.swift in Sources */,
+				51E2145B1E382380005B2864 /* APDUHeaderTests.swift in Sources */,
+				51E2144B1E3821F8005B2864 /* APDUMessageDataProtocol.swift in Sources */,
 				515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */,
 				515E83651E38049200F40024 /* DataWriter.swift in Sources */,
+				51E2144C1E3821F8005B2864 /* APDUMessageProtocol.swift in Sources */,
+				51E214501E3821F8005B2864 /* AuthenticationResponse.swift in Sources */,
+				51213EC01E383344005454E0 /* SHA256.swift in Sources */,
 				515E83631E38048C00F40024 /* CoreExtensions.swift in Sources */,
 				515E83641E38048F00F40024 /* DataReader.swift in Sources */,
+				51E214491E3821F4005B2864 /* APDUError.swift in Sources */,
 				515E83661E38049400F40024 /* Endian.swift in Sources */,
-				51F090221E37E8C600F03AD3 /* SoftU2FToolTests.swift in Sources */,
+				51E2144E1E3821F8005B2864 /* APDUTrailer.swift in Sources */,
+				51E214481E3821F0005B2864 /* APDUCommand.swift in Sources */,
+				51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */,
+				51E2144F1E3821F8005B2864 /* AuthenticationRequest.swift in Sources */,
+				51213EC41E3904A8005454E0 /* SelfSignedCertificateTests.swift in Sources */,
+				51E214521E3821F8005B2864 /* RegisterResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,14 +529,26 @@
 		51F090271E37E8C600F03AD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/opt/openssl/include,
+					"$(PROJECT_DIR)/SoftU2FTool/inc",
+				);
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/openssl/1.0.2j/lib,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2FTool-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -400,14 +556,25 @@
 		51F090281E37E8C600F03AD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/opt/openssl/include,
+					"$(PROJECT_DIR)/SoftU2FTool/inc",
+				);
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/openssl/1.0.2j/lib,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2FTool-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -417,13 +584,21 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/opt/openssl/include,
+					"$(PROJECT_DIR)/SoftU2FTool/inc",
+				);
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/openssl/1.0.2j/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FToolTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2FTool.app/Contents/MacOS/SoftU2FTool";
 			};
@@ -434,13 +609,20 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/opt/openssl/include,
+					"$(PROJECT_DIR)/SoftU2FTool/inc",
+				);
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/openssl/1.0.2j/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FToolTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2FTool.app/Contents/MacOS/SoftU2FTool";
 			};

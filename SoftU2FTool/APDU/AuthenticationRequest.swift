@@ -20,30 +20,30 @@ struct AuthenticationRequest: APDUCommandDataProtocol {
     static let cmdCode = APDUHeader.CommandCode.Authenticate
     
     let control: Control
-    let challengeParameter: NSData
-    let applicationParameter: NSData
-    let keyHandle: NSData
+    let challengeParameter: Data
+    let applicationParameter: Data
+    let keyHandle: Data
     
-    var raw: NSData {
+    var raw: Data {
         let writer = DataWriter()
         
         writer.write(control.rawValue)
         writer.writeData(challengeParameter)
         writer.writeData(applicationParameter)
-        writer.write(UInt8(keyHandle.length))
+        writer.write(UInt8(keyHandle.count))
         writer.writeData(keyHandle)
         
         return writer.buffer
     }
     
-    init(control c: Control, challengeParameter cp: NSData, applicationParameter ap: NSData, keyHandle kh: NSData) {
+    init(control c: Control, challengeParameter cp: Data, applicationParameter ap: Data, keyHandle kh: Data) {
         control = c
         challengeParameter = cp
         applicationParameter = ap
         keyHandle = kh
     }
     
-    init(raw: NSData) throws {
+    init(raw: Data) throws {
         let reader = DataReader(data: raw)
         
         do {
@@ -52,7 +52,7 @@ struct AuthenticationRequest: APDUCommandDataProtocol {
             applicationParameter = try reader.readData(U2F_APPID_SIZE)
             let khLen:UInt8 = try reader.read()
             keyHandle = try reader.readData(khLen)
-        } catch DataReader.Error.End {
+        } catch DataReader.DRError.End {
             throw APDUError.BadSize
         }
         

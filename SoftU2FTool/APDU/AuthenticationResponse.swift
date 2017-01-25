@@ -13,9 +13,9 @@ struct AuthenticationResponse: APDUResponseDataProtocol {
 
     let userPresence:UInt8
     let counter:UInt32
-    let signature:NSData
+    let signature:Data
     
-    var raw: NSData {
+    var raw: Data {
         let writer = DataWriter()
         
         writer.write(userPresence)
@@ -25,19 +25,19 @@ struct AuthenticationResponse: APDUResponseDataProtocol {
         return writer.buffer
     }
     
-    init(raw: NSData) throws {
+    init(raw: Data) throws {
         let reader = DataReader(data: raw)
         
         do {
             userPresence = try reader.read()
             counter = try reader.read()
             signature = reader.rest
-        } catch DataReader.Error.End {
+        } catch DataReader.DRError.End {
             throw APDUError.BadSize
         }
     }
     
-    init(userPresence u:UInt8, counter c:UInt32, signature s:NSData) {
+    init(userPresence u:UInt8, counter c:UInt32, signature s:Data) {
         userPresence = u
         counter = c
         signature = s
