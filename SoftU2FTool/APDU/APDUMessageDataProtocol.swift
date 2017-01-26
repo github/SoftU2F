@@ -1,5 +1,5 @@
 //
-//  APDUMessageBody.swift
+//  APDUMessageDataProtocol.swift
 //  SoftU2FTool
 //
 //  Created by Benjamin P Toews on 9/12/16.
@@ -11,7 +11,6 @@ protocol APDUMessageDataProtocol {
     init(raw: Data) throws
     
     func apduWrapped() throws -> APDUMessageProtocol
-    // func bleWrapped()  throws -> BLEMessage
 }
 
 protocol APDUCommandDataProtocol: APDUMessageDataProtocol {
@@ -24,12 +23,6 @@ extension APDUCommandDataProtocol {
     func apduWrapped() throws -> APDUMessageProtocol {
         return try APDUCommand(data: self)
     }
-    
-    // Register request wrapped in BLE packets.
-    // func bleWrapped()  throws -> BLEMessage {
-    //    let apdu = try apduWrapped()
-    //    return BLEMessage(command: .Msg, data: apdu.raw)
-    // }
 }
 
 protocol APDUResponseDataProtocol: APDUMessageDataProtocol {
@@ -41,10 +34,4 @@ extension APDUResponseDataProtocol {
     func apduWrapped() throws -> APDUMessageProtocol {
         return APDUResponse(data: self)
     }
-
-    // Register request wrapped in BLE packets.
-    // func bleWrapped()  throws -> BLEMessage {
-    //   let apdu = try apduWrapped()
-    //   return BLEMessage(command: .Msg, data: apdu.raw)
-    // }
 }

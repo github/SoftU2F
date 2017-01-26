@@ -23,7 +23,8 @@ class APDUCommandTests: XCTestCase {
     }
 
     func testVersionRequest() throws {
-        let r = Data(bytes: [0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00]) // from Chrome
+        // from Chrome
+        let r = Data(base64Encoded: "AAMAAAAAAA==")!
         let c = try APDUCommand(raw: r)
 
         XCTAssertEqual(c.header.cla, APDUCommandHeader.CommandClass.Reserved)
@@ -35,6 +36,17 @@ class APDUCommandTests: XCTestCase {
         XCTAssertEqual(c.trailer.maxResponse, APDUCommandTrailer.MaxMaxResponse)
         XCTAssertEqual(c.trailer.noBody, true)
         XCTAssertEqual(c.raw, r)
+    }
+
+    func testAuthenticationRequest() throws {
+        // From Chrome
+        let r = Data(base64Encoded: "AAIDAAAAgeOwxEKY/BwUmvv0yJlvuSQnrkHkZJuTTKSVmRt4UrhVcGF9/tBlhjr0fBVVbJF5iICCjMQH/fcK6FARVpRloHVAIA5xiih5UyR97Gx8DMpSZgno9djTV85XM+VQfZNgADuFrTX978Gq3C8F6BfBLgD042ioARsymZUhkDxd3i3nsQAA")!
+        let c = try APDUCommand(raw: r)
+
+        XCTAssertEqual(c.header.cla, APDUCommandHeader.CommandClass.Reserved)
+        XCTAssertEqual(c.header.ins, APDUCommandHeader.CommandCode.Authenticate)
+        XCTAssertEqual(c.header.p1, AuthenticationRequest.Control.EnforceUserPresenceAndSign.rawValue)
+        XCTAssertEqual(c.header.p2, 0x00)
     }
 
     func testCommandTypeForCode() {

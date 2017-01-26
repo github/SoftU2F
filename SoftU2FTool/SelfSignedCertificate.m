@@ -86,7 +86,7 @@
     return [[NSData alloc] initWithBytes: buf length: len];
 }
 
-- (NSString*)signData:(NSData*)msg
+- (NSData*)signData:(NSData*)msg
 {
     EVP_MD_CTX ctx;
     const unsigned char* cmsg = (const unsigned char*)[msg bytes];
@@ -111,7 +111,7 @@
         return nil;
     }
 
-    return [[NSString alloc] initWithBytes: sig length: len encoding:NSASCIIStringEncoding];
+    return [[NSData alloc] initWithBytes:sig length:len];
 }
 
 - (void)dealloc

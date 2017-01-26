@@ -22,7 +22,7 @@
 
 - (id)init;
 - (NSData*)toDer;
-- (NSString*)signData:(NSData*)msg;
+- (NSData*)signData:(NSData*)msg;
 + (bool)parseX509:(NSData*)data consumed:(NSInteger *)consumed;
 
 @end
