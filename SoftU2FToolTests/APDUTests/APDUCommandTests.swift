@@ -17,6 +17,8 @@ class APDUCommandTests: XCTestCase {
         XCTAssertEqual(c.header.ins, APDUCommandHeader.CommandCode.Register)
         XCTAssertEqual(c.header.p1, AuthenticationRequest.Control.EnforceUserPresenceAndSign.rawValue)
         XCTAssertEqual(c.header.p2, 0x00)
+        XCTAssertEqual(c.trailer.maxResponse, APDUCommandTrailer.MaxMaxResponse)
+        XCTAssertEqual(c.trailer.noBody, false)
         XCTAssertNotNil(c.registerRequest)
         XCTAssertEqual(c.raw, r)
     }
@@ -45,6 +47,8 @@ class APDUCommandTests: XCTestCase {
         XCTAssertEqual(c.header.ins, APDUCommandHeader.CommandCode.Authenticate)
         XCTAssertEqual(c.header.p1, AuthenticationRequest.Control.EnforceUserPresenceAndSign.rawValue)
         XCTAssertEqual(c.header.p2, 0x00)
+        XCTAssertEqual(c.trailer.maxResponse, APDUCommandTrailer.MaxMaxResponse)
+        XCTAssertEqual(c.trailer.noBody, false)
         XCTAssertNotNil(c.authenticationRequest)
         XCTAssertEqual(c.raw, r)
     }

@@ -9,4 +9,6 @@
 protocol APDUMessageProtocol {
     var raw: Data { get }
     init(raw: Data) throws
+
+    func debug()
 }

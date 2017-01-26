@@ -40,4 +40,10 @@ struct VersionResponse: APDUMessageProtocol {
             throw APDUError.BadSize
         }
     }
+
+    func debug() {
+        print("Version Response:")
+        print("  Version: \(version)")
+        print("  Status:  \(status)")
+    }
 }

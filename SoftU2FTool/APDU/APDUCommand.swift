@@ -54,4 +54,11 @@ struct APDUCommand: APDUMessageProtocol {
         dData = raw.subdata(in: dOffset..<raw.count)
         trailer = try APDUCommandTrailer(raw: dData)
     }
+
+    func debug() {
+        print("APDU Command:")
+        header.debug()
+        data.debug()
+        trailer.debug()
+    }
 }

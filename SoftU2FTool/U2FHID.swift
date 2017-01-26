@@ -33,7 +33,7 @@ class U2FHID {
             return nil
         }
 
-        ctx = softu2f_init()
+        ctx = softu2f_init(false)
 
         if ctx == nil {
             return nil

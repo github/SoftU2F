@@ -46,4 +46,12 @@ struct AuthenticationResponse: APDUMessageProtocol {
         signature = s
         status = .NoError
     }
+
+    func debug() {
+        print("AuthenticationResponse:")
+        print(String(format: "  User presence: 0x%02x", userPresence))
+        print(String(format: "  Counter:       0x%08x", counter))
+        print(               "  Signature:     \(signature.base64EncodedString())")
+        print(               "  Status:        \(status)")
+    }
 }

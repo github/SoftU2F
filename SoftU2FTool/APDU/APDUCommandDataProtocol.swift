@@ -12,6 +12,8 @@ protocol APDUCommandDataProtocol {
 
     var raw: Data { get }
     init(raw: Data) throws
+
+    func debug()
 }
 
 extension APDUCommandDataProtocol {

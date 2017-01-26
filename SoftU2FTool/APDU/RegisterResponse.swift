@@ -72,4 +72,15 @@ struct RegisterResponse: APDUMessageProtocol {
         signature = sig
         status = .NoError
     }
+
+    func debug() {
+        print("AuthenticationResponse:")
+        print(               "  Reserved:    0x05")
+        print(               "  Public key:  \(publicKey.base64EncodedString())")
+        print(String(format: "  KH Len:      0x%02x", keyHandle.count))
+        print(               "  Key Handle:  \(keyHandle.base64EncodedString())")
+        print(               "  Certificate: \(certificate.base64EncodedString())")
+        print(               "  Signature:   \(signature.base64EncodedString())")
+        print(               "  Status:      \(status)")
+    }
 }

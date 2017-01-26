@@ -35,4 +35,10 @@ struct RegisterRequest: APDUCommandDataProtocol {
             throw APDUError.BadSize
         }
     }
+
+    func debug() {
+        print("RegisterRequest:")
+        print("  Challenge parameter:   \(challengeParameter.base64EncodedString())")
+        print("  Application parameter: \(applicationParameter.base64EncodedString())")
+    }
 }

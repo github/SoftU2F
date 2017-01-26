@@ -85,4 +85,13 @@ struct APDUCommandHeader {
             throw APDUError.BadSize
         }
     }
+
+    func debug() {
+        print(               "Command Header:")
+        print(               "  cla:      \(cla)")
+        print(               "  ins:      \(ins)")
+        print(String(format: "  p1:       0x%02d", p1))
+        print(String(format: "  p2:       0x%02d", p2))
+        print(               "  data len: \(dataLength)")
+    }
 }

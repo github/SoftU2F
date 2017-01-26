@@ -29,4 +29,9 @@ struct ErrorResponse: APDUMessageProtocol {
             throw APDUError.BadSize
         }
     }
+
+    func debug() {
+        print("Error Response:")
+        print("  Status: \(status)")
+    }
 }

@@ -61,4 +61,10 @@ struct APDUCommandTrailer {
         maxResponse = mr
         noBody = cd.raw.count == 0
     }
+
+    func debug() {
+        print("Command trailer (no body: \(noBody)):")
+        print("  Max response len: \(maxResponse)")
+
+    }
 }

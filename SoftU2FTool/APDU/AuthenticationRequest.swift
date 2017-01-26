@@ -48,4 +48,11 @@ struct AuthenticationRequest: APDUCommandDataProtocol {
             throw APDUError.BadSize
         }
     }
+
+    func debug() {
+        print("AuthenticationRequest:")
+        print("  Challenge parameter:   \(challengeParameter.base64EncodedString())")
+        print("  Application parameter: \(applicationParameter.base64EncodedString())")
+        print("  Key handle:            \(keyHandle.base64EncodedString())")
+    }
 }

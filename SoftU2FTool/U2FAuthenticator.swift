@@ -40,8 +40,6 @@ class U2FAuthenticator {
     func installMsgHandler() {
         u2fhid.handle(.Msg) { (_ msg:softu2f_hid_message) -> Bool in
             let data = msg.data.takeUnretainedValue() as Data
-            print("Received message: \(data.base64EncodedString())")
-
             let cmd:APDUCommand
 
             do {
@@ -50,6 +48,10 @@ class U2FAuthenticator {
                 print("Error reading APDU command: \(err.localizedDescription)")
                 return true
             }
+
+            print("↓↓↓↓↓ Received message ↓↓↓↓↓")
+            cmd.debug()
+            print("")
 
             if let req = cmd.registerRequest {
                 return self.handleRegisterRequest(req, cid: msg.cid)
@@ -78,7 +80,7 @@ class U2FAuthenticator {
             reg = try U2FRegistration.create(keyHandle: req.applicationParameter)
         } catch let err {
             print("Error creating registration: \(err.localizedDescription)")
-            return false
+            return sendError(status: .OtherError, cid: cid)
         }
 
         let sigPayload = DataWriter()
@@ -91,13 +93,7 @@ class U2FAuthenticator {
 
         let resp = RegisterResponse(publicKey: reg.publicKey, keyHandle: reg.keyHandle, certificate: reg.certificate.toDer(), signature: sig)
 
-        if u2fhid.sendMsg(cid: cid, data: resp.raw) {
-            print("Sent register response.")
-            return true
-        } else {
-            print("Error sending register response.")
-            return false
-        }
+        return sendMsg(msg: resp, cid: cid)
     }
 
     func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) -> Bool {
@@ -121,17 +117,14 @@ class U2FAuthenticator {
         reg.signWithPrivateKey(sigPayload.buffer) { (_ sig:Data?, _ err:Error?) -> Void in
             if let e = err {
                 print("Error signing with private key: \(e.localizedDescription)")
-                let _ = self.sendError(status: .ConditionsNotSatisfied, cid: cid)
+                let _ = self.sendError(status: .OtherError, cid: cid)
                 return
             }
 
             if let s = sig {
                 let resp = AuthenticationResponse(userPresence: 0x01, counter: 0x00000000, signature: s)
-                if self.u2fhid.sendMsg(cid: cid, data: resp.raw) {
-                    print("Sent authentication response.")
-                } else {
-                    print("Error sending authentication response.")
-                }
+                let _ = self.sendMsg(msg: resp, cid: cid)
+                return
             }
         }
 
@@ -139,28 +132,27 @@ class U2FAuthenticator {
     }
 
     func handleVersionRequest(_ req:VersionRequest, cid:UInt32) -> Bool {
-        print("Received version request!")
-
         let resp = VersionResponse(version: "U2F_V2")
-
-        if u2fhid.sendMsg(cid: cid, data: resp.raw) {
-            print("Sent version response.")
-            return true
-        } else {
-            print("Error sending version response.")
-            return sendError(status: .OtherError, cid: cid)
-        }
+        return sendMsg(msg: resp, cid: cid)
     }
 
     func sendError(status:APDUResponseStatus, cid: UInt32) -> Bool {
         let resp = ErrorResponse(status: status)
+        return sendMsg(msg: resp, cid: cid)
+    }
 
-        if u2fhid.sendMsg(cid: cid, data: resp.raw) {
-            print("Sent error response.")
-            return true
+    func sendMsg(msg:APDUMessageProtocol, cid:UInt32) -> Bool {
+        let ret = u2fhid.sendMsg(cid: cid, data: msg.raw)
+
+        if ret {
+            print("↓↓↓↓↓ Sent message ↓↓↓↓↓")
         } else {
-            print("Error sending error response.")
-            return false
+            print("↓↓↓↓↓ Error sending message ↓↓↓↓↓")
         }
+
+        msg.debug()
+        print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
+
+        return ret
     }
 }

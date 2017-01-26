@@ -19,4 +19,8 @@ struct VersionRequest: APDUCommandDataProtocol {
 
     init(raw: Data) throws {
     }
+
+    func debug() {
+        print("Version Request (no data)")
+    }
 }
