@@ -20,6 +20,5 @@ struct VersionRequest: APDUCommandDataProtocol {
     }
 
     init(raw: Data) throws {
-        if raw.count > 0 { throw APDUError.BadSize }
     }
 }

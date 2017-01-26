@@ -9,7 +9,7 @@
 import XCTest
 
 class APDUCommandTests: XCTestCase {
-    func testRoundTrip() throws {
+    func testRegisterRequest() throws {
         let c = Data(repeating: 0xCC, count: 32)
         let a = Data(repeating: 0xAA, count: 32)
         let r = RegisterRequest(challengeParameter: c, applicationParameter: a)
@@ -22,7 +22,21 @@ class APDUCommandTests: XCTestCase {
         XCTAssertEqual(cmd1.trailer.raw, cmd2.trailer.raw)
     }
 
-    
+    func testVersionRequest() throws {
+        let r = Data(bytes: [0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00]) // from Chrome
+        let c = try APDUCommand(raw: r)
+
+        XCTAssertEqual(c.header.cla, APDUCommandHeader.CommandClass.Reserved)
+        XCTAssertEqual(c.header.ins, APDUCommandHeader.CommandCode.Version)
+        XCTAssertEqual(c.header.p1, 0x00)
+        XCTAssertEqual(c.header.p2, 0x00)
+        XCTAssertEqual(c.header.dataLength, 0)
+        XCTAssertEqual(c.data.raw.count, 0)
+        XCTAssertEqual(c.trailer.maxResponse, APDUCommandTrailer.MaxMaxResponse)
+        XCTAssertEqual(c.trailer.noBody, true)
+        XCTAssertEqual(c.raw, r)
+    }
+
     func testCommandTypeForCode() {
         XCTAssert(APDUCommand.commandTypeForCode(.Register)          == RegisterRequest.self)
         XCTAssert(APDUCommand.commandTypeForCode(.Authenticate)      == AuthenticationRequest.self)
