@@ -9,12 +9,19 @@
 import Foundation
 
 struct RegisterRequest: APDUCommandDataProtocol {
-    static let cmdClass = APDUHeader.CommandClass.Reserved
-    static let cmdCode  = APDUHeader.CommandCode.Register
+    static let cmdClass = APDUCommandHeader.CommandClass.Reserved
+    static let cmdCode  = APDUCommandHeader.CommandCode.Register
 
     let challengeParameter: Data
     let applicationParameter: Data
-    
+
+    var raw: Data {
+        let writer = DataWriter()
+        writer.writeData(challengeParameter)
+        writer.writeData(applicationParameter)
+        return writer.buffer
+    }
+
     init(challengeParameter c: Data, applicationParameter a: Data) {
         challengeParameter = c
         applicationParameter = a
@@ -29,14 +36,5 @@ struct RegisterRequest: APDUCommandDataProtocol {
         } catch DataReaderError.End {
             throw APDUError.BadSize
         }
-
-        if reader.remaining > 0 { throw APDUError.BadSize }
-    }
-    
-    var raw: Data {
-        let writer = DataWriter()
-        writer.writeData(challengeParameter)
-        writer.writeData(applicationParameter)
-        return writer.buffer
     }
 }

@@ -10,42 +10,50 @@ import Foundation
 
 let APDUCommandTypes:[APDUCommandDataProtocol.Type] = [
     RegisterRequest.self,
-    AuthenticationRequest.self
+    AuthenticationRequest.self,
+    VersionRequest.self
 ]
 
 struct APDUCommand: APDUMessageProtocol {
     typealias DataType = APDUCommandDataProtocol
-    
-    let header: APDUHeader
-    let data: DataType
-    
-    init(data d: DataType) throws {
-        header = try APDUHeader(cmdData: d)
-        data = d
-    }
-    
-    init(raw: Data) throws {
-        header = try APDUHeader(raw: raw)
-        
-        guard let cmdType = APDUCommand.commandTypeForCode(header.ins) else { throw APDUError.BadCode }
-        
-        let dOffset = header.raw.count
-        let dData = raw.subdata(in: dOffset..<raw.count)
 
-        data = try cmdType.init(raw: dData)
+    static func commandTypeForCode(_ code: APDUCommandHeader.CommandCode) -> DataType.Type? {
+        return APDUCommandTypes.lazy.filter({ $0.cmdCode == code }).first
     }
-    
+
+    let header: APDUCommandHeader
+    let data: DataType
+    let trailer: APDUCommandTrailer
+
     var raw: Data {
         let writer = DataWriter()
         writer.writeData(header.raw)
         writer.writeData(data.raw)
+        writer.writeData(trailer.raw)
         return writer.buffer
     }
-    
+
     var registerRequest:       RegisterRequest?       { return data as? RegisterRequest }
     var authenticationRequest: AuthenticationRequest? { return data as? AuthenticationRequest }
+    var versionRequest:        VersionRequest?        { return data as? VersionRequest }
+
+    init(data d: DataType) throws {
+        header = try APDUCommandHeader(cmdData: d)
+        data = d
+        trailer = APDUCommandTrailer(cmdData: d)
+    }
     
-    static func commandTypeForCode(_ code: APDUHeader.CommandCode) -> DataType.Type? {
-        return APDUCommandTypes.lazy.filter({ $0.cmdCode == code }).first
+    init(raw: Data) throws {
+        header = try APDUCommandHeader(raw: raw)
+        
+        guard let cmdType = APDUCommand.commandTypeForCode(header.ins) else { throw APDUError.BadCode }
+        
+        var dOffset = header.raw.count
+        var dData = raw.subdata(in: dOffset..<raw.count)
+        data = try cmdType.init(raw: dData)
+
+        dOffset += data.raw.count
+        dData = raw.subdata(in: dOffset..<raw.count)
+        trailer = try APDUCommandTrailer(raw: dData)
     }
 }

@@ -9,8 +9,18 @@
 import Foundation
 
 struct RegisterResponse: APDUResponseDataProtocol {
-    static let status = APDUTrailer.Status.NoError
-    
+    static let status = APDUResponseTrailer.Status.NoError
+
+    // Parse a DER formatted X509 certificate from the beginning of a datum and return its length.
+    static func certLength(fromData d: Data) throws -> Int {
+        var size: Int = 0
+        if SelfSignedCertificate.parseX509(d, consumed: &size) {
+            return size
+        } else {
+            throw APDUError.BadCert
+        }
+    }
+
     let publicKey:   Data
     let keyHandle:   Data
     let certificate: Data
@@ -56,15 +66,5 @@ struct RegisterResponse: APDUResponseDataProtocol {
         writer.writeData(signature)
         
         return writer.buffer
-    }
-    
-    // Parse a DER formatted X509 certificate from the beginning of a datum and return its length.
-    static func certLength(fromData d: Data) throws -> Int {
-        var size: Int = 0
-        if SelfSignedCertificate.parseX509(d, consumed: &size) {
-            return size
-        } else {
-            throw APDUError.BadCert
-        }
     }
 }

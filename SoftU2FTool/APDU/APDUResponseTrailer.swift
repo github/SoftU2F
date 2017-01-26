@@ -1,5 +1,5 @@
 //
-//  APDUTrailer.swift
+//  APDUResponseTrailer.swift
 //  SecurityKeyBLE
 //
 //  Created by Benjamin P Toews on 9/12/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct APDUTrailer {
+struct APDUResponseTrailer {
     
     // ISO7816-4
     enum Status: UInt16, EndianEnumProtocol {

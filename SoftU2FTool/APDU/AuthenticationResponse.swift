@@ -9,7 +9,7 @@
 import Foundation
 
 struct AuthenticationResponse: APDUResponseDataProtocol {
-    static let status = APDUTrailer.Status.NoError
+    static let status = APDUResponseTrailer.Status.NoError
 
     let userPresence:UInt8
     let counter:UInt32

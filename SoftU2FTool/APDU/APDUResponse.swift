@@ -12,7 +12,7 @@ struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol 
     typealias DataType = APDUResponseDataProtocol
     
     let data: ResponseType
-    let trailer: APDUTrailer
+    let trailer: APDUResponseTrailer
     
     var raw: Data {
         let writer = DataWriter()
@@ -23,7 +23,7 @@ struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol 
     
     init(data d: ResponseType) {
         data = d
-        trailer = APDUTrailer(data: data)
+        trailer = APDUResponseTrailer(data: data)
     }
     
     init(raw: Data) throws {
@@ -31,6 +31,6 @@ struct APDUResponse<ResponseType:APDUResponseDataProtocol>: APDUMessageProtocol 
         
         let dData = try reader.readData(reader.remaining - 2)
         data = try ResponseType(raw: dData)
-        trailer = try APDUTrailer(raw: reader.rest)
+        trailer = try APDUResponseTrailer(raw: reader.rest)
     }
 }

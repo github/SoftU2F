@@ -16,8 +16,8 @@ struct AuthenticationRequest: APDUCommandDataProtocol {
         case CheckOnly                  = 0x07
     }
     
-    static let cmdClass = APDUHeader.CommandClass.Reserved
-    static let cmdCode = APDUHeader.CommandCode.Authenticate
+    static let cmdClass = APDUCommandHeader.CommandClass.Reserved
+    static let cmdCode = APDUCommandHeader.CommandCode.Authenticate
     
     let control: Control
     let challengeParameter: Data
@@ -55,7 +55,5 @@ struct AuthenticationRequest: APDUCommandDataProtocol {
         } catch DataReaderError.End {
             throw APDUError.BadSize
         }
-        
-        if reader.remaining > 0 { throw APDUError.BadSize }
     }
 }

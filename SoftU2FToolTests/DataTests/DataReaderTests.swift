@@ -77,7 +77,42 @@ class DataReaderTests: XCTestCase {
         
         XCTAssertEqual(1, reader.remaining)
     }
-    
+
+    func testReadVersionCmdHdr() throws {
+        let raw = Data(bytes: [0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00])
+        let reader = DataReader(data: raw)
+        var byte:UInt8
+        let len:UInt16
+        let intLen:Int
+
+        // cla
+        byte = try reader.read()
+        XCTAssertEqual(byte, 0x00)
+
+        // ins
+        byte = try reader.read()
+        XCTAssertEqual(byte, 0x03)
+
+        // p1
+        byte = try reader.read()
+        XCTAssertEqual(byte, 0x00)
+
+        // p2
+        byte = try reader.read()
+        XCTAssertEqual(byte, 0x00)
+
+        // lc0
+        byte = try reader.read()
+        XCTAssertEqual(byte, 0x00)
+
+        // data length
+        len = try reader.read()
+        XCTAssertEqual(len, 0x0000)
+
+        intLen = Int(len)
+        XCTAssertEqual(intLen, 0)
+    }
+
     func testReadOptionalUInt8() {
         let data = Data(bytes: [0x00])
         let reader = DataReader(data: data)

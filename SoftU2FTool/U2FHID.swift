@@ -45,6 +45,7 @@ class U2FHID {
     deinit {
         if ctx != nil {
             softu2f_deinit(ctx)
+            U2FHID.hasShared = false
         }
     }
 

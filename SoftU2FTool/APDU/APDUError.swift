@@ -13,4 +13,6 @@ enum APDUError: Error {
     case BadClass
     case BadCode
     case BadCert
+    case BadEncoding
+    case ShortEncoding
 }

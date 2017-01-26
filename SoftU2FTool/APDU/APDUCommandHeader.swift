@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct APDUHeader {
+struct APDUCommandHeader {
     enum CommandClass: UInt8 {
         case Reserved = 0x00
     }
@@ -26,6 +26,22 @@ struct APDUHeader {
     let p1:  UInt8
     let p2:  UInt8
     let dataLength: Int
+
+    var raw: Data {
+        let writer = DataWriter()
+
+        writer.write(cla.rawValue)
+        writer.write(ins.rawValue)
+        writer.write(p1)
+        writer.write(p2)
+
+        if dataLength > 0 {
+            writer.write(UInt8(0x00))
+            writer.write(UInt16(dataLength))
+        }
+
+        return writer.buffer
+    }
     
     init(cmdData: APDUCommandDataProtocol) throws {
         cla = type(of: cmdData).cmdClass
@@ -50,34 +66,25 @@ struct APDUHeader {
             
             p1 = try reader.read()
             p2 = try reader.read()
-            
-            let lc0:UInt8 = try reader.read()
-            if lc0 > 0x00 {
-                dataLength = Int(lc0)
-            } else {
+
+            // Only handle long encoding of Lc bytes.
+
+            switch reader.remaining {
+            case 0, 1, 2:
+                throw APDUError.ShortEncoding
+            case 3:
+                // Long encoding: Lc=0 (omitted), Le is prefixed by 0.
+                dataLength = 0
+            default:
+                // Lc is included.
+                let lc0:UInt8 = try reader.read()
+                if lc0 != 0x00 { throw APDUError.ShortEncoding }
+
                 let lc:UInt16 = try reader.read()
                 dataLength = Int(lc)
             }
         } catch DataReaderError.End {
             throw APDUError.BadSize
         }
-    }
-    
-    var raw: Data {
-        let writer = DataWriter()
-        
-        writer.write(cla.rawValue)
-        writer.write(ins.rawValue)
-        writer.write(p1)
-        writer.write(p2)
-        
-        if dataLength <= 0xFF {
-            writer.write(UInt8(dataLength))
-        } else {
-            writer.write(UInt8(0x00))
-            writer.write(UInt16(dataLength))
-        }
-        
-        return writer.buffer
     }
 }

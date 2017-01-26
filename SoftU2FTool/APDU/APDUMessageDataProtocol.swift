@@ -17,8 +17,8 @@ protocol APDUMessageDataProtocol {
 }
 
 protocol APDUCommandDataProtocol: APDUMessageDataProtocol {
-    static var cmdClass: APDUHeader.CommandClass { get }
-    static var cmdCode:  APDUHeader.CommandCode  { get }
+    static var cmdClass: APDUCommandHeader.CommandClass { get }
+    static var cmdCode:  APDUCommandHeader.CommandCode  { get }
 }
 
 extension APDUCommandDataProtocol {
@@ -35,7 +35,7 @@ extension APDUCommandDataProtocol {
 }
 
 protocol APDUResponseDataProtocol: APDUMessageDataProtocol {
-    static var status: APDUTrailer.Status { get }
+    static var status: APDUResponseTrailer.Status { get }
 }
 
 extension APDUResponseDataProtocol {
