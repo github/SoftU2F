@@ -6,8 +6,6 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
-import Foundation
-
 struct VersionRequest: APDUCommandDataProtocol {
     static let cmdClass = APDUCommandHeader.CommandClass.Reserved
     static let cmdCode = APDUCommandHeader.CommandCode.Version

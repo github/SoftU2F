@@ -3,7 +3,7 @@
 //  SecurityKey
 //
 //  Created by Benjamin P Toews on 8/19/16.
-//  Copyright © 2016 GitHub, inc. All rights reserved.
+//  Copyright © 2017 GitHub, inc. All rights reserved.
 //
 
 // http://opensource.apple.com/source/OpenSSL/OpenSSL-22/openssl/demos/x509/mkcert.c

@@ -6,8 +6,6 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
-import Foundation
-
 struct APDUCommandTrailer {
     static let MaxMaxResponse = Int(UInt16.max) + 1
 

@@ -6,8 +6,6 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
-import Foundation
-
 struct VersionResponse: APDUResponseDataProtocol {
     static let status = APDUResponseTrailer.Status.NoError
 
