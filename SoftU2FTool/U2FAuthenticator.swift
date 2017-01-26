@@ -49,19 +49,51 @@ class U2FAuthenticator {
                 return true
             }
 
-            if let _ = cmd.registerRequest {
-                print("Received register request!")
+            if let req = cmd.registerRequest {
+                return self.handleRegisterRequest(req, cid: msg.cid)
             }
 
-            if let _ = cmd.authenticationRequest {
-                print("Received authentication request!")
+            if let req = cmd.authenticationRequest {
+                return self.handleAuthenticationRequest(req, cid: msg.cid)
             }
 
-            if let _ = cmd.versionRequest {
-                print("Received version request!")
+            if let req = cmd.versionRequest {
+                return self.handleVersionRequest(req, cid: msg.cid)
             }
             
+            return false
+        }
+    }
+
+    func handleRegisterRequest(_ req:RegisterRequest, cid:UInt32) -> Bool {
+        print("Received register request!")
+        return true
+    }
+
+    func handleAuthenticationRequest(_ req:AuthenticationRequest, cid:UInt32) -> Bool {
+        print("Received authentication request!")
+        return true
+    }
+
+    func handleVersionRequest(_ req:VersionRequest, cid:UInt32) -> Bool {
+        print("Received version request!")
+
+        let resp = VersionResponse(version: "U2F_V2")
+        let respAPDU:APDUMessageProtocol
+
+        do {
+            respAPDU = try resp.apduWrapped()
+        } catch let err {
+            print("Error creating version response: \(err.localizedDescription)")
+            return false
+        }
+
+        if u2fhid.sendMsg(cid: cid, data: respAPDU.raw) {
+            print("Sent version response.")
             return true
+        } else {
+            print("Error sending version response.")
+            return false
         }
     }
 }

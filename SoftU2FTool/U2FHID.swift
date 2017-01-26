@@ -49,6 +49,20 @@ class U2FHID {
         }
     }
 
+    // Send a U2F level message to the client with the given CID.
+    func sendMsg(cid:UInt32, data:Data) -> Bool {
+        var msg = softu2f_hid_message()
+
+        msg.cmd = MessageType.Msg.rawValue
+        msg.bcnt = UInt16(data.count)
+        msg.cid = cid
+        msg.data = Unmanaged.passUnretained(data as CFData)
+
+        return withUnsafeMutablePointer(to: &msg) { msgPtr in
+            return softu2f_hid_msg_send(ctx, msgPtr)
+        }
+    }
+
     // Register a handler for the given type of U2F HID message.
     func handle(_ type: MessageType, with handler: @escaping HIDMessageHandler) {
         handlers[type.rawValue] = handler
