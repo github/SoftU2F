@@ -6,9 +6,7 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
-struct RegisterResponse: APDUResponseDataProtocol {
-    static let status = APDUResponseTrailer.Status.NoError
-
+struct RegisterResponse: APDUMessageProtocol {
     // Parse a DER formatted X509 certificate from the beginning of a datum and return its length.
     static func certLength(fromData d: Data) throws -> Int {
         var size: Int = 0
@@ -23,12 +21,20 @@ struct RegisterResponse: APDUResponseDataProtocol {
     let keyHandle:   Data
     let certificate: Data
     let signature:   Data
-    
-    init(publicKey pk: Data, keyHandle kh: Data, certificate cert: Data, signature sig: Data) {
-        publicKey = pk
-        keyHandle = kh
-        certificate = cert
-        signature = sig
+    let status:      APDUResponseStatus
+
+    var raw: Data {
+        let writer = DataWriter()
+
+        writer.write(UInt8(0x05))
+        writer.writeData(publicKey)
+        writer.write(UInt8(keyHandle.count))
+        writer.writeData(keyHandle)
+        writer.writeData(certificate)
+        writer.writeData(signature)
+        writer.write(status)
+
+        return writer.buffer
     }
     
     init(raw: Data) throws {
@@ -47,22 +53,23 @@ struct RegisterResponse: APDUResponseDataProtocol {
             let certLen = try RegisterResponse.certLength(fromData: reader.rest)
             certificate = try reader.readData(certLen)
             
-            signature = reader.rest
+            signature = try reader.readData(reader.remaining - 2)
+
+            status = try reader.read()
         } catch DataReaderError.End {
             throw APDUError.BadSize
         }
+
+        if reader.remaining > 0 {
+            throw APDUError.BadSize
+        }
     }
-    
-    var raw: Data {
-        let writer = DataWriter()
-        
-        writer.write(UInt8(0x05))
-        writer.writeData(publicKey)
-        writer.write(UInt8(keyHandle.count))
-        writer.writeData(keyHandle)
-        writer.writeData(certificate)
-        writer.writeData(signature)
-        
-        return writer.buffer
+
+    init(publicKey pk: Data, keyHandle kh: Data, certificate cert: Data, signature sig: Data) {
+        publicKey = pk
+        keyHandle = kh
+        certificate = cert
+        signature = sig
+        status = .NoError
     }
 }

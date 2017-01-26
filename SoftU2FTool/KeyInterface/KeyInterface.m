@@ -103,7 +103,7 @@
     SecAccessControlRef sacObject = SecAccessControlCreateWithFlags(
                                                                     kCFAllocatorDefault,
                                                                     kSecAttrAccessibleWhenUnlocked,
-                                                                    kSecAccessControlPrivateKeyUsage, // maybe kSecAccessControlUserPresence too?
+                                                                    0, // kSecAccessControlPrivateKeyUsage, maybe kSecAccessControlUserPresence too?
                                                                     &error
                                                                     );
 

@@ -28,6 +28,10 @@ class DataWriter: DataWriterProtocol {
 
         buffer.append(UnsafeBufferPointer(start: &eval, count: 1))
     }
+
+    func write<T: EndianEnumProtocol>(_ val:T, endian: Endian = .Big) {
+        write(val.rawValue)
+    }
     
     func writeData(_ d: Data) {
         buffer.append(d)

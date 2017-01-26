@@ -56,14 +56,16 @@ class U2FAuthenticator {
             }
 
             if let req = cmd.authenticationRequest {
-                return self.handleAuthenticationRequest(req, cid: msg.cid)
+                if let control = AuthenticationRequest.Control(rawValue: cmd.header.p1) {
+                    return self.handleAuthenticationRequest(req, control: control, cid: msg.cid)
+                }
             }
 
             if let req = cmd.versionRequest {
                 return self.handleVersionRequest(req, cid: msg.cid)
             }
             
-            return false
+            return self.sendError(status: .OtherError, cid: msg.cid)
         }
     }
 
@@ -73,7 +75,7 @@ class U2FAuthenticator {
         let reg:U2FRegistration
 
         do {
-            reg = try U2FRegistration(keyHandle: req.applicationParameter)
+            reg = try U2FRegistration.create(keyHandle: req.applicationParameter)
         } catch let err {
             print("Error creating registration: \(err.localizedDescription)")
             return false
@@ -88,16 +90,8 @@ class U2FAuthenticator {
         let sig = reg.signWithCertificateKey(sigPayload.buffer)
 
         let resp = RegisterResponse(publicKey: reg.publicKey, keyHandle: reg.keyHandle, certificate: reg.certificate.toDer(), signature: sig)
-        let respAPDU:APDUMessageProtocol
 
-        do {
-            respAPDU = try resp.apduWrapped()
-        } catch let err {
-            print("Error creating register response: \(err.localizedDescription)")
-            return false
-        }
-
-        if u2fhid.sendMsg(cid: cid, data: respAPDU.raw) {
+        if u2fhid.sendMsg(cid: cid, data: resp.raw) {
             print("Sent register response.")
             return true
         } else {
@@ -106,8 +100,41 @@ class U2FAuthenticator {
         }
     }
 
-    func handleAuthenticationRequest(_ req:AuthenticationRequest, cid:UInt32) -> Bool {
-        print("Received authentication request!")
+    func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) -> Bool {
+        print("Received authentication request (\(control))!")
+
+        guard let reg = U2FRegistration.find(keyHandle: req.applicationParameter) else {
+            return sendError(status: .WrongData, cid: cid)
+        }
+
+        if control == .CheckOnly {
+            // success -> error response. It's weird...
+            return sendError(status: .ConditionsNotSatisfied, cid: cid)
+        }
+
+        let sigPayload = DataWriter()
+        sigPayload.writeData(req.applicationParameter)
+        sigPayload.write(UInt8(0x01))        // user present
+        sigPayload.write(UInt32(0x00000000)) // counter
+        sigPayload.writeData(req.challengeParameter)
+
+        reg.signWithPrivateKey(sigPayload.buffer) { (_ sig:Data?, _ err:Error?) -> Void in
+            if let e = err {
+                print("Error signing with private key: \(e.localizedDescription)")
+                let _ = self.sendError(status: .ConditionsNotSatisfied, cid: cid)
+                return
+            }
+
+            if let s = sig {
+                let resp = AuthenticationResponse(userPresence: 0x01, counter: 0x00000000, signature: s)
+                if self.u2fhid.sendMsg(cid: cid, data: resp.raw) {
+                    print("Sent authentication response.")
+                } else {
+                    print("Error sending authentication response.")
+                }
+            }
+        }
+
         return true
     }
 
@@ -115,24 +142,25 @@ class U2FAuthenticator {
         print("Received version request!")
 
         let resp = VersionResponse(version: "U2F_V2")
-        let respAPDU:APDUMessageProtocol
 
-        do {
-            respAPDU = try resp.apduWrapped()
-        } catch let err {
-            print("Error creating version response: \(err.localizedDescription)")
-            return false
-        }
-
-        if u2fhid.sendMsg(cid: cid, data: respAPDU.raw) {
+        if u2fhid.sendMsg(cid: cid, data: resp.raw) {
             print("Sent version response.")
             return true
         } else {
             print("Error sending version response.")
-            return false
+            return sendError(status: .OtherError, cid: cid)
         }
     }
 
-    func sendError() {
+    func sendError(status:APDUResponseStatus, cid: UInt32) -> Bool {
+        let resp = ErrorResponse(status: status)
+
+        if u2fhid.sendMsg(cid: cid, data: resp.raw) {
+            print("Sent error response.")
+            return true
+        } else {
+            print("Error sending error response.")
+            return false
+        }
     }
 }

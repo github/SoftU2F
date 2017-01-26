@@ -13,6 +13,8 @@ enum U2FRegistrationError: Error {
 }
 
 class U2FRegistration {
+    typealias SignCallback = (Data?, Error?) -> Void
+
     let keyHandle:Data
     let certificate:SelfSignedCertificate
 
@@ -76,5 +78,10 @@ class U2FRegistration {
     // Sign some data with the private key associated with our certificate.
     func signWithCertificateKey(_ data:Data) -> Data {
         return certificate.sign(data)
+    }
+
+    // Sign some data with the registration's privat key.
+    func signWithPrivateKey(_ data:Data, with callback: @escaping SignCallback) {
+        KeyInterface.generateSignature(for: data, withKeyName: keyHandleString, withCompletion: callback)
     }
 }

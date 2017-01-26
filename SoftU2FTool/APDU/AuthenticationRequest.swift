@@ -8,8 +8,6 @@
 
 struct AuthenticationRequest: APDUCommandDataProtocol {
     enum Control: UInt8 {
-        typealias RawValue = UInt8
-
         case EnforceUserPresenceAndSign = 0x03
         case CheckOnly                  = 0x07
     }

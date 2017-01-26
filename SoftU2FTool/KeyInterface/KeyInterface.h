@@ -31,7 +31,6 @@
 + (SecKeyRef) lookupPublicKeyRef:(NSString*)keyName;;
 + (NSData *) publicKeyBits:(NSString*)keyName;;
 + (SecKeyRef) lookupPrivateKeyRef:(NSString*)keyName;
-
 + (void)generateSignatureForData:(NSData *)inputData withKeyName:(NSString*)keyName withCompletion:(void(^)(NSData*, NSError*))completion;
 
 @end
