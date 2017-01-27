@@ -74,7 +74,7 @@ struct RegisterResponse: APDUMessageProtocol {
     }
 
     func debug() {
-        print("AuthenticationResponse:")
+        print("Registration Response:")
         print(               "  Reserved:    0x05")
         print(               "  Public key:  \(publicKey.base64EncodedString())")
         print(String(format: "  KH Len:      0x%02x", keyHandle.count))
