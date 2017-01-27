@@ -75,6 +75,22 @@ class U2FRegistration {
         }
     }
 
+    // Delete our key pair from the keychain.
+    func deleteKeyPair() -> Bool {
+        if !KeyInterface.deletePrivateKey(keyHandleString) {
+            print("Error deleting private key.")
+            return false
+        }
+
+        if !KeyInterface.deletePubKey(keyHandleString) {
+            print("Error deleting public key.")
+            return false
+        }
+
+        print("Deleted keys.")
+        return true
+    }
+
     // Sign some data with the private key associated with our certificate.
     func signWithCertificateKey(_ data:Data) -> Data {
         return certificate.sign(data)

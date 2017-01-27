@@ -13,7 +13,7 @@ struct VersionResponse: APDUMessageProtocol {
     var raw: Data {
         let writer = DataWriter()
 
-        writer.writeData(version.data(using: String.Encoding.utf8)!)
+        writer.writeData(version.data(using: .utf8)!)
         writer.write(status)
 
         return writer.buffer
@@ -28,7 +28,7 @@ struct VersionResponse: APDUMessageProtocol {
         let reader = DataReader(data: raw)
 
         let vData = try reader.readData(reader.remaining - 2)
-        if let v = String(data: vData, encoding: String.Encoding.utf8) {
+        if let v = String(data: vData, encoding: .utf8) {
             version = v
         } else {
             throw APDUError.BadEncoding

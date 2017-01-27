@@ -24,7 +24,7 @@ class SHA256 {
     }
 
     static func tupleDigest(str: String) throws -> TupleDigest {
-        guard let data = str.data(using: String.Encoding.utf8) else { throw SError.BadEncoding }
+        guard let data = str.data(using: .utf8) else { throw SError.BadEncoding }
         return SHA256(data: data).tupleDigest
     }
     

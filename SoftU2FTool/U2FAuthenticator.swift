@@ -51,7 +51,7 @@ class U2FAuthenticator {
 
             print("↓↓↓↓↓ Received message ↓↓↓↓↓")
             cmd.debug()
-            print("")
+            print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
 
             if let req = cmd.registerRequest {
                 return self.handleRegisterRequest(req, cid: msg.cid)
@@ -72,8 +72,6 @@ class U2FAuthenticator {
     }
 
     func handleRegisterRequest(_ req:RegisterRequest, cid:UInt32) -> Bool {
-        print("Received register request!")
-
         let reg:U2FRegistration
 
         do {
@@ -97,8 +95,6 @@ class U2FAuthenticator {
     }
 
     func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) -> Bool {
-        print("Received authentication request (\(control))!")
-
         guard let reg = U2FRegistration.find(keyHandle: req.applicationParameter) else {
             return sendError(status: .WrongData, cid: cid)
         }
@@ -151,7 +147,7 @@ class U2FAuthenticator {
         }
 
         msg.debug()
-        print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
+        print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
 
         return ret
     }

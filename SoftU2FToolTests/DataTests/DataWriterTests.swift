@@ -15,7 +15,7 @@ class DataWriterTests: XCTestCase {
         writer.write(UInt8(0xFF), endian: .Little)
         writer.write(UInt16(0x0102))
         writer.write(UInt16(0x0102), endian: .Little)
-        writer.writeData("AB".data(using: String.Encoding.utf8)!)
+        writer.writeData("AB".data(using: .utf8)!)
 
         XCTAssertEqual(Data(int: UInt64(0x00FF010202014142)), writer.buffer)
     }
@@ -26,7 +26,7 @@ class DataWriterTests: XCTestCase {
         try writer.write(UInt8(0x01))
         
         do {
-            try writer.writeData("AB".data(using: String.Encoding.utf8)!)
+            try writer.writeData("AB".data(using: .utf8)!)
         } catch CappedDataWriterError.MaxExceeded {
             // pass
         }

@@ -28,6 +28,8 @@
 		5131C1AB1E3A9CB9006A820C /* VersionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A81E3A9CB9006A820C /* VersionRequest.swift */; };
 		5131C1AC1E3A9CB9006A820C /* VersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A91E3A9CB9006A820C /* VersionResponse.swift */; };
 		5131C1AD1E3A9CB9006A820C /* VersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A91E3A9CB9006A820C /* VersionResponse.swift */; };
+		5131C1B01E3B9C62006A820C /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1AE1E3B9C62006A820C /* IntegrationTests.swift */; };
+		5131C1B21E3B9EA1006A820C /* libu2f-host.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5131C1B11E3B9EA1006A820C /* libu2f-host.a */; };
 		515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */; };
 		515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835E1E3803BE00F40024 /* DataReaderTests.swift */; };
 		515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835F1E3803BE00F40024 /* DataWriterTests.swift */; };
@@ -102,6 +104,8 @@
 		5131C1A51E3A9CB0006A820C /* APDUCommandTrailer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandTrailer.swift; path = APDU/APDUCommandTrailer.swift; sourceTree = "<group>"; };
 		5131C1A81E3A9CB9006A820C /* VersionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionRequest.swift; path = APDU/VersionRequest.swift; sourceTree = "<group>"; };
 		5131C1A91E3A9CB9006A820C /* VersionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionResponse.swift; path = APDU/VersionResponse.swift; sourceTree = "<group>"; };
+		5131C1AE1E3B9C62006A820C /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
+		5131C1B11E3B9EA1006A820C /* libu2f-host.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libu2f-host.a"; path = "../../../../usr/local/Cellar/libu2f-host/1.1.3/lib/libu2f-host.a"; sourceTree = "<group>"; };
 		515E835D1E3803BE00F40024 /* CoreExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreExtensionsTests.swift; path = DataTests/CoreExtensionsTests.swift; sourceTree = "<group>"; };
 		515E835E1E3803BE00F40024 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
 		515E835F1E3803BE00F40024 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5131C1B21E3B9EA1006A820C /* libu2f-host.a in Frameworks */,
 				51E214471E38215C005B2864 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +190,7 @@
 		518537C61E380FAE00600911 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5131C1B11E3B9EA1006A820C /* libu2f-host.a */,
 				51213EC81E391720005454E0 /* libsoftu2f.a */,
 				51A0DA161E3813B900152E9B /* libcrypto.a */,
 			);
@@ -252,6 +258,7 @@
 				51203C381E39234000F661DF /* U2FHIDTests.swift */,
 				51E214631E382529005B2864 /* WebSafeBase64Tests.swift */,
 				51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */,
+				5131C1AE1E3B9C62006A820C /* IntegrationTests.swift */,
 				51213EC11E3834F8005454E0 /* TestUtil.swift */,
 				51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */,
 				51E214561E382376005B2864 /* APDUTests */,
@@ -445,6 +452,7 @@
 				515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */,
 				515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */,
 				51E214641E382529005B2864 /* WebSafeBase64Tests.swift in Sources */,
+				5131C1B01E3B9C62006A820C /* IntegrationTests.swift in Sources */,
 				51E214511E3821F8005B2864 /* RegisterRequest.swift in Sources */,
 				51912B481E397A9600F52454 /* APDUCommandTrailerTests.swift in Sources */,
 				51E2144A1E3821F8005B2864 /* APDUCommandHeader.swift in Sources */,
@@ -658,10 +666,14 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
 					"$(PROJECT_DIR)/SoftU2FTool/inc",
+					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
 				);
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/openssl/1.0.2j/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/openssl/1.0.2j/lib,
+					"/usr/local/Cellar/libu2f-host/1.1.3/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FToolTests-Bridging-Header.h";
@@ -683,10 +695,14 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
 					"$(PROJECT_DIR)/SoftU2FTool/inc",
+					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
 				);
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/openssl/1.0.2j/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/openssl/1.0.2j/lib,
+					"/usr/local/Cellar/libu2f-host/1.1.3/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FToolTests-Bridging-Header.h";

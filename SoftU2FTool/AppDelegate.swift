@@ -11,8 +11,18 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     var u2fThread: Thread?
+    let ghkh = Data(base64Encoded: "cGF9/tBlhjr0fBVVbJF5iICCjMQH/fcK6FARVpRloHU=")!
+    let yckh = Data(base64Encoded: "VWc7UTjMkNO38yv9rWo4qO3Xs1W3erl5IZbxBtFsoxI=")!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        if let ghreg = U2FRegistration.find(keyHandle: ghkh) {
+            let _ = ghreg.deleteKeyPair()
+        }
+
+        if let ycreg = U2FRegistration.find(keyHandle: yckh) {
+            let _ = ycreg.deleteKeyPair()
+        }
+
         if !U2FAuthenticator.start() {
             print("Error starting authenticator")
         }
