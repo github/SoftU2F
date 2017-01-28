@@ -12,6 +12,9 @@
 		5106D3301E3A6126007A2FB3 /* U2FRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */; };
 		5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119862D1E3C1519006A3BBB /* KnownFacets.swift */; };
 		5119862F1E3C1882006A3BBB /* KnownFacets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119862D1E3C1519006A3BBB /* KnownFacets.swift */; };
+		511986311E3C1BB1006A3BBB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511986301E3C1BB1006A3BBB /* main.swift */; };
+		511986321E3C1BB1006A3BBB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511986301E3C1BB1006A3BBB /* main.swift */; };
+		511986331E3C1C20006A3BBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */; };
 		51203C391E39234000F661DF /* U2FHIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51203C381E39234000F661DF /* U2FHIDTests.swift */; };
 		51213EC01E383344005454E0 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2145F1E3823E7005B2864 /* SHA256.swift */; };
 		51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC11E3834F8005454E0 /* TestUtil.swift */; };
@@ -74,9 +77,6 @@
 		51E214641E382529005B2864 /* WebSafeBase64Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214631E382529005B2864 /* WebSafeBase64Tests.swift */; };
 		51E214651E3826DB005B2864 /* WebSafeBase64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214611E382521005B2864 /* WebSafeBase64.swift */; };
 		51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */; };
-		51F090121E37E8C600F03AD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090111E37E8C600F03AD3 /* ViewController.swift */; };
-		51F090141E37E8C600F03AD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F090131E37E8C600F03AD3 /* Assets.xcassets */; };
-		51F090171E37E8C600F03AD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51F090151E37E8C600F03AD3 /* Main.storyboard */; };
 		51F090481E37F90300F03AD3 /* CoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090441E37F90300F03AD3 /* CoreExtensions.swift */; };
 		51F090491E37F90300F03AD3 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090451E37F90300F03AD3 /* DataReader.swift */; };
 		51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090461E37F90300F03AD3 /* DataWriter.swift */; };
@@ -98,6 +98,7 @@
 		5106D32C1E3A5D2C007A2FB3 /* KeyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyInterface.m; path = KeyInterface/KeyInterface.m; sourceTree = "<group>"; };
 		5106D32F1E3A5D47007A2FB3 /* KeyInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KeyInterface.h; path = KeyInterface/KeyInterface.h; sourceTree = "<group>"; };
 		5119862D1E3C1519006A3BBB /* KnownFacets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnownFacets.swift; sourceTree = "<group>"; };
+		511986301E3C1BB1006A3BBB /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		51203C381E39234000F661DF /* U2FHIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FHIDTests.swift; sourceTree = "<group>"; };
 		51213EC11E3834F8005454E0 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfSignedCertificateTests.swift; sourceTree = "<group>"; };
@@ -140,9 +141,6 @@
 		51E214631E382529005B2864 /* WebSafeBase64Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSafeBase64Tests.swift; sourceTree = "<group>"; };
 		51F0900C1E37E8C600F03AD3 /* SoftU2FTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoftU2FTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		51F090111E37E8C600F03AD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		51F090131E37E8C600F03AD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		51F090161E37E8C600F03AD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		51F090181E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftU2FToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F090231E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,8 +238,8 @@
 				51F090431E37F8F900F03AD3 /* Data */,
 				51F0902C1E37F7BA00F03AD3 /* APDU */,
 				5106D32B1E3A5CF2007A2FB3 /* KeyInterface */,
+				511986301E3C1BB1006A3BBB /* main.swift */,
 				51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */,
-				51F090111E37E8C600F03AD3 /* ViewController.swift */,
 				51E2145F1E3823E7005B2864 /* SHA256.swift */,
 				51E214611E382521005B2864 /* WebSafeBase64.swift */,
 				51213EC51E3916EB005454E0 /* U2FHID.swift */,
@@ -252,8 +250,6 @@
 				518537C21E380EF500600911 /* SelfSignedCertificate.m */,
 				518537C51E380F0A00600911 /* SelfSignedCertificate.h */,
 				518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */,
-				51F090131E37E8C600F03AD3 /* Assets.xcassets */,
-				51F090151E37E8C600F03AD3 /* Main.storyboard */,
 				51F090181E37E8C600F03AD3 /* Info.plist */,
 			);
 			path = SoftU2FTool;
@@ -400,8 +396,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51F090141E37E8C600F03AD3 /* Assets.xcassets in Resources */,
-				51F090171E37E8C600F03AD3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,8 +420,8 @@
 				5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */,
 				518537B11E380C0A00600911 /* APDUCommand.swift in Sources */,
 				51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */,
-				51F090121E37E8C600F03AD3 /* ViewController.swift in Sources */,
 				5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */,
+				511986311E3C1BB1006A3BBB /* main.swift in Sources */,
 				518537B41E380C0A00600911 /* APDUCommandDataProtocol.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
 				51F090481E37F90300F03AD3 /* CoreExtensions.swift in Sources */,
@@ -459,6 +453,7 @@
 				51E2145A1E382380005B2864 /* APDUCommandTests.swift in Sources */,
 				5131C1A11E3A97DE006A820C /* APDUResponseStatus.swift in Sources */,
 				5131C1A71E3A9CB0006A820C /* APDUCommandTrailer.swift in Sources */,
+				511986331E3C1C20006A3BBB /* AppDelegate.swift in Sources */,
 				515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */,
 				5119862F1E3C1882006A3BBB /* KnownFacets.swift in Sources */,
 				515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */,
@@ -481,6 +476,7 @@
 				5131C1AD1E3A9CB9006A820C /* VersionResponse.swift in Sources */,
 				51213EC01E383344005454E0 /* SHA256.swift in Sources */,
 				515E83631E38048C00F40024 /* CoreExtensions.swift in Sources */,
+				511986321E3C1BB1006A3BBB /* main.swift in Sources */,
 				515E83641E38048F00F40024 /* DataReader.swift in Sources */,
 				51E214491E3821F4005B2864 /* APDUError.swift in Sources */,
 				5190B6131E3C028400E6FE06 /* UserPresence.swift in Sources */,
@@ -506,17 +502,6 @@
 			targetProxy = 51F0901E1E37E8C600F03AD3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		51F090151E37E8C600F03AD3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				51F090161E37E8C600F03AD3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		51F090241E37E8C600F03AD3 /* Debug */ = {

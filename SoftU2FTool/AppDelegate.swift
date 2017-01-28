@@ -8,7 +8,7 @@
 
 import Cocoa
 
-@NSApplicationMain
+//@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     var u2fThread: Thread?
     let ghkh = Data(base64Encoded: "cGF9/tBlhjr0fBVVbJF5iICCjMQH/fcK6FARVpRloHU=")!
