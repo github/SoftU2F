@@ -60,6 +60,8 @@ class UserPresence: NSObject {
             notification.informativeText = "Authenticate with " + (facet ?? "site")
         }
 
+        notification.actionButtonTitle = "foobar"
+
         NSUserNotificationCenter.default.deliver(notification)
         }
     }
