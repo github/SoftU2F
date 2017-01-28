@@ -15,10 +15,14 @@ class SHA256 {
     
     static var DigestLength = Int(CC_SHA256_DIGEST_LENGTH)
     
-    static func digest(_ data: Data) throws -> Data {
+    static func digest(_ data: Data) -> Data {
         return SHA256(data: data).digest
     }
-    
+
+    static func digest(_ string: String) -> Data {
+        return SHA256(data: string.data(using: .utf8)!).digest
+    }
+
     static func tupleDigest(_ data: Data) -> TupleDigest {
         return SHA256(data: data).tupleDigest
     }

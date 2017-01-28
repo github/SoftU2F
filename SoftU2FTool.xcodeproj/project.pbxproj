@@ -10,6 +10,8 @@
 		5106D32A1E3A5464007A2FB3 /* U2FRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */; };
 		5106D32D1E3A5D2C007A2FB3 /* KeyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 5106D32C1E3A5D2C007A2FB3 /* KeyInterface.m */; };
 		5106D3301E3A6126007A2FB3 /* U2FRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */; };
+		5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119862D1E3C1519006A3BBB /* KnownFacets.swift */; };
+		5119862F1E3C1882006A3BBB /* KnownFacets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119862D1E3C1519006A3BBB /* KnownFacets.swift */; };
 		51203C391E39234000F661DF /* U2FHIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51203C381E39234000F661DF /* U2FHIDTests.swift */; };
 		51213EC01E383344005454E0 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2145F1E3823E7005B2864 /* SHA256.swift */; };
 		51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC11E3834F8005454E0 /* TestUtil.swift */; };
@@ -47,6 +49,8 @@
 		518537BA1E380C0A00600911 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AF1E380C0A00600911 /* RegisterRequest.swift */; };
 		518537BB1E380C0A00600911 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537B01E380C0A00600911 /* RegisterResponse.swift */; };
 		518537C31E380EF500600911 /* SelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 518537C21E380EF500600911 /* SelfSignedCertificate.m */; };
+		5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */; };
+		5190B6131E3C028400E6FE06 /* UserPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */; };
 		51912B481E397A9600F52454 /* APDUCommandTrailerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51912B471E397A9600F52454 /* APDUCommandTrailerTests.swift */; };
 		51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */; };
 		51B289E61E39903F00AD90CC /* U2FAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */; };
@@ -93,6 +97,7 @@
 		5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FRegistration.swift; sourceTree = "<group>"; };
 		5106D32C1E3A5D2C007A2FB3 /* KeyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyInterface.m; path = KeyInterface/KeyInterface.m; sourceTree = "<group>"; };
 		5106D32F1E3A5D47007A2FB3 /* KeyInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KeyInterface.h; path = KeyInterface/KeyInterface.h; sourceTree = "<group>"; };
+		5119862D1E3C1519006A3BBB /* KnownFacets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnownFacets.swift; sourceTree = "<group>"; };
 		51203C381E39234000F661DF /* U2FHIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FHIDTests.swift; sourceTree = "<group>"; };
 		51213EC11E3834F8005454E0 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfSignedCertificateTests.swift; sourceTree = "<group>"; };
@@ -121,6 +126,7 @@
 		518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		518537C21E380EF500600911 /* SelfSignedCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfSignedCertificate.m; sourceTree = "<group>"; };
 		518537C51E380F0A00600911 /* SelfSignedCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfSignedCertificate.h; sourceTree = "<group>"; };
+		5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPresence.swift; sourceTree = "<group>"; };
 		51912B471E397A9600F52454 /* APDUCommandTrailerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandTrailerTests.swift; path = APDUTests/APDUCommandTrailerTests.swift; sourceTree = "<group>"; };
 		51A0DA161E3813B900152E9B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/Cellar/openssl/1.0.2j/lib/libcrypto.a; sourceTree = "<group>"; };
 		51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FAuthenticator.swift; sourceTree = "<group>"; };
@@ -241,6 +247,8 @@
 				51213EC51E3916EB005454E0 /* U2FHID.swift */,
 				51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */,
 				5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */,
+				5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */,
+				5119862D1E3C1519006A3BBB /* KnownFacets.swift */,
 				518537C21E380EF500600911 /* SelfSignedCertificate.m */,
 				518537C51E380F0A00600911 /* SelfSignedCertificate.h */,
 				518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */,
@@ -415,9 +423,11 @@
 				51F090491E37F90300F03AD3 /* DataReader.swift in Sources */,
 				5131C1AA1E3A9CB9006A820C /* VersionRequest.swift in Sources */,
 				5131C1A61E3A9CB0006A820C /* APDUCommandTrailer.swift in Sources */,
+				5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */,
 				518537B11E380C0A00600911 /* APDUCommand.swift in Sources */,
 				51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */,
 				51F090121E37E8C600F03AD3 /* ViewController.swift in Sources */,
+				5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */,
 				518537B41E380C0A00600911 /* APDUCommandDataProtocol.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
 				51F090481E37F90300F03AD3 /* CoreExtensions.swift in Sources */,
@@ -450,6 +460,7 @@
 				5131C1A11E3A97DE006A820C /* APDUResponseStatus.swift in Sources */,
 				5131C1A71E3A9CB0006A820C /* APDUCommandTrailer.swift in Sources */,
 				515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */,
+				5119862F1E3C1882006A3BBB /* KnownFacets.swift in Sources */,
 				515E83601E3803BE00F40024 /* CoreExtensionsTests.swift in Sources */,
 				51E214641E382529005B2864 /* WebSafeBase64Tests.swift in Sources */,
 				5131C1B01E3B9C62006A820C /* IntegrationTests.swift in Sources */,
@@ -472,6 +483,7 @@
 				515E83631E38048C00F40024 /* CoreExtensions.swift in Sources */,
 				515E83641E38048F00F40024 /* DataReader.swift in Sources */,
 				51E214491E3821F4005B2864 /* APDUError.swift in Sources */,
+				5190B6131E3C028400E6FE06 /* UserPresence.swift in Sources */,
 				515E83661E38049400F40024 /* Endian.swift in Sources */,
 				51E214481E3821F0005B2864 /* APDUCommand.swift in Sources */,
 				5106D3301E3A6126007A2FB3 /* U2FRegistration.swift in Sources */,

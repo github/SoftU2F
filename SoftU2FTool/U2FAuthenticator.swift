@@ -54,12 +54,24 @@ class U2FAuthenticator {
             print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
 
             if let req = cmd.registerRequest {
-                return self.handleRegisterRequest(req, cid: msg.cid)
+                let facet = KnownFacets[req.applicationParameter]
+
+                UserPresence.test(.Register(facet: facet)) { success in
+                    self.handleRegisterRequest(req, cid: msg.cid)
+                }
+
+                return true
             }
 
             if let req = cmd.authenticationRequest {
                 if let control = AuthenticationRequest.Control(rawValue: cmd.header.p1) {
-                    return self.handleAuthenticationRequest(req, control: control, cid: msg.cid)
+                    let facet = KnownFacets[req.applicationParameter]
+
+                    UserPresence.test(.Authenticate(facet: facet)) { success in
+                        self.handleAuthenticationRequest(req, control: control, cid: msg.cid)
+                    }
+
+                    return true
                 }
             }
 
@@ -71,14 +83,15 @@ class U2FAuthenticator {
         }
     }
 
-    func handleRegisterRequest(_ req:RegisterRequest, cid:UInt32) -> Bool {
+    func handleRegisterRequest(_ req:RegisterRequest, cid:UInt32) {
         let reg:U2FRegistration
 
         do {
             reg = try U2FRegistration.create(keyHandle: req.applicationParameter)
         } catch let err {
             print("Error creating registration: \(err.localizedDescription)")
-            return sendError(status: .OtherError, cid: cid)
+            let _ = sendError(status: .OtherError, cid: cid)
+            return
         }
 
         let sigPayload = DataWriter()
@@ -91,17 +104,19 @@ class U2FAuthenticator {
 
         let resp = RegisterResponse(publicKey: reg.publicKey, keyHandle: reg.keyHandle, certificate: reg.certificate.toDer(), signature: sig)
 
-        return sendMsg(msg: resp, cid: cid)
+        let _ = sendMsg(msg: resp, cid: cid)
     }
 
-    func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) -> Bool {
+    func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) {
         guard let reg = U2FRegistration.find(keyHandle: req.applicationParameter) else {
-            return sendError(status: .WrongData, cid: cid)
+            let _ = sendError(status: .WrongData, cid: cid)
+            return
         }
 
         if control == .CheckOnly {
             // success -> error response. It's weird...
-            return sendError(status: .ConditionsNotSatisfied, cid: cid)
+            let _ = sendError(status: .ConditionsNotSatisfied, cid: cid)
+            return
         }
 
         let sigPayload = DataWriter()
@@ -123,8 +138,6 @@ class U2FAuthenticator {
                 return
             }
         }
-
-        return true
     }
 
     func handleVersionRequest(_ req:VersionRequest, cid:UInt32) -> Bool {
