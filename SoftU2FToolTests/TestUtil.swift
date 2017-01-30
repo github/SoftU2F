@@ -6,9 +6,9 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
-import Foundation
-
+import XCTest
 @testable import SoftU2FTool
+
 func tupleDigestEqual(_ a: SHA256.TupleDigest, _ b: SHA256.TupleDigest) -> Bool {
     return
         a.0 == b.0 &&
@@ -60,9 +60,9 @@ func randData(length len: Int) -> Data {
     return d
 }
 
-//extension Data {
-//    convenience init(chars: [UInt8]) {
-//        var vChars = chars
-//        self.init(bytes: &vChars, length: vChars.count)
-//    }
-//}
+extension u2fh_rc {
+    var name:String {
+        let namePtr = u2fh_strerror_name(rawValue)
+        return String(cString: namePtr!)
+    }
+}

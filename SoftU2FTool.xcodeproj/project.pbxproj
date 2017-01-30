@@ -15,7 +15,6 @@
 		51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC11E3834F8005454E0 /* TestUtil.swift */; };
 		51213EC41E3904A8005454E0 /* SelfSignedCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */; };
 		51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC51E3916EB005454E0 /* U2FHID.swift */; };
-		51213EDE1E391E9E005454E0 /* libsoftu2f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51213EC81E391720005454E0 /* libsoftu2f.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		5131C1A01E3A97DE006A820C /* APDUResponseStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C19F1E3A97DE006A820C /* APDUResponseStatus.swift */; };
 		5131C1A31E3A9C72006A820C /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A21E3A9C72006A820C /* ErrorResponse.swift */; };
 		5131C1A61E3A9CB0006A820C /* APDUCommandTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A51E3A9CB0006A820C /* APDUCommandTrailer.swift */; };
@@ -37,6 +36,7 @@
 		518537C31E380EF500600911 /* SelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 518537C21E380EF500600911 /* SelfSignedCertificate.m */; };
 		5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */; };
 		51912B481E397A9600F52454 /* APDUCommandTrailerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51912B471E397A9600F52454 /* APDUCommandTrailerTests.swift */; };
+		51A5E3B01E3FC7CD0028E2D1 /* libsoftu2f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A5E3AD1E3FC7BA0028E2D1 /* libsoftu2f.a */; };
 		51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */; };
 		51E214461E381E0C005B2864 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A0DA161E3813B900152E9B /* libcrypto.a */; };
 		51E214471E38215C005B2864 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A0DA161E3813B900152E9B /* libcrypto.a */; };
@@ -54,6 +54,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		51A5E3A81E3FC7BA0028E2D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5143B0AB1E282828005717AD;
+			remoteInfo = Driver;
+		};
+		51A5E3AA1E3FC7BA0028E2D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 514CF0EB1E285CBC004203C6;
+			remoteInfo = Example;
+		};
+		51A5E3AC1E3FC7BA0028E2D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 514CF0FF1E28604F004203C6;
+			remoteInfo = softu2f;
+		};
+		51A5E3AE1E3FC7BA0028E2D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5129956F1E32E98400591797;
+			remoteInfo = Tests;
+		};
+		51A5E3B11E3FC80C0028E2D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 514CF0FE1E28604F004203C6;
+			remoteInfo = softu2f;
+		};
 		51F0901E1E37E8C600F03AD3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 51F090041E37E8C500F03AD3 /* Project object */;
@@ -73,7 +108,6 @@
 		51213EC11E3834F8005454E0 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfSignedCertificateTests.swift; sourceTree = "<group>"; };
 		51213EC51E3916EB005454E0 /* U2FHID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FHID.swift; sourceTree = "<group>"; };
-		51213EC81E391720005454E0 /* libsoftu2f.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsoftu2f.a; path = "../../Library/Developer/Xcode/DerivedData/SoftU2F-anxsjiaglenmrofviwcnmradlhmx/Build/Products/Debug/libsoftu2f.a"; sourceTree = "<group>"; };
 		5131C19D1E3A77EE006A820C /* SoftU2FTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoftU2FTool.entitlements; sourceTree = "<group>"; };
 		5131C19F1E3A97DE006A820C /* APDUResponseStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUResponseStatus.swift; path = APDU/APDUResponseStatus.swift; sourceTree = "<group>"; };
 		5131C1A21E3A9C72006A820C /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorResponse.swift; path = APDU/ErrorResponse.swift; sourceTree = "<group>"; };
@@ -99,6 +133,7 @@
 		5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPresence.swift; sourceTree = "<group>"; };
 		51912B471E397A9600F52454 /* APDUCommandTrailerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandTrailerTests.swift; path = APDUTests/APDUCommandTrailerTests.swift; sourceTree = "<group>"; };
 		51A0DA161E3813B900152E9B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/Cellar/openssl/1.0.2j/lib/libcrypto.a; sourceTree = "<group>"; };
+		51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoftU2F.xcodeproj; path = SoftU2F/SoftU2F.xcodeproj; sourceTree = "<group>"; };
 		51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FAuthenticator.swift; sourceTree = "<group>"; };
 		51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FToolTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		51E214571E382380005B2864 /* APDUCommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandTests.swift; path = APDUTests/APDUCommandTests.swift; sourceTree = "<group>"; };
@@ -123,7 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51213EDE1E391E9E005454E0 /* libsoftu2f.a in Frameworks */,
+				51A5E3B01E3FC7CD0028E2D1 /* libsoftu2f.a in Frameworks */,
 				51E214461E381E0C005B2864 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,10 +197,20 @@
 			isa = PBXGroup;
 			children = (
 				5131C1B11E3B9EA1006A820C /* libu2f-host.a */,
-				51213EC81E391720005454E0 /* libsoftu2f.a */,
 				51A0DA161E3813B900152E9B /* libcrypto.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		51A5E3A11E3FC7BA0028E2D1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				51A5E3A91E3FC7BA0028E2D1 /* softu2f.kext */,
+				51A5E3AB1E3FC7BA0028E2D1 /* Example */,
+				51A5E3AD1E3FC7BA0028E2D1 /* libsoftu2f.a */,
+				51A5E3AF1E3FC7BA0028E2D1 /* Tests */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		51E214561E382376005B2864 /* APDUTests */ = {
@@ -182,6 +227,7 @@
 		51F090031E37E8C500F03AD3 = {
 			isa = PBXGroup;
 			children = (
+				51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */,
 				51F0900E1E37E8C600F03AD3 /* SoftU2FTool */,
 				51F090201E37E8C600F03AD3 /* SoftU2FToolTests */,
 				51F0900D1E37E8C600F03AD3 /* Products */,
@@ -284,6 +330,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				51A5E3B21E3FC80C0028E2D1 /* PBXTargetDependency */,
 			);
 			name = SoftU2FTool;
 			productName = SoftU2FTool;
@@ -349,6 +396,12 @@
 			mainGroup = 51F090031E37E8C500F03AD3;
 			productRefGroup = 51F0900D1E37E8C600F03AD3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 51A5E3A11E3FC7BA0028E2D1 /* Products */;
+					ProjectRef = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				51F0900B1E37E8C600F03AD3 /* SoftU2FTool */,
@@ -356,6 +409,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		51A5E3A91E3FC7BA0028E2D1 /* softu2f.kext */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = softu2f.kext;
+			remoteRef = 51A5E3A81E3FC7BA0028E2D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		51A5E3AB1E3FC7BA0028E2D1 /* Example */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = Example;
+			remoteRef = 51A5E3AA1E3FC7BA0028E2D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		51A5E3AD1E3FC7BA0028E2D1 /* libsoftu2f.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsoftu2f.a;
+			remoteRef = 51A5E3AC1E3FC7BA0028E2D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		51A5E3AF1E3FC7BA0028E2D1 /* Tests */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = Tests;
+			remoteRef = 51A5E3AE1E3FC7BA0028E2D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		51F0900A1E37E8C600F03AD3 /* Resources */ = {
@@ -432,6 +516,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		51A5E3B21E3FC80C0028E2D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = softu2f;
+			targetProxy = 51A5E3B11E3FC80C0028E2D1 /* PBXContainerItemProxy */;
+		};
 		51F0901F1E37E8C600F03AD3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 51F0900B1E37E8C600F03AD3 /* SoftU2FTool */;
@@ -542,7 +631,7 @@
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
-					"$(PROJECT_DIR)/SoftU2FTool/inc",
+					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
 				);
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -571,7 +660,7 @@
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
-					"$(PROJECT_DIR)/SoftU2FTool/inc",
+					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
 				);
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -598,7 +687,7 @@
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
-					"$(PROJECT_DIR)/SoftU2FTool/inc",
+					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
 					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
 				);
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
@@ -627,7 +716,7 @@
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
-					"$(PROJECT_DIR)/SoftU2FTool/inc",
+					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
 					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
 				);
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;

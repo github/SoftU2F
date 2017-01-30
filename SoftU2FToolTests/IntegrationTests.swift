@@ -12,13 +12,13 @@ import XCTest
 class U2FAuthenticatorTests: XCTestCase {
     func testRegister() throws {
         var rc = u2fh_global_init(u2fh_initflags(rawValue: 0))
-        XCTAssertEqual(rc, U2FH_OK)
+        XCTAssertEqual(rc.name, U2FH_OK.name)
         defer { u2fh_global_done() }
 
 
         var devs:OpaquePointer? = nil
         rc = u2fh_devs_init(&devs)
-        XCTAssertEqual(rc, U2FH_OK)
+        XCTAssertEqual(rc.name, U2FH_OK.name)
         XCTAssertNotNil(devs)
         defer { u2fh_devs_done(devs) }
 
@@ -28,11 +28,11 @@ class U2FAuthenticatorTests: XCTestCase {
             sleep(1)
 
             rc = u2fh_devs_init(&devs)
-            XCTAssertEqual(rc, U2FH_OK)
+            XCTAssertEqual(rc.name, U2FH_OK.name)
             XCTAssertNotNil(devs)
         }
 
-        XCTAssertEqual(rc, U2FH_OK)
+        XCTAssertEqual(rc.name, U2FH_OK.name)
         XCTAssertEqual(maxIdx, 0)
 
         let appId = "https://github.com/u2f/trusted_facets"
@@ -42,7 +42,7 @@ class U2FAuthenticatorTests: XCTestCase {
         var response:UnsafeMutablePointer<Int8>? = nil
 
         rc = u2fh_register(devs, challengeParam, appId, &response, U2FH_REQUEST_USER_PRESENCE)
-        XCTAssertEqual(rc, U2FH_OK)
+        XCTAssertEqual(rc.name, U2FH_OK.name)
         XCTAssertNotNil(response)
 
         let keyHandle = SHA256.digest(appId.data(using: .utf8)!)

@@ -49,119 +49,124 @@ class U2FAuthenticator {
                 return true
             }
 
-            print("↓↓↓↓↓ Received message ↓↓↓↓↓")
-            cmd.debug()
-            print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
+//            print("↓↓↓↓↓ Received message ↓↓↓↓↓")
+//            cmd.debug()
+//            print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
 
             if let req = cmd.registerRequest {
-                let facet = KnownFacets[req.applicationParameter]
-
-                UserPresence.test(.Register(facet: facet)) { success in
-                    self.handleRegisterRequest(req, cid: msg.cid)
-                }
-
+                self.handleRegisterRequest(req, cid: msg.cid)
                 return true
             }
 
             if let req = cmd.authenticationRequest {
                 if let control = AuthenticationRequest.Control(rawValue: cmd.header.p1) {
-                    let facet = KnownFacets[req.applicationParameter]
-
-                    UserPresence.test(.Authenticate(facet: facet)) { success in
-                        self.handleAuthenticationRequest(req, control: control, cid: msg.cid)
-                    }
-
+                    self.handleAuthenticationRequest(req, control: control, cid: msg.cid)
                     return true
                 }
             }
 
             if let req = cmd.versionRequest {
-                return self.handleVersionRequest(req, cid: msg.cid)
+                self.handleVersionRequest(req, cid: msg.cid)
+                return true
             }
             
-            return self.sendError(status: .OtherError, cid: msg.cid)
+            self.sendError(status: .OtherError, cid: msg.cid)
+            return true
         }
     }
 
     func handleRegisterRequest(_ req:RegisterRequest, cid:UInt32) {
-        let reg:U2FRegistration
+        let facet = KnownFacets[req.applicationParameter]
+        let notification = UserPresence.Notification.Register(facet: facet)
 
-        do {
-            reg = try U2FRegistration.create(keyHandle: req.applicationParameter)
-        } catch let err {
-            print("Error creating registration: \(err.localizedDescription)")
-            let _ = sendError(status: .OtherError, cid: cid)
-            return
+        UserPresence.test(notification) { success in
+            if !success {
+                self.sendError(status: .ConditionsNotSatisfied, cid: cid)
+                return
+            }
+
+            let reg:U2FRegistration
+
+            do {
+                reg = try U2FRegistration.create(keyHandle: req.applicationParameter)
+            } catch let err {
+                print("Error creating registration: \(err.localizedDescription)")
+                self.sendError(status: .OtherError, cid: cid)
+                return
+            }
+
+            let sigPayload = DataWriter()
+            sigPayload.write(UInt8(0x00)) // reserved
+            sigPayload.writeData(req.applicationParameter)
+            sigPayload.writeData(req.challengeParameter)
+            sigPayload.writeData(reg.keyHandle)
+            sigPayload.writeData(reg.publicKey)
+            let sig = reg.signWithCertificateKey(sigPayload.buffer)
+
+            let resp = RegisterResponse(publicKey: reg.publicKey, keyHandle: reg.keyHandle, certificate: reg.certificate.toDer(), signature: sig)
+            
+            self.sendMsg(msg: resp, cid: cid)
         }
-
-        let sigPayload = DataWriter()
-        sigPayload.write(UInt8(0x00)) // reserved
-        sigPayload.writeData(req.applicationParameter)
-        sigPayload.writeData(req.challengeParameter)
-        sigPayload.writeData(reg.keyHandle)
-        sigPayload.writeData(reg.publicKey)
-        let sig = reg.signWithCertificateKey(sigPayload.buffer)
-
-        let resp = RegisterResponse(publicKey: reg.publicKey, keyHandle: reg.keyHandle, certificate: reg.certificate.toDer(), signature: sig)
-
-        let _ = sendMsg(msg: resp, cid: cid)
     }
 
     func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) {
         guard let reg = U2FRegistration.find(keyHandle: req.applicationParameter) else {
-            let _ = sendError(status: .WrongData, cid: cid)
+            sendError(status: .WrongData, cid: cid)
             return
         }
 
         if control == .CheckOnly {
             // success -> error response. It's weird...
-            let _ = sendError(status: .ConditionsNotSatisfied, cid: cid)
+            sendError(status: .ConditionsNotSatisfied, cid: cid)
             return
         }
 
-        let sigPayload = DataWriter()
-        sigPayload.writeData(req.applicationParameter)
-        sigPayload.write(UInt8(0x01))        // user present
-        sigPayload.write(UInt32(0x00000000)) // counter
-        sigPayload.writeData(req.challengeParameter)
+        let facet = KnownFacets[req.applicationParameter]
+        let notification = UserPresence.Notification.Authenticate(facet: facet)
 
-        reg.signWithPrivateKey(sigPayload.buffer) { (_ sig:Data?, _ err:Error?) -> Void in
-            if let e = err {
-                print("Error signing with private key: \(e.localizedDescription)")
-                let _ = self.sendError(status: .OtherError, cid: cid)
-                return
-            }
+        UserPresence.test(notification) { success in
+            let sigPayload = DataWriter()
+            sigPayload.writeData(req.applicationParameter)
+            sigPayload.write(UInt8(0x01))        // user present
+            sigPayload.write(UInt32(0x00000000)) // counter
+            sigPayload.writeData(req.challengeParameter)
 
-            if let s = sig {
-                let resp = AuthenticationResponse(userPresence: 0x01, counter: 0x00000000, signature: s)
-                let _ = self.sendMsg(msg: resp, cid: cid)
-                return
+            reg.signWithPrivateKey(sigPayload.buffer) { (_ sig:Data?, _ err:Error?) -> Void in
+                if let e = err {
+                    print("Error signing with private key: \(e.localizedDescription)")
+                    self.sendError(status: .OtherError, cid: cid)
+                    return
+                }
+
+                if let s = sig {
+                    let resp = AuthenticationResponse(userPresence: 0x01, counter: 0x00000000, signature: s)
+                    self.sendMsg(msg: resp, cid: cid)
+                    return
+                }
             }
         }
     }
 
-    func handleVersionRequest(_ req:VersionRequest, cid:UInt32) -> Bool {
+    func handleVersionRequest(_ req:VersionRequest, cid:UInt32) {
         let resp = VersionResponse(version: "U2F_V2")
-        return sendMsg(msg: resp, cid: cid)
+        sendMsg(msg: resp, cid: cid)
     }
 
-    func sendError(status:APDUResponseStatus, cid: UInt32) -> Bool {
+    func sendError(status:APDUResponseStatus, cid: UInt32) {
         let resp = ErrorResponse(status: status)
-        return sendMsg(msg: resp, cid: cid)
+        sendMsg(msg: resp, cid: cid)
     }
 
-    func sendMsg(msg:APDUMessageProtocol, cid:UInt32) -> Bool {
+    func sendMsg(msg:APDUMessageProtocol, cid:UInt32) {
         let ret = u2fhid.sendMsg(cid: cid, data: msg.raw)
 
-        if ret {
-            print("↓↓↓↓↓ Sent message ↓↓↓↓↓")
-        } else {
-            print("↓↓↓↓↓ Error sending message ↓↓↓↓↓")
-        }
-
-        msg.debug()
-        print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
-
-        return ret
+//        if ret {
+//            print("↓↓↓↓↓ Sent message ↓↓↓↓↓")
+//        } else {
+//            print("↓↓↓↓↓ Error sending message ↓↓↓↓↓")
+//        }
+//
+//        msg.debug()
+//        print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
     }
 }

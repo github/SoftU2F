@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AC56B5A826EFC8C045C4CEFFD93C0FC5723044B9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AC56B5A826EFC8C045C4CEFFD93C0FC5723044B9" : 9223372036854775807,
+    "255AD7C5569D0E3618B1ECBAA9C64282DB21D5ED" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3853A582-91BA-44CF-83E2-E47CCF59790D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AC56B5A826EFC8C045C4CEFFD93C0FC5723044B9" : "SoftU2FTool\/",
+    "255AD7C5569D0E3618B1ECBAA9C64282DB21D5ED" : "SoftU2FTool\/SoftU2F\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SoftU2FTool",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SoftU2FTool.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mastahyeti\/SoftU2F",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "255AD7C5569D0E3618B1ECBAA9C64282DB21D5ED"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mastahyeti\/SoftU2FTool",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AC56B5A826EFC8C045C4CEFFD93C0FC5723044B9"
+    }
+  ]
+}
