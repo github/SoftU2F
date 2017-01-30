@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class APDUResponseTests: XCTestCase {
     func testRegisterResponse() throws {
         let pk = randData(length: MemoryLayout<U2F_EC_POINT>.size)

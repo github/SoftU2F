@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class DataReaderTests: XCTestCase {
     func testUInt8() throws {
         let data = Data(bytes: [0x00, 0x01, 0x02])
@@ -196,7 +197,7 @@ class DataReaderTests: XCTestCase {
     }
     
     func testReadEnum() throws {
-        let reader = DataReader(data: Data(int: UInt32(0x01020304)))
+        let reader = DataReader(data: Data(bytes: [0x01, 0x02, 0x03, 0x04]))
         var p:Place
         var op:Place?
         
@@ -239,7 +240,7 @@ class DataReaderTests: XCTestCase {
     }
 
     func testReadOptionalEnum() {
-        let reader = DataReader(data: Data(int: UInt32(0x01020304)))
+        let reader = DataReader(data: Data(bytes: [0x01, 0x02, 0x03, 0x04]))
         var op:Place?
 
         XCTAssertEqual(4, reader.remaining)

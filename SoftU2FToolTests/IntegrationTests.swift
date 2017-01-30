@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class U2FAuthenticatorTests: XCTestCase {
     func testRegister() throws {
         var rc = u2fh_global_init(u2fh_initflags(rawValue: 0))
@@ -44,7 +45,7 @@ class U2FAuthenticatorTests: XCTestCase {
         XCTAssertEqual(rc, U2FH_OK)
         XCTAssertNotNil(response)
 
-        let keyHandle = try SHA256.digest(appId.data(using: .utf8)!)
+        let keyHandle = SHA256.digest(appId.data(using: .utf8)!)
         let reg = U2FRegistration.find(keyHandle: keyHandle)
         XCTAssertNotNil(reg)
         XCTAssertTrue(reg?.deleteKeyPair() ?? true) //cleanup

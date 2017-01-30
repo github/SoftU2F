@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class APDUCommandHeaderTests: XCTestCase {
     func testRegisterRequest() throws {
         let c = Data(repeating: 0xCC, count: 32)

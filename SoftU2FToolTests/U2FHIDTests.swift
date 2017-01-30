@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class U2FHIDTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(U2FHID.shared)

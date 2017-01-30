@@ -8,6 +8,7 @@
 
 import Foundation
 
+@testable import SoftU2FTool
 func tupleDigestEqual(_ a: SHA256.TupleDigest, _ b: SHA256.TupleDigest) -> Bool {
     return
         a.0 == b.0 &&

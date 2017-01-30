@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class DataWriterTests: XCTestCase {
     func testWrite() throws {
         let writer = DataWriter()
@@ -17,7 +18,7 @@ class DataWriterTests: XCTestCase {
         writer.write(UInt16(0x0102), endian: .Little)
         writer.writeData("AB".data(using: .utf8)!)
 
-        XCTAssertEqual(Data(int: UInt64(0x00FF010202014142)), writer.buffer)
+        XCTAssertEqual(Data(bytes: [0x00, 0xFF, 0x01, 0x02, 0x02, 0x01, 0x41, 0x42]), writer.buffer)
     }
     
     func testCappedWrite() throws {
@@ -39,6 +40,6 @@ class DataWriterTests: XCTestCase {
         
         try writer.write(UInt8(0x02))
         
-        XCTAssertEqual(Data(int: UInt16(0x0102)), writer.buffer)
+        XCTAssertEqual(Data(bytes: [0x01, 0x02]), writer.buffer)
     }
 }

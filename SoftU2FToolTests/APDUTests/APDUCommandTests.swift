@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class APDUCommandTests: XCTestCase {
     func testChromeRegisterRequest() throws {
         let r = Data(base64Encoded: "AAEDAAAAQEr8hj61EL83BjxGaqSnMUyWyXeBIAhGhQ2zbkFcgOzbcGF9/tBlhjr0fBVVbJF5iICCjMQH/fcK6FARVpRloHUAAA==")!

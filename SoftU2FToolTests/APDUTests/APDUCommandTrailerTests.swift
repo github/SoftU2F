@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class APDUCommandTrailerTests: XCTestCase {
     func testNormal() throws {
         let r = Data(bytes: [0x01, 0x02])

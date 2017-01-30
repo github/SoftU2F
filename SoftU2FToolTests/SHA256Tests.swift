@@ -8,6 +8,7 @@
 
 import XCTest
 
+@testable import SoftU2FTool
 class SHA256Tests: XCTestCase {
     func testDigestFormats() throws {
         let hash = SHA256(data: "hello world".data(using: .utf8)!)
