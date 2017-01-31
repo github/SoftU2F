@@ -28,5 +28,7 @@
 	<string>NSApplication</string>
 	<key>LSBackgroundOnly</key>
 	<true/>
+	<key>NSUserNotificationAlertStyle</key>
+	<string>alert</string>
 </dict>
 </plist>

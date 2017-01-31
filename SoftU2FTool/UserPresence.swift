@@ -14,6 +14,7 @@ class UserPresence: NSObject {
 
     typealias Callback = (_ success:Bool) -> Void
 
+    // Singleton instance.
     static let shared:UserPresence = UserPresence()
 
     // Display a notification, wait for the user to click it, and call the callback with `true`.
@@ -22,36 +23,52 @@ class UserPresence: NSObject {
         shared.test(type, with: cb)
     }
 
-    var callback:Callback?
-    var delegateWas:NSUserNotificationCenterDelegate?
+    var skip = false
+
+    private var callback:Callback?
+    private var notification:NSUserNotification?
+    private var timer:Timer?
+    private var delegateBackup:NSUserNotificationCenterDelegate?
+
+    // Helper for accessing user notification center singleton.
+    private var center:NSUserNotificationCenter { return NSUserNotificationCenter.default }
 
     // Display a notification, wait for the user to click it, and call the callback with `true`.
     // Calls callback with `false` if another test is done while we're waiting for this one.
     func test(_ type:Notification, with cb: @escaping Callback) {
+        if skip {
+            // Skip sending an actual notification for tests.
+            cb(true)
+            return
+        }
+
         // If there was an outstanding test, fail it.
-        fireCallback(false)
+        fail()
 
         callback = cb
-        delegateWas = NSUserNotificationCenter.default.delegate
-        NSUserNotificationCenter.default.delegate = self
+        backupDelegate()
         sendNotification(type)
     }
 
     // Call the callback closure with our result and reset everything.
-    func fireCallback(_ result:Bool) {
-        guard let cb = callback else { return }
-        cb(result)
+    func complete(_ result:Bool) {
+        callback?(result)
         callback = nil
 
-        NSUserNotificationCenter.default.delegate = delegateWas
-        delegateWas = nil
+        timer?.invalidate()
+        timer = nil
+
+        restoreDelegate()
     }
+    func fail()    { complete(false) }
+    func succeed() { complete(true) }
 
     // Send a notification popup to the user.
     func sendNotification(_ type:Notification) {
         let notification = NSUserNotification()
         notification.title = "Security Key Request"
-        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.actionButtonTitle = "Approve"
+        notification.otherButtonTitle = "Reject"
 
         switch type {
         case let .Register(facet):
@@ -60,24 +77,37 @@ class UserPresence: NSObject {
             notification.informativeText = "Authenticate with " + (facet ?? "site")
         }
 
-        notification.actionButtonTitle = "foobar"
-
         NSUserNotificationCenter.default.deliver(notification)
-        }
     }
 
-    extension UserPresence: NSUserNotificationCenterDelegate {
-        func userNotificationCenter(_ center: NSUserNotificationCenter, didDeliver notification: NSUserNotification) {
-        print("TestOfUserPresence.didDeliver")
+    func installTimer() {
     }
 
+    func clearTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+
+    func backupDelegate() {
+        delegateBackup = center.delegate
+        center.delegate = self
+    }
+
+    func restoreDelegate() {
+        center.delegate = delegateBackup
+        delegateBackup = nil
+    }
+}
+
+extension UserPresence: NSUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        print("TestOfUserPresence.didActivate")
-        fireCallback(true)
+        // User clicked our notification.
+        NSUserNotificationCenter.default.removeDeliveredNotification(notification)
+        succeed()
     }
 
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
-        print("TestOfUserPresence.shouldPresent")
+        // Present notification even if we're in foreground.
         return true
     }
 }

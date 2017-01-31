@@ -9,9 +9,10 @@
 import XCTest
 
 @testable import SoftU2FTool
-class U2FAuthenticatorTests: XCTestCase {
+class U2FAuthenticatorTests: SoftU2FTestCase {
     func testRegister() throws {
         var rc = u2fh_global_init(u2fh_initflags(rawValue: 0))
+//        var rc = u2fh_global_init(U2FH_DEBUG)
         XCTAssertEqual(rc.name, U2FH_OK.name)
         defer { u2fh_global_done() }
 

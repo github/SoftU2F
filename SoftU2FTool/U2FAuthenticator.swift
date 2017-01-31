@@ -49,9 +49,9 @@ class U2FAuthenticator {
                 return true
             }
 
-//            print("↓↓↓↓↓ Received message ↓↓↓↓↓")
-//            cmd.debug()
-//            print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
+            print("↓↓↓↓↓ Received message ↓↓↓↓↓")
+            cmd.debug()
+            print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
 
             if let req = cmd.registerRequest {
                 self.handleRegisterRequest(req, cid: msg.cid)
@@ -158,15 +158,13 @@ class U2FAuthenticator {
     }
 
     func sendMsg(msg:APDUMessageProtocol, cid:UInt32) {
-        let ret = u2fhid.sendMsg(cid: cid, data: msg.raw)
+        if u2fhid.sendMsg(cid: cid, data: msg.raw) {
+            print("↓↓↓↓↓ Sent message ↓↓↓↓↓")
+        } else {
+            print("↓↓↓↓↓ Error sending message ↓↓↓↓↓")
+        }
 
-//        if ret {
-//            print("↓↓↓↓↓ Sent message ↓↓↓↓↓")
-//        } else {
-//            print("↓↓↓↓↓ Error sending message ↓↓↓↓↓")
-//        }
-//
-//        msg.debug()
-//        print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
+        msg.debug()
+        print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
     }
 }

@@ -8,11 +8,13 @@
 
 import Cocoa
 
+let app = NSApplication.shared()
+
 signal(SIGINT) { sig in
     print("Got SIGINT")
-    NSApplication.shared().terminate(nil)
+    app.terminate(nil)
 }
 
 let delegate = AppDelegate()
-NSApplication.shared().delegate = delegate
+app.delegate = delegate
 let _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)

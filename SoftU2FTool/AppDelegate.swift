@@ -10,7 +10,6 @@ import Cocoa
 
 //@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var u2fThread: Thread?
     let ghkh = Data(base64Encoded: "cGF9/tBlhjr0fBVVbJF5iICCjMQH/fcK6FARVpRloHU=")!
     let yckh = Data(base64Encoded: "VWc7UTjMkNO38yv9rWo4qO3Xs1W3erl5IZbxBtFsoxI=")!
 
