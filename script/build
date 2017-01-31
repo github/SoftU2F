@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+BUILD_DIR=$REPO_DIR/build
+
+# Build softu2f.kext
+$REPO_DIR/SoftU2F/script/build
+
+echo "Building SoftU2FTool.app"
+if ! xcodebuild -scheme SoftU2FTool -project SoftU2FTool.xcodeproj SYMROOT=$BUILD_DIR &> /dev/null; then
+  echo "Error building SoftU2FTool.app"
+  exit 1
+fi
+echo "Built SoftU2FTool.app"

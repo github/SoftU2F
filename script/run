@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+BUILD_DIR=$REPO_DIR/build
+
+# Load softu2f.kext
+$REPO_DIR/SoftU2F/script/load
+
+# Run it
+$BUILD_DIR/Debug/SoftU2FTool.app/Contents/MacOS/SoftU2FTool
