@@ -7,14 +7,14 @@
 //
 
 class WebSafeBase64 {
-    static func encodeData(_ data: Data) -> String {
+    static func encode(_ data: Data) -> String {
         return data.base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")
             .replacingOccurrences(of: "/", with: "_")
             .replacingOccurrences(of: "=", with: "")
     }
     
-    static func decodeString(_ string: String) -> Data? {
+    static func decode(_ string: String) -> Data? {
         var b64 = string
             .replacingOccurrences(of: "-", with: "+")
             .replacingOccurrences(of: "_", with: "/")
@@ -41,6 +41,6 @@ class WebSafeBase64 {
         var bytes = [UInt8](repeating: 0x00, count: size)
         let _ = SecRandomCopyBytes(kSecRandomDefault, size, &bytes)
         let data = Data(bytes: bytes)
-        return encodeData(data)
+        return encode(data)
     }
 }

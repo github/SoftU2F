@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5106D32A1E3A5464007A2FB3 /* U2FRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */; };
-		5106D32D1E3A5D2C007A2FB3 /* KeyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 5106D32C1E3A5D2C007A2FB3 /* KeyInterface.m */; };
 		5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119862D1E3C1519006A3BBB /* KnownFacets.swift */; };
 		51203C391E39234000F661DF /* U2FHIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51203C381E39234000F661DF /* U2FHIDTests.swift */; };
 		51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC11E3834F8005454E0 /* TestUtil.swift */; };
@@ -50,6 +48,9 @@
 		51F090491E37F90300F03AD3 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090451E37F90300F03AD3 /* DataReader.swift */; };
 		51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090461E37F90300F03AD3 /* DataWriter.swift */; };
 		51F0904B1E37F90300F03AD3 /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090471E37F90300F03AD3 /* Endian.swift */; };
+		51FE30ED1E403DA000BAE824 /* U2FRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */; };
+		51FE30EF1E40F3DB00BAE824 /* U2FKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE30EE1E40F3DB00BAE824 /* U2FKeyTests.swift */; };
+		51FE30F11E410B3D00BAE824 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE30F01E410B3D00BAE824 /* Utils.swift */; };
 		51FFC71D1E3FE090006275E2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511986301E3C1BB1006A3BBB /* main.swift */; };
 		51FFC71F1E3FEAA4006275E2 /* SoftU2FTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FFC71E1E3FEAA4006275E2 /* SoftU2FTestCase.swift */; };
 /* End PBXBuildFile section */
@@ -100,9 +101,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FRegistration.swift; sourceTree = "<group>"; };
-		5106D32C1E3A5D2C007A2FB3 /* KeyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyInterface.m; path = KeyInterface/KeyInterface.m; sourceTree = "<group>"; };
-		5106D32F1E3A5D47007A2FB3 /* KeyInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KeyInterface.h; path = KeyInterface/KeyInterface.h; sourceTree = "<group>"; };
 		5119862D1E3C1519006A3BBB /* KnownFacets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnownFacets.swift; sourceTree = "<group>"; };
 		511986301E3C1BB1006A3BBB /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		51203C381E39234000F661DF /* U2FHIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FHIDTests.swift; sourceTree = "<group>"; };
@@ -152,6 +150,9 @@
 		51F090451E37F90300F03AD3 /* DataReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReader.swift; path = Data/DataReader.swift; sourceTree = "<group>"; };
 		51F090461E37F90300F03AD3 /* DataWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriter.swift; path = Data/DataWriter.swift; sourceTree = "<group>"; };
 		51F090471E37F90300F03AD3 /* Endian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endian.swift; path = Data/Endian.swift; sourceTree = "<group>"; };
+		51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FRegistration.swift; sourceTree = "<group>"; };
+		51FE30EE1E40F3DB00BAE824 /* U2FKeyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FKeyTests.swift; sourceTree = "<group>"; };
+		51FE30F01E410B3D00BAE824 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		51FFC71E1E3FEAA4006275E2 /* SoftU2FTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoftU2FTestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,15 +178,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5106D32B1E3A5CF2007A2FB3 /* KeyInterface */ = {
-			isa = PBXGroup;
-			children = (
-				5106D32C1E3A5D2C007A2FB3 /* KeyInterface.m */,
-				5106D32F1E3A5D47007A2FB3 /* KeyInterface.h */,
-			);
-			name = KeyInterface;
-			sourceTree = "<group>";
-		};
 		515E835C1E38038800F40024 /* DataTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,16 +244,16 @@
 				5131C19D1E3A77EE006A820C /* SoftU2FTool.entitlements */,
 				51F090431E37F8F900F03AD3 /* Data */,
 				51F0902C1E37F7BA00F03AD3 /* APDU */,
-				5106D32B1E3A5CF2007A2FB3 /* KeyInterface */,
 				511986301E3C1BB1006A3BBB /* main.swift */,
 				51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */,
 				51E2145F1E3823E7005B2864 /* SHA256.swift */,
 				51E214611E382521005B2864 /* WebSafeBase64.swift */,
 				51213EC51E3916EB005454E0 /* U2FHID.swift */,
 				51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */,
-				5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */,
 				5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */,
 				5119862D1E3C1519006A3BBB /* KnownFacets.swift */,
+				51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */,
+				51FE30F01E410B3D00BAE824 /* Utils.swift */,
 				518537C21E380EF500600911 /* SelfSignedCertificate.m */,
 				518537C51E380F0A00600911 /* SelfSignedCertificate.h */,
 				518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */,
@@ -273,6 +265,7 @@
 		51F090201E37E8C600F03AD3 /* SoftU2FToolTests */ = {
 			isa = PBXGroup;
 			children = (
+				51FE30EE1E40F3DB00BAE824 /* U2FKeyTests.swift */,
 				51E2145D1E3823E0005B2864 /* SHA256Tests.swift */,
 				51203C381E39234000F661DF /* U2FHIDTests.swift */,
 				51E214631E382529005B2864 /* WebSafeBase64Tests.swift */,
@@ -370,7 +363,7 @@
 				TargetAttributes = {
 					51F0900B1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VEKTX9H2N7;
+						DevelopmentTeam = S93FDAQ29M;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -381,7 +374,7 @@
 					};
 					51F0901C1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VEKTX9H2N7;
+						DevelopmentTeam = S93FDAQ29M;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 51F0900B1E37E8C600F03AD3;
@@ -471,6 +464,7 @@
 				5131C1AA1E3A9CB9006A820C /* VersionRequest.swift in Sources */,
 				5131C1A61E3A9CB0006A820C /* APDUCommandTrailer.swift in Sources */,
 				5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */,
+				51FE30F11E410B3D00BAE824 /* Utils.swift in Sources */,
 				518537B11E380C0A00600911 /* APDUCommand.swift in Sources */,
 				51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */,
 				5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */,
@@ -484,8 +478,8 @@
 				51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */,
 				518537B81E380C0A00600911 /* AuthenticationRequest.swift in Sources */,
 				518537B91E380C0A00600911 /* AuthenticationResponse.swift in Sources */,
-				5106D32A1E3A5464007A2FB3 /* U2FRegistration.swift in Sources */,
 				518537BA1E380C0A00600911 /* RegisterRequest.swift in Sources */,
+				51FE30ED1E403DA000BAE824 /* U2FRegistration.swift in Sources */,
 				51E214621E382521005B2864 /* WebSafeBase64.swift in Sources */,
 				51F0904B1E37F90300F03AD3 /* Endian.swift in Sources */,
 				51FFC71D1E3FE090006275E2 /* main.swift in Sources */,
@@ -493,7 +487,6 @@
 				518537BB1E380C0A00600911 /* RegisterResponse.swift in Sources */,
 				5131C1A31E3A9C72006A820C /* ErrorResponse.swift in Sources */,
 				518537C31E380EF500600911 /* SelfSignedCertificate.m in Sources */,
-				5106D32D1E3A5D2C007A2FB3 /* KeyInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +507,7 @@
 				51FFC71F1E3FEAA4006275E2 /* SoftU2FTestCase.swift in Sources */,
 				51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */,
 				51213EC41E3904A8005454E0 /* SelfSignedCertificateTests.swift in Sources */,
+				51FE30EF1E40F3DB00BAE824 /* U2FKeyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,7 +626,7 @@
 				CODE_SIGN_ENTITLEMENTS = SoftU2FTool/SoftU2FTool.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VEKTX9H2N7;
+				DEVELOPMENT_TEAM = S93FDAQ29M;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
 					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
@@ -661,7 +655,7 @@
 				CODE_SIGN_ENTITLEMENTS = SoftU2FTool/SoftU2FTool.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VEKTX9H2N7;
+				DEVELOPMENT_TEAM = S93FDAQ29M;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
 					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
@@ -688,7 +682,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VEKTX9H2N7;
+				DEVELOPMENT_TEAM = S93FDAQ29M;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
 					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
@@ -717,7 +711,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VEKTX9H2N7;
+				DEVELOPMENT_TEAM = S93FDAQ29M;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/opt/openssl/include,
 					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",

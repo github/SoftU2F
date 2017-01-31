@@ -22,6 +22,8 @@ class U2FAuthenticator {
         return ua.stop()
     }
 
+    let certificate = SelfSignedCertificate()!
+
     init?() {
         guard let uh:U2FHID = U2FHID.shared else { return nil }
 
@@ -85,12 +87,20 @@ class U2FAuthenticator {
                 return
             }
 
-            let reg:U2FRegistration
+            guard let reg = U2FRegistration() else {
+                print("Error creating registration.")
+                self.sendError(status: .OtherError, cid: cid)
+                return
+            }
 
-            do {
-                reg = try U2FRegistration.create(keyHandle: req.applicationParameter)
-            } catch let err {
-                print("Error creating registration: \(err.localizedDescription)")
+            guard let keyHandle = reg.handle else {
+                print("Error getting key handle")
+                self.sendError(status: .OtherError, cid: cid)
+                return
+            }
+
+            guard let publicKey = reg.publicKeyData else {
+                print("Error getting public key")
                 self.sendError(status: .OtherError, cid: cid)
                 return
             }
@@ -99,18 +109,23 @@ class U2FAuthenticator {
             sigPayload.write(UInt8(0x00)) // reserved
             sigPayload.writeData(req.applicationParameter)
             sigPayload.writeData(req.challengeParameter)
-            sigPayload.writeData(reg.keyHandle)
-            sigPayload.writeData(reg.publicKey)
-            let sig = reg.signWithCertificateKey(sigPayload.buffer)
+            sigPayload.writeData(keyHandle)
+            sigPayload.writeData(publicKey)
 
-            let resp = RegisterResponse(publicKey: reg.publicKey, keyHandle: reg.keyHandle, certificate: reg.certificate.toDer(), signature: sig)
+            guard let sig = self.certificate.sign(sigPayload.buffer) else {
+                print("Error signing with certificate")
+                self.sendError(status: .OtherError, cid: cid)
+                return
+            }
+
+            let resp = RegisterResponse(publicKey: publicKey, keyHandle: keyHandle, certificate: self.certificate.toDer(), signature: sig)
             
             self.sendMsg(msg: resp, cid: cid)
         }
     }
 
     func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) {
-        guard let reg = U2FRegistration.find(keyHandle: req.keyHandle) else {
+        guard let reg = U2FRegistration(keyHandle: req.keyHandle) else {
             sendError(status: .WrongData, cid: cid)
             return
         }
@@ -136,19 +151,14 @@ class U2FAuthenticator {
             sigPayload.write(UInt32(0x00000000)) // counter
             sigPayload.writeData(req.challengeParameter)
 
-            reg.signWithPrivateKey(sigPayload.buffer) { (_ sig:Data?, _ err:Error?) -> Void in
-                if let e = err {
-                    print("Error signing with private key: \(e.localizedDescription)")
-                    self.sendError(status: .OtherError, cid: cid)
-                    return
-                }
-
-                if let s = sig {
-                    let resp = AuthenticationResponse(userPresence: 0x01, counter: 0x00000000, signature: s)
-                    self.sendMsg(msg: resp, cid: cid)
-                    return
-                }
+            guard let sig = reg.sign(sigPayload.buffer) else {
+                self.sendError(status: .OtherError, cid: cid)
+                return
             }
+
+            let resp = AuthenticationResponse(userPresence: 0x01, counter: 0x00000000, signature: sig)
+            self.sendMsg(msg: resp, cid: cid)
+            return
         }
     }
 

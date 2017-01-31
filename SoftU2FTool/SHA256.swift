@@ -53,7 +53,7 @@ class SHA256 {
     }
     
     var webSafeB64Digest: String {
-        return WebSafeBase64.encodeData(digest)
+        return WebSafeBase64.encode(digest)
     }
 
     

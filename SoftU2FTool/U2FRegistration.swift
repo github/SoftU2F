@@ -2,102 +2,246 @@
 //  U2FRegistration.swift
 //  SoftU2FTool
 //
-//  Created by Benjamin P Toews on 1/26/17.
+//  Created by Benjamin P Toews on 1/30/17.
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
-enum U2FRegistrationError: Error {
-    case CertificateGenerationError
-    case KeyGenerationError
-    case DuplicateKeyHandleError
-}
-
 class U2FRegistration {
-    typealias SignCallback = (Data?, Error?) -> Void
+    // Allow using separate keychain namespace for tests.
+    static var namespace = "SoftU2F Security Key"
+    static var applicationLabel:CFString { return namespace as CFString }
 
-    let keyHandle:Data
-    let certificate:SelfSignedCertificate
+    // Get count of our keys (public and private) in the keychain.
+    static func count() -> Int? {
+        var opaqueResult:CFTypeRef? = nil
 
-    var keyHandleString:String {
-        return keyHandle.base64EncodedString()
-    }
+        let query = makeCFDictionary(
+            (kSecClass,       kSecClassKey),
+            (kSecAttrKeyType, kSecAttrKeyTypeEC),
+            (kSecAttrLabel,   U2FRegistration.applicationLabel),
+            (kSecReturnRef,   kCFBooleanTrue),
+            (kSecMatchLimit,  100 as CFNumber)
+        )
 
-    var publicKey:Data {
-        return KeyInterface.publicKeyBits(keyHandleString)
-    }
+        let err = SecItemCopyMatching(query, &opaqueResult)
 
-    // Has a key been made for this registration and persisted in the keychain?
-    var doesExist:Bool {
-        return KeyInterface.publicKeyExists(keyHandleString)
-    }
+        if err == errSecItemNotFound {
+            return 0
+        }
 
-    // Find the registration if it exists.
-    static func find(keyHandle: Data) -> U2FRegistration? {
-        let reg:U2FRegistration
-
-        do {
-            reg = try U2FRegistration(keyHandle: keyHandle)
-        } catch {
+        if err != errSecSuccess {
+            print("Error querying keychain: \(err)")
             return nil
         }
 
-        if reg.doesExist {
-            return reg
-        } else {
+        if opaqueResult == nil {
+            print("No results from querying keychain.")
             return nil
         }
+
+        let result = opaqueResult! as! CFArray
+        return CFArrayGetCount(result)
     }
 
-    // Create a new registration with the given keyhandle.
-    static func create(keyHandle: Data) throws -> U2FRegistration {
-        let reg = try U2FRegistration(keyHandle: keyHandle)
-        try reg.generateKeyPair()
-        return reg
-    }
+    // Delete all SoftU2F keys from keychain.
+    static func deleteAll() -> Bool {
+        let query = makeCFDictionary(
+            (kSecClass,     kSecClassKey),
+            (kSecAttrLabel, U2FRegistration.applicationLabel)
+        )
 
-    init(keyHandle kh: Data) throws {
-        guard let c = SelfSignedCertificate() else {
-            throw U2FRegistrationError.CertificateGenerationError
-        }
+        let err = SecItemDelete(query)
 
-        certificate = c
-        keyHandle = kh
-    }
-
-    // Generate a keypair for this registration and store them in the keychain.
-    func generateKeyPair() throws {
-        if doesExist {
-            throw U2FRegistrationError.DuplicateKeyHandleError
-        }
-
-        if !KeyInterface.generateKeyPair(keyHandleString) {
-            throw U2FRegistrationError.KeyGenerationError
-        }
-    }
-
-    // Delete our key pair from the keychain.
-    func deleteKeyPair() -> Bool {
-        if !KeyInterface.deletePrivateKey(keyHandleString) {
-            print("Error deleting private key.")
+        if err != errSecSuccess && err != errSecItemNotFound {
+            print("Error deleting keys: \(err)")
             return false
         }
-
-        if !KeyInterface.deletePubKey(keyHandleString) {
-            print("Error deleting public key.")
-            return false
-        }
-
-        print("Deleted keys.")
+        
         return true
     }
 
-    // Sign some data with the private key associated with our certificate.
-    func signWithCertificateKey(_ data:Data) -> Data {
-        return certificate.sign(data)
+    let publicKey:SecKey
+    let privateKey:SecKey
+
+    // Dictionary of keychain attributes.
+    var publicKeyAttrs:[String:AnyObject]? {
+        return SecKeyCopyAttributes(publicKey) as? [String:AnyObject]
     }
 
-    // Sign some data with the registration's privat key.
-    func signWithPrivateKey(_ data:Data, with callback: @escaping SignCallback) {
-        KeyInterface.generateSignature(for: data, withKeyName: keyHandleString, withCompletion: callback)
+    // Key handle is a hash of the public key.
+    var handle:Data? {
+        return publicKeyAttrs?[String(kSecAttrApplicationLabel)] as? Data
+    }
+
+    // Raw public key bytes.
+    var publicKeyData:Data? {
+        guard let h = handle else {
+            print("Error getting key handle")
+            return nil
+        }
+
+        let query = makeCFDictionary(
+            (kSecClass,                kSecClassKey),
+            (kSecAttrKeyType,          kSecAttrKeyTypeEC),
+            (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
+            (kSecAttrApplicationLabel, h as CFData),
+            (kSecReturnData,           kCFBooleanTrue)
+        )
+
+        var opaqueResult:CFTypeRef? = nil
+        let err = SecItemCopyMatching(query, &opaqueResult)
+
+        if err != errSecSuccess {
+            print("Error calling SecItemCopyMatching: \(err)")
+            return nil
+        }
+
+        if opaqueResult == nil {
+            print("No result from SecItemCopyMatching")
+            return nil
+        }
+
+        return opaqueResult! as! CFData as Data
+    }
+
+    init?() {
+        var err:Unmanaged<CFError>? = nil
+        defer { err?.release() }
+
+        // Make ACL controlling access to generated keys.
+        let acl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenUnlocked, SecAccessControlCreateFlags(rawValue: 0), &err)
+        if acl == nil || err != nil {
+            print("Error generating ACL for key generation")
+            return nil
+        }
+
+        // Make parameters for generating keys.
+        let params = makeCFDictionary(
+            (kSecAttrKeyType,        kSecAttrKeyTypeEC),
+            (kSecAttrKeySizeInBits,  256 as CFNumber),
+            (kSecAttrAccessControl,  acl!),
+            (kSecAttrIsPermanent,    kCFBooleanTrue),
+            (kSecAttrLabel,          U2FRegistration.applicationLabel)
+        )
+
+        // Generate key pair.
+        var pub:SecKey? = nil
+        var priv:SecKey? = nil
+        let status = SecKeyGeneratePair(params, &pub, &priv)
+
+        if status != errSecSuccess {
+            print("Error calling SecKeyGeneratePair: \(status)")
+            return nil
+        }
+
+        if pub == nil || priv == nil {
+            print("Keys not returned from SecKeyGeneratePair")
+            return nil
+        }
+
+        publicKey = pub!
+        privateKey = priv!
+    }
+
+    init?(keyHandle kh:Data) {
+        // Lookup public key.
+        var query = makeCFDictionary(
+            (kSecClass,                kSecClassKey),
+            (kSecAttrKeyType,          kSecAttrKeyTypeEC),
+            (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
+            (kSecAttrApplicationLabel, kh as CFData),
+            (kSecReturnRef,            kCFBooleanTrue)
+        )
+
+        var opaqueResult:CFTypeRef? = nil
+        var err = SecItemCopyMatching(query, &opaqueResult)
+
+        if err != errSecSuccess {
+            print("Error calling SecItemCopyMatching: \(err)")
+            return nil
+        }
+
+        if opaqueResult == nil {
+            print("No result from SecItemCopyMatching")
+            return nil
+        }
+
+        publicKey = opaqueResult as! SecKey
+
+        // Lookup private key.
+        query = makeCFDictionary(
+            (kSecClass,                kSecClassKey),
+            (kSecAttrKeyType,          kSecAttrKeyTypeEC),
+            (kSecAttrKeyClass,         kSecAttrKeyClassPrivate),
+            (kSecAttrApplicationLabel, kh as CFData),
+            (kSecReturnRef,            kCFBooleanTrue)
+        )
+
+        opaqueResult = nil
+        err = SecItemCopyMatching(query, &opaqueResult)
+
+        if err != errSecSuccess {
+            print("Error calling SecItemCopyMatching: \(err)")
+            return nil
+        }
+
+        if opaqueResult == nil {
+            print("No result from SecItemCopyMatching")
+            return nil
+        }
+
+        privateKey = opaqueResult as! SecKey
+    }
+
+    // Delete the keypair from the keychain.
+    func delete() -> Bool {
+        guard let h = handle else {
+            print("Error getting key handle")
+            return false
+        }
+
+        let query = makeCFDictionary(
+            (kSecClass,                kSecClassKey),
+            (kSecAttrApplicationLabel, h as CFData)
+        )
+
+        let err = SecItemDelete(query)
+
+        if err != errSecSuccess {
+            print("Error deleting keys: \(err)")
+            return false
+        }
+
+        return true
+    }
+
+    // Sign some data with the private key.
+    func sign(_ data:Data) -> Data? {
+        var err:Unmanaged<CFError>? = nil
+        defer { err?.release() }
+
+        let sig = SecKeyCreateSignature(privateKey, .ecdsaSignatureMessageX962SHA256, data as CFData, &err) as? Data
+
+        if err != nil {
+            print("Error creating signature: \(err!.takeUnretainedValue().localizedDescription)")
+            return nil
+        }
+
+        return sig
+    }
+
+    // Verify some signature over some data with the public key.
+    func verify(data:Data, signature:Data) -> Bool {
+        var err:Unmanaged<CFError>? = nil
+        defer { err?.release() }
+
+        let ret = SecKeyVerifySignature(publicKey, .ecdsaSignatureMessageX962SHA256, data as CFData, signature as CFData, &err)
+
+        if err != nil {
+            print("Error verifying signature: \(err!.takeUnretainedValue().localizedDescription)")
+            return false
+        }
+
+        return ret
     }
 }
