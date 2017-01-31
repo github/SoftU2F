@@ -110,7 +110,7 @@ class U2FAuthenticator {
     }
 
     func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) {
-        guard let reg = U2FRegistration.find(keyHandle: req.applicationParameter) else {
+        guard let reg = U2FRegistration.find(keyHandle: req.keyHandle) else {
             sendError(status: .WrongData, cid: cid)
             return
         }
@@ -125,6 +125,11 @@ class U2FAuthenticator {
         let notification = UserPresence.Notification.Authenticate(facet: facet)
 
         UserPresence.test(notification) { success in
+            if !success {
+                self.sendError(status: .ConditionsNotSatisfied, cid: cid)
+                return
+            }
+
             let sigPayload = DataWriter()
             sigPayload.writeData(req.applicationParameter)
             sigPayload.write(UInt8(0x01))        // user present

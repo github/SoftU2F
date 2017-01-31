@@ -50,7 +50,6 @@
 		51F090491E37F90300F03AD3 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090451E37F90300F03AD3 /* DataReader.swift */; };
 		51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090461E37F90300F03AD3 /* DataWriter.swift */; };
 		51F0904B1E37F90300F03AD3 /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090471E37F90300F03AD3 /* Endian.swift */; };
-		51FE30E51E4005E100BAE824 /* UserPresenceTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE30E41E4005E100BAE824 /* UserPresenceTwo.swift */; };
 		51FFC71D1E3FE090006275E2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511986301E3C1BB1006A3BBB /* main.swift */; };
 		51FFC71F1E3FEAA4006275E2 /* SoftU2FTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FFC71E1E3FEAA4006275E2 /* SoftU2FTestCase.swift */; };
 /* End PBXBuildFile section */
@@ -153,7 +152,6 @@
 		51F090451E37F90300F03AD3 /* DataReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReader.swift; path = Data/DataReader.swift; sourceTree = "<group>"; };
 		51F090461E37F90300F03AD3 /* DataWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriter.swift; path = Data/DataWriter.swift; sourceTree = "<group>"; };
 		51F090471E37F90300F03AD3 /* Endian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endian.swift; path = Data/Endian.swift; sourceTree = "<group>"; };
-		51FE30E41E4005E100BAE824 /* UserPresenceTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPresenceTwo.swift; sourceTree = "<group>"; };
 		51FFC71E1E3FEAA4006275E2 /* SoftU2FTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoftU2FTestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,7 +261,6 @@
 				51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */,
 				5106D3291E3A5464007A2FB3 /* U2FRegistration.swift */,
 				5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */,
-				51FE30E41E4005E100BAE824 /* UserPresenceTwo.swift */,
 				5119862D1E3C1519006A3BBB /* KnownFacets.swift */,
 				518537C21E380EF500600911 /* SelfSignedCertificate.m */,
 				518537C51E380F0A00600911 /* SelfSignedCertificate.h */,
@@ -483,7 +480,6 @@
 				518537B21E380C0A00600911 /* APDUError.swift in Sources */,
 				5131C1AC1E3A9CB9006A820C /* VersionResponse.swift in Sources */,
 				518537B51E380C0A00600911 /* APDUMessageProtocol.swift in Sources */,
-				51FE30E51E4005E100BAE824 /* UserPresenceTwo.swift in Sources */,
 				51E214601E3823E7005B2864 /* SHA256.swift in Sources */,
 				51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */,
 				518537B81E380C0A00600911 /* AuthenticationRequest.swift in Sources */,

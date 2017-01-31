@@ -14,96 +14,135 @@ class UserPresence: NSObject {
 
     typealias Callback = (_ success:Bool) -> Void
 
-    // Singleton instance.
-    static let shared:UserPresence = UserPresence()
+    static var current:UserPresence?
+    static var skip = false
 
     // Display a notification, wait for the user to click it, and call the callback with `true`.
     // Calls callback with `false` if another test is done while we're waiting for this one.
-    static func test(_ type:Notification, with cb: @escaping Callback) {
-        shared.test(type, with: cb)
+    static func test(_ type:Notification, with callback: @escaping Callback) {
+        if skip {
+            callback(true)
+        } else {
+            // Fail any outstanding test.
+            current?.complete(false)
+
+            // Backup previous delegate to restore on completion.
+            let delegateWas = NSUserNotificationCenter.default.delegate
+
+            let up = UserPresence { success in
+                NSUserNotificationCenter.default.delegate = delegateWas
+                callback(success)
+            }
+
+            current = up
+            NSUserNotificationCenter.default.delegate = up
+            up.test(type)
+        }
     }
 
-    var skip = false
+    let callback:Callback
+    var notification:NSUserNotification?
+    var timer:Timer?
+    var timerStart:Date?
 
-    private var callback:Callback?
-    private var notification:NSUserNotification?
-    private var timer:Timer?
-    private var delegateBackup:NSUserNotificationCenterDelegate?
+    // Give up after 10 seconds.
+    var timedOut:Bool {
+        guard let ts = timerStart else { return false }
+        return Date().timeIntervalSince(ts) > 10
+    }
 
     // Helper for accessing user notification center singleton.
-    private var center:NSUserNotificationCenter { return NSUserNotificationCenter.default }
+    var center:NSUserNotificationCenter { return NSUserNotificationCenter.default }
 
-    // Display a notification, wait for the user to click it, and call the callback with `true`.
-    // Calls callback with `false` if another test is done while we're waiting for this one.
-    func test(_ type:Notification, with cb: @escaping Callback) {
-        if skip {
-            // Skip sending an actual notification for tests.
-            cb(true)
-            return
+    init(with cb: @escaping Callback) {
+        callback = cb
+        super.init()
+    }
+
+    // Send a notification popup to the user.
+    func test(_ type:Notification) {
+        sendNotification(type)
+    }
+
+    // Send a notification popup to the user.
+    func sendNotification(_ type:Notification) {
+        let n = NSUserNotification()
+        n.title = "Security Key Request"
+        n.actionButtonTitle = "Approve"
+        n.otherButtonTitle = "Reject"
+
+        switch type {
+        case let .Register(facet):
+            n.informativeText = "Register with " + (facet ?? "site")
+        case let .Authenticate(facet):
+            n.informativeText = "Authenticate with " + (facet ?? "site")
         }
 
-        // If there was an outstanding test, fail it.
-        fail()
+        NSUserNotificationCenter.default.deliver(n)
 
-        callback = cb
-        backupDelegate()
-        sendNotification(type)
+        notification = n
     }
 
     // Call the callback closure with our result and reset everything.
     func complete(_ result:Bool) {
-        callback?(result)
-        callback = nil
-
-        timer?.invalidate()
-        timer = nil
-
-        restoreDelegate()
-    }
-    func fail()    { complete(false) }
-    func succeed() { complete(true) }
-
-    // Send a notification popup to the user.
-    func sendNotification(_ type:Notification) {
-        let notification = NSUserNotification()
-        notification.title = "Security Key Request"
-        notification.actionButtonTitle = "Approve"
-        notification.otherButtonTitle = "Reject"
-
-        switch type {
-        case let .Register(facet):
-            notification.informativeText = "Register with " + (facet ?? "site")
-        case let .Authenticate(facet):
-            notification.informativeText = "Authenticate with " + (facet ?? "site")
-        }
-
-        NSUserNotificationCenter.default.deliver(notification)
+        clearTimer()
+        removeNotification()
+        callback(result)
+        UserPresence.current = nil
     }
 
+    // Stop showing the notification.
+    func removeNotification() {
+        guard let n = notification else { return }
+        center.removeDeliveredNotification(n)
+    }
+
+    // Install timer to check if user has dismissed notification.
     func installTimer() {
+        timerStart = Date()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            guard let n = self.notification else { return }
+
+            if self.timedOut {
+                // It's taken too long.
+                self.complete(false)
+            } else if let _ = self.center.deliveredNotifications.index(of: n) {
+                // User still viewing.
+            } else {
+                // User dismissed.
+                self.complete(false)
+            }
+        }
     }
 
+    // Stop the timer.
     func clearTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-
-    func backupDelegate() {
-        delegateBackup = center.delegate
-        center.delegate = self
-    }
-
-    func restoreDelegate() {
-        center.delegate = delegateBackup
-        delegateBackup = nil
+        guard let t = timer else { return }
+        t.invalidate()
     }
 }
 
 extension UserPresence: NSUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: NSUserNotificationCenter, didDeliver notification: NSUserNotification) {
+        if notification.isPresented {
+            // Alert is showing to user. Watch to see if it's dismissed.
+            installTimer()
+        } else {
+            // Alert wasn't shown to user. Fail.
+            complete(false)
+        }
+    }
+
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        // User clicked our notification.
-        NSUserNotificationCenter.default.removeDeliveredNotification(notification)
-        succeed()
+        switch notification.activationType {
+        case .actionButtonClicked:
+            // User clicked "Accept".
+            complete(true)
+        default:
+            // User did something else.
+            complete(false)
+        }
     }
 
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
