@@ -31,3 +31,7 @@ With the app running, you'll receive notifications when sites try to register or
 ### Authentication
 
 ![authenticate](https://cloud.githubusercontent.com/assets/1144197/22489753/824fbb80-e7d6-11e6-82c5-7f6ac0d6042b.png)
+
+## Known app-IDs/facets
+
+Every website using U2F has an app-ID. For example, the app-ID of [Yubico's U2F demo page](https://demo.yubico.com/u2f) is `https://demo.yubico.com`. When the low-level U2F authenticator receives a request to register/authenticate a website, it doesn't receive the friendly app-ID string. Instead, it receives a SHA256 digest of the app-ID. To be able to show a helpful alert message when a website is trying to register/authenticate, a list of app-ID digests is maintained in this repository. You can find the list [here](https://github.com/mastahyeti/SoftU2FTool/blob/master/SoftU2FTool/KnownFacets.swift). If your companies app-ID is missing from this list, open a pull request to add it.
