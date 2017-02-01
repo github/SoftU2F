@@ -21,3 +21,13 @@ I'm waiting on Apple to get a certificate for signing kernel extension. In the m
 ```bash
 script/run
 ```
+
+With the app running, you'll receive notifications when sites try to register or authenticate with U2F.
+
+### Registration
+
+![register](https://cloud.githubusercontent.com/assets/1144197/22489751/80e4748e-e7d6-11e6-9e4e-11e48ddff331.png)
+
+### Authentication
+
+![authenticate](https://cloud.githubusercontent.com/assets/1144197/22489753/824fbb80-e7d6-11e6-82c5-7f6ac0d6042b.png)
