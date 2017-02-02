@@ -68,14 +68,115 @@ class U2FRegistration {
         return SecKeyCopyAttributes(publicKey) as? [String:AnyObject]
     }
 
-    // Key handle is a hash of the public key.
-    var handle:Data? {
+    // Application label is a hash of the public key.
+    var applicationLabel:Data? {
         return publicKeyAttrs?[String(kSecAttrApplicationLabel)] as? Data
+    }
+
+    // Application tag is an attribute we use to smuggle data (counter).
+    var applicationTag:Data? {
+        get {
+            guard let appLabel = applicationLabel else {
+                print("Error getting key handle")
+                return nil
+            }
+
+            let query = makeCFDictionary(
+                (kSecClass,                kSecClassKey),
+                (kSecAttrKeyType,          kSecAttrKeyTypeEC),
+                (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
+                (kSecAttrApplicationLabel, appLabel as CFData),
+                (kSecReturnAttributes,     kCFBooleanTrue)
+            )
+
+            var opaqueDict:CFTypeRef? = nil
+            let err = SecItemCopyMatching(query, &opaqueDict)
+
+            if err != errSecSuccess {
+                print("Error calling SecItemCopyMatching: \(err)")
+                return nil
+            }
+
+            if opaqueDict == nil {
+                print("No result from SecItemCopyMatching")
+                return nil
+            }
+
+            let dict = opaqueDict! as! CFDictionary as NSDictionary
+
+            guard let opaqueResult = dict[kSecAttrApplicationTag] else {
+                return nil
+            }
+
+            let result = opaqueResult as! CFData
+            
+            return result as Data
+        }
+
+        set(newValue) {
+            guard let appLabel = applicationLabel else {
+                print("Can't update applicationTag. No applicationLabel.")
+                return
+            }
+
+            guard let nv = newValue else {
+                print("Can't update applicationTag. No new value.")
+                return
+            }
+
+            let query = makeCFDictionary(
+                (kSecClass,                kSecClassKey),
+                (kSecAttrKeyType,          kSecAttrKeyTypeEC),
+                (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
+                (kSecAttrApplicationLabel, appLabel as CFData)
+            )
+
+            let newAttrs = makeCFDictionary(
+                (kSecAttrApplicationTag, nv as CFData)
+            )
+
+            let err = SecItemUpdate(query, newAttrs)
+            if err != errSecSuccess {
+                print("Error updating applicationTag: \(err)")
+            }
+        }
+    }
+
+    // Key handle is application label plus 50 bytes of padding. Conformance tests require key handle to be >64 bytes.
+    var handle:Data? {
+        guard let h = applicationLabel else {
+            return nil
+        }
+
+        return padKeyHandle(h)
+    }
+
+    // How many times this authenticator has been used. We smuggle this data in the application tag.
+    var counter:UInt32? {
+        get {
+            guard let raw = applicationTag else {
+                return nil
+            }
+
+            return DataReader(data: raw).read()
+        }
+
+        set(newValue) {
+            guard let nv = newValue else {
+                print("Can;t update counter. No new value.")
+                return
+            }
+
+            let writer = DataWriter()
+            writer.write(nv)
+
+            applicationTag = writer.buffer
+        }
     }
 
     // Raw public key bytes.
     var publicKeyData:Data? {
-        guard let h = handle else {
+        guard let appLabel = applicationLabel else {
             print("Error getting key handle")
             return nil
         }
@@ -84,7 +185,7 @@ class U2FRegistration {
             (kSecClass,                kSecClassKey),
             (kSecAttrKeyType,          kSecAttrKeyTypeEC),
             (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
-            (kSecAttrApplicationLabel, h as CFData),
+            (kSecAttrApplicationLabel, appLabel as CFData),
             (kSecReturnData,           kCFBooleanTrue)
         )
 
@@ -141,15 +242,19 @@ class U2FRegistration {
 
         publicKey = pub!
         privateKey = priv!
+
+        counter = 1
     }
 
     init?(keyHandle kh:Data) {
+        let appLabel = unpadKeyHandle(kh) as CFData
+
         // Lookup public key.
         var query = makeCFDictionary(
             (kSecClass,                kSecClassKey),
             (kSecAttrKeyType,          kSecAttrKeyTypeEC),
             (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
-            (kSecAttrApplicationLabel, kh as CFData),
+            (kSecAttrApplicationLabel, appLabel),
             (kSecReturnRef,            kCFBooleanTrue)
         )
 
@@ -173,7 +278,7 @@ class U2FRegistration {
             (kSecClass,                kSecClassKey),
             (kSecAttrKeyType,          kSecAttrKeyTypeEC),
             (kSecAttrKeyClass,         kSecAttrKeyClassPrivate),
-            (kSecAttrApplicationLabel, kh as CFData),
+            (kSecAttrApplicationLabel, appLabel),
             (kSecReturnRef,            kCFBooleanTrue)
         )
 
@@ -195,14 +300,14 @@ class U2FRegistration {
 
     // Delete the keypair from the keychain.
     func delete() -> Bool {
-        guard let h = handle else {
+        guard let appLabel = applicationLabel else {
             print("Error getting key handle")
             return false
         }
 
         let query = makeCFDictionary(
             (kSecClass,                kSecClassKey),
-            (kSecAttrApplicationLabel, h as CFData)
+            (kSecAttrApplicationLabel, appLabel as CFData)
         )
 
         let err = SecItemDelete(query)
@@ -225,6 +330,10 @@ class U2FRegistration {
         if err != nil {
             print("Error creating signature: \(err!.takeUnretainedValue().localizedDescription)")
             return nil
+        }
+
+        if let current = counter {
+            counter = current + 1
         }
 
         return sig
