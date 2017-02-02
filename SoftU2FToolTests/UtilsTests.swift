@@ -7,29 +7,22 @@
 //
 
 import XCTest
+@testable import SoftU2FTool
 
 class UtilsTests: XCTestCase {
+    func testPadUnpadKeyHandle() {
+        let kh = Data(bytes: [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x06, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14])
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+        let padded = padKeyHandle(kh)
+        XCTAssertEqual(padded.count, kh.count + 50)
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let unpadded = unpadKeyHandle(padded)
+        XCTAssertEqual(unpadded, kh)
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testUnpadBadKeyHandle() {
+        let bad = Data(bytes: [0xde, 0xad, 0xbe, 0xef]) // to small to be paadded.
+        let unpadded = unpadKeyHandle(padded)
+        XCTAssertEqual(unpadded, bad)
     }
-
 }
