@@ -22,7 +22,7 @@ class UtilsTests: XCTestCase {
 
     func testUnpadBadKeyHandle() {
         let bad = Data(bytes: [0xde, 0xad, 0xbe, 0xef]) // to small to be paadded.
-        let unpadded = unpadKeyHandle(padded)
+        let unpadded = unpadKeyHandle(bad)
         XCTAssertEqual(unpadded, bad)
     }
 }

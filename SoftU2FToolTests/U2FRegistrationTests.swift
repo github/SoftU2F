@@ -18,29 +18,28 @@ class U2FRegistrationTests: SoftU2FTestCase {
 
     func testNamespace() {
         XCTAssertEqual(U2FRegistration.namespace, "SoftU2F Tests")
-        XCTAssertEqual(U2FRegistration.applicationLabel as String, "SoftU2F Tests")
     }
 
     func testCount() {
-        XCTAssertEqual(U2FRegistration.count(), 0)
+        XCTAssertEqual(U2FRegistration.count, 0)
 
         XCTAssertNotNil(makeKey)
-        XCTAssertEqual(U2FRegistration.count(), 2)
+        XCTAssertEqual(U2FRegistration.count, 1)
 
         XCTAssertNotNil(makeKey)
-        XCTAssertEqual(U2FRegistration.count(), 4)
+        XCTAssertEqual(U2FRegistration.count, 2)
 
         let key = makeKey
         XCTAssertNotNil(key)
-        XCTAssertEqual(U2FRegistration.count(), 6)
+        XCTAssertEqual(U2FRegistration.count, 3)
 
-        XCTAssertTrue(key?.delete() ?? false)
-        XCTAssertEqual(U2FRegistration.count(), 4)
+        XCTAssertTrue(key?.keyPair.delete() ?? false)
+        XCTAssertEqual(U2FRegistration.count, 2)
     }
 
     func testGenerateKey() {
         XCTAssertNotNil(makeKey)
-        XCTAssertEqual(U2FRegistration.count(), 2)
+        XCTAssertEqual(U2FRegistration.count, 1)
     }
 
     func testFindKeyByKeyHandle() {
@@ -49,43 +48,38 @@ class U2FRegistrationTests: SoftU2FTestCase {
             return
         }
 
-        guard let kh = keyOne.handle else {
-            XCTFail("Couldn't get key handle")
-            return
-        }
-
-        guard let keyTwo = U2FRegistration(keyHandle: kh) else {
+        guard let keyTwo = U2FRegistration(keyHandle: keyOne.keyHandle) else {
             XCTFail("Couldn't lookup key")
             return
         }
 
-        XCTAssertEqual(keyOne.handle, keyTwo.handle)
-        XCTAssertEqual(keyOne.publicKeyData, keyTwo.publicKeyData)
+        XCTAssertEqual(keyOne.keyHandle, keyTwo.keyHandle)
+        XCTAssertEqual(keyOne.keyPair.publicKeyData, keyTwo.keyPair.publicKeyData)
     }
 
     func testDelete() {
-        XCTAssertTrue(makeKey?.delete() ?? false)
-        XCTAssertEqual(U2FRegistration.count(), 0)
+        XCTAssertTrue(makeKey?.keyPair.delete() ?? false)
+        XCTAssertEqual(U2FRegistration.count, 0)
     }
 
     func testKeyHandle() {
-        let handle = makeKey?.handle
+        let handle = makeKey?.keyHandle
         XCTAssertNotNil(handle)
         XCTAssertEqual(handle?.count, 70)
     }
 
     func testUniqueHandles() {
-        XCTAssertNotEqual(makeKey?.handle, makeKey?.handle)
+        XCTAssertNotEqual(makeKey?.keyHandle, makeKey?.keyHandle)
     }
 
     func testPublicKeyData() {
-        let data = makeKey?.publicKeyData
+        let data = makeKey?.keyPair.publicKeyData
         XCTAssertNotNil(data)
         XCTAssertEqual(data?.count, MemoryLayout<U2F_EC_POINT>.size)
     }
 
     func testUniquePublicKeys() {
-        XCTAssertNotEqual(makeKey?.publicKeyData, makeKey?.publicKeyData)
+        XCTAssertNotEqual(makeKey?.keyPair.publicKeyData, makeKey?.keyPair.publicKeyData)
     }
 
     func testSignVerify() {
@@ -101,7 +95,7 @@ class U2FRegistrationTests: SoftU2FTestCase {
             return
         }
 
-        XCTAssertTrue(key.verify(data: msg, signature: sig))
+        XCTAssertTrue(key.keyPair.verify(data: msg, signature: sig))
     }
 
     func testCounterIncrementsAfterSign() {
@@ -112,10 +106,10 @@ class U2FRegistrationTests: SoftU2FTestCase {
             return
         }
 
-        XCTAssertEqual(key.counter, 0)
-        XCTAssertEqual(key.counter, 0)
+        XCTAssertEqual(key.counter, 1)
+        XCTAssertEqual(key.counter, 1)
 
-        for i in 1...5 {
+        for i in 2...6 {
             guard let _ = key.sign(msg) else {
                 XCTFail("Couldn't sing data")
                 return

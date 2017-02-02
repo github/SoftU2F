@@ -6,8 +6,10 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+typealias CFDictionaryMember = (CFString, CFTypeRef)
+
 // Helper for making CFDictionary.
-func makeCFDictionary(_ members: (CFString, AnyObject)...) -> CFDictionary {
+func makeCFDictionary(_ members: [CFDictionaryMember]) -> CFDictionary {
     var dict = [String:AnyObject]()
 
     members.forEach { elt in
@@ -15,6 +17,11 @@ func makeCFDictionary(_ members: (CFString, AnyObject)...) -> CFDictionary {
     }
 
     return dict as CFDictionary
+}
+
+// Helper for making CFDictionary.
+func makeCFDictionary(_ members: CFDictionaryMember...) -> CFDictionary {
+    return makeCFDictionary(members)
 }
 
 let FifyZeros = Data(repeating: 0x00, count: 50)
@@ -35,4 +42,12 @@ func unpadKeyHandle(_ kh:Data) -> Data {
     }
 
     return kh.subdata(in: 0..<padIdx)
+}
+
+func handlingKeyChainError<T>(closure: () throws -> T) -> T? {
+    do {
+        return try closure()
+    } catch {
+        return nil
+    }
 }

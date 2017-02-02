@@ -106,13 +106,7 @@ class U2FAuthenticator {
                 return
             }
 
-            guard let keyHandle = reg.handle else {
-                print("Error getting key handle")
-                self.sendError(status: .OtherError, cid: cid)
-                return
-            }
-
-            guard let publicKey = reg.publicKeyData else {
+            guard let publicKey = reg.keyPair.publicKeyData else {
                 print("Error getting public key")
                 self.sendError(status: .OtherError, cid: cid)
                 return
@@ -122,7 +116,7 @@ class U2FAuthenticator {
             sigPayload.write(UInt8(0x00)) // reserved
             sigPayload.writeData(req.applicationParameter)
             sigPayload.writeData(req.challengeParameter)
-            sigPayload.writeData(keyHandle)
+            sigPayload.writeData(reg.keyHandle)
             sigPayload.writeData(publicKey)
 
             guard let sig = self.certificate.sign(sigPayload.buffer) else {
@@ -131,7 +125,7 @@ class U2FAuthenticator {
                 return
             }
 
-            let resp = RegisterResponse(publicKey: publicKey, keyHandle: keyHandle, certificate: self.certificate.toDer(), signature: sig)
+            let resp = RegisterResponse(publicKey: publicKey, keyHandle: reg.keyHandle, certificate: self.certificate.toDer(), signature: sig)
             
             self.sendMsg(msg: resp, cid: cid)
         }

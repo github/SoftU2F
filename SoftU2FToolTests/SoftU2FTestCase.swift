@@ -26,7 +26,7 @@ class SoftU2FTestCase:XCTestCase {
     }
 
     override static func tearDown() {
-        // Restore keychain namespace.
         U2FRegistration.namespace = nameSpaceWas
+        UserPresence.skip = false
     }
 }
