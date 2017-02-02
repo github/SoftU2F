@@ -37,12 +37,16 @@
     ASN1_INTEGER_set(X509_get_serialNumber(self.x509), 1);
     X509_gmtime_adj(X509_get_notBefore(self.x509), 0);
     X509_gmtime_adj(X509_get_notAfter(self.x509),(long)60*60*24*1);
-    X509_set_pubkey(self.x509, self.pkey);
 
     X509_NAME* name = X509_get_subject_name(self.x509);
     X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC, (const unsigned char*)"mastahyeti", -1, -1, 0);
 
     X509_set_issuer_name(self.x509, name);
+
+    if (!X509_set_pubkey(self.x509, self.pkey)) {
+        printf("failed to set public key.\n");
+        return 0;
+    }
 
     if (!X509_sign(self.x509, self.pkey, EVP_sha256())) {
         printf("failed to sign cert\n");
@@ -60,19 +64,34 @@
         return 0;
     }
 
-    EC_KEY* ec = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
+    EC_KEY *ec = EC_KEY_new();
     if (ec == NULL) {
-        printf("failed to init ec by curve name\n");
+        printf("EC_KEY_new failed\n");
+        return 0;
+    }
+
+    EC_GROUP *ecg = EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1);
+    if (ecg == NULL) {
+        printf("EC_GROUP_new_by_curve_name failed\n");
+        return 0;
+    }
+
+    EC_GROUP_set_asn1_flag(ecg, NID_X9_62_prime256v1);
+    EC_KEY_set_group(ec, ecg);
+
+    if (EC_KEY_generate_key(ec) != 1) {
+        printf("couldn't generate ec key\n");
+        return 0;
+    }
+
+    if (EC_KEY_check_key(ec) != 1) {
+        printf("error checking key\n");
         return 0;
     }
 
     if (EVP_PKEY_assign_EC_KEY(self.pkey, ec) != 1) {
         printf("failed to assing ec to pkey\n");
-        return 0;
-    }
-
-    if (EC_KEY_generate_key(ec) != 1) {
-        printf("couldn't generate ec key\n");
+        EC_KEY_free(ec);
         return 0;
     }
 
