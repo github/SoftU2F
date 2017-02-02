@@ -53,7 +53,7 @@ struct APDUCommandTrailer {
                 maxResponse = Int(mr)
             }
         default:
-            throw APDUError.BadEncoding
+            throw APDUError.BadSize
         }
     }
 

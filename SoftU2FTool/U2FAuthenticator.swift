@@ -46,8 +46,21 @@ class U2FAuthenticator {
 
             do {
                 cmd = try APDUCommand(raw: data)
+            } catch APDUError.BadCode {
+                print("Unknown APDU command code")
+                self.sendError(status: .InsNotSupported, cid: msg.cid)
+                return true
+            } catch APDUError.BadSize {
+                print("Bad request size")
+                self.sendError(status: .WrongLength, cid: msg.cid)
+                return true
+            } catch APDUError.BadClass {
+                print("Bad request size")
+                self.sendError(status: .ClassNotSupported, cid: msg.cid)
+                return true
             } catch let err {
                 print("Error reading APDU command: \(err.localizedDescription)")
+                self.sendError(status: .OtherError, cid: msg.cid)
                 return true
             }
 
@@ -145,10 +158,12 @@ class U2FAuthenticator {
                 return
             }
 
+            let counter = reg.counter ?? 0
+
             let sigPayload = DataWriter()
             sigPayload.writeData(req.applicationParameter)
             sigPayload.write(UInt8(0x01))        // user present
-            sigPayload.write(UInt32(0x00000000)) // counter
+            sigPayload.write(counter)
             sigPayload.writeData(req.challengeParameter)
 
             guard let sig = reg.sign(sigPayload.buffer) else {
@@ -156,7 +171,7 @@ class U2FAuthenticator {
                 return
             }
 
-            let resp = AuthenticationResponse(userPresence: 0x01, counter: 0x00000000, signature: sig)
+            let resp = AuthenticationResponse(userPresence: 0x01, counter: counter, signature: sig)
             self.sendMsg(msg: resp, cid: cid)
             return
         }

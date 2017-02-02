@@ -71,7 +71,7 @@ class U2FRegistrationTests: SoftU2FTestCase {
     func testKeyHandle() {
         let handle = makeKey?.handle
         XCTAssertNotNil(handle)
-        XCTAssertEqual(handle?.count, 20)
+        XCTAssertEqual(handle?.count, 70)
     }
 
     func testUniqueHandles() {
@@ -89,10 +89,7 @@ class U2FRegistrationTests: SoftU2FTestCase {
     }
 
     func testSignVerify() {
-        guard let msg = "hello, world!".data(using: .utf8) else {
-            XCTFail("Couldn't encode message")
-            return
-        }
+        let msg = "hello, world!".data(using: .utf8)!
 
         guard let key = makeKey else {
             XCTFail("Couldn't make key")
@@ -105,5 +102,26 @@ class U2FRegistrationTests: SoftU2FTestCase {
         }
 
         XCTAssertTrue(key.verify(data: msg, signature: sig))
+    }
+
+    func testCounterIncrementsAfterSign() {
+        let msg = "hello, world!".data(using: .utf8)!
+
+        guard let key = makeKey else {
+            XCTFail("Couldn't make key")
+            return
+        }
+
+        XCTAssertEqual(key.counter, 0)
+        XCTAssertEqual(key.counter, 0)
+
+        for i in 1...5 {
+            guard let _ = key.sign(msg) else {
+                XCTFail("Couldn't sing data")
+                return
+            }
+
+            XCTAssertEqual(key.counter, UInt32(i))
+        }
     }
 }
