@@ -10,7 +10,7 @@ import XCTest
 @testable import SoftU2FTool
 
 class U2FRegistrationTests: SoftU2FTestCase {
-    var makeKey:U2FRegistration? { return U2FRegistration() }
+    var makeKey:U2FRegistration? { return U2FRegistration(applicationParameter: randData()) }
 
     override func tearDown() {
         let _ = U2FRegistration.deleteAll()
@@ -42,19 +42,34 @@ class U2FRegistrationTests: SoftU2FTestCase {
         XCTAssertEqual(U2FRegistration.count, 1)
     }
 
-    func testFindKeyByKeyHandle() {
+    func testFindKeyByKeyHandleAndAppParam() {
         guard let keyOne = makeKey else {
             XCTFail("Couldn't make key")
             return
         }
 
-        guard let keyTwo = U2FRegistration(keyHandle: keyOne.keyHandle) else {
+        guard let keyTwo = U2FRegistration(keyHandle: keyOne.keyHandle, applicationParameter: keyOne.applicationParameter) else {
             XCTFail("Couldn't lookup key")
             return
         }
 
         XCTAssertEqual(keyOne.keyHandle, keyTwo.keyHandle)
         XCTAssertEqual(keyOne.keyPair.publicKeyData, keyTwo.keyPair.publicKeyData)
+    }
+
+    func testFindKeyWithWrongAppParam() {
+        guard let keyOne = makeKey else {
+            XCTFail("Couldn't make key")
+            return
+        }
+
+        guard let keyTwo = makeKey else {
+            XCTFail("Couldn't make key")
+            return
+        }
+
+        let found = U2FRegistration(keyHandle: keyOne.keyHandle, applicationParameter: keyTwo.applicationParameter)
+        XCTAssertNil(found)
     }
 
     func testDelete() {

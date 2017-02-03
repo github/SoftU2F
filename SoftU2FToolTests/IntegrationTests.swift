@@ -81,7 +81,7 @@ class IntegrationTests: SoftU2FTestCase {
         // TODO: this fails because we include the APDU trailer in the RegisterResponse....
         let regResp = try RegisterResponse(raw: regData)
 
-        guard let _ = U2FRegistration(keyHandle: regResp.keyHandle) else {
+        guard let _ = U2FRegistration(keyHandle: regResp.keyHandle, applicationParameter: randData()) else {
             XCTFail("Expected key handle from response to match registration")
             return
         }

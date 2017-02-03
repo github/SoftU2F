@@ -100,7 +100,7 @@ class U2FAuthenticator {
                 return
             }
 
-            guard let reg = U2FRegistration() else {
+            guard let reg = U2FRegistration(applicationParameter: req.applicationParameter) else {
                 print("Error creating registration.")
                 self.sendError(status: .OtherError, cid: cid)
                 return
@@ -132,7 +132,7 @@ class U2FAuthenticator {
     }
 
     func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) {
-        guard let reg = U2FRegistration(keyHandle: req.keyHandle) else {
+        guard let reg = U2FRegistration(keyHandle: req.keyHandle, applicationParameter: req.applicationParameter) else {
             sendError(status: .WrongData, cid: cid)
             return
         }
@@ -152,12 +152,10 @@ class U2FAuthenticator {
                 return
             }
 
-            let counter = reg.counter ?? 0
-
             let sigPayload = DataWriter()
             sigPayload.writeData(req.applicationParameter)
             sigPayload.write(UInt8(0x01))        // user present
-            sigPayload.write(counter)
+            sigPayload.write(reg.counter)
             sigPayload.writeData(req.challengeParameter)
 
             guard let sig = reg.sign(sigPayload.buffer) else {
@@ -165,7 +163,7 @@ class U2FAuthenticator {
                 return
             }
 
-            let resp = AuthenticationResponse(userPresence: 0x01, counter: counter, signature: sig)
+            let resp = AuthenticationResponse(userPresence: 0x01, counter: reg.counter, signature: sig)
             self.sendMsg(msg: resp, cid: cid)
             return
         }

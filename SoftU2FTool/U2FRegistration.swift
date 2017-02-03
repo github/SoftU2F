@@ -21,55 +21,70 @@ class U2FRegistration {
     }
 
     let keyPair:KeyPair
+    let applicationParameter:Data
+    var counter:UInt32
 
     // Key handle is application label plus 50 bytes of padding. Conformance tests require key handle to be >64 bytes.
     var keyHandle:Data {
         return padKeyHandle(keyPair.applicationLabel)
     }
 
-    // How many times this authenticator has been used. We smuggle this data in the application tag.
-    var counter:UInt32? {
-        get {
-            guard let raw = keyPair.applicationTag else { return nil }
-            return DataReader(data: raw).read()
-        }
-
-        set {
-            let value = newValue ?? 0
-            let writer = DataWriter()
-            writer.write(value)
-            keyPair.applicationTag = writer.buffer
-        }
-    }
-
     // Generate a new registration.
-    init?() {
-        guard let kp = KeyPair(label: U2FRegistration.namespace) else {
-            return nil
-        }
+    init?(applicationParameter ap:Data) {
+        applicationParameter = ap
 
+        guard let kp = KeyPair(label: U2FRegistration.namespace) else { return nil }
         keyPair = kp
+
         counter = 1
+        writeApplicationTag()
     }
 
     // Find a registration with the given key handle.
-    init?(keyHandle kh:Data) {
+    init?(keyHandle kh:Data, applicationParameter ap:Data) {
         let appLabel = unpadKeyHandle(kh)
-        guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel) else {
+        guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel) else { return nil }
+        keyPair = kp
+
+        // Read our application parameter from the keychain and make sure it matches.
+        guard let appTag = keyPair.applicationTag else { return nil }
+        let reader = DataReader(data: appTag)
+
+        do {
+            counter = try reader.read()
+            applicationParameter = reader.rest
+        } catch {
             return nil
         }
 
-        keyPair = kp
+        if applicationParameter != ap {
+            print("Bad applicationParameter")
+            return nil
+        }
     }
 
     // Sign some data with the private key and increment our counter.
     func sign(_ data:Data) -> Data? {
         guard let sig = keyPair.sign(data) else { return nil }
 
-        if let current = counter {
-            counter = current + 1
-        }
+        incrementCounter()
 
         return sig
+    }
+
+    func incrementCounter() {
+        counter += 1
+        writeApplicationTag()
+    }
+
+    func readApplicationTag(appTag:Data?) {
+    }
+
+    // Persist the applicationParameter and counter in the keychain.
+    func writeApplicationTag() {
+        let writer = DataWriter()
+        writer.write(counter)
+        writer.writeData(applicationParameter)
+        keyPair.applicationTag = writer.buffer
     }
 }
