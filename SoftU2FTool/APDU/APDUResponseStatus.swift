@@ -10,12 +10,12 @@
 enum APDUResponseStatus: UInt16, EndianEnumProtocol {
     typealias RawValue = UInt16
 
-    case NoError                = 0x9000
-    case WrongData              = 0x6A80
+    case NoError = 0x9000
+    case WrongData = 0x6A80
     case ConditionsNotSatisfied = 0x6985
-    case CommandNotAllowed      = 0x6986
-    case InsNotSupported        = 0x6D00
-    case WrongLength            = 0x6700
-    case ClassNotSupported      = 0x6E00
-    case OtherError             = 0x6F00 // "No precise diagnosis"
+    case CommandNotAllowed = 0x6986
+    case InsNotSupported = 0x6D00
+    case WrongLength = 0x6700
+    case ClassNotSupported = 0x6E00
+    case OtherError = 0x6F00 // "No precise diagnosis"
 }

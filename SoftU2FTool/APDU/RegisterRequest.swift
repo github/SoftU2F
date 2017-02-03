@@ -8,7 +8,7 @@
 
 struct RegisterRequest: APDUCommandDataProtocol {
     static let cmdClass = APDUCommandHeader.CommandClass.Reserved
-    static let cmdCode  = APDUCommandHeader.CommandCode.Register
+    static let cmdCode = APDUCommandHeader.CommandCode.Register
 
     let challengeParameter: Data
     let applicationParameter: Data
@@ -24,10 +24,10 @@ struct RegisterRequest: APDUCommandDataProtocol {
         challengeParameter = c
         applicationParameter = a
     }
-    
+
     init(raw: Data) throws {
         let reader = DataReader(data: raw)
-        
+
         do {
             challengeParameter = try reader.readData(U2F_CHAL_SIZE)
             applicationParameter = try reader.readData(U2F_APPID_SIZE)

@@ -7,25 +7,25 @@
 //
 
 struct AuthenticationResponse: APDUMessageProtocol {
-    let userPresence:UInt8
-    let counter:UInt32
-    let signature:Data
-    let status:APDUResponseStatus
-    
+    let userPresence: UInt8
+    let counter: UInt32
+    let signature: Data
+    let status: APDUResponseStatus
+
     var raw: Data {
         let writer = DataWriter()
-        
+
         writer.write(userPresence)
         writer.write(counter)
         writer.writeData(signature)
         writer.write(status)
-        
+
         return writer.buffer
     }
-    
+
     init(raw: Data) throws {
         let reader = DataReader(data: raw)
-        
+
         do {
             userPresence = try reader.read()
             counter = try reader.read()
@@ -40,7 +40,7 @@ struct AuthenticationResponse: APDUMessageProtocol {
         }
     }
 
-    init(userPresence u:UInt8, counter c:UInt32, signature s:Data) {
+    init(userPresence u: UInt8, counter c: UInt32, signature s: Data) {
         userPresence = u
         counter = c
         signature = s
@@ -51,7 +51,7 @@ struct AuthenticationResponse: APDUMessageProtocol {
         print("AuthenticationResponse:")
         print(String(format: "  User presence: 0x%02x", userPresence))
         print(String(format: "  Counter:       0x%08x", counter))
-        print(               "  Signature:     \(signature.base64EncodedString())")
-        print(               "  Status:        \(status)")
+        print( "  Signature:     \(signature.base64EncodedString())")
+        print( "  Status:        \(status)")
     }
 }

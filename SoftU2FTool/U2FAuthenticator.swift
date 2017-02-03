@@ -10,22 +10,22 @@ class U2FAuthenticator {
     static let shared = U2FAuthenticator()
     private static var hasShared = false
 
-    private let u2fhid:U2FHID
+    private let u2fhid: U2FHID
 
     static func start() -> Bool {
-        guard let ua:U2FAuthenticator = shared else { return false }
+        guard let ua: U2FAuthenticator = shared else { return false }
         return ua.start()
     }
 
     static func stop() -> Bool {
-        guard let ua:U2FAuthenticator = shared else { return false }
+        guard let ua: U2FAuthenticator = shared else { return false }
         return ua.stop()
     }
 
     let certificate = SelfSignedCertificate()!
 
     init?() {
-        guard let uh:U2FHID = U2FHID.shared else { return nil }
+        guard let uh: U2FHID = U2FHID.shared else { return nil }
 
         u2fhid = uh
         installMsgHandler()
@@ -40,9 +40,9 @@ class U2FAuthenticator {
     }
 
     func installMsgHandler() {
-        u2fhid.handle(.Msg) { (_ msg:softu2f_hid_message) -> Bool in
+        u2fhid.handle(.Msg) { (_ msg: softu2f_hid_message) -> Bool in
             let data = msg.data.takeUnretainedValue() as Data
-            let cmd:APDUCommand
+            let cmd: APDUCommand
 
             do {
                 cmd = try APDUCommand(raw: data)
@@ -84,13 +84,13 @@ class U2FAuthenticator {
                 self.handleVersionRequest(req, cid: msg.cid)
                 return true
             }
-            
+
             self.sendError(status: .OtherError, cid: msg.cid)
             return true
         }
     }
 
-    func handleRegisterRequest(_ req:RegisterRequest, cid:UInt32) {
+    func handleRegisterRequest(_ req: RegisterRequest, cid: UInt32) {
         let facet = KnownFacets[req.applicationParameter]
         let notification = UserPresence.Notification.Register(facet: facet)
 
@@ -126,12 +126,12 @@ class U2FAuthenticator {
             }
 
             let resp = RegisterResponse(publicKey: publicKey, keyHandle: reg.keyHandle, certificate: self.certificate.toDer(), signature: sig)
-            
+
             self.sendMsg(msg: resp, cid: cid)
         }
     }
 
-    func handleAuthenticationRequest(_ req:AuthenticationRequest, control: AuthenticationRequest.Control, cid:UInt32) {
+    func handleAuthenticationRequest(_ req: AuthenticationRequest, control: AuthenticationRequest.Control, cid: UInt32) {
         guard let reg = U2FRegistration(keyHandle: req.keyHandle, applicationParameter: req.applicationParameter) else {
             sendError(status: .WrongData, cid: cid)
             return
@@ -156,7 +156,7 @@ class U2FAuthenticator {
 
             let sigPayload = DataWriter()
             sigPayload.writeData(req.applicationParameter)
-            sigPayload.write(UInt8(0x01))        // user present
+            sigPayload.write(UInt8(0x01)) // user present
             sigPayload.write(counter)
             sigPayload.writeData(req.challengeParameter)
 
@@ -171,17 +171,17 @@ class U2FAuthenticator {
         }
     }
 
-    func handleVersionRequest(_ req:VersionRequest, cid:UInt32) {
+    func handleVersionRequest(_ req: VersionRequest, cid: UInt32) {
         let resp = VersionResponse(version: "U2F_V2")
         sendMsg(msg: resp, cid: cid)
     }
 
-    func sendError(status:APDUResponseStatus, cid: UInt32) {
+    func sendError(status: APDUResponseStatus, cid: UInt32) {
         let resp = ErrorResponse(status: status)
         sendMsg(msg: resp, cid: cid)
     }
 
-    func sendMsg(msg:APDUMessageProtocol, cid:UInt32) {
+    func sendMsg(msg: APDUMessageProtocol, cid: UInt32) {
         if u2fhid.sendMsg(cid: cid, data: msg.raw) {
             print("↓↓↓↓↓ Sent message ↓↓↓↓↓")
         } else {

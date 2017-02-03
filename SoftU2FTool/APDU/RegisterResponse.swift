@@ -17,11 +17,11 @@ struct RegisterResponse: APDUMessageProtocol {
         }
     }
 
-    let publicKey:   Data
-    let keyHandle:   Data
+    let publicKey: Data
+    let keyHandle: Data
     let certificate: Data
-    let signature:   Data
-    let status:      APDUResponseStatus
+    let signature: Data
+    let status: APDUResponseStatus
 
     var raw: Data {
         let writer = DataWriter()
@@ -36,23 +36,23 @@ struct RegisterResponse: APDUMessageProtocol {
 
         return writer.buffer
     }
-    
+
     init(raw: Data) throws {
         let reader = DataReader(data: raw)
-        
+
         do {
             // reserved byte
-            let _:UInt8 = try reader.read()
-            
+            let _: UInt8 = try reader.read()
+
             publicKey = try reader.readData(MemoryLayout<U2F_EC_POINT>.size)
-            
-            let khLen:UInt8 = try reader.read()
+
+            let khLen: UInt8 = try reader.read()
             keyHandle = try reader.readData(Int(khLen))
-            
+
             // peek at cert to figure out its length
             let certLen = try RegisterResponse.certLength(fromData: reader.rest)
             certificate = try reader.readData(certLen)
-            
+
             signature = try reader.readData(reader.remaining - 2)
 
             status = try reader.read()
@@ -75,12 +75,12 @@ struct RegisterResponse: APDUMessageProtocol {
 
     func debug() {
         print("Registration Response:")
-        print(               "  Reserved:    0x05")
-        print(               "  Public key:  \(publicKey.base64EncodedString())")
+        print( "  Reserved:    0x05")
+        print( "  Public key:  \(publicKey.base64EncodedString())")
         print(String(format: "  KH Len:      0x%02x", keyHandle.count))
-        print(               "  Key Handle:  \(keyHandle.base64EncodedString())")
-        print(               "  Certificate: \(certificate.base64EncodedString())")
-        print(               "  Signature:   \(signature.base64EncodedString())")
-        print(               "  Status:      \(status)")
+        print( "  Key Handle:  \(keyHandle.base64EncodedString())")
+        print( "  Certificate: \(certificate.base64EncodedString())")
+        print( "  Signature:   \(signature.base64EncodedString())")
+        print( "  Status:      \(status)")
     }
 }

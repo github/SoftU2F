@@ -21,7 +21,7 @@ class IntegrationTests: SoftU2FTestCase {
         defer { u2fh_global_done() }
 
 
-        var devs:OpaquePointer? = nil
+        var devs: OpaquePointer? = nil
         rc = u2fh_devs_init(&devs)
         XCTAssertEqual(rc.name, U2FH_OK.name)
         XCTAssertNotNil(devs)
@@ -44,7 +44,7 @@ class IntegrationTests: SoftU2FTestCase {
         let challenge = "VA-qf-tVVQVuPmNI4U2_ShZNYgvaaHnMPp_EnL2dNWY"
         let challengeParamBytes = try JSONSerialization.data(withJSONObject: ["challenge": challenge, "version": "U2F_V2", "appId": appId])
         let challengeParam = String(bytes: challengeParamBytes, encoding: .utf8)!
-        var respPtr:UnsafeMutablePointer<Int8>? = nil
+        var respPtr: UnsafeMutablePointer<Int8>? = nil
 
         rc = u2fh_register(devs, challengeParam, appId, &respPtr, U2FH_REQUEST_USER_PRESENCE)
         XCTAssertEqual(rc.name, U2FH_OK.name)
@@ -63,7 +63,7 @@ class IntegrationTests: SoftU2FTestCase {
 
         let respJSON = try JSONSerialization.jsonObject(with: respData, options: JSONSerialization.ReadingOptions.init(rawValue: 0))
 
-        guard let respDict = respJSON as? [String:String] else {
+        guard let respDict = respJSON as? [String: String] else {
             XCTFail("Expected response to be dictionary")
             return
         }

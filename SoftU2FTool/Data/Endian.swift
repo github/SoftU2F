@@ -16,23 +16,23 @@ protocol EndianProtocol {
     init(littleEndian value: Self)
     init(bigEndian value: Self)
 
-    var bigEndian:    Self { get }
+    var bigEndian: Self { get }
     var littleEndian: Self { get }
 }
 
-extension UInt64: EndianProtocol {}
-extension UInt32: EndianProtocol {}
-extension UInt16: EndianProtocol {}
+extension UInt64: EndianProtocol { }
+extension UInt32: EndianProtocol { }
+extension UInt16: EndianProtocol { }
 extension UInt8: EndianProtocol {
     init(littleEndian value: UInt8) {
         self = value
     }
-    
+
     init(bigEndian value: UInt8) {
         self = value
     }
-    
-    var bigEndian:    UInt8 { return self }
+
+    var bigEndian: UInt8 { return self }
     var littleEndian: UInt8 { return self }
 }
 

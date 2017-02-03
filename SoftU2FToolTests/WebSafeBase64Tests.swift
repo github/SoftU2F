@@ -18,7 +18,7 @@ class WebSafeBase64Tests: XCTestCase {
             XCTAssertNil(encoded.characters.index(of: Character("+")))
             XCTAssertNil(encoded.characters.index(of: Character("/")))
             XCTAssertNil(encoded.characters.index(of: Character("=")))
-            
+
             let decoded = WebSafeBase64.decode(encoded)
             XCTAssertNotNil(decoded)
             XCTAssertEqual(orig, decoded)

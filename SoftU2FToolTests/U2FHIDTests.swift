@@ -19,7 +19,7 @@ class U2FHIDTests: XCTestCase {
     }
 
     func testHandleMsg() {
-        U2FHID.shared?.handle(.Msg) { (_ msg:softu2f_hid_message) -> Bool in
+        U2FHID.shared?.handle(.Msg) { (_ msg: softu2f_hid_message) -> Bool in
             return true
         }
     }

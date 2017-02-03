@@ -6,7 +6,7 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
-let APDUCommandTypes:[APDUCommandDataProtocol.Type] = [
+let APDUCommandTypes: [APDUCommandDataProtocol.Type] = [
     RegisterRequest.self,
     AuthenticationRequest.self,
     VersionRequest.self
@@ -31,21 +31,21 @@ struct APDUCommand: APDUMessageProtocol {
         return writer.buffer
     }
 
-    var registerRequest:       RegisterRequest?       { return data as? RegisterRequest }
+    var registerRequest: RegisterRequest? { return data as? RegisterRequest }
     var authenticationRequest: AuthenticationRequest? { return data as? AuthenticationRequest }
-    var versionRequest:        VersionRequest?        { return data as? VersionRequest }
+    var versionRequest: VersionRequest? { return data as? VersionRequest }
 
     init(data d: DataType) throws {
         header = try APDUCommandHeader(cmdData: d)
         data = d
         trailer = APDUCommandTrailer(cmdData: d)
     }
-    
+
     init(raw: Data) throws {
         header = try APDUCommandHeader(raw: raw)
-        
+
         guard let cmdType = APDUCommand.commandTypeForCode(header.ins) else { throw APDUError.BadCode }
-        
+
         var dOffset = header.raw.count
         var dData = raw.subdata(in: dOffset..<raw.count)
         data = try cmdType.init(raw: dData)

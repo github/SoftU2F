@@ -10,8 +10,8 @@ import XCTest
 
 class SelfSignedCertificateTests: XCTestCase {
     func testParseX509() {
-        guard let crt = SelfSignedCertificate() else { XCTFail("Error generating cert");     return }
-        guard var der = crt.toDer()             else { XCTFail("Error DER formatting cert"); return }
+        guard let crt = SelfSignedCertificate() else { XCTFail("Error generating cert"); return }
+        guard var der = crt.toDer() else { XCTFail("Error DER formatting cert"); return }
 
         let crtLen = der.count
         var parsedLen = 0

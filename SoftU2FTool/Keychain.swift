@@ -8,16 +8,16 @@
 
 class Keychain {
     // Get the number of keychain items with a given kSecAttrLabel.
-    static func count(attrLabel:CFString) -> Int? {
+    static func count(attrLabel: CFString) -> Int? {
         let query = makeCFDictionary(
-            (kSecClass,       kSecClassKey),
-            (kSecAttrKeyType, kSecAttrKeyTypeEC),
-            (kSecAttrLabel,   attrLabel),
-            (kSecReturnRef,   kCFBooleanTrue),
-            (kSecMatchLimit,  100 as CFNumber)
+                                     (kSecClass, kSecClassKey),
+                                     (kSecAttrKeyType, kSecAttrKeyTypeEC),
+                                     (kSecAttrLabel, attrLabel),
+                                     (kSecReturnRef, kCFBooleanTrue),
+                                     (kSecMatchLimit, 100 as CFNumber)
         )
 
-        var optionalOpaqueResult:CFTypeRef? = nil
+        var optionalOpaqueResult: CFTypeRef? = nil
         let err = SecItemCopyMatching(query, &optionalOpaqueResult)
 
         if err == errSecItemNotFound {
@@ -40,7 +40,7 @@ class Keychain {
     }
 
     // Delete all keychain items matching the given query.
-    static func delete(_ query:CFDictionaryMember...) -> Bool {
+    static func delete(_ query: CFDictionaryMember...) -> Bool {
         let queryDict = makeCFDictionary(query)
 
         let err = SecItemDelete(queryDict)
@@ -57,8 +57,8 @@ class Keychain {
     }
 
     // Get the given attribute for the given SecKey.
-    static func getSecKeyAttr<T:AnyObject>(key: SecKey, attr name:CFString) -> T? {
-        guard let attrs = SecKeyCopyAttributes(key) as? [String:AnyObject] else {
+    static func getSecKeyAttr<T:AnyObject>(key: SecKey, attr name: CFString) -> T? {
+        guard let attrs = SecKeyCopyAttributes(key) as? [String: AnyObject] else {
             return nil
         }
 
@@ -70,16 +70,16 @@ class Keychain {
     }
 
     // Get the given attribute for the SecItem with the given kSecAttrApplicationLabel.
-    static func getSecItemAttr<T>(attrAppLabel:CFData, name:CFString) -> T? {
+    static func getSecItemAttr<T>(attrAppLabel: CFData, name: CFString) -> T? {
         let query = makeCFDictionary(
-            (kSecClass,                kSecClassKey),
-            (kSecAttrKeyType,          kSecAttrKeyTypeEC),
-            (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
-            (kSecAttrApplicationLabel, attrAppLabel),
-            (kSecReturnAttributes,     kCFBooleanTrue)
+                                     (kSecClass, kSecClassKey),
+                                     (kSecAttrKeyType, kSecAttrKeyTypeEC),
+                                     (kSecAttrKeyClass, kSecAttrKeyClassPublic),
+                                     (kSecAttrApplicationLabel, attrAppLabel),
+                                     (kSecReturnAttributes, kCFBooleanTrue)
         )
 
-        var optionalOpaqueDict:CFTypeRef? = nil
+        var optionalOpaqueDict: CFTypeRef? = nil
         let err = SecItemCopyMatching(query, &optionalOpaqueDict)
 
         if err != errSecSuccess {
@@ -92,7 +92,7 @@ class Keychain {
             return nil
         }
 
-        guard let dict = opaqueDict as! CFDictionary as? [String:AnyObject] else {
+        guard let dict = opaqueDict as! CFDictionary as? [String: AnyObject] else {
             print("Error downcasting CFDictionary")
             return nil
         }
@@ -106,16 +106,16 @@ class Keychain {
     }
 
     // Get the given attribute for the SecItem with the given kSecAttrApplicationLabel.
-    static func setSecItemAttr<T:CFTypeRef>(attrAppLabel:CFData, name:CFString, value:T) {
+    static func setSecItemAttr<T:CFTypeRef>(attrAppLabel: CFData, name: CFString, value: T) {
         let query = makeCFDictionary(
-            (kSecClass,                kSecClassKey),
-            (kSecAttrKeyType,          kSecAttrKeyTypeEC),
-            (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
-            (kSecAttrApplicationLabel, attrAppLabel)
+                                     (kSecClass, kSecClassKey),
+                                     (kSecAttrKeyType, kSecAttrKeyTypeEC),
+                                     (kSecAttrKeyClass, kSecAttrKeyClassPublic),
+                                     (kSecAttrApplicationLabel, attrAppLabel)
         )
 
         let newAttrs = makeCFDictionary(
-            (name, value)
+                                        (name, value)
         )
 
         let err = SecItemUpdate(query, newAttrs)
@@ -126,16 +126,16 @@ class Keychain {
     }
 
     // Get the raw data for the SecItem with the given kSecAttrApplicationLabel.
-    static func getSecItemData(attrAppLabel:Data) -> Data? {
+    static func getSecItemData(attrAppLabel: Data) -> Data? {
         let query = makeCFDictionary(
-            (kSecClass,                kSecClassKey),
-            (kSecAttrKeyType,          kSecAttrKeyTypeEC),
-            (kSecAttrKeyClass,         kSecAttrKeyClassPublic),
-            (kSecAttrApplicationLabel, attrAppLabel as CFData),
-            (kSecReturnData,           kCFBooleanTrue)
+                                     (kSecClass, kSecClassKey),
+                                     (kSecAttrKeyType, kSecAttrKeyTypeEC),
+                                     (kSecAttrKeyClass, kSecAttrKeyClassPublic),
+                                     (kSecAttrApplicationLabel, attrAppLabel as CFData),
+                                     (kSecReturnData, kCFBooleanTrue)
         )
 
-        var optionalOpaqueResult:CFTypeRef? = nil
+        var optionalOpaqueResult: CFTypeRef? = nil
         let err = SecItemCopyMatching(query, &optionalOpaqueResult)
 
         if err != errSecSuccess {
@@ -151,17 +151,17 @@ class Keychain {
         return opaqueResult as! CFData as Data
     }
 
-    static func getSecKey(attrAppLabel:CFData, keyClass:CFString) -> SecKey? {
+    static func getSecKey(attrAppLabel: CFData, keyClass: CFString) -> SecKey? {
         // Lookup public key.
         let query = makeCFDictionary(
-            (kSecClass,                kSecClassKey),
-            (kSecAttrKeyType,          kSecAttrKeyTypeEC),
-            (kSecAttrKeyClass,         keyClass),
-            (kSecAttrApplicationLabel, attrAppLabel),
-            (kSecReturnRef,            kCFBooleanTrue)
+                                     (kSecClass, kSecClassKey),
+                                     (kSecAttrKeyType, kSecAttrKeyTypeEC),
+                                     (kSecAttrKeyClass, keyClass),
+                                     (kSecAttrApplicationLabel, attrAppLabel),
+                                     (kSecReturnRef, kCFBooleanTrue)
         )
 
-        var optionalOpaqueResult:CFTypeRef? = nil
+        var optionalOpaqueResult: CFTypeRef? = nil
         let err = SecItemCopyMatching(query, &optionalOpaqueResult)
 
         if err != errSecSuccess {
@@ -179,8 +179,8 @@ class Keychain {
         return result
     }
 
-    static func generateKeyPair(attrLabel:CFString) -> (SecKey, SecKey)? {
-        var err:Unmanaged<CFError>? = nil
+    static func generateKeyPair(attrLabel: CFString) -> (SecKey, SecKey)? {
+        var err: Unmanaged<CFError>? = nil
         defer { err?.release() }
 
         // Make ACL controlling access to generated keys.
@@ -192,16 +192,16 @@ class Keychain {
 
         // Make parameters for generating keys.
         let params = makeCFDictionary(
-            (kSecAttrKeyType,        kSecAttrKeyTypeEC),
-            (kSecAttrKeySizeInBits,  256 as CFNumber),
-            (kSecAttrAccessControl,  acl!),
-            (kSecAttrIsPermanent,    kCFBooleanTrue),
-            (kSecAttrLabel,          attrLabel)
+                                      (kSecAttrKeyType, kSecAttrKeyTypeEC),
+                                      (kSecAttrKeySizeInBits, 256 as CFNumber),
+                                      (kSecAttrAccessControl, acl!),
+                                      (kSecAttrIsPermanent, kCFBooleanTrue),
+                                      (kSecAttrLabel, attrLabel)
         )
 
         // Generate key pair.
-        var pub:SecKey? = nil
-        var priv:SecKey? = nil
+        var pub: SecKey? = nil
+        var priv: SecKey? = nil
         let status = SecKeyGeneratePair(params, &pub, &priv)
 
         if status != errSecSuccess {
@@ -218,8 +218,8 @@ class Keychain {
     }
 
     // Sign some data with the private key.
-    static func sign(key:SecKey, data:Data) -> Data? {
-        var err:Unmanaged<CFError>? = nil
+    static func sign(key: SecKey, data: Data) -> Data? {
+        var err: Unmanaged<CFError>? = nil
         defer { err?.release() }
 
         let sig = SecKeyCreateSignature(key, .ecdsaSignatureMessageX962SHA256, data as CFData, &err) as? Data
@@ -233,8 +233,8 @@ class Keychain {
     }
 
     // Verify some signature over some data with the public key.
-    static func verify(key:SecKey, data:Data, signature:Data) -> Bool {
-        var err:Unmanaged<CFError>? = nil
+    static func verify(key: SecKey, data: Data, signature: Data) -> Bool {
+        var err: Unmanaged<CFError>? = nil
         defer { err?.release() }
 
         let ret = SecKeyVerifySignature(key, .ecdsaSignatureMessageX962SHA256, data as CFData, signature as CFData, &err)
@@ -243,7 +243,7 @@ class Keychain {
             print("Error verifying signature: \(err!.takeUnretainedValue().localizedDescription)")
             return false
         }
-        
+
         return ret
     }
 }

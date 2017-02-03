@@ -9,8 +9,8 @@
 struct APDUCommandTrailer {
     static let MaxMaxResponse = Int(UInt16.max) + 1
 
-    let maxResponse:Int
-    let noBody:Bool
+    let maxResponse: Int
+    let noBody: Bool
 
     var raw: Data {
         let writer = DataWriter()
@@ -34,7 +34,7 @@ struct APDUCommandTrailer {
         // 0 is prepended to trailer if there was no body.
         if reader.remaining == 3 {
             noBody = true
-            let zero:UInt8 = try reader.read()
+            let zero: UInt8 = try reader.read()
             if zero != 0x00 { throw APDUError.BadEncoding }
         } else {
             noBody = false
@@ -46,7 +46,7 @@ struct APDUCommandTrailer {
         case 1:
             throw APDUError.ShortEncoding
         case 2:
-            let mr:UInt16 = try reader.read()
+            let mr: UInt16 = try reader.read()
             if mr == 0x0000 {
                 maxResponse = APDUCommandTrailer.MaxMaxResponse
             } else {
@@ -57,7 +57,7 @@ struct APDUCommandTrailer {
         }
     }
 
-    init(cmdData cd:APDUCommandDataProtocol, maxResponse mr:Int = APDUCommandTrailer.MaxMaxResponse) {
+    init(cmdData cd: APDUCommandDataProtocol, maxResponse mr: Int = APDUCommandTrailer.MaxMaxResponse) {
         maxResponse = mr
         noBody = cd.raw.count == 0
     }

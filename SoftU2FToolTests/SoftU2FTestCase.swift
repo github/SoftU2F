@@ -9,7 +9,7 @@
 import XCTest
 @testable import SoftU2FTool
 
-class SoftU2FTestCase:XCTestCase {
+class SoftU2FTestCase: XCTestCase {
     static var nameSpaceWas = U2FRegistration.namespace
 
     override static func setUp() {

@@ -13,14 +13,14 @@ class WebSafeBase64 {
             .replacingOccurrences(of: "/", with: "_")
             .replacingOccurrences(of: "=", with: "")
     }
-    
+
     static func decode(_ string: String) -> Data? {
         var b64 = string
             .replacingOccurrences(of: "-", with: "+")
             .replacingOccurrences(of: "_", with: "/")
-        
+
         let padding: Int
-        
+
         switch b64.characters.count % 4 {
         case 0:
             padding = 0
@@ -36,8 +36,8 @@ class WebSafeBase64 {
 
         return Data(base64Encoded: b64)
     }
-    
-    static func random(_ size:Int = 32) -> String {
+
+    static func random(_ size: Int = 32) -> String {
         var bytes = [UInt8](repeating: 0x00, count: size)
         let _ = SecRandomCopyBytes(kSecRandomDefault, size, &bytes)
         let data = Data(bytes: bytes)

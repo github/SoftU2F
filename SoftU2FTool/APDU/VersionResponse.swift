@@ -7,8 +7,8 @@
 //
 
 struct VersionResponse: APDUMessageProtocol {
-    let version:String
-    let status:APDUResponseStatus
+    let version: String
+    let status: APDUResponseStatus
 
     var raw: Data {
         let writer = DataWriter()
@@ -19,7 +19,7 @@ struct VersionResponse: APDUMessageProtocol {
         return writer.buffer
     }
 
-    init(version v:String) {
+    init(version v: String) {
         version = v
         status = .NoError
     }

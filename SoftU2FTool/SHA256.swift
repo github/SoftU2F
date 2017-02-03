@@ -12,9 +12,9 @@ class SHA256 {
     enum SError: Error {
         case BadEncoding
     }
-    
+
     static var DigestLength = Int(CC_SHA256_DIGEST_LENGTH)
-    
+
     static func digest(_ data: Data) -> Data {
         return SHA256(data: data).digest
     }
@@ -31,32 +31,32 @@ class SHA256 {
         guard let data = str.data(using: .utf8) else { throw SError.BadEncoding }
         return SHA256(data: data).tupleDigest
     }
-    
+
     static func b64Digest(_ data: Data) -> Data {
         return SHA256(data: data).b64Digest
     }
-    
+
     static func webSafeB64Digest(_ data: Data) -> String {
         return SHA256(data: data).webSafeB64Digest
     }
-    
+
     let digest: Data
-    
+
     var tupleDigest: TupleDigest {
         return digest.withUnsafeBytes { digestPtr in
             return digestPtr.pointee
         }
     }
-    
+
     var b64Digest: Data {
         return digest.base64EncodedData()
     }
-    
+
     var webSafeB64Digest: String {
         return WebSafeBase64.encode(digest)
     }
 
-    
+
     init(data: Data) {
         digest = Data(repeating: 0x00, count: SHA256.DigestLength)
 

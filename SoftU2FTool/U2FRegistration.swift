@@ -11,7 +11,7 @@ class U2FRegistration {
     static var namespace = "SoftU2F Security Key"
 
     // The number of key pairs (keys/2) in the keychain.
-    static var count:Int? {
+    static var count: Int? {
         return KeyPair.count(label: namespace)
     }
 
@@ -20,17 +20,17 @@ class U2FRegistration {
         return KeyPair.delete(label: namespace)
     }
 
-    let keyPair:KeyPair
-    let applicationParameter:Data
-    var counter:UInt32
+    let keyPair: KeyPair
+    let applicationParameter: Data
+    var counter: UInt32
 
     // Key handle is application label plus 50 bytes of padding. Conformance tests require key handle to be >64 bytes.
-    var keyHandle:Data {
+    var keyHandle: Data {
         return padKeyHandle(keyPair.applicationLabel)
     }
 
     // Generate a new registration.
-    init?(applicationParameter ap:Data) {
+    init?(applicationParameter ap: Data) {
         applicationParameter = ap
 
         guard let kp = KeyPair(label: U2FRegistration.namespace) else { return nil }
@@ -41,7 +41,7 @@ class U2FRegistration {
     }
 
     // Find a registration with the given key handle.
-    init?(keyHandle kh:Data, applicationParameter ap:Data) {
+    init?(keyHandle kh: Data, applicationParameter ap: Data) {
         let appLabel = unpadKeyHandle(kh)
         guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel) else { return nil }
         keyPair = kp
@@ -64,7 +64,7 @@ class U2FRegistration {
     }
 
     // Sign some data with the private key and increment our counter.
-    func sign(_ data:Data) -> Data? {
+    func sign(_ data: Data) -> Data? {
         guard let sig = keyPair.sign(data) else { return nil }
 
         incrementCounter()
@@ -77,7 +77,7 @@ class U2FRegistration {
         writeApplicationTag()
     }
 
-    func readApplicationTag(appTag:Data?) {
+    func readApplicationTag(appTag: Data?) {
     }
 
     // Persist the applicationParameter and counter in the keychain.

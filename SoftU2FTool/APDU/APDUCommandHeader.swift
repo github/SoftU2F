@@ -10,19 +10,19 @@ struct APDUCommandHeader {
     enum CommandClass: UInt8 {
         case Reserved = 0x00
     }
-    
+
     enum CommandCode: UInt8 {
-        case Register          = 0x01
-        case Authenticate      = 0x02
-        case Version           = 0x03
-        case CheckRegister     = 0x04
+        case Register = 0x01
+        case Authenticate = 0x02
+        case Version = 0x03
+        case CheckRegister = 0x04
         case AuthenticateBatch = 0x05
     }
-    
+
     let cla: CommandClass
     let ins: CommandCode
-    let p1:  UInt8
-    let p2:  UInt8
+    let p1: UInt8
+    let p2: UInt8
     let dataLength: Int
 
     var raw: Data {
@@ -40,7 +40,7 @@ struct APDUCommandHeader {
 
         return writer.buffer
     }
-    
+
     init(cmdData: APDUCommandDataProtocol) throws {
         cla = type(of: cmdData).cmdClass
         ins = type(of: cmdData).cmdCode
@@ -49,19 +49,19 @@ struct APDUCommandHeader {
         dataLength = cmdData.raw.count
         if dataLength > 0xFFFF { throw APDUError.BadSize }
     }
-    
+
     init(raw: Data) throws {
         let reader = DataReader(data: raw)
-        
+
         do {
-            let claByte:UInt8 = try reader.read()
+            let claByte: UInt8 = try reader.read()
             guard let tmpCla = CommandClass(rawValue: claByte) else { throw APDUError.BadClass }
             cla = tmpCla
-            
-            let insByte:UInt8 = try reader.read()
+
+            let insByte: UInt8 = try reader.read()
             guard let tmpIns = CommandCode(rawValue: insByte) else { throw APDUError.BadCode }
             ins = tmpIns
-            
+
             p1 = try reader.read()
             p2 = try reader.read()
 
@@ -75,10 +75,10 @@ struct APDUCommandHeader {
                 dataLength = 0
             default:
                 // Lc is included.
-                let lc0:UInt8 = try reader.read()
+                let lc0: UInt8 = try reader.read()
                 if lc0 != 0x00 { throw APDUError.ShortEncoding }
 
-                let lc:UInt16 = try reader.read()
+                let lc: UInt16 = try reader.read()
                 dataLength = Int(lc)
             }
         } catch DataReaderError.End {
@@ -87,11 +87,11 @@ struct APDUCommandHeader {
     }
 
     func debug() {
-        print(               "Command Header:")
-        print(               "  cla:      \(cla)")
-        print(               "  ins:      \(ins)")
+        print( "Command Header:")
+        print( "  cla:      \(cla)")
+        print( "  ins:      \(ins)")
         print(String(format: "  p1:       0x%02d", p1))
         print(String(format: "  p2:       0x%02d", p2))
-        print(               "  data len: \(dataLength)")
+        print( "  data len: \(dataLength)")
     }
 }

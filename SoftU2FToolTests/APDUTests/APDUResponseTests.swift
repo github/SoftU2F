@@ -13,9 +13,9 @@ class APDUResponseTests: XCTestCase {
     func testRegisterResponse() throws {
         let pk = randData(length: MemoryLayout<U2F_EC_POINT>.size)
         let kh = randData(length: 50)
-        let crt:Data = SelfSignedCertificate().toDer()
+        let crt: Data = SelfSignedCertificate().toDer()
         let sig = randData(length: 20)
-        
+
         let r = RegisterResponse(publicKey: pk, keyHandle: kh, certificate: crt, signature: sig)
         let r2 = try RegisterResponse(raw: r.raw)
 

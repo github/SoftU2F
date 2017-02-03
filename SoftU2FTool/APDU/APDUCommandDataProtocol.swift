@@ -8,7 +8,7 @@
 
 protocol APDUCommandDataProtocol {
     static var cmdClass: APDUCommandHeader.CommandClass { get }
-    static var cmdCode:  APDUCommandHeader.CommandCode  { get }
+    static var cmdCode: APDUCommandHeader.CommandCode { get }
 
     var raw: Data { get }
     init(raw: Data) throws

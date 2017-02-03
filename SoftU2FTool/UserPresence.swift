@@ -8,18 +8,18 @@
 
 class UserPresence: NSObject {
     enum Notification {
-        case Register(facet:String?)
-        case Authenticate(facet:String?)
+        case Register(facet: String?)
+        case Authenticate(facet: String?)
     }
 
-    typealias Callback = (_ success:Bool) -> Void
+    typealias Callback = (_ success: Bool) -> Void
 
-    static var current:UserPresence?
+    static var current: UserPresence?
     static var skip = false
 
     // Display a notification, wait for the user to click it, and call the callback with `true`.
     // Calls callback with `false` if another test is done while we're waiting for this one.
-    static func test(_ type:Notification, with callback: @escaping Callback) {
+    static func test(_ type: Notification, with callback: @escaping Callback) {
         if skip {
             callback(true)
         } else {
@@ -40,19 +40,19 @@ class UserPresence: NSObject {
         }
     }
 
-    let callback:Callback
-    var notification:NSUserNotification?
-    var timer:Timer?
-    var timerStart:Date?
+    let callback: Callback
+    var notification: NSUserNotification?
+    var timer: Timer?
+    var timerStart: Date?
 
     // Give up after 10 seconds.
-    var timedOut:Bool {
+    var timedOut: Bool {
         guard let ts = timerStart else { return false }
         return Date().timeIntervalSince(ts) > 10
     }
 
     // Helper for accessing user notification center singleton.
-    var center:NSUserNotificationCenter { return NSUserNotificationCenter.default }
+    var center: NSUserNotificationCenter { return NSUserNotificationCenter.default }
 
     init(with cb: @escaping Callback) {
         callback = cb
@@ -60,12 +60,12 @@ class UserPresence: NSObject {
     }
 
     // Send a notification popup to the user.
-    func test(_ type:Notification) {
+    func test(_ type: Notification) {
         sendNotification(type)
     }
 
     // Send a notification popup to the user.
-    func sendNotification(_ type:Notification) {
+    func sendNotification(_ type: Notification) {
         let n = NSUserNotification()
         n.title = "Security Key Request"
         n.actionButtonTitle = "Approve"
@@ -84,7 +84,7 @@ class UserPresence: NSObject {
     }
 
     // Call the callback closure with our result and reset everything.
-    func complete(_ result:Bool) {
+    func complete(_ result: Bool) {
         clearTimer()
         removeNotification()
         callback(result)

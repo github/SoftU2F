@@ -9,7 +9,7 @@
 struct AuthenticationRequest: APDUCommandDataProtocol {
     enum Control: UInt8 {
         case EnforceUserPresenceAndSign = 0x03
-        case CheckOnly                  = 0x07
+        case CheckOnly = 0x07
     }
 
     static let cmdClass = APDUCommandHeader.CommandClass.Reserved
@@ -18,7 +18,7 @@ struct AuthenticationRequest: APDUCommandDataProtocol {
     let challengeParameter: Data
     let applicationParameter: Data
     let keyHandle: Data
-    
+
     var raw: Data {
         let writer = DataWriter()
 
@@ -26,23 +26,23 @@ struct AuthenticationRequest: APDUCommandDataProtocol {
         writer.writeData(applicationParameter)
         writer.write(UInt8(keyHandle.count))
         writer.writeData(keyHandle)
-        
+
         return writer.buffer
     }
-    
+
     init(challengeParameter cp: Data, applicationParameter ap: Data, keyHandle kh: Data) {
         challengeParameter = cp
         applicationParameter = ap
         keyHandle = kh
     }
-    
+
     init(raw: Data) throws {
         let reader = DataReader(data: raw)
-        
+
         do {
             challengeParameter = try reader.readData(U2F_CHAL_SIZE)
             applicationParameter = try reader.readData(U2F_APPID_SIZE)
-            let khLen:UInt8 = try reader.read()
+            let khLen: UInt8 = try reader.read()
             keyHandle = try reader.readData(khLen)
         } catch DataReaderError.End {
             throw APDUError.BadSize
