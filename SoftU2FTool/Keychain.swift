@@ -45,12 +45,15 @@ class Keychain {
 
         let err = SecItemDelete(queryDict)
 
-        if err != errSecSuccess {
+        switch err {
+        case errSecSuccess:
+            return true
+        case errSecItemNotFound:
+            return false
+        default:
             print("Error from keychain: \(err)")
             return false
         }
-
-        return true
     }
 
     // Get the given attribute for the given SecKey.

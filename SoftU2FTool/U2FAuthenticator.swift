@@ -152,10 +152,12 @@ class U2FAuthenticator {
                 return
             }
 
+            let counter = reg.counter
+
             let sigPayload = DataWriter()
             sigPayload.writeData(req.applicationParameter)
             sigPayload.write(UInt8(0x01))        // user present
-            sigPayload.write(reg.counter)
+            sigPayload.write(counter)
             sigPayload.writeData(req.challengeParameter)
 
             guard let sig = reg.sign(sigPayload.buffer) else {
@@ -163,7 +165,7 @@ class U2FAuthenticator {
                 return
             }
 
-            let resp = AuthenticationResponse(userPresence: 0x01, counter: reg.counter, signature: sig)
+            let resp = AuthenticationResponse(userPresence: 0x01, counter: counter, signature: sig)
             self.sendMsg(msg: resp, cid: cid)
             return
         }
