@@ -8,21 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #undef I // complex.h defines some crazy `I` macro...
-#import <openssl/x509.h>
+#import <openssl/asn1.h>
 #import <openssl/ec.h>
 #import <openssl/ecdsa.h>
 #import <openssl/evp.h>
 #import <openssl/objects.h>
-#import <openssl/asn1.h>
 #import <openssl/pem.h>
+#import <openssl/x509.h>
 
-@interface SelfSignedCertificate : NSObject;
-@property EVP_PKEY* pkey;
-@property X509* x509;
+@interface SelfSignedCertificate : NSObject
+
+@property EVP_PKEY *pkey;
+@property X509 *x509;
 
 - (id)init;
-- (NSData*)toDer;
-- (NSData*)signData:(NSData*)msg;
-+ (bool)parseX509:(NSData*)data consumed:(NSInteger *)consumed;
+- (NSData *)toDer;
+- (NSData *)signData:(NSData *)msg;
++ (bool)parseX509:(NSData *)data consumed:(NSInteger *)consumed;
 
 @end
