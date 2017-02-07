@@ -8,9 +8,7 @@
 
 import Foundation
 
-struct CommandTrailer {
-    static let MaxMaxResponse = Int(UInt16.max) + 1
-
+struct CommandTrailer: RawConvertible, MessagePart {
     let maxResponse: Int
     let noBody: Bool
 
@@ -30,9 +28,7 @@ struct CommandTrailer {
         return writer.buffer
     }
 
-    init(raw: Data) throws {
-        let reader = DataReader(data: raw)
-
+    init(reader: DataReader) throws {
         // 0 is prepended to trailer if there was no body.
         if reader.remaining == 3 {
             noBody = true
@@ -50,7 +46,7 @@ struct CommandTrailer {
         case 2:
             let mr: UInt16 = try reader.read()
             if mr == 0x0000 {
-                maxResponse = CommandTrailer.MaxMaxResponse
+                maxResponse = MaxResponseSize
             } else {
                 maxResponse = Int(mr)
             }
@@ -58,10 +54,10 @@ struct CommandTrailer {
             throw ResponseStatus.WrongLength
         }
     }
-
-    init(cmdData cd: CommandDataProtocol, maxResponse mr: Int = CommandTrailer.MaxMaxResponse) {
-        maxResponse = mr
-        noBody = cd.raw.count == 0
+    
+    init(noBody: Bool, maxResponse: Int = MaxResponseSize) {
+        self.noBody = noBody
+        self.maxResponse = maxResponse
     }
 
     func debug() {

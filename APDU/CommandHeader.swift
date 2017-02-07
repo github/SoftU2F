@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CommandHeader {
+struct CommandHeader: RawConvertible, MessagePart {
     public let cla: CommandClass
     public let ins: CommandCode
     public let p1: UInt8
@@ -31,18 +31,7 @@ public struct CommandHeader {
         return writer.buffer
     }
 
-    init(cmdData: CommandDataProtocol) throws {
-        cla = type(of: cmdData).cmdClass
-        ins = type(of: cmdData).cmdCode
-        p1 = 0x00
-        p2 = 0x00
-        dataLength = cmdData.raw.count
-        if dataLength > 0xFFFF { throw ResponseStatus.WrongLength }
-    }
-
-    init(raw: Data) throws {
-        let reader = DataReader(data: raw)
-
+    init(reader: DataReader) throws {
         do {
             let claByte: UInt8 = try reader.read()
             guard let tmpCla = CommandClass(rawValue: claByte) else { throw ResponseStatus.ClassNotSupported }
@@ -74,6 +63,14 @@ public struct CommandHeader {
         } catch DataReaderError.End {
             throw ResponseStatus.WrongLength
         }
+    }
+    
+    init(cla: CommandClass = .Reserved, ins: CommandCode, p1: UInt8 = 0x00, p2: UInt8 = 0x00, dataLength: Int) {
+        self.cla = cla
+        self.ins = ins
+        self.p1 = p1
+        self.p2 = p2
+        self.dataLength = dataLength
     }
 
     func debug() {

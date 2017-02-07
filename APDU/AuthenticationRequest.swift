@@ -8,48 +8,69 @@
 
 import Foundation
 
-public struct AuthenticationRequest: CommandDataProtocol {
-    public static let cmdClass = CommandClass.Reserved
-    public static let cmdCode = CommandCode.Authenticate
+public struct AuthenticationRequest: RawConvertible {
+    let header: CommandHeader
+    let body: Data
+    let trailer: CommandTrailer
+    
+    public var control: Control {
+        return Control(rawValue: header.p1) ?? .Invalid
+    }
 
-    public let challengeParameter: Data
-    public let applicationParameter: Data
-    public let keyHandle: Data
+    public var challengeParameter: Data {
+        let lowerBound = 0
+        let upperBound = lowerBound + U2F_CHAL_SIZE
+        return body.subdata(in: lowerBound..<upperBound)
+    }
 
-    public var raw: Data {
+    public var applicationParameter: Data {
+        let lowerBound = U2F_CHAL_SIZE
+        let upperBound = lowerBound + U2F_APPID_SIZE
+        return body.subdata(in: lowerBound..<upperBound)
+    }
+    
+    var keyHandleLength: Int {
+        return Int(body[U2F_CHAL_SIZE + U2F_APPID_SIZE])
+    }
+
+    public var keyHandle: Data {
+        let lowerBound = U2F_CHAL_SIZE + U2F_APPID_SIZE + 1
+        let upperBound = lowerBound + keyHandleLength
+        return body.subdata(in: lowerBound..<upperBound)
+    }
+
+    public init(challengeParameter: Data, applicationParameter: Data, keyHandle: Data, control: Control) {
         let writer = DataWriter()
-
         writer.writeData(challengeParameter)
         writer.writeData(applicationParameter)
         writer.write(UInt8(keyHandle.count))
         writer.writeData(keyHandle)
-
-        return writer.buffer
+        
+        self.body = writer.buffer
+        self.header = CommandHeader(ins: .Authenticate, p1: control.rawValue, dataLength: body.count)
+        self.trailer = CommandTrailer(noBody: false)
     }
-
-    public init(challengeParameter cp: Data, applicationParameter ap: Data, keyHandle kh: Data) {
-        challengeParameter = cp
-        applicationParameter = ap
-        keyHandle = kh
-    }
-
-    public init(raw: Data) throws {
-        let reader = DataReader(data: raw)
-
-        do {
-            challengeParameter = try reader.readData(U2F_CHAL_SIZE)
-            applicationParameter = try reader.readData(U2F_APPID_SIZE)
-            let khLen: UInt8 = try reader.read()
-            keyHandle = try reader.readData(khLen)
-        } catch DataReaderError.End {
+    
+    func validateBody() throws {
+        // Make sure it's at least long enough to have key-handle length.
+        if body.count < U2F_CHAL_SIZE + U2F_APPID_SIZE + 1 {
             throw ResponseStatus.WrongLength
         }
-    }
 
-    public func debug() {
-        print("AuthenticationRequest:")
-        print("  Challenge parameter:   \(challengeParameter.base64EncodedString())")
-        print("  Application parameter: \(applicationParameter.base64EncodedString())")
-        print("  Key handle:            \(keyHandle.base64EncodedString())")
+        if body.count != U2F_CHAL_SIZE + U2F_APPID_SIZE + 1 + keyHandleLength {
+            throw ResponseStatus.WrongLength
+        }
+        
+        if control == .Invalid {
+            throw ResponseStatus.OtherError
+        }
+    }
+}
+
+extension AuthenticationRequest: CommandProtocol {
+    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
+        self.header = header
+        self.body = body
+        self.trailer = trailer
     }
 }

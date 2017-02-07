@@ -14,29 +14,29 @@ class CommandHeaderTests: XCTestCase {
         let a = Data(repeating: 0xAA, count: 32)
 
         let cmd = RegisterRequest(challengeParameter: c, applicationParameter: a)
-        let apdu = try cmd.apduWrapped()
+        let apdu = cmd.raw
 
-        let h = try CommandHeader(raw: apdu.raw)
+        let h = try CommandHeader(raw: apdu)
 
         XCTAssertEqual(h.cla, CommandClass.Reserved)
         XCTAssertEqual(h.ins, CommandCode.Register)
         XCTAssertEqual(h.p1, 0x00)
         XCTAssertEqual(h.p2, 0x00)
         XCTAssertEqual(h.dataLength, c.count + a.count)
-        XCTAssert(apdu.raw.starts(with: h.raw))
+        XCTAssert(apdu.starts(with: h.raw))
     }
 
     func testVersionRequest() throws {
         let cmd = VersionRequest()
-        let apdu = try cmd.apduWrapped()
+        let apdu = cmd.raw
 
-        let h = try CommandHeader(raw: apdu.raw)
+        let h = try CommandHeader(raw: apdu)
 
         XCTAssertEqual(h.cla, CommandClass.Reserved)
         XCTAssertEqual(h.ins, CommandCode.Version)
         XCTAssertEqual(h.p1, 0x00)
         XCTAssertEqual(h.p2, 0x00)
         XCTAssertEqual(h.dataLength, 0)
-        XCTAssert(apdu.raw.starts(with: h.raw))
+        XCTAssert(apdu.starts(with: h.raw))
     }
 }

@@ -8,39 +8,44 @@
 
 import Foundation
 
-public struct RegisterRequest: CommandDataProtocol {
-    public static let cmdClass = CommandClass.Reserved
-    public static let cmdCode = CommandCode.Register
+public struct RegisterRequest: RawConvertible {
+    let header: CommandHeader
+    let body: Data
+    let trailer: CommandTrailer
+    
+    public var challengeParameter: Data {
+        let lowerBound = 0
+        let upperBound = lowerBound + U2F_CHAL_SIZE
+        return body.subdata(in: lowerBound..<upperBound)
+    }
 
-    public let challengeParameter: Data
-    public let applicationParameter: Data
+    public var applicationParameter: Data {
+        let lowerBound = U2F_CHAL_SIZE
+        let upperBound = lowerBound + U2F_APPID_SIZE
+        return body.subdata(in: lowerBound..<upperBound)
+    }
 
-    public var raw: Data {
+    public init(challengeParameter: Data, applicationParameter: Data) {
         let writer = DataWriter()
         writer.writeData(challengeParameter)
         writer.writeData(applicationParameter)
-        return writer.buffer
+        
+        self.body = writer.buffer
+        self.header = CommandHeader(ins: .Register, dataLength: body.count)
+        self.trailer = CommandTrailer(noBody: false)
     }
-
-    public init(challengeParameter c: Data, applicationParameter a: Data) {
-        challengeParameter = c
-        applicationParameter = a
-    }
-
-    public init(raw: Data) throws {
-        let reader = DataReader(data: raw)
-
-        do {
-            challengeParameter = try reader.readData(U2F_CHAL_SIZE)
-            applicationParameter = try reader.readData(U2F_APPID_SIZE)
-        } catch DataReaderError.End {
+    
+    func validateBody() throws {
+        if body.count != U2F_CHAL_SIZE + U2F_APPID_SIZE {
             throw ResponseStatus.WrongLength
         }
     }
+}
 
-    public func debug() {
-        print("RegisterRequest:")
-        print("  Challenge parameter:   \(challengeParameter.base64EncodedString())")
-        print("  Application parameter: \(applicationParameter.base64EncodedString())")
+extension RegisterRequest: CommandProtocol {
+    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
+        self.header = header
+        self.body = body
+        self.trailer = trailer
     }
 }

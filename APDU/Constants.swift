@@ -14,6 +14,8 @@ let U2F_APPID_SIZE = 32
 let U2F_EC_KEY_SIZE = 32                            // EC key size in bytes
 let U2F_EC_POINT_SIZE = ((U2F_EC_KEY_SIZE * 2) + 1) // Size of EC point
 
+let MaxResponseSize = Int(UInt16.max) + 1
+
 // ISO7816-4
 public enum ResponseStatus: UInt16, EndianEnumProtocol, Error {
     public typealias RawValue = UInt16
@@ -43,4 +45,7 @@ public enum CommandCode: UInt8 {
 public enum Control: UInt8 {
     case EnforceUserPresenceAndSign = 0x03
     case CheckOnly = 0x07
+    
+    // Used internally.
+    case Invalid = 0xFF
 }

@@ -8,21 +8,28 @@
 
 import Foundation
 
-public struct VersionRequest: CommandDataProtocol {
-    public static let cmdClass = CommandClass.Reserved
-    public static let cmdCode = CommandCode.Version
-
-    public var raw: Data {
-        return Data(capacity: 0)
+public struct VersionRequest: RawConvertible {
+    let header: CommandHeader
+    let body: Data
+    let trailer: CommandTrailer
+    
+    func validateBody() throws {
+        if body.count > 0 {
+            throw ResponseStatus.WrongLength
+        }
     }
-
+    
     init() {
+        self.header = CommandHeader(ins: .Version, dataLength: 0)
+        self.body = Data()
+        self.trailer = CommandTrailer(noBody: true)
     }
+}
 
-    public init(raw: Data) throws {
-    }
-
-    public func debug() {
-        print("Version Request (no data)")
+extension VersionRequest: CommandProtocol {
+    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
+        self.header = header
+        self.body = body
+        self.trailer = trailer
     }
 }
