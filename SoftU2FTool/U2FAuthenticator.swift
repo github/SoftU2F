@@ -6,6 +6,10 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+import APDU
+import SelfSignedCertificate
+
 class U2FAuthenticator {
     static let shared = U2FAuthenticator()
     private static var hasShared = false
@@ -42,11 +46,11 @@ class U2FAuthenticator {
     func installMsgHandler() {
         u2fhid.handle(.Msg) { (_ msg: softu2f_hid_message) -> Bool in
             let data = msg.data.takeUnretainedValue() as Data
-            let cmd: APDUCommand
+            let cmd: APDU.Command
 
             do {
-                cmd = try APDUCommand(raw: data)
-            } catch let err as APDUResponseStatus {
+                cmd = try APDU.Command(raw: data)
+            } catch let err as APDU.ResponseStatus {
                 self.sendError(status: err, cid: msg.cid)
                 return true
             } catch {
@@ -64,7 +68,7 @@ class U2FAuthenticator {
             }
 
             if let req = cmd.authenticationRequest {
-                if let control = AuthenticationRequest.Control(rawValue: cmd.header.p1) {
+                if let control = APDU.Control(rawValue: cmd.header.p1) {
                     self.handleAuthenticationRequest(req, control: control, cid: msg.cid)
                     return true
                 }
@@ -80,7 +84,7 @@ class U2FAuthenticator {
         }
     }
 
-    func handleRegisterRequest(_ req: RegisterRequest, cid: UInt32) {
+    func handleRegisterRequest(_ req: APDU.RegisterRequest, cid: UInt32) {
         let facet = KnownFacets[req.applicationParameter]
         let notification = UserPresence.Notification.Register(facet: facet)
 
@@ -102,14 +106,16 @@ class U2FAuthenticator {
                 return
             }
 
-            let sigPayload = DataWriter()
-            sigPayload.write(UInt8(0x00)) // reserved
-            sigPayload.writeData(req.applicationParameter)
-            sigPayload.writeData(req.challengeParameter)
-            sigPayload.writeData(reg.keyHandle)
-            sigPayload.writeData(publicKey)
+            let payloadSize = 1 + req.applicationParameter.count + req.challengeParameter.count + reg.keyHandle.count + publicKey.count
+            var sigPayload = Data(capacity: payloadSize)
+            
+            sigPayload.append(UInt8(0x00)) // reserved
+            sigPayload.append(req.applicationParameter)
+            sigPayload.append(req.challengeParameter)
+            sigPayload.append(reg.keyHandle)
+            sigPayload.append(publicKey)
 
-            guard let sig = self.certificate.sign(sigPayload.buffer) else {
+            guard let sig = self.certificate.sign(sigPayload) else {
                 print("Error signing with certificate")
                 self.sendError(status: .OtherError, cid: cid)
                 return
@@ -121,7 +127,7 @@ class U2FAuthenticator {
         }
     }
 
-    func handleAuthenticationRequest(_ req: AuthenticationRequest, control: AuthenticationRequest.Control, cid: UInt32) {
+    func handleAuthenticationRequest(_ req: APDU.AuthenticationRequest, control: APDU.Control, cid: UInt32) {
         guard let reg = U2FRegistration(keyHandle: req.keyHandle, applicationParameter: req.applicationParameter) else {
             sendError(status: .WrongData, cid: cid)
             return
@@ -143,14 +149,17 @@ class U2FAuthenticator {
             }
 
             let counter = reg.counter
+            var ctrBigEndian = counter.bigEndian
+            
+            let payloadSize = req.applicationParameter.count + 1 + MemoryLayout<UInt32>.size + req.challengeParameter.count
+            var sigPayload = Data(capacity: payloadSize)
 
-            let sigPayload = DataWriter()
-            sigPayload.writeData(req.applicationParameter)
-            sigPayload.write(UInt8(0x01)) // user present
-            sigPayload.write(counter)
-            sigPayload.writeData(req.challengeParameter)
+            sigPayload.append(req.applicationParameter)
+            sigPayload.append(UInt8(0x01)) // user present
+            sigPayload.append(Data(bytes: &ctrBigEndian, count: MemoryLayout<UInt32>.size))
+            sigPayload.append(req.challengeParameter)
 
-            guard let sig = reg.sign(sigPayload.buffer) else {
+            guard let sig = reg.sign(sigPayload) else {
                 self.sendError(status: .OtherError, cid: cid)
                 return
             }
@@ -161,17 +170,17 @@ class U2FAuthenticator {
         }
     }
 
-    func handleVersionRequest(_ req: VersionRequest, cid: UInt32) {
-        let resp = VersionResponse(version: "U2F_V2")
+    func handleVersionRequest(_ req: APDU.VersionRequest, cid: UInt32) {
+        let resp = APDU.VersionResponse(version: "U2F_V2")
         sendMsg(msg: resp, cid: cid)
     }
 
-    func sendError(status: APDUResponseStatus, cid: UInt32) {
-        let resp = ErrorResponse(status: status)
+    func sendError(status: APDU.ResponseStatus, cid: UInt32) {
+        let resp = APDU.ErrorResponse(status: status)
         sendMsg(msg: resp, cid: cid)
     }
 
-    func sendMsg(msg: APDUMessageProtocol, cid: UInt32) {
+    func sendMsg(msg: APDU.MessageProtocol, cid: UInt32) {
         if u2fhid.sendMsg(cid: cid, data: msg.raw) {
             print("↓↓↓↓↓ Sent message ↓↓↓↓↓")
         } else {

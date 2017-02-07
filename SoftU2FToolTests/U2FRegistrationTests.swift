@@ -10,7 +10,7 @@ import XCTest
 @testable import SoftU2FTool
 
 class U2FRegistrationTests: SoftU2FTestCase {
-    var makeKey: U2FRegistration? { return U2FRegistration(applicationParameter: randData()) }
+    var makeKey: U2FRegistration? { return U2FRegistration(applicationParameter: randData(length: 32)) }
 
     override func tearDown() {
         let _ = U2FRegistration.deleteAll()

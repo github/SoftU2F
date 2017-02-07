@@ -6,6 +6,8 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+
 class U2FHID {
     enum MessageType: UInt8 {
         case Ping = 0x81 // Echo data through local processor only

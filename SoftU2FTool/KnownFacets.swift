@@ -6,6 +6,8 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+
 let KnownFacets: [Data: String] = [
     SHA256.digest("https://github.com/u2f/trusted_facets"): "https://github.com",
     SHA256.digest("https://demo.yubico.com"): "https://demo.yubico.com",

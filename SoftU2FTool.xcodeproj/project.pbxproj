@@ -10,51 +10,78 @@
 		5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119862D1E3C1519006A3BBB /* KnownFacets.swift */; };
 		51203C391E39234000F661DF /* U2FHIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51203C381E39234000F661DF /* U2FHIDTests.swift */; };
 		51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC11E3834F8005454E0 /* TestUtil.swift */; };
-		51213EC41E3904A8005454E0 /* SelfSignedCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */; };
 		51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51213EC51E3916EB005454E0 /* U2FHID.swift */; };
-		5131C1A01E3A97DE006A820C /* APDUResponseStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C19F1E3A97DE006A820C /* APDUResponseStatus.swift */; };
-		5131C1A31E3A9C72006A820C /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A21E3A9C72006A820C /* ErrorResponse.swift */; };
-		5131C1A61E3A9CB0006A820C /* APDUCommandTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A51E3A9CB0006A820C /* APDUCommandTrailer.swift */; };
-		5131C1AA1E3A9CB9006A820C /* VersionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A81E3A9CB9006A820C /* VersionRequest.swift */; };
-		5131C1AC1E3A9CB9006A820C /* VersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1A91E3A9CB9006A820C /* VersionResponse.swift */; };
 		5131C1B01E3B9C62006A820C /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131C1AE1E3B9C62006A820C /* IntegrationTests.swift */; };
 		5131C1B21E3B9EA1006A820C /* libu2f-host.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5131C1B11E3B9EA1006A820C /* libu2f-host.a */; };
 		514F3D821E43C833008FA513 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514F3D811E43C833008FA513 /* Keychain.swift */; };
 		514F3D871E43E828008FA513 /* KeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514F3D861E43E828008FA513 /* KeyPair.swift */; };
-		515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835E1E3803BE00F40024 /* DataReaderTests.swift */; };
-		515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835F1E3803BE00F40024 /* DataWriterTests.swift */; };
-		518537B11E380C0A00600911 /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A61E380C0A00600911 /* APDUCommand.swift */; };
-		518537B31E380C0A00600911 /* APDUCommandHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A81E380C0A00600911 /* APDUCommandHeader.swift */; };
-		518537B41E380C0A00600911 /* APDUCommandDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A91E380C0A00600911 /* APDUCommandDataProtocol.swift */; };
-		518537B51E380C0A00600911 /* APDUMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */; };
-		518537B81E380C0A00600911 /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AD1E380C0A00600911 /* AuthenticationRequest.swift */; };
-		518537B91E380C0A00600911 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AE1E380C0A00600911 /* AuthenticationResponse.swift */; };
-		518537BA1E380C0A00600911 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AF1E380C0A00600911 /* RegisterRequest.swift */; };
-		518537BB1E380C0A00600911 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537B01E380C0A00600911 /* RegisterResponse.swift */; };
-		518537C31E380EF500600911 /* SelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 518537C21E380EF500600911 /* SelfSignedCertificate.m */; };
 		5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */; };
-		51912B481E397A9600F52454 /* APDUCommandTrailerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51912B471E397A9600F52454 /* APDUCommandTrailerTests.swift */; };
 		51A5E3B01E3FC7CD0028E2D1 /* libsoftu2f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A5E3AD1E3FC7BA0028E2D1 /* libsoftu2f.a */; };
 		51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */; };
-		51E214461E381E0C005B2864 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A0DA161E3813B900152E9B /* libcrypto.a */; };
-		51E214471E38215C005B2864 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A0DA161E3813B900152E9B /* libcrypto.a */; };
-		51E2145A1E382380005B2864 /* APDUCommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214571E382380005B2864 /* APDUCommandTests.swift */; };
-		51E2145B1E382380005B2864 /* APDUCommandHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214581E382380005B2864 /* APDUCommandHeaderTests.swift */; };
-		51E2145C1E382380005B2864 /* APDUResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214591E382380005B2864 /* APDUResponseTests.swift */; };
 		51E2145E1E3823E0005B2864 /* SHA256Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2145D1E3823E0005B2864 /* SHA256Tests.swift */; };
 		51E214601E3823E7005B2864 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2145F1E3823E7005B2864 /* SHA256.swift */; };
 		51E214621E382521005B2864 /* WebSafeBase64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214611E382521005B2864 /* WebSafeBase64.swift */; };
 		51E214641E382529005B2864 /* WebSafeBase64Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E214631E382529005B2864 /* WebSafeBase64Tests.swift */; };
 		51EF60B21E427EE200D429F2 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EF60B11E427EE200D429F2 /* UtilsTests.swift */; };
 		51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */; };
-		51F090491E37F90300F03AD3 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090451E37F90300F03AD3 /* DataReader.swift */; };
-		51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090461E37F90300F03AD3 /* DataWriter.swift */; };
-		51F0904B1E37F90300F03AD3 /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F090471E37F90300F03AD3 /* Endian.swift */; };
 		51FE30ED1E403DA000BAE824 /* U2FRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */; };
 		51FE30EF1E40F3DB00BAE824 /* U2FRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE30EE1E40F3DB00BAE824 /* U2FRegistrationTests.swift */; };
 		51FE30F11E410B3D00BAE824 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FE30F01E410B3D00BAE824 /* Utils.swift */; };
 		51FFC71D1E3FE090006275E2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511986301E3C1BB1006A3BBB /* main.swift */; };
 		51FFC71F1E3FEAA4006275E2 /* SoftU2FTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FFC71E1E3FEAA4006275E2 /* SoftU2FTestCase.swift */; };
+		F738F4F51E4A2CCC005680A2 /* APDU.h in Headers */ = {isa = PBXBuildFile; fileRef = F738F4F31E4A2CCC005680A2 /* APDU.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F738F4F81E4A2CCC005680A2 /* APDU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F738F4F11E4A2CCB005680A2 /* APDU.framework */; };
+		F738F4F91E4A2CCC005680A2 /* APDU.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F738F4F11E4A2CCB005680A2 /* APDU.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F738F5111E4A2CF6005680A2 /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5041E4A2CF6005680A2 /* AuthenticationRequest.swift */; };
+		F738F5121E4A2CF6005680A2 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5051E4A2CF6005680A2 /* AuthenticationResponse.swift */; };
+		F738F5131E4A2CF6005680A2 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5061E4A2CF6005680A2 /* ErrorResponse.swift */; };
+		F738F5141E4A2CF6005680A2 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5071E4A2CF6005680A2 /* RegisterRequest.swift */; };
+		F738F5151E4A2CF6005680A2 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5081E4A2CF6005680A2 /* RegisterResponse.swift */; };
+		F738F5161E4A2CF6005680A2 /* VersionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5091E4A2CF6005680A2 /* VersionRequest.swift */; };
+		F738F5171E4A2CF6005680A2 /* VersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F50A1E4A2CF6005680A2 /* VersionResponse.swift */; };
+		F738F5191E4A2DD5005680A2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5181E4A2DD5005680A2 /* Command.swift */; };
+		F738F51F1E4A2DDD005680A2 /* CommandDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F51A1E4A2DDD005680A2 /* CommandDataProtocol.swift */; };
+		F738F5201E4A2DDD005680A2 /* CommandHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F51B1E4A2DDD005680A2 /* CommandHeader.swift */; };
+		F738F5211E4A2DDD005680A2 /* CommandTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F51C1E4A2DDD005680A2 /* CommandTrailer.swift */; };
+		F738F5221E4A2DDD005680A2 /* MessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F51D1E4A2DDD005680A2 /* MessageProtocol.swift */; };
+		F738F5281E4A2E57005680A2 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5251E4A2E57005680A2 /* DataReader.swift */; };
+		F738F5291E4A2E57005680A2 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5261E4A2E57005680A2 /* DataWriter.swift */; };
+		F738F52A1E4A2E57005680A2 /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5271E4A2E57005680A2 /* Endian.swift */; };
+		F738F5341E4A2E8A005680A2 /* APDU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F738F4F11E4A2CCB005680A2 /* APDU.framework */; };
+		F738F53E1E4A2ED6005680A2 /* CommandHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F53A1E4A2ED6005680A2 /* CommandHeaderTests.swift */; };
+		F738F53F1E4A2ED6005680A2 /* CommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F53B1E4A2ED6005680A2 /* CommandTests.swift */; };
+		F738F5401E4A2ED6005680A2 /* CommandTrailerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F53C1E4A2ED6005680A2 /* CommandTrailerTests.swift */; };
+		F738F5411E4A2ED6005680A2 /* ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F53D1E4A2ED6005680A2 /* ResponseTests.swift */; };
+		F738F5421E4A2F91005680A2 /* CommandDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F51A1E4A2DDD005680A2 /* CommandDataProtocol.swift */; };
+		F738F5431E4A2F91005680A2 /* CommandHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F51B1E4A2DDD005680A2 /* CommandHeader.swift */; };
+		F738F5441E4A2F91005680A2 /* CommandTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F51C1E4A2DDD005680A2 /* CommandTrailer.swift */; };
+		F738F5451E4A2F91005680A2 /* MessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F51D1E4A2DDD005680A2 /* MessageProtocol.swift */; };
+		F738F5471E4A2F91005680A2 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5181E4A2DD5005680A2 /* Command.swift */; };
+		F738F5481E4A2F91005680A2 /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5041E4A2CF6005680A2 /* AuthenticationRequest.swift */; };
+		F738F5491E4A2F91005680A2 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5051E4A2CF6005680A2 /* AuthenticationResponse.swift */; };
+		F738F54A1E4A2F91005680A2 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5061E4A2CF6005680A2 /* ErrorResponse.swift */; };
+		F738F54B1E4A2F91005680A2 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5071E4A2CF6005680A2 /* RegisterRequest.swift */; };
+		F738F54C1E4A2F91005680A2 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5081E4A2CF6005680A2 /* RegisterResponse.swift */; };
+		F738F54D1E4A2F91005680A2 /* VersionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5091E4A2CF6005680A2 /* VersionRequest.swift */; };
+		F738F54E1E4A2F91005680A2 /* VersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F50A1E4A2CF6005680A2 /* VersionResponse.swift */; };
+		F738F54F1E4A2F9E005680A2 /* DataReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5251E4A2E57005680A2 /* DataReader.swift */; };
+		F738F5501E4A2F9E005680A2 /* DataWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5261E4A2E57005680A2 /* DataWriter.swift */; };
+		F738F5511E4A2F9E005680A2 /* Endian.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5271E4A2E57005680A2 /* Endian.swift */; };
+		F738F5531E4A2FF0005680A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5521E4A2FF0005680A2 /* Constants.swift */; };
+		F738F5541E4A2FF0005680A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5521E4A2FF0005680A2 /* Constants.swift */; };
+		F738F55E1E4A31DE005680A2 /* public.h in Headers */ = {isa = PBXBuildFile; fileRef = F738F55C1E4A31DE005680A2 /* public.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F738F5611E4A31DE005680A2 /* SelfSignedCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */; };
+		F738F5621E4A31DE005680A2 /* SelfSignedCertificate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F738F5671E4A3204005680A2 /* SelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = F738F5661E4A3204005680A2 /* SelfSignedCertificate.m */; };
+		F738F5691E4A3230005680A2 /* SelfSignedCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = F738F5681E4A322B005680A2 /* SelfSignedCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F738F56C1E4A32C9005680A2 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A0DA161E3813B900152E9B /* libcrypto.a */; };
+		F738F5741E4A3328005680A2 /* SelfSignedCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5731E4A3328005680A2 /* SelfSignedCertificateTests.swift */; };
+		F738F5761E4A3328005680A2 /* SelfSignedCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */; };
+		F738F57E1E4A34EE005680A2 /* private.h in Headers */ = {isa = PBXBuildFile; fileRef = F738F57D1E4A34EE005680A2 /* private.h */; };
+		F738F5831E4A3B26005680A2 /* SelfSignedCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */; };
+		F738F5871E4A3C09005680A2 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5851E4A3C09005680A2 /* DataReaderTests.swift */; };
+		F738F5881E4A3C09005680A2 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5861E4A3C09005680A2 /* DataWriterTests.swift */; };
+		F738F58A1E4A3C21005680A2 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5891E4A3C21005680A2 /* TestUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,47 +127,75 @@
 			remoteGlobalIDString = 51F0900B1E37E8C600F03AD3;
 			remoteInfo = SoftU2FTool;
 		};
+		F738F4F61E4A2CCC005680A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51F090041E37E8C500F03AD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F738F4F01E4A2CCB005680A2;
+			remoteInfo = APDU;
+		};
+		F738F5351E4A2E8A005680A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51F090041E37E8C500F03AD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F738F4F01E4A2CCB005680A2;
+			remoteInfo = APDU;
+		};
+		F738F55F1E4A31DE005680A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51F090041E37E8C500F03AD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F738F5591E4A31DE005680A2;
+			remoteInfo = SelfSignedCertificate;
+		};
+		F738F5771E4A3328005680A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51F090041E37E8C500F03AD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F738F5591E4A31DE005680A2;
+			remoteInfo = SelfSignedCertificate;
+		};
+		F738F5811E4A3B20005680A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51F090041E37E8C500F03AD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F738F5591E4A31DE005680A2;
+			remoteInfo = SelfSignedCertificate;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F738F4FD1E4A2CCC005680A2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F738F5621E4A31DE005680A2 /* SelfSignedCertificate.framework in Embed Frameworks */,
+				F738F4F91E4A2CCC005680A2 /* APDU.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5119862D1E3C1519006A3BBB /* KnownFacets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnownFacets.swift; sourceTree = "<group>"; };
 		511986301E3C1BB1006A3BBB /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		51203C381E39234000F661DF /* U2FHIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FHIDTests.swift; sourceTree = "<group>"; };
 		51213EC11E3834F8005454E0 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
-		51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfSignedCertificateTests.swift; sourceTree = "<group>"; };
 		51213EC51E3916EB005454E0 /* U2FHID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FHID.swift; sourceTree = "<group>"; };
 		5131C19D1E3A77EE006A820C /* SoftU2FTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoftU2FTool.entitlements; sourceTree = "<group>"; };
-		5131C19F1E3A97DE006A820C /* APDUResponseStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUResponseStatus.swift; path = APDU/APDUResponseStatus.swift; sourceTree = "<group>"; };
-		5131C1A21E3A9C72006A820C /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorResponse.swift; path = APDU/ErrorResponse.swift; sourceTree = "<group>"; };
-		5131C1A51E3A9CB0006A820C /* APDUCommandTrailer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandTrailer.swift; path = APDU/APDUCommandTrailer.swift; sourceTree = "<group>"; };
-		5131C1A81E3A9CB9006A820C /* VersionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionRequest.swift; path = APDU/VersionRequest.swift; sourceTree = "<group>"; };
-		5131C1A91E3A9CB9006A820C /* VersionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionResponse.swift; path = APDU/VersionResponse.swift; sourceTree = "<group>"; };
 		5131C1AE1E3B9C62006A820C /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		5131C1B11E3B9EA1006A820C /* libu2f-host.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libu2f-host.a"; path = "../../../../usr/local/Cellar/libu2f-host/1.1.3/lib/libu2f-host.a"; sourceTree = "<group>"; };
 		514F3D811E43C833008FA513 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		514F3D861E43E828008FA513 /* KeyPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
-		515E835E1E3803BE00F40024 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
-		515E835F1E3803BE00F40024 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
-		518537A61E380C0A00600911 /* APDUCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommand.swift; path = APDU/APDUCommand.swift; sourceTree = "<group>"; };
-		518537A81E380C0A00600911 /* APDUCommandHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandHeader.swift; path = APDU/APDUCommandHeader.swift; sourceTree = "<group>"; };
-		518537A91E380C0A00600911 /* APDUCommandDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandDataProtocol.swift; path = APDU/APDUCommandDataProtocol.swift; sourceTree = "<group>"; };
-		518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUMessageProtocol.swift; path = APDU/APDUMessageProtocol.swift; sourceTree = "<group>"; };
-		518537AD1E380C0A00600911 /* AuthenticationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationRequest.swift; path = APDU/AuthenticationRequest.swift; sourceTree = "<group>"; };
-		518537AE1E380C0A00600911 /* AuthenticationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationResponse.swift; path = APDU/AuthenticationResponse.swift; sourceTree = "<group>"; };
-		518537AF1E380C0A00600911 /* RegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterRequest.swift; path = APDU/RegisterRequest.swift; sourceTree = "<group>"; };
-		518537B01E380C0A00600911 /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterResponse.swift; path = APDU/RegisterResponse.swift; sourceTree = "<group>"; };
 		518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FTool-Bridging-Header.h"; sourceTree = "<group>"; };
-		518537C21E380EF500600911 /* SelfSignedCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfSignedCertificate.m; sourceTree = "<group>"; };
-		518537C51E380F0A00600911 /* SelfSignedCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfSignedCertificate.h; sourceTree = "<group>"; };
 		5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPresence.swift; sourceTree = "<group>"; };
-		51912B471E397A9600F52454 /* APDUCommandTrailerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandTrailerTests.swift; path = APDUTests/APDUCommandTrailerTests.swift; sourceTree = "<group>"; };
 		51A0DA161E3813B900152E9B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/Cellar/openssl/1.0.2j/lib/libcrypto.a; sourceTree = "<group>"; };
 		51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoftU2F.xcodeproj; path = SoftU2F/SoftU2F.xcodeproj; sourceTree = "<group>"; };
 		51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FAuthenticator.swift; sourceTree = "<group>"; };
 		51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FToolTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		51E214571E382380005B2864 /* APDUCommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandTests.swift; path = APDUTests/APDUCommandTests.swift; sourceTree = "<group>"; };
-		51E214581E382380005B2864 /* APDUCommandHeaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandHeaderTests.swift; path = APDUTests/APDUCommandHeaderTests.swift; sourceTree = "<group>"; };
-		51E214591E382380005B2864 /* APDUResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUResponseTests.swift; path = APDUTests/APDUResponseTests.swift; sourceTree = "<group>"; };
 		51E2145D1E3823E0005B2864 /* SHA256Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256Tests.swift; sourceTree = "<group>"; };
 		51E2145F1E3823E7005B2864 /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		51E214611E382521005B2864 /* WebSafeBase64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSafeBase64.swift; sourceTree = "<group>"; };
@@ -151,13 +206,47 @@
 		51F090181E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftU2FToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F090231E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		51F090451E37F90300F03AD3 /* DataReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReader.swift; path = Data/DataReader.swift; sourceTree = "<group>"; };
-		51F090461E37F90300F03AD3 /* DataWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriter.swift; path = Data/DataWriter.swift; sourceTree = "<group>"; };
-		51F090471E37F90300F03AD3 /* Endian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endian.swift; path = Data/Endian.swift; sourceTree = "<group>"; };
 		51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FRegistration.swift; sourceTree = "<group>"; };
 		51FE30EE1E40F3DB00BAE824 /* U2FRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FRegistrationTests.swift; sourceTree = "<group>"; };
 		51FE30F01E410B3D00BAE824 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		51FFC71E1E3FEAA4006275E2 /* SoftU2FTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoftU2FTestCase.swift; sourceTree = "<group>"; };
+		F738F4F11E4A2CCB005680A2 /* APDU.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = APDU.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F738F4F31E4A2CCC005680A2 /* APDU.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APDU.h; sourceTree = "<group>"; };
+		F738F4F41E4A2CCC005680A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F738F5041E4A2CF6005680A2 /* AuthenticationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationRequest.swift; sourceTree = "<group>"; };
+		F738F5051E4A2CF6005680A2 /* AuthenticationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationResponse.swift; sourceTree = "<group>"; };
+		F738F5061E4A2CF6005680A2 /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		F738F5071E4A2CF6005680A2 /* RegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
+		F738F5081E4A2CF6005680A2 /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
+		F738F5091E4A2CF6005680A2 /* VersionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionRequest.swift; sourceTree = "<group>"; };
+		F738F50A1E4A2CF6005680A2 /* VersionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionResponse.swift; sourceTree = "<group>"; };
+		F738F5181E4A2DD5005680A2 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		F738F51A1E4A2DDD005680A2 /* CommandDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandDataProtocol.swift; sourceTree = "<group>"; };
+		F738F51B1E4A2DDD005680A2 /* CommandHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandHeader.swift; sourceTree = "<group>"; };
+		F738F51C1E4A2DDD005680A2 /* CommandTrailer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTrailer.swift; sourceTree = "<group>"; };
+		F738F51D1E4A2DDD005680A2 /* MessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageProtocol.swift; sourceTree = "<group>"; };
+		F738F5251E4A2E57005680A2 /* DataReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReader.swift; path = Data/DataReader.swift; sourceTree = "<group>"; };
+		F738F5261E4A2E57005680A2 /* DataWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriter.swift; path = Data/DataWriter.swift; sourceTree = "<group>"; };
+		F738F5271E4A2E57005680A2 /* Endian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endian.swift; path = Data/Endian.swift; sourceTree = "<group>"; };
+		F738F52F1E4A2E8A005680A2 /* APDUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APDUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F738F5331E4A2E8A005680A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F738F53A1E4A2ED6005680A2 /* CommandHeaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandHeaderTests.swift; sourceTree = "<group>"; };
+		F738F53B1E4A2ED6005680A2 /* CommandTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTests.swift; sourceTree = "<group>"; };
+		F738F53C1E4A2ED6005680A2 /* CommandTrailerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTrailerTests.swift; sourceTree = "<group>"; };
+		F738F53D1E4A2ED6005680A2 /* ResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseTests.swift; sourceTree = "<group>"; };
+		F738F5521E4A2FF0005680A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SelfSignedCertificate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F738F55C1E4A31DE005680A2 /* public.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = public.h; sourceTree = "<group>"; };
+		F738F55D1E4A31DE005680A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F738F5661E4A3204005680A2 /* SelfSignedCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfSignedCertificate.m; sourceTree = "<group>"; };
+		F738F5681E4A322B005680A2 /* SelfSignedCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfSignedCertificate.h; sourceTree = "<group>"; };
+		F738F5711E4A3328005680A2 /* SelfSignedCertificateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelfSignedCertificateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F738F5731E4A3328005680A2 /* SelfSignedCertificateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSignedCertificateTests.swift; sourceTree = "<group>"; };
+		F738F5751E4A3328005680A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F738F57D1E4A34EE005680A2 /* private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = private.h; sourceTree = "<group>"; };
+		F738F5851E4A3C09005680A2 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
+		F738F5861E4A3C09005680A2 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
+		F738F5891E4A3C21005680A2 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +255,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				51A5E3B01E3FC7CD0028E2D1 /* libsoftu2f.a in Frameworks */,
-				51E214461E381E0C005B2864 /* libcrypto.a in Frameworks */,
+				F738F4F81E4A2CCC005680A2 /* APDU.framework in Frameworks */,
+				F738F5611E4A31DE005680A2 /* SelfSignedCertificate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,22 +265,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				5131C1B21E3B9EA1006A820C /* libu2f-host.a in Frameworks */,
-				51E214471E38215C005B2864 /* libcrypto.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F4ED1E4A2CCB005680A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F5831E4A3B26005680A2 /* SelfSignedCertificate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F52C1E4A2E8A005680A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F5341E4A2E8A005680A2 /* APDU.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F5561E4A31DE005680A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F56C1E4A32C9005680A2 /* libcrypto.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F56E1E4A3328005680A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F5761E4A3328005680A2 /* SelfSignedCertificate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		515E835C1E38038800F40024 /* DataTests */ = {
-			isa = PBXGroup;
-			children = (
-				515E835E1E3803BE00F40024 /* DataReaderTests.swift */,
-				515E835F1E3803BE00F40024 /* DataWriterTests.swift */,
-			);
-			name = DataTests;
-			sourceTree = "<group>";
-		};
 		518537C61E380FAE00600911 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,23 +323,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		51E214561E382376005B2864 /* APDUTests */ = {
-			isa = PBXGroup;
-			children = (
-				51E214571E382380005B2864 /* APDUCommandTests.swift */,
-				51E214581E382380005B2864 /* APDUCommandHeaderTests.swift */,
-				51912B471E397A9600F52454 /* APDUCommandTrailerTests.swift */,
-				51E214591E382380005B2864 /* APDUResponseTests.swift */,
-			);
-			name = APDUTests;
-			sourceTree = "<group>";
-		};
 		51F090031E37E8C500F03AD3 = {
 			isa = PBXGroup;
 			children = (
 				51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */,
 				51F0900E1E37E8C600F03AD3 /* SoftU2FTool */,
 				51F090201E37E8C600F03AD3 /* SoftU2FToolTests */,
+				F738F4F21E4A2CCB005680A2 /* APDU */,
+				F738F5301E4A2E8A005680A2 /* APDUTests */,
+				F738F55B1E4A31DE005680A2 /* SelfSignedCertificate */,
+				F738F5721E4A3328005680A2 /* SelfSignedCertificateTests */,
 				51F0900D1E37E8C600F03AD3 /* Products */,
 				518537C61E380FAE00600911 /* Frameworks */,
 			);
@@ -238,6 +343,10 @@
 			children = (
 				51F0900C1E37E8C600F03AD3 /* SoftU2FTool.app */,
 				51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */,
+				F738F4F11E4A2CCB005680A2 /* APDU.framework */,
+				F738F52F1E4A2E8A005680A2 /* APDUTests.xctest */,
+				F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */,
+				F738F5711E4A3328005680A2 /* SelfSignedCertificateTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,8 +355,6 @@
 			isa = PBXGroup;
 			children = (
 				5131C19D1E3A77EE006A820C /* SoftU2FTool.entitlements */,
-				51F0902C1E37F7BA00F03AD3 /* APDU */,
-				51F090431E37F8F900F03AD3 /* Data */,
 				511986301E3C1BB1006A3BBB /* main.swift */,
 				51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */,
 				51E2145F1E3823E7005B2864 /* SHA256.swift */,
@@ -260,8 +367,6 @@
 				51213EC51E3916EB005454E0 /* U2FHID.swift */,
 				51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */,
 				51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */,
-				518537C21E380EF500600911 /* SelfSignedCertificate.m */,
-				518537C51E380F0A00600911 /* SelfSignedCertificate.h */,
 				518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */,
 				51F090181E37E8C600F03AD3 /* Info.plist */,
 			);
@@ -275,50 +380,115 @@
 				51E2145D1E3823E0005B2864 /* SHA256Tests.swift */,
 				51203C381E39234000F661DF /* U2FHIDTests.swift */,
 				51E214631E382529005B2864 /* WebSafeBase64Tests.swift */,
-				51213EC31E3904A8005454E0 /* SelfSignedCertificateTests.swift */,
 				5131C1AE1E3B9C62006A820C /* IntegrationTests.swift */,
-				51213EC11E3834F8005454E0 /* TestUtil.swift */,
 				51FFC71E1E3FEAA4006275E2 /* SoftU2FTestCase.swift */,
 				51EF60B11E427EE200D429F2 /* UtilsTests.swift */,
+				51213EC11E3834F8005454E0 /* TestUtil.swift */,
 				51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */,
-				51E214561E382376005B2864 /* APDUTests */,
-				515E835C1E38038800F40024 /* DataTests */,
 				51F090231E37E8C600F03AD3 /* Info.plist */,
 			);
 			path = SoftU2FToolTests;
 			sourceTree = "<group>";
 		};
-		51F0902C1E37F7BA00F03AD3 /* APDU */ = {
+		F738F4F21E4A2CCB005680A2 /* APDU */ = {
 			isa = PBXGroup;
 			children = (
-				518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */,
-				518537A91E380C0A00600911 /* APDUCommandDataProtocol.swift */,
-				518537A61E380C0A00600911 /* APDUCommand.swift */,
-				518537A81E380C0A00600911 /* APDUCommandHeader.swift */,
-				5131C1A51E3A9CB0006A820C /* APDUCommandTrailer.swift */,
-				5131C19F1E3A97DE006A820C /* APDUResponseStatus.swift */,
-				518537AD1E380C0A00600911 /* AuthenticationRequest.swift */,
-				518537AE1E380C0A00600911 /* AuthenticationResponse.swift */,
-				518537AF1E380C0A00600911 /* RegisterRequest.swift */,
-				518537B01E380C0A00600911 /* RegisterResponse.swift */,
-				5131C1A81E3A9CB9006A820C /* VersionRequest.swift */,
-				5131C1A91E3A9CB9006A820C /* VersionResponse.swift */,
-				5131C1A21E3A9C72006A820C /* ErrorResponse.swift */,
+				F738F5241E4A2E4C005680A2 /* Data */,
+				F738F5521E4A2FF0005680A2 /* Constants.swift */,
+				F738F51A1E4A2DDD005680A2 /* CommandDataProtocol.swift */,
+				F738F51B1E4A2DDD005680A2 /* CommandHeader.swift */,
+				F738F51C1E4A2DDD005680A2 /* CommandTrailer.swift */,
+				F738F51D1E4A2DDD005680A2 /* MessageProtocol.swift */,
+				F738F5181E4A2DD5005680A2 /* Command.swift */,
+				F738F5041E4A2CF6005680A2 /* AuthenticationRequest.swift */,
+				F738F5051E4A2CF6005680A2 /* AuthenticationResponse.swift */,
+				F738F5061E4A2CF6005680A2 /* ErrorResponse.swift */,
+				F738F5071E4A2CF6005680A2 /* RegisterRequest.swift */,
+				F738F5081E4A2CF6005680A2 /* RegisterResponse.swift */,
+				F738F5091E4A2CF6005680A2 /* VersionRequest.swift */,
+				F738F50A1E4A2CF6005680A2 /* VersionResponse.swift */,
+				F738F4F31E4A2CCC005680A2 /* APDU.h */,
+				F738F4F41E4A2CCC005680A2 /* Info.plist */,
 			);
-			name = APDU;
+			path = APDU;
 			sourceTree = "<group>";
 		};
-		51F090431E37F8F900F03AD3 /* Data */ = {
+		F738F5241E4A2E4C005680A2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				51F090451E37F90300F03AD3 /* DataReader.swift */,
-				51F090461E37F90300F03AD3 /* DataWriter.swift */,
-				51F090471E37F90300F03AD3 /* Endian.swift */,
+				F738F5251E4A2E57005680A2 /* DataReader.swift */,
+				F738F5261E4A2E57005680A2 /* DataWriter.swift */,
+				F738F5271E4A2E57005680A2 /* Endian.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
 		};
+		F738F5301E4A2E8A005680A2 /* APDUTests */ = {
+			isa = PBXGroup;
+			children = (
+				F738F5841E4A3BF9005680A2 /* DataTests */,
+				F738F53A1E4A2ED6005680A2 /* CommandHeaderTests.swift */,
+				F738F53B1E4A2ED6005680A2 /* CommandTests.swift */,
+				F738F53C1E4A2ED6005680A2 /* CommandTrailerTests.swift */,
+				F738F53D1E4A2ED6005680A2 /* ResponseTests.swift */,
+				F738F5891E4A3C21005680A2 /* TestUtil.swift */,
+				F738F5331E4A2E8A005680A2 /* Info.plist */,
+			);
+			path = APDUTests;
+			sourceTree = "<group>";
+		};
+		F738F55B1E4A31DE005680A2 /* SelfSignedCertificate */ = {
+			isa = PBXGroup;
+			children = (
+				F738F5661E4A3204005680A2 /* SelfSignedCertificate.m */,
+				F738F55C1E4A31DE005680A2 /* public.h */,
+				F738F57D1E4A34EE005680A2 /* private.h */,
+				F738F5681E4A322B005680A2 /* SelfSignedCertificate.h */,
+				F738F55D1E4A31DE005680A2 /* Info.plist */,
+			);
+			path = SelfSignedCertificate;
+			sourceTree = "<group>";
+		};
+		F738F5721E4A3328005680A2 /* SelfSignedCertificateTests */ = {
+			isa = PBXGroup;
+			children = (
+				F738F5731E4A3328005680A2 /* SelfSignedCertificateTests.swift */,
+				F738F5751E4A3328005680A2 /* Info.plist */,
+			);
+			path = SelfSignedCertificateTests;
+			sourceTree = "<group>";
+		};
+		F738F5841E4A3BF9005680A2 /* DataTests */ = {
+			isa = PBXGroup;
+			children = (
+				F738F5851E4A3C09005680A2 /* DataReaderTests.swift */,
+				F738F5861E4A3C09005680A2 /* DataWriterTests.swift */,
+			);
+			name = DataTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F738F4EE1E4A2CCB005680A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F4F51E4A2CCC005680A2 /* APDU.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F5571E4A31DE005680A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F5691E4A3230005680A2 /* SelfSignedCertificate.h in Headers */,
+				F738F55E1E4A31DE005680A2 /* public.h in Headers */,
+				F738F57E1E4A34EE005680A2 /* private.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		51F0900B1E37E8C600F03AD3 /* SoftU2FTool */ = {
@@ -328,11 +498,14 @@
 				51F090081E37E8C600F03AD3 /* Sources */,
 				51F090091E37E8C600F03AD3 /* Frameworks */,
 				51F0900A1E37E8C600F03AD3 /* Resources */,
+				F738F4FD1E4A2CCC005680A2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				51A5E3B21E3FC80C0028E2D1 /* PBXTargetDependency */,
+				F738F4F71E4A2CCC005680A2 /* PBXTargetDependency */,
+				F738F5601E4A31DE005680A2 /* PBXTargetDependency */,
 			);
 			name = SoftU2FTool;
 			productName = SoftU2FTool;
@@ -357,13 +530,86 @@
 			productReference = 51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F738F4F01E4A2CCB005680A2 /* APDU */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F738F4FA1E4A2CCC005680A2 /* Build configuration list for PBXNativeTarget "APDU" */;
+			buildPhases = (
+				F738F4EC1E4A2CCB005680A2 /* Sources */,
+				F738F4ED1E4A2CCB005680A2 /* Frameworks */,
+				F738F4EE1E4A2CCB005680A2 /* Headers */,
+				F738F4EF1E4A2CCB005680A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F738F5821E4A3B20005680A2 /* PBXTargetDependency */,
+			);
+			name = APDU;
+			productName = APDU;
+			productReference = F738F4F11E4A2CCB005680A2 /* APDU.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F738F52E1E4A2E8A005680A2 /* APDUTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F738F5371E4A2E8A005680A2 /* Build configuration list for PBXNativeTarget "APDUTests" */;
+			buildPhases = (
+				F738F52B1E4A2E8A005680A2 /* Sources */,
+				F738F52C1E4A2E8A005680A2 /* Frameworks */,
+				F738F52D1E4A2E8A005680A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F738F5361E4A2E8A005680A2 /* PBXTargetDependency */,
+			);
+			name = APDUTests;
+			productName = APDUTests;
+			productReference = F738F52F1E4A2E8A005680A2 /* APDUTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F738F5591E4A31DE005680A2 /* SelfSignedCertificate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F738F5631E4A31DE005680A2 /* Build configuration list for PBXNativeTarget "SelfSignedCertificate" */;
+			buildPhases = (
+				F738F5551E4A31DE005680A2 /* Sources */,
+				F738F5561E4A31DE005680A2 /* Frameworks */,
+				F738F5571E4A31DE005680A2 /* Headers */,
+				F738F5581E4A31DE005680A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SelfSignedCertificate;
+			productName = SelfSignedCertificate;
+			productReference = F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F738F5701E4A3328005680A2 /* SelfSignedCertificateTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F738F5791E4A3328005680A2 /* Build configuration list for PBXNativeTarget "SelfSignedCertificateTests" */;
+			buildPhases = (
+				F738F56D1E4A3328005680A2 /* Sources */,
+				F738F56E1E4A3328005680A2 /* Frameworks */,
+				F738F56F1E4A3328005680A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F738F5781E4A3328005680A2 /* PBXTargetDependency */,
+			);
+			name = SelfSignedCertificateTests;
+			productName = SelfSignedCertificateTests;
+			productReference = F738F5711E4A3328005680A2 /* SelfSignedCertificateTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		51F090041E37E8C500F03AD3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = GitHub;
 				TargetAttributes = {
@@ -384,6 +630,25 @@
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 51F0900B1E37E8C600F03AD3;
+					};
+					F738F4F01E4A2CCB005680A2 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = S93FDAQ29M;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+					};
+					F738F52E1E4A2E8A005680A2 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					F738F5591E4A31DE005680A2 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = S93FDAQ29M;
+						ProvisioningStyle = Automatic;
+					};
+					F738F5701E4A3328005680A2 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -408,6 +673,10 @@
 			targets = (
 				51F0900B1E37E8C600F03AD3 /* SoftU2FTool */,
 				51F0901C1E37E8C600F03AD3 /* SoftU2FToolTests */,
+				F738F4F01E4A2CCB005680A2 /* APDU */,
+				F738F52E1E4A2E8A005680A2 /* APDUTests */,
+				F738F5591E4A31DE005680A2 /* SelfSignedCertificate */,
+				F738F5701E4A3328005680A2 /* SelfSignedCertificateTests */,
 			);
 		};
 /* End PBXProject section */
@@ -458,6 +727,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F738F4EF1E4A2CCB005680A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F52D1E4A2E8A005680A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F5581E4A31DE005680A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F56F1E4A3328005680A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -465,35 +762,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				518537B31E380C0A00600911 /* APDUCommandHeader.swift in Sources */,
-				51F090491E37F90300F03AD3 /* DataReader.swift in Sources */,
-				5131C1AA1E3A9CB9006A820C /* VersionRequest.swift in Sources */,
-				5131C1A61E3A9CB0006A820C /* APDUCommandTrailer.swift in Sources */,
 				5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */,
 				51FE30F11E410B3D00BAE824 /* Utils.swift in Sources */,
-				518537B11E380C0A00600911 /* APDUCommand.swift in Sources */,
-				51F0904A1E37F90300F03AD3 /* DataWriter.swift in Sources */,
 				5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */,
-				518537B41E380C0A00600911 /* APDUCommandDataProtocol.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
 				51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */,
-				5131C1AC1E3A9CB9006A820C /* VersionResponse.swift in Sources */,
-				518537B51E380C0A00600911 /* APDUMessageProtocol.swift in Sources */,
 				51E214601E3823E7005B2864 /* SHA256.swift in Sources */,
 				51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */,
-				518537B81E380C0A00600911 /* AuthenticationRequest.swift in Sources */,
 				514F3D821E43C833008FA513 /* Keychain.swift in Sources */,
-				518537B91E380C0A00600911 /* AuthenticationResponse.swift in Sources */,
-				518537BA1E380C0A00600911 /* RegisterRequest.swift in Sources */,
 				51FE30ED1E403DA000BAE824 /* U2FRegistration.swift in Sources */,
 				51E214621E382521005B2864 /* WebSafeBase64.swift in Sources */,
-				51F0904B1E37F90300F03AD3 /* Endian.swift in Sources */,
 				51FFC71D1E3FE090006275E2 /* main.swift in Sources */,
-				5131C1A01E3A97DE006A820C /* APDUResponseStatus.swift in Sources */,
-				518537BB1E380C0A00600911 /* RegisterResponse.swift in Sources */,
-				5131C1A31E3A9C72006A820C /* ErrorResponse.swift in Sources */,
 				514F3D871E43E828008FA513 /* KeyPair.swift in Sources */,
-				518537C31E380EF500600911 /* SelfSignedCertificate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,21 +781,83 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51E2145A1E382380005B2864 /* APDUCommandTests.swift in Sources */,
-				515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */,
 				51E214641E382529005B2864 /* WebSafeBase64Tests.swift in Sources */,
 				5131C1B01E3B9C62006A820C /* IntegrationTests.swift in Sources */,
-				51912B481E397A9600F52454 /* APDUCommandTrailerTests.swift in Sources */,
 				51E2145E1E3823E0005B2864 /* SHA256Tests.swift in Sources */,
-				51E2145C1E382380005B2864 /* APDUResponseTests.swift in Sources */,
 				51203C391E39234000F661DF /* U2FHIDTests.swift in Sources */,
 				51EF60B21E427EE200D429F2 /* UtilsTests.swift in Sources */,
-				51E2145B1E382380005B2864 /* APDUCommandHeaderTests.swift in Sources */,
-				515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */,
 				51FFC71F1E3FEAA4006275E2 /* SoftU2FTestCase.swift in Sources */,
 				51213EC21E3834F8005454E0 /* TestUtil.swift in Sources */,
-				51213EC41E3904A8005454E0 /* SelfSignedCertificateTests.swift in Sources */,
 				51FE30EF1E40F3DB00BAE824 /* U2FRegistrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F4EC1E4A2CCB005680A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F5281E4A2E57005680A2 /* DataReader.swift in Sources */,
+				F738F5531E4A2FF0005680A2 /* Constants.swift in Sources */,
+				F738F5151E4A2CF6005680A2 /* RegisterResponse.swift in Sources */,
+				F738F51F1E4A2DDD005680A2 /* CommandDataProtocol.swift in Sources */,
+				F738F5201E4A2DDD005680A2 /* CommandHeader.swift in Sources */,
+				F738F5141E4A2CF6005680A2 /* RegisterRequest.swift in Sources */,
+				F738F5211E4A2DDD005680A2 /* CommandTrailer.swift in Sources */,
+				F738F52A1E4A2E57005680A2 /* Endian.swift in Sources */,
+				F738F5111E4A2CF6005680A2 /* AuthenticationRequest.swift in Sources */,
+				F738F5291E4A2E57005680A2 /* DataWriter.swift in Sources */,
+				F738F5171E4A2CF6005680A2 /* VersionResponse.swift in Sources */,
+				F738F5221E4A2DDD005680A2 /* MessageProtocol.swift in Sources */,
+				F738F5131E4A2CF6005680A2 /* ErrorResponse.swift in Sources */,
+				F738F5121E4A2CF6005680A2 /* AuthenticationResponse.swift in Sources */,
+				F738F5161E4A2CF6005680A2 /* VersionRequest.swift in Sources */,
+				F738F5191E4A2DD5005680A2 /* Command.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F52B1E4A2E8A005680A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F58A1E4A3C21005680A2 /* TestUtil.swift in Sources */,
+				F738F5421E4A2F91005680A2 /* CommandDataProtocol.swift in Sources */,
+				F738F53E1E4A2ED6005680A2 /* CommandHeaderTests.swift in Sources */,
+				F738F54E1E4A2F91005680A2 /* VersionResponse.swift in Sources */,
+				F738F54C1E4A2F91005680A2 /* RegisterResponse.swift in Sources */,
+				F738F5471E4A2F91005680A2 /* Command.swift in Sources */,
+				F738F54B1E4A2F91005680A2 /* RegisterRequest.swift in Sources */,
+				F738F5871E4A3C09005680A2 /* DataReaderTests.swift in Sources */,
+				F738F53F1E4A2ED6005680A2 /* CommandTests.swift in Sources */,
+				F738F5881E4A3C09005680A2 /* DataWriterTests.swift in Sources */,
+				F738F5411E4A2ED6005680A2 /* ResponseTests.swift in Sources */,
+				F738F5431E4A2F91005680A2 /* CommandHeader.swift in Sources */,
+				F738F5441E4A2F91005680A2 /* CommandTrailer.swift in Sources */,
+				F738F5541E4A2FF0005680A2 /* Constants.swift in Sources */,
+				F738F5401E4A2ED6005680A2 /* CommandTrailerTests.swift in Sources */,
+				F738F5451E4A2F91005680A2 /* MessageProtocol.swift in Sources */,
+				F738F5501E4A2F9E005680A2 /* DataWriter.swift in Sources */,
+				F738F5491E4A2F91005680A2 /* AuthenticationResponse.swift in Sources */,
+				F738F5481E4A2F91005680A2 /* AuthenticationRequest.swift in Sources */,
+				F738F54D1E4A2F91005680A2 /* VersionRequest.swift in Sources */,
+				F738F54F1E4A2F9E005680A2 /* DataReader.swift in Sources */,
+				F738F5511E4A2F9E005680A2 /* Endian.swift in Sources */,
+				F738F54A1E4A2F91005680A2 /* ErrorResponse.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F5551E4A31DE005680A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F5671E4A3204005680A2 /* SelfSignedCertificate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F738F56D1E4A3328005680A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F738F5741E4A3328005680A2 /* SelfSignedCertificateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +873,31 @@
 			isa = PBXTargetDependency;
 			target = 51F0900B1E37E8C600F03AD3 /* SoftU2FTool */;
 			targetProxy = 51F0901E1E37E8C600F03AD3 /* PBXContainerItemProxy */;
+		};
+		F738F4F71E4A2CCC005680A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F738F4F01E4A2CCB005680A2 /* APDU */;
+			targetProxy = F738F4F61E4A2CCC005680A2 /* PBXContainerItemProxy */;
+		};
+		F738F5361E4A2E8A005680A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F738F4F01E4A2CCB005680A2 /* APDU */;
+			targetProxy = F738F5351E4A2E8A005680A2 /* PBXContainerItemProxy */;
+		};
+		F738F5601E4A31DE005680A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F738F5591E4A31DE005680A2 /* SelfSignedCertificate */;
+			targetProxy = F738F55F1E4A31DE005680A2 /* PBXContainerItemProxy */;
+		};
+		F738F5781E4A3328005680A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F738F5591E4A31DE005680A2 /* SelfSignedCertificate */;
+			targetProxy = F738F5771E4A3328005680A2 /* PBXContainerItemProxy */;
+		};
+		F738F5821E4A3B20005680A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F738F5591E4A31DE005680A2 /* SelfSignedCertificate */;
+			targetProxy = F738F5811E4A3B20005680A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -628,24 +995,16 @@
 		51F090271E37E8C600F03AD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SoftU2FTool/SoftU2FTool.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S93FDAQ29M;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/opt/openssl/include,
-					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
-				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SoftU2F/SoftU2F/**";
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/openssl/1.0.2j/lib,
-					/usr/local/lib,
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2FTool-Bridging-Header.h";
@@ -657,24 +1016,16 @@
 		51F090281E37E8C600F03AD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SoftU2FTool/SoftU2FTool.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S93FDAQ29M;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/opt/openssl/include,
-					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
-				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SoftU2F/SoftU2F/**";
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/openssl/1.0.2j/lib,
-					/usr/local/lib,
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2FTool-Bridging-Header.h";
@@ -692,16 +1043,12 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S93FDAQ29M;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/opt/openssl/include,
 					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
 					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
 				);
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/Cellar/openssl/1.0.2j/lib,
-					"/usr/local/Cellar/libu2f-host/1.1.3/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/libu2f-host/1.1.3/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FToolTests-Bridging-Header.h";
@@ -721,21 +1068,182 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S93FDAQ29M;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/opt/openssl/include,
 					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
 					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
 				);
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/Cellar/openssl/1.0.2j/lib,
-					"/usr/local/Cellar/libu2f-host/1.1.3/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/libu2f-host/1.1.3/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FToolTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2FTool.app/Contents/MacOS/SoftU2FTool";
+			};
+			name = Release;
+		};
+		F738F4FB1E4A2CCC005680A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = APDU/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDU;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F738F4FC1E4A2CCC005680A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = APDU/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDU;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F738F5381E4A2E8A005680A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = APDUTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDUTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		F738F5391E4A2E8A005680A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = APDUTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDUTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		F738F5641E4A31DE005680A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = /usr/local/opt/openssl/include;
+				INFOPLIST_FILE = SelfSignedCertificate/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/openssl/1.0.2j/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F738F5651E4A31DE005680A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = /usr/local/opt/openssl/include;
+				INFOPLIST_FILE = SelfSignedCertificate/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/openssl/1.0.2j/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F738F57A1E4A3328005680A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SelfSignedCertificateTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificateTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		F738F57B1E4A3328005680A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SelfSignedCertificateTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificateTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -765,6 +1273,42 @@
 			buildConfigurations = (
 				51F0902A1E37E8C600F03AD3 /* Debug */,
 				51F0902B1E37E8C600F03AD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F738F4FA1E4A2CCC005680A2 /* Build configuration list for PBXNativeTarget "APDU" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F738F4FB1E4A2CCC005680A2 /* Debug */,
+				F738F4FC1E4A2CCC005680A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F738F5371E4A2E8A005680A2 /* Build configuration list for PBXNativeTarget "APDUTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F738F5381E4A2E8A005680A2 /* Debug */,
+				F738F5391E4A2E8A005680A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F738F5631E4A31DE005680A2 /* Build configuration list for PBXNativeTarget "SelfSignedCertificate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F738F5641E4A31DE005680A2 /* Debug */,
+				F738F5651E4A31DE005680A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F738F5791E4A3328005680A2 /* Build configuration list for PBXNativeTarget "SelfSignedCertificateTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F738F57A1E4A3328005680A2 /* Debug */,
+				F738F57B1E4A3328005680A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

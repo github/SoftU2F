@@ -6,6 +6,8 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+
 class UserPresence: NSObject {
     enum Notification {
         case Register(facet: String?)

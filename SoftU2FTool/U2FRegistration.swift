@@ -6,6 +6,8 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+
 class U2FRegistration {
     // Allow using separate keychain namespace for tests.
     static var namespace = "SoftU2F Security Key"
@@ -48,14 +50,19 @@ class U2FRegistration {
 
         // Read our application parameter from the keychain and make sure it matches.
         guard let appTag = keyPair.applicationTag else { return nil }
-        let reader = DataReader(data: appTag)
-
-        do {
-            counter = try reader.read()
-            applicationParameter = reader.rest
-        } catch {
+        
+        let counterSize = MemoryLayout<UInt32>.size
+        let appTagSize = Int(U2F_APPID_SIZE)
+        
+        if appTag.count != counterSize + appTagSize {
             return nil
         }
+        
+        counter = appTag.withUnsafeBytes { (ptr:UnsafePointer<UInt32>) -> UInt32 in
+            return ptr.pointee.bigEndian
+        }
+
+        applicationParameter = appTag.subdata(in: counterSize..<(counterSize + appTagSize))
 
         if applicationParameter != ap {
             print("Bad applicationParameter")
@@ -82,9 +89,14 @@ class U2FRegistration {
 
     // Persist the applicationParameter and counter in the keychain.
     func writeApplicationTag() {
-        let writer = DataWriter()
-        writer.write(counter)
-        writer.writeData(applicationParameter)
-        keyPair.applicationTag = writer.buffer
+        let counterSize = MemoryLayout<UInt32>.size
+        let appTagSize = Int(U2F_APPID_SIZE)
+        var data = Data(capacity: counterSize + appTagSize)
+        var ctrBigEndian = counter.bigEndian
+        
+        data.append(Data(bytes: &ctrBigEndian, count: counterSize))
+        data.append(applicationParameter)
+
+        keyPair.applicationTag = data
     }
 }

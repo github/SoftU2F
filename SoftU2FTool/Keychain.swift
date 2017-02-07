@@ -6,6 +6,8 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+
 class Keychain {
     // Get the number of keychain items with a given kSecAttrLabel.
     static func count(attrLabel: CFString) -> Int? {

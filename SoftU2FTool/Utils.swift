@@ -6,6 +6,8 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+
 typealias CFDictionaryMember = (CFString, CFTypeRef)
 
 // Helper for making CFDictionary.

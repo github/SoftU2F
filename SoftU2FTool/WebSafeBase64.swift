@@ -6,6 +6,8 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+
 class WebSafeBase64 {
     static func encode(_ data: Data) -> String {
         return data.base64EncodedString()

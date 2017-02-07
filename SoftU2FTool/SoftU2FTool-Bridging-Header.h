@@ -1,4 +1,3 @@
-#import "SelfSignedCertificate.h"
 #import "softu2f.h"
 #import "u2f.h"
 #import "u2f_hid.h"

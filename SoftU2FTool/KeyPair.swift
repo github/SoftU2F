@@ -6,6 +6,8 @@
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
+import Foundation
+
 class KeyPair {
     // The number of key pairs (keys/2) in the keychain.
     static func count(label: String) -> Int? {
