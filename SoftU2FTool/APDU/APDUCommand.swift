@@ -44,7 +44,7 @@ struct APDUCommand: APDUMessageProtocol {
     init(raw: Data) throws {
         header = try APDUCommandHeader(raw: raw)
 
-        guard let cmdType = APDUCommand.commandTypeForCode(header.ins) else { throw APDUError.BadCode }
+        guard let cmdType = APDUCommand.commandTypeForCode(header.ins) else { throw APDUResponseStatus.InsNotSupported }
 
         var dOffset = header.raw.count
         var dData = raw.subdata(in: dOffset..<raw.count)

@@ -26,7 +26,7 @@ struct ErrorResponse: APDUMessageProtocol {
         status = try reader.read()
 
         if reader.remaining > 0 {
-            throw APDUError.BadSize
+            throw APDUResponseStatus.WrongLength
         }
     }
 

@@ -47,7 +47,7 @@ struct APDUCommandHeader {
         p1 = 0x00
         p2 = 0x00
         dataLength = cmdData.raw.count
-        if dataLength > 0xFFFF { throw APDUError.BadSize }
+        if dataLength > 0xFFFF { throw APDUResponseStatus.WrongLength }
     }
 
     init(raw: Data) throws {
@@ -55,11 +55,11 @@ struct APDUCommandHeader {
 
         do {
             let claByte: UInt8 = try reader.read()
-            guard let tmpCla = CommandClass(rawValue: claByte) else { throw APDUError.BadClass }
+            guard let tmpCla = CommandClass(rawValue: claByte) else { throw APDUResponseStatus.ClassNotSupported }
             cla = tmpCla
 
             let insByte: UInt8 = try reader.read()
-            guard let tmpIns = CommandCode(rawValue: insByte) else { throw APDUError.BadCode }
+            guard let tmpIns = CommandCode(rawValue: insByte) else { throw APDUResponseStatus.InsNotSupported }
             ins = tmpIns
 
             p1 = try reader.read()
@@ -69,20 +69,20 @@ struct APDUCommandHeader {
 
             switch reader.remaining {
             case 0, 1, 2:
-                throw APDUError.ShortEncoding
+                throw APDUResponseStatus.WrongLength
             case 3:
                 // Long encoding: Lc=0 (omitted), Le is prefixed by 0.
                 dataLength = 0
             default:
                 // Lc is included.
                 let lc0: UInt8 = try reader.read()
-                if lc0 != 0x00 { throw APDUError.ShortEncoding }
+                if lc0 != 0x00 { throw APDUResponseStatus.WrongLength }
 
                 let lc: UInt16 = try reader.read()
                 dataLength = Int(lc)
             }
         } catch DataReaderError.End {
-            throw APDUError.BadSize
+            throw APDUResponseStatus.WrongLength
         }
     }
 

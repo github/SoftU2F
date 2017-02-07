@@ -35,7 +35,7 @@ struct APDUCommandTrailer {
         if reader.remaining == 3 {
             noBody = true
             let zero: UInt8 = try reader.read()
-            if zero != 0x00 { throw APDUError.BadEncoding }
+            if zero != 0x00 { throw APDUResponseStatus.WrongLength }
         } else {
             noBody = false
         }
@@ -44,7 +44,7 @@ struct APDUCommandTrailer {
         case 0:
             maxResponse = 0
         case 1:
-            throw APDUError.ShortEncoding
+            throw APDUResponseStatus.WrongLength
         case 2:
             let mr: UInt16 = try reader.read()
             if mr == 0x0000 {
@@ -53,7 +53,7 @@ struct APDUCommandTrailer {
                 maxResponse = Int(mr)
             }
         default:
-            throw APDUError.BadSize
+            throw APDUResponseStatus.WrongLength
         }
     }
 

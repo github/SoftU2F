@@ -31,13 +31,13 @@ struct VersionResponse: APDUMessageProtocol {
         if let v = String(data: vData, encoding: .utf8) {
             version = v
         } else {
-            throw APDUError.BadEncoding
+            throw APDUResponseStatus.WrongLength
         }
 
         status = try reader.read()
 
         if reader.remaining > 0 {
-            throw APDUError.BadSize
+            throw APDUResponseStatus.WrongLength
         }
     }
 

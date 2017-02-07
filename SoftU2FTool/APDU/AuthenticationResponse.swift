@@ -32,11 +32,11 @@ struct AuthenticationResponse: APDUMessageProtocol {
             signature = try reader.readData(reader.remaining - 2)
             status = try reader.read()
         } catch DataReaderError.End {
-            throw APDUError.BadSize
+            throw APDUResponseStatus.WrongLength
         }
 
         if reader.remaining > 0 {
-            throw APDUError.BadSize
+            throw APDUResponseStatus.WrongLength
         }
     }
 

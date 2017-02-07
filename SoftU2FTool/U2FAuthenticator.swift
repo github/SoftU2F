@@ -46,20 +46,10 @@ class U2FAuthenticator {
 
             do {
                 cmd = try APDUCommand(raw: data)
-            } catch APDUError.BadCode {
-                print("Unknown APDU command code")
-                self.sendError(status: .InsNotSupported, cid: msg.cid)
+            } catch let err as APDUResponseStatus {
+                self.sendError(status: err, cid: msg.cid)
                 return true
-            } catch APDUError.BadSize {
-                print("Bad request size")
-                self.sendError(status: .WrongLength, cid: msg.cid)
-                return true
-            } catch APDUError.BadClass {
-                print("Bad request size")
-                self.sendError(status: .ClassNotSupported, cid: msg.cid)
-                return true
-            } catch let err {
-                print("Error reading APDU command: \(err.localizedDescription)")
+            } catch {
                 self.sendError(status: .OtherError, cid: msg.cid)
                 return true
             }

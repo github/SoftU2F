@@ -24,7 +24,6 @@
 		515E83611E3803BE00F40024 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835E1E3803BE00F40024 /* DataReaderTests.swift */; };
 		515E83621E3803BE00F40024 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515E835F1E3803BE00F40024 /* DataWriterTests.swift */; };
 		518537B11E380C0A00600911 /* APDUCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A61E380C0A00600911 /* APDUCommand.swift */; };
-		518537B21E380C0A00600911 /* APDUError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A71E380C0A00600911 /* APDUError.swift */; };
 		518537B31E380C0A00600911 /* APDUCommandHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A81E380C0A00600911 /* APDUCommandHeader.swift */; };
 		518537B41E380C0A00600911 /* APDUCommandDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537A91E380C0A00600911 /* APDUCommandDataProtocol.swift */; };
 		518537B51E380C0A00600911 /* APDUMessageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */; };
@@ -123,7 +122,6 @@
 		515E835E1E3803BE00F40024 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
 		515E835F1E3803BE00F40024 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
 		518537A61E380C0A00600911 /* APDUCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommand.swift; path = APDU/APDUCommand.swift; sourceTree = "<group>"; };
-		518537A71E380C0A00600911 /* APDUError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUError.swift; path = APDU/APDUError.swift; sourceTree = "<group>"; };
 		518537A81E380C0A00600911 /* APDUCommandHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandHeader.swift; path = APDU/APDUCommandHeader.swift; sourceTree = "<group>"; };
 		518537A91E380C0A00600911 /* APDUCommandDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUCommandDataProtocol.swift; path = APDU/APDUCommandDataProtocol.swift; sourceTree = "<group>"; };
 		518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APDUMessageProtocol.swift; path = APDU/APDUMessageProtocol.swift; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 		51F0902C1E37F7BA00F03AD3 /* APDU */ = {
 			isa = PBXGroup;
 			children = (
-				518537A71E380C0A00600911 /* APDUError.swift */,
 				518537AA1E380C0A00600911 /* APDUMessageProtocol.swift */,
 				518537A91E380C0A00600911 /* APDUCommandDataProtocol.swift */,
 				518537A61E380C0A00600911 /* APDUCommand.swift */,
@@ -480,7 +477,6 @@
 				518537B41E380C0A00600911 /* APDUCommandDataProtocol.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
 				51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */,
-				518537B21E380C0A00600911 /* APDUError.swift in Sources */,
 				5131C1AC1E3A9CB9006A820C /* VersionResponse.swift in Sources */,
 				518537B51E380C0A00600911 /* APDUMessageProtocol.swift in Sources */,
 				51E214601E3823E7005B2864 /* SHA256.swift in Sources */,

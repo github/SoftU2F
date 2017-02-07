@@ -13,7 +13,7 @@ struct RegisterResponse: APDUMessageProtocol {
         if SelfSignedCertificate.parseX509(d, consumed: &size) {
             return size
         } else {
-            throw APDUError.BadCert
+            throw APDUResponseStatus.OtherError
         }
     }
 
@@ -57,11 +57,11 @@ struct RegisterResponse: APDUMessageProtocol {
 
             status = try reader.read()
         } catch DataReaderError.End {
-            throw APDUError.BadSize
+            throw APDUResponseStatus.WrongLength
         }
 
         if reader.remaining > 0 {
-            throw APDUError.BadSize
+            throw APDUResponseStatus.WrongLength
         }
     }
 

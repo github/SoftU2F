@@ -7,7 +7,7 @@
 //
 
 // ISO7816-4
-enum APDUResponseStatus: UInt16, EndianEnumProtocol {
+enum APDUResponseStatus: UInt16, EndianEnumProtocol, Error {
     typealias RawValue = UInt16
 
     case NoError = 0x9000
