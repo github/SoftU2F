@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>APDU.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>SelfSignedCertificate.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>SoftU2FTool.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -18,6 +28,26 @@
 			<true/>
 		</dict>
 		<key>51F0901C1E37E8C600F03AD3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F738F4F01E4A2CCB005680A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F738F52E1E4A2E8A005680A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F738F5591E4A31DE005680A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F738F5701E4A3328005680A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

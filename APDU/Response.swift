@@ -12,6 +12,7 @@ enum ResponseError: Error {
     case BadSize
     case BadStatus
     case BadCertificate
+    case BadData
 }
 
 protocol Response {
@@ -39,6 +40,8 @@ extension Response {
         let trailer: ResponseStatus = try reader.read()
 
         self.init(body: body, trailer: trailer)
+
+        try validateBody()
     }
     
     // For testing with libu2f-host

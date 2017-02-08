@@ -50,5 +50,7 @@ extension Command {
         }
         
         self.init(header: header, body: body, trailer: trailer)
+
+        try validateBody()
     }
 }

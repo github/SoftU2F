@@ -12,6 +12,10 @@ import SelfSignedCertificate
 public struct RegisterResponse: RawConvertible {
     let body: Data
     let trailer: ResponseStatus
+
+    var reserved: UInt8 {
+        return body.subdata(in: reservedRange)[0]
+    }
     
     public var publicKey: Data {
         return body.subdata(in: publicKeyRange)
@@ -32,9 +36,15 @@ public struct RegisterResponse: RawConvertible {
     public var signature: Data {
         return body.subdata(in: signatureRange)
     }
+
+    var reservedRange: Range<Int> {
+        let lowerBound = 0
+        let upperBound = MemoryLayout<UInt8>.size
+        return lowerBound..<upperBound
+    }
     
     var publicKeyRange: Range<Int> {
-        let lowerBound = 0
+        let lowerBound = reservedRange.upperBound
         let upperBound = lowerBound + U2F_EC_POINT_SIZE
         return lowerBound..<upperBound
     }
@@ -77,6 +87,7 @@ public struct RegisterResponse: RawConvertible {
     
     public init(publicKey: Data, keyHandle: Data, certificate: Data, signature: Data) {
         let writer = DataWriter()
+        writer.write(UInt8(0x05)) // reserved
         writer.writeData(publicKey)
         writer.write(UInt8(keyHandle.count))
         writer.writeData(keyHandle)
@@ -96,12 +107,11 @@ extension RegisterResponse: Response {
     
     func validateBody() throws {
         // Check that we at least have key-handle length.
-        var min = U2F_EC_POINT_SIZE + MemoryLayout<UInt8>.size
+        var min = MemoryLayout<UInt8>.size + U2F_EC_POINT_SIZE + MemoryLayout<UInt8>.size
         if body.count < min {
             throw ResponseError.BadSize
         }
-        
-        
+
         // Check that we at least have one byte of cert.
         // TODO: minimum cert size?
         min += keyHandleLength + 1
@@ -119,6 +129,10 @@ extension RegisterResponse: Response {
         min += certificateSize + 1
         if body.count < min {
             throw ResponseError.BadSize
+        }
+
+        if reserved != 0x05 {
+            throw ResponseError.BadData
         }
         
         if trailer != .NoError {
