@@ -50,13 +50,21 @@ public struct AuthenticationRequest: RawConvertible {
         self.header = CommandHeader(ins: .Authenticate, p1: control.rawValue, dataLength: body.count)
         self.trailer = CommandTrailer(noBody: false)
     }
+}
+
+extension AuthenticationRequest: Command {
+    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
+        self.header = header
+        self.body = body
+        self.trailer = trailer
+    }
     
     func validateBody() throws {
         // Make sure it's at least long enough to have key-handle length.
         if body.count < U2F_CHAL_SIZE + U2F_APPID_SIZE + 1 {
             throw ResponseStatus.WrongLength
         }
-
+        
         if body.count != U2F_CHAL_SIZE + U2F_APPID_SIZE + 1 + keyHandleLength {
             throw ResponseStatus.WrongLength
         }
@@ -64,13 +72,5 @@ public struct AuthenticationRequest: RawConvertible {
         if control == .Invalid {
             throw ResponseStatus.OtherError
         }
-    }
-}
-
-extension AuthenticationRequest: CommandProtocol {
-    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
-        self.header = header
-        self.body = body
-        self.trailer = trailer
     }
 }

@@ -8,44 +8,33 @@
 
 import Foundation
 
-public struct VersionResponse: MessageProtocol {
-    public let version: String
-    public let status: ResponseStatus
-
-    public var raw: Data {
-        let writer = DataWriter()
-
-        writer.writeData(version.data(using: .utf8)!)
-        writer.write(status)
-
-        return writer.buffer
+public struct VersionResponse: RawConvertible {
+    let body: Data
+    let trailer: ResponseStatus
+    
+    public var version: String {
+        return String(data: body, encoding: .utf8) ?? ""
     }
 
-    public init(version v: String) {
-        version = v
-        status = .NoError
+    public init(version: String) {
+        body = version.data(using: .utf8)!
+        trailer = .NoError
     }
+}
 
-    public init(raw: Data) throws {
-        let reader = DataReader(data: raw)
-
-        let vData = try reader.readData(reader.remaining - 2)
-        if let v = String(data: vData, encoding: .utf8) {
-            version = v
-        } else {
-            throw ResponseStatus.WrongLength
+extension VersionResponse: Response {
+    init(body: Data, trailer: ResponseStatus) {
+        self.body = body
+        self.trailer = trailer
+    }
+    
+    func validateBody() throws {
+        if version.lengthOfBytes(using: .utf8) < 1 {
+            throw ResponseError.BadSize
         }
-
-        status = try reader.read()
-
-        if reader.remaining > 0 {
-            throw ResponseStatus.WrongLength
+        
+        if trailer != .NoError {
+            throw ResponseError.BadStatus
         }
-    }
-
-    public func debug() {
-        print("Version Response:")
-        print("  Version: \(version)")
-        print("  Status:  \(status)")
     }
 }

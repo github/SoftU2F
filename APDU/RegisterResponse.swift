@@ -9,81 +9,120 @@
 import Foundation
 import SelfSignedCertificate
 
-public struct RegisterResponse: MessageProtocol {
-    // Parse a DER formatted X509 certificate from the beginning of a datum and return its length.
-    static func certLength(fromData d: Data) throws -> Int {
-        var size: Int = 0
-        if SelfSignedCertificate.parseX509(d, consumed: &size) {
-            return size
-        } else {
-            throw ResponseStatus.OtherError
-        }
+public struct RegisterResponse: RawConvertible {
+    let body: Data
+    let trailer: ResponseStatus
+    
+    public var publicKey: Data {
+        return body.subdata(in: publicKeyRange)
+    }
+    
+    var keyHandleLength: Int {
+        return Int(body.subdata(in: keyHandleLengthRange)[0])
     }
 
-    public let publicKey: Data
-    public let keyHandle: Data
-    public let certificate: Data
-    public let signature: Data
-    public let status: ResponseStatus
+    public var keyHandle: Data {
+        return body.subdata(in: keyHandleRange)
+    }
+    
+    public var certificate: Data {
+        return body.subdata(in: certificateRange)
+    }
 
-    public var raw: Data {
+    public var signature: Data {
+        return body.subdata(in: signatureRange)
+    }
+    
+    var publicKeyRange: Range<Int> {
+        let lowerBound = 0
+        let upperBound = lowerBound + U2F_EC_POINT_SIZE
+        return lowerBound..<upperBound
+    }
+    
+    var keyHandleLengthRange: Range<Int> {
+        let lowerBound = publicKeyRange.upperBound
+        let upperBound = lowerBound + MemoryLayout<UInt8>.size
+        return lowerBound..<upperBound
+    }
+
+    var keyHandleRange: Range<Int> {
+        let lowerBound = keyHandleLengthRange.upperBound
+        let upperBound = lowerBound + keyHandleLength
+        return lowerBound..<upperBound
+    }
+    
+    var certificateSize: Int {
+        let remainingRange: Range<Int> = keyHandleRange.upperBound..<body.count
+        let remaining = body.subdata(in: remainingRange)
+        var size: Int = 0
+
+        if SelfSignedCertificate.parseX509(remaining, consumed: &size) {
+            return size
+        } else {
+            return 0
+        }
+    }
+    
+    var certificateRange: Range<Int> {
+        let lowerBound = keyHandleRange.upperBound
+        let upperBound = lowerBound + certificateSize
+        return lowerBound..<upperBound
+    }
+    
+    var signatureRange: Range<Int> {
+        let lowerBound = certificateRange.upperBound
+        let upperBound = body.count
+        return lowerBound..<upperBound
+    }
+    
+    public init(publicKey: Data, keyHandle: Data, certificate: Data, signature: Data) {
         let writer = DataWriter()
-
-        writer.write(UInt8(0x05))
         writer.writeData(publicKey)
         writer.write(UInt8(keyHandle.count))
         writer.writeData(keyHandle)
         writer.writeData(certificate)
         writer.writeData(signature)
-        writer.write(status)
 
-        return writer.buffer
+        body = writer.buffer
+        trailer = .NoError
     }
+}
 
-    public init(raw: Data) throws {
-        let reader = DataReader(data: raw)
-
-        do {
-            // reserved byte
-            let _: UInt8 = try reader.read()
-
-            publicKey = try reader.readData(U2F_EC_POINT_SIZE)
-
-            let khLen: UInt8 = try reader.read()
-            keyHandle = try reader.readData(Int(khLen))
-
-            // peek at cert to figure out its length
-            let certLen = try RegisterResponse.certLength(fromData: reader.rest)
-            certificate = try reader.readData(certLen)
-
-            signature = try reader.readData(reader.remaining - 2)
-
-            status = try reader.read()
-        } catch DataReaderError.End {
-            throw ResponseStatus.WrongLength
+extension RegisterResponse: Response {
+    init(body: Data, trailer: ResponseStatus) {
+        self.body = body
+        self.trailer = trailer
+    }
+    
+    func validateBody() throws {
+        // Check that we at least have key-handle length.
+        var min = U2F_EC_POINT_SIZE + MemoryLayout<UInt8>.size
+        if body.count < min {
+            throw ResponseError.BadSize
         }
-
-        if reader.remaining > 0 {
-            throw ResponseStatus.WrongLength
+        
+        
+        // Check that we at least have one byte of cert.
+        // TODO: minimum cert size?
+        min += keyHandleLength + 1
+        if body.count < min {
+            throw ResponseError.BadSize
         }
-    }
-
-    public init(publicKey pk: Data, keyHandle kh: Data, certificate cert: Data, signature sig: Data) {
-        publicKey = pk
-        keyHandle = kh
-        certificate = cert
-        signature = sig
-        status = .NoError
-    }
-
-    public func debug() {
-        print("Registration Response:")
-        print( "  Reserved:    0x05")
-        print( "  Public key:  \(publicKey.base64EncodedString())")
-        print(String(format: "  KH Len:      0x%02x", keyHandle.count))
-        print( "  Key Handle:  \(keyHandle.base64EncodedString())")
-        print( "  Certificate: \(certificate.base64EncodedString())")
-        print( "  Signature:   \(signature.base64EncodedString())")
-        print( "  Status:      \(status)")
+        
+        // Check that cert is parsable.
+        if certificateSize == 0 {
+            throw ResponseError.BadCertificate
+        }
+        
+        // Check that we at least have one byte of signature.
+        // TODO: minimum signature size?
+        min += certificateSize + 1
+        if body.count < min {
+            throw ResponseError.BadSize
+        }
+        
+        if trailer != .NoError {
+            throw ResponseError.BadStatus
+        }
     }
 }

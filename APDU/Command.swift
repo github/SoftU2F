@@ -1,5 +1,5 @@
 //
-//  CommandProtocol.swift
+//  Command.swift
 //  SoftU2FTool
 //
 //  Created by Benjamin P Toews on 2/7/17.
@@ -14,7 +14,7 @@ public func commandType(raw: Data) throws -> CommandCode {
     return header.ins
 }
 
-protocol CommandProtocol {
+protocol Command {
     var header: CommandHeader { get }
     var body: Data { get }
     var trailer: CommandTrailer { get }
@@ -25,7 +25,7 @@ protocol CommandProtocol {
 }
 
 // Implement RawConvertible
-extension CommandProtocol {
+extension Command {
     public var raw: Data {
         let writer = DataWriter()
         writer.writeData(header.raw)

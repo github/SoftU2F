@@ -23,7 +23,7 @@ class ResponseTests: XCTestCase {
         XCTAssertEqual(r2.keyHandle, r.keyHandle)
         XCTAssertEqual(r2.certificate, r.certificate)
         XCTAssertEqual(r2.signature, r.signature)
-        XCTAssertEqual(r2.status, r.status)
+        XCTAssertEqual(r2.trailer, r.trailer)
         XCTAssertEqual(r.raw, r2.raw)
     }
 
@@ -39,7 +39,7 @@ class ResponseTests: XCTestCase {
         let r2 = try VersionResponse(raw: r.raw)
 
         XCTAssertEqual(r.version, r2.version)
-        XCTAssertEqual(r.status, r2.status)
+        XCTAssertEqual(r.trailer, r2.trailer)
         XCTAssertEqual(r.raw, r2.raw)
     }
 
@@ -47,7 +47,7 @@ class ResponseTests: XCTestCase {
         let r = ErrorResponse(status: .ConditionsNotSatisfied)
         let r2 = try ErrorResponse(raw: r.raw)
 
-        XCTAssertEqual(r.status, r2.status)
+        XCTAssertEqual(r.trailer, r2.trailer)
         XCTAssertEqual(r.raw, r2.raw)
     }
 }

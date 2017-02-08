@@ -34,18 +34,18 @@ public struct RegisterRequest: RawConvertible {
         self.header = CommandHeader(ins: .Register, dataLength: body.count)
         self.trailer = CommandTrailer(noBody: false)
     }
+}
+
+extension RegisterRequest: Command {
+    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
+        self.header = header
+        self.body = body
+        self.trailer = trailer
+    }
     
     func validateBody() throws {
         if body.count != U2F_CHAL_SIZE + U2F_APPID_SIZE {
             throw ResponseStatus.WrongLength
         }
-    }
-}
-
-extension RegisterRequest: CommandProtocol {
-    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
-        self.header = header
-        self.body = body
-        self.trailer = trailer
     }
 }

@@ -13,12 +13,6 @@ public struct VersionRequest: RawConvertible {
     let body: Data
     let trailer: CommandTrailer
     
-    func validateBody() throws {
-        if body.count > 0 {
-            throw ResponseStatus.WrongLength
-        }
-    }
-    
     init() {
         self.header = CommandHeader(ins: .Version, dataLength: 0)
         self.body = Data()
@@ -26,10 +20,16 @@ public struct VersionRequest: RawConvertible {
     }
 }
 
-extension VersionRequest: CommandProtocol {
+extension VersionRequest: Command {
     init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
         self.header = header
         self.body = body
         self.trailer = trailer
+    }
+    
+    func validateBody() throws {
+        if body.count > 0 {
+            throw ResponseStatus.WrongLength
+        }
     }
 }

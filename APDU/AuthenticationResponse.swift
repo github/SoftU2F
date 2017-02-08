@@ -8,52 +8,55 @@
 
 import Foundation
 
-public struct AuthenticationResponse: MessageProtocol {
-    public let userPresence: UInt8
-    public let counter: UInt32
-    public let signature: Data
-    public let status: ResponseStatus
+public struct AuthenticationResponse: RawConvertible {
+    let body: Data
+    let trailer: ResponseStatus
+    
+    public var userPresence: UInt8 {
+        return body[0]
+    }
 
-    public var raw: Data {
+    public var counter: UInt32 {
+        let lowerBound = MemoryLayout<UInt8>.size
+        let upperBound = lowerBound + MemoryLayout<UInt32>.size
+        let data = body.subdata(in: lowerBound..<upperBound)
+        
+        return data.withUnsafeBytes { (ptr: UnsafePointer<UInt32>) -> UInt32 in
+            return ptr.pointee.bigEndian
+        }
+    }
+
+    public var signature: Data {
+        let lowerBound = MemoryLayout<UInt8>.size + MemoryLayout<UInt32>.size
+        let upperBound = body.count
+        return body.subdata(in: lowerBound..<upperBound)
+    }
+
+    public init(userPresence: UInt8, counter: UInt32, signature: Data) {
         let writer = DataWriter()
-
         writer.write(userPresence)
         writer.write(counter)
         writer.writeData(signature)
-        writer.write(status)
-
-        return writer.buffer
+        
+        body = writer.buffer
+        trailer = .NoError
     }
+}
 
-    public init(raw: Data) throws {
-        let reader = DataReader(data: raw)
-
-        do {
-            userPresence = try reader.read()
-            counter = try reader.read()
-            signature = try reader.readData(reader.remaining - 2)
-            status = try reader.read()
-        } catch DataReaderError.End {
-            throw ResponseStatus.WrongLength
+extension AuthenticationResponse: Response {
+    init(body: Data, trailer: ResponseStatus) {
+        self.body = body
+        self.trailer = trailer
+    }
+    
+    func validateBody() throws {
+        // TODO: minimum signature size?
+        if body.count < MemoryLayout<UInt8>.size + MemoryLayout<UInt32>.size + 1 {
+            throw ResponseError.BadSize
         }
-
-        if reader.remaining > 0 {
-            throw ResponseStatus.WrongLength
+        
+        if trailer != .NoError {
+            throw ResponseError.BadStatus
         }
-    }
-
-    public init(userPresence u: UInt8, counter c: UInt32, signature s: Data) {
-        userPresence = u
-        counter = c
-        signature = s
-        status = .NoError
-    }
-
-    public func debug() {
-        print("AuthenticationResponse:")
-        print(String(format: "  User presence: 0x%02x", userPresence))
-        print(String(format: "  Counter:       0x%08x", counter))
-        print( "  Signature:     \(signature.base64EncodedString())")
-        print( "  Status:        \(status)")
     }
 }

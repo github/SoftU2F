@@ -46,45 +46,33 @@ class U2FAuthenticator {
     func installMsgHandler() {
         u2fhid.handle(.Msg) { (_ msg: softu2f_hid_message) -> Bool in
             let data = msg.data.takeUnretainedValue() as Data
-            let cmd: APDU.Command
-
+            
             do {
-                cmd = try APDU.Command(raw: data)
+                let ins = try APDU.commandType(raw: data)
+
+                switch ins {
+                case .Register:
+                    try self.handleRegisterRequest(data, cid: msg.cid)
+                case .Authenticate:
+                    try self.handleAuthenticationRequest(data, cid: msg.cid)
+                case .Version:
+                    try self.handleVersionRequest(data, cid: msg.cid)
+                default:
+                    self.sendError(status: .InsNotSupported, cid: msg.cid)
+                }
             } catch let err as APDU.ResponseStatus {
                 self.sendError(status: err, cid: msg.cid)
-                return true
             } catch {
                 self.sendError(status: .OtherError, cid: msg.cid)
-                return true
             }
-
-            print("↓↓↓↓↓ Received message ↓↓↓↓↓")
-            cmd.debug()
-            print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
-
-            if let req = cmd.registerRequest {
-                self.handleRegisterRequest(req, cid: msg.cid)
-                return true
-            }
-
-            if let req = cmd.authenticationRequest {
-                if let control = APDU.Control(rawValue: cmd.header.p1) {
-                    self.handleAuthenticationRequest(req, control: control, cid: msg.cid)
-                    return true
-                }
-            }
-
-            if let req = cmd.versionRequest {
-                self.handleVersionRequest(req, cid: msg.cid)
-                return true
-            }
-
-            self.sendError(status: .OtherError, cid: msg.cid)
+            
             return true
         }
     }
 
-    func handleRegisterRequest(_ req: APDU.RegisterRequest, cid: UInt32) {
+    func handleRegisterRequest(_ raw: Data, cid: UInt32) throws {
+        let req = try APDU.RegisterRequest(raw: raw)
+        
         let facet = KnownFacets[req.applicationParameter]
         let notification = UserPresence.Notification.Register(facet: facet)
 
@@ -127,13 +115,15 @@ class U2FAuthenticator {
         }
     }
 
-    func handleAuthenticationRequest(_ req: APDU.AuthenticationRequest, control: APDU.Control, cid: UInt32) {
+    func handleAuthenticationRequest(_ raw: Data, cid: UInt32) throws {
+        let req = try APDU.AuthenticationRequest(raw: raw)
+        
         guard let reg = U2FRegistration(keyHandle: req.keyHandle, applicationParameter: req.applicationParameter) else {
             sendError(status: .WrongData, cid: cid)
             return
         }
 
-        if control == .CheckOnly {
+        if req.control == .CheckOnly {
             // success -> error response. It's weird...
             sendError(status: .ConditionsNotSatisfied, cid: cid)
             return
@@ -170,7 +160,8 @@ class U2FAuthenticator {
         }
     }
 
-    func handleVersionRequest(_ req: APDU.VersionRequest, cid: UInt32) {
+    func handleVersionRequest(_ raw: Data, cid: UInt32) throws {
+        let _ = try APDU.VersionRequest(raw: raw)
         let resp = APDU.VersionResponse(version: "U2F_V2")
         sendMsg(msg: resp, cid: cid)
     }
@@ -180,14 +171,7 @@ class U2FAuthenticator {
         sendMsg(msg: resp, cid: cid)
     }
 
-    func sendMsg(msg: APDU.MessageProtocol, cid: UInt32) {
-        if u2fhid.sendMsg(cid: cid, data: msg.raw) {
-            print("↓↓↓↓↓ Sent message ↓↓↓↓↓")
-        } else {
-            print("↓↓↓↓↓ Error sending message ↓↓↓↓↓")
-        }
-
-        msg.debug()
-        print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑\n")
+    func sendMsg(msg: APDU.RawConvertible, cid: UInt32) {
+        let _ = u2fhid.sendMsg(cid: cid, data: msg.raw)
     }
 }

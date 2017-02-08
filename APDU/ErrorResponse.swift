@@ -8,32 +8,25 @@
 
 import Foundation
 
-public struct ErrorResponse: MessageProtocol {
-    public let status: ResponseStatus
-
-    public var raw: Data {
-        let writer = DataWriter()
-
-        writer.write(status)
-
-        return writer.buffer
-    }
+public struct ErrorResponse: RawConvertible {
+    let body: Data
+    let trailer: ResponseStatus
 
     public init(status s: ResponseStatus) {
-        status = s
+        body = Data()
+        trailer = s
     }
+}
 
-    public init(raw: Data) throws {
-        let reader = DataReader(data: raw)
-        status = try reader.read()
-
-        if reader.remaining > 0 {
-            throw ResponseStatus.WrongLength
+extension ErrorResponse: Response {
+    init(body: Data, trailer: ResponseStatus) {
+        self.body = body
+        self.trailer = trailer
+    }
+    
+    func validateBody() throws {
+        if body.count != 0 {
+            throw ResponseError.BadSize
         }
-    }
-
-    public func debug() {
-        print("Error Response:")
-        print("  Status: \(status)")
     }
 }
