@@ -75,6 +75,7 @@
 		F738F5871E4A3C09005680A2 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5851E4A3C09005680A2 /* DataReaderTests.swift */; };
 		F738F5881E4A3C09005680A2 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5861E4A3C09005680A2 /* DataWriterTests.swift */; };
 		F738F58A1E4A3C21005680A2 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5891E4A3C21005680A2 /* TestUtil.swift */; };
+		F7ABD9BE1E80603D00768FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7ABD9BD1E80603D00768FEC /* Assets.xcassets */; };
 		F7B5DBAD1E4A5CED00E5ABD4 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5DBAC1E4A5CED00E5ABD4 /* Command.swift */; };
 		F7B5DBAF1E4A815700E5ABD4 /* RawConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5DBAE1E4A815700E5ABD4 /* RawConvertible.swift */; };
 		F7B5DBB01E4A827000E5ABD4 /* RawConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5DBAE1E4A815700E5ABD4 /* RawConvertible.swift */; };
@@ -247,6 +248,7 @@
 		F738F5851E4A3C09005680A2 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
 		F738F5861E4A3C09005680A2 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
 		F738F5891E4A3C21005680A2 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
+		F7ABD9BD1E80603D00768FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7B5DBAC1E4A5CED00E5ABD4 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		F7B5DBAE1E4A815700E5ABD4 /* RawConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawConvertible.swift; sourceTree = "<group>"; };
 		F7B5DBB21E4A82EB00E5ABD4 /* MessagePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePart.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 		51F0900E1E37E8C600F03AD3 /* SoftU2FTool */ = {
 			isa = PBXGroup;
 			children = (
+				F7ABD9BD1E80603D00768FEC /* Assets.xcassets */,
 				5131C19D1E3A77EE006A820C /* SoftU2FTool.entitlements */,
 				511986301E3C1BB1006A3BBB /* main.swift */,
 				51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */,
@@ -727,6 +730,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7ABD9BE1E80603D00768FEC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
