@@ -97,26 +97,12 @@
 			remoteGlobalIDString = 5143B0AB1E282828005717AD;
 			remoteInfo = Driver;
 		};
-		51A5E3AA1E3FC7BA0028E2D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 514CF0EB1E285CBC004203C6;
-			remoteInfo = Example;
-		};
 		51A5E3AC1E3FC7BA0028E2D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 514CF0FF1E28604F004203C6;
 			remoteInfo = softu2f;
-		};
-		51A5E3AE1E3FC7BA0028E2D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5129956F1E32E98400591797;
-			remoteInfo = Tests;
 		};
 		51A5E3B11E3FC80C0028E2D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -131,6 +117,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 51F0900B1E37E8C600F03AD3;
 			remoteInfo = SoftU2FTool;
+		};
+		F7213D7E1E817790000CC2D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F7D468B11E4CED18005F2494;
+			remoteInfo = LibSoftU2FTests;
 		};
 		F738F4F61E4A2CCC005680A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -325,9 +318,8 @@
 			isa = PBXGroup;
 			children = (
 				51A5E3A91E3FC7BA0028E2D1 /* softu2f.kext */,
-				51A5E3AB1E3FC7BA0028E2D1 /* Example */,
 				51A5E3AD1E3FC7BA0028E2D1 /* libsoftu2f.a */,
-				51A5E3AF1E3FC7BA0028E2D1 /* Tests */,
+				F7213D7F1E817790000CC2D3 /* LibSoftU2FTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -628,7 +620,7 @@
 				TargetAttributes = {
 					51F0900B1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = S93FDAQ29M;
+						DevelopmentTeam = VEKTX9H2N7;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -639,28 +631,30 @@
 					};
 					51F0901C1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = S93FDAQ29M;
+						DevelopmentTeam = VEKTX9H2N7;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 51F0900B1E37E8C600F03AD3;
 					};
 					F738F4F01E4A2CCB005680A2 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = S93FDAQ29M;
+						DevelopmentTeam = VEKTX9H2N7;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					F738F52E1E4A2E8A005680A2 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = VEKTX9H2N7;
 						ProvisioningStyle = Automatic;
 					};
 					F738F5591E4A31DE005680A2 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = S93FDAQ29M;
+						DevelopmentTeam = VEKTX9H2N7;
 						ProvisioningStyle = Automatic;
 					};
 					F738F5701E4A3328005680A2 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = VEKTX9H2N7;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -702,13 +696,6 @@
 			remoteRef = 51A5E3A81E3FC7BA0028E2D1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		51A5E3AB1E3FC7BA0028E2D1 /* Example */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = Example;
-			remoteRef = 51A5E3AA1E3FC7BA0028E2D1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		51A5E3AD1E3FC7BA0028E2D1 /* libsoftu2f.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -716,11 +703,11 @@
 			remoteRef = 51A5E3AC1E3FC7BA0028E2D1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		51A5E3AF1E3FC7BA0028E2D1 /* Tests */ = {
+		F7213D7F1E817790000CC2D3 /* LibSoftU2FTests.xctest */ = {
 			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = Tests;
-			remoteRef = 51A5E3AE1E3FC7BA0028E2D1 /* PBXContainerItemProxy */;
+			fileType = wrapper.cfbundle;
+			path = LibSoftU2FTests.xctest;
+			remoteRef = F7213D7E1E817790000CC2D3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1019,7 +1006,7 @@
 				CODE_SIGN_ENTITLEMENTS = SoftU2FTool/SoftU2FTool.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SoftU2F/SoftU2F/**";
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1040,7 +1027,7 @@
 				CODE_SIGN_ENTITLEMENTS = SoftU2FTool/SoftU2FTool.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SoftU2F/SoftU2F/**";
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1059,7 +1046,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
 					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
@@ -1084,7 +1071,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
 					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
@@ -1109,7 +1096,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1136,7 +1123,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1157,7 +1144,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				INFOPLIST_FILE = APDUTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDUTests;
@@ -1170,7 +1159,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				INFOPLIST_FILE = APDUTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDUTests;
@@ -1188,7 +1179,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1199,7 +1190,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/openssl/1.0.2j/lib,
+					/usr/local/Cellar/openssl/1.0.2k/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1218,7 +1209,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S93FDAQ29M;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1229,7 +1220,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/openssl/1.0.2j/lib,
+					/usr/local/Cellar/openssl/1.0.2k/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1243,7 +1234,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				INFOPLIST_FILE = SelfSignedCertificateTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificateTests;
@@ -1256,7 +1249,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				INFOPLIST_FILE = SelfSignedCertificateTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificateTests;
