@@ -9,9 +9,9 @@
 import Foundation
 
 public struct AuthenticationRequest: RawConvertible {
-    let header: CommandHeader
-    let body: Data
-    let trailer: CommandTrailer
+    public let header: CommandHeader
+    public let body: Data
+    public let trailer: CommandTrailer
     
     public var control: Control {
         return Control(rawValue: header.p1) ?? .Invalid
@@ -53,13 +53,13 @@ public struct AuthenticationRequest: RawConvertible {
 }
 
 extension AuthenticationRequest: Command {
-    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
+    public init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
         self.header = header
         self.body = body
         self.trailer = trailer
     }
     
-    func validateBody() throws {
+    public func validateBody() throws {
         // Make sure it's at least long enough to have key-handle length.
         if body.count < U2F_CHAL_SIZE + U2F_APPID_SIZE + 1 {
             throw ResponseStatus.WrongLength

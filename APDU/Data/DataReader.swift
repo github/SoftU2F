@@ -8,12 +8,12 @@
 
 import Foundation
 
-enum DataReaderError: Error {
+public enum DataReaderError: Error {
     case End
     case TypeError
 }
 
-class DataReader {
+public class DataReader {
     let data: Data
     var offset: Int
 

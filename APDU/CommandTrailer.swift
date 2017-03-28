@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct CommandTrailer: RawConvertible, MessagePart {
+public struct CommandTrailer: RawConvertible, MessagePart {
     let maxResponse: Int
     let noBody: Bool
 
-    var raw: Data {
+    public var raw: Data {
         let writer = DataWriter()
 
         if noBody {
@@ -28,7 +28,7 @@ struct CommandTrailer: RawConvertible, MessagePart {
         return writer.buffer
     }
 
-    init(reader: DataReader) throws {
+    public init(reader: DataReader) throws {
         // 0 is prepended to trailer if there was no body.
         if reader.remaining == 3 {
             noBody = true

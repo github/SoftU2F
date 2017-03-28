@@ -14,7 +14,7 @@ public func commandType(raw: Data) throws -> CommandCode {
     return header.ins
 }
 
-protocol Command {
+public protocol Command {
     var header: CommandHeader { get }
     var body: Data { get }
     var trailer: CommandTrailer { get }

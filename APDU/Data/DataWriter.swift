@@ -8,17 +8,17 @@
 
 import Foundation
 
-protocol DataWriterProtocol {
+public protocol DataWriterProtocol {
     var buffer: Data { get }
 
     func write<T: EndianProtocol>(_ val: T, endian: Endian) throws
     func writeData(_ d: Data) throws
 }
 
-class DataWriter: DataWriterProtocol {
-    var buffer = Data()
+public class DataWriter: DataWriterProtocol {
+    public var buffer = Data()
 
-    func write<T: EndianProtocol>(_ val: T, endian: Endian = .Big) {
+    public func write<T: EndianProtocol>(_ val: T, endian: Endian = .Big) {
         var eval: T
 
         switch endian {
@@ -31,31 +31,31 @@ class DataWriter: DataWriterProtocol {
         buffer.append(UnsafeBufferPointer(start: &eval, count: 1))
     }
 
-    func write<T: EndianEnumProtocol>(_ val: T, endian: Endian = .Big) {
+    public func write<T: EndianEnumProtocol>(_ val: T, endian: Endian = .Big) {
         write(val.rawValue)
     }
 
-    func writeData(_ d: Data) {
+    public func writeData(_ d: Data) {
         buffer.append(d)
     }
 }
 
-enum CappedDataWriterError: Error {
+public enum CappedDataWriterError: Error {
     case MaxExceeded
 }
 
-class CappedDataWriter: DataWriterProtocol {
-    var max: Int
-    var buffer: Data { return writer.buffer }
-    var isFinished: Bool { return buffer.count == max }
+public class CappedDataWriter: DataWriterProtocol {
+    public var max: Int
+    public var buffer: Data { return writer.buffer }
+    public var isFinished: Bool { return buffer.count == max }
 
     private let writer = DataWriter()
 
-    init(max m: Int) {
+    public init(max m: Int) {
         max = m
     }
 
-    func write<T: EndianProtocol>(_ val: T, endian: Endian = .Big) throws {
+    public func write<T: EndianProtocol>(_ val: T, endian: Endian = .Big) throws {
         if buffer.count + MemoryLayout<T>.size > max {
             throw CappedDataWriterError.MaxExceeded
         }
@@ -63,7 +63,7 @@ class CappedDataWriter: DataWriterProtocol {
         writer.write(val, endian: endian)
     }
 
-    func writeData(_ d: Data) throws {
+    public func writeData(_ d: Data) throws {
         if buffer.count + d.count > max {
             throw CappedDataWriterError.MaxExceeded
         }

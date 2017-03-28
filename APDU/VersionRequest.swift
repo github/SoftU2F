@@ -9,9 +9,9 @@
 import Foundation
 
 public struct VersionRequest: RawConvertible {
-    let header: CommandHeader
-    let body: Data
-    let trailer: CommandTrailer
+    public let header: CommandHeader
+    public let body: Data
+    public let trailer: CommandTrailer
     
     init() {
         self.header = CommandHeader(ins: .Version, dataLength: 0)
@@ -21,13 +21,13 @@ public struct VersionRequest: RawConvertible {
 }
 
 extension VersionRequest: Command {
-    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
+    public init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
         self.header = header
         self.body = body
         self.trailer = trailer
     }
     
-    func validateBody() throws {
+    public func validateBody() throws {
         if body.count > 0 {
             throw ResponseStatus.WrongLength
         }

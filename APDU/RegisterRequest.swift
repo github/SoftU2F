@@ -9,9 +9,9 @@
 import Foundation
 
 public struct RegisterRequest: RawConvertible {
-    let header: CommandHeader
-    let body: Data
-    let trailer: CommandTrailer
+    public let header: CommandHeader
+    public let body: Data
+    public let trailer: CommandTrailer
     
     public var challengeParameter: Data {
         let lowerBound = 0
@@ -37,13 +37,13 @@ public struct RegisterRequest: RawConvertible {
 }
 
 extension RegisterRequest: Command {
-    init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
+    public init(header: CommandHeader, body: Data, trailer: CommandTrailer) {
         self.header = header
         self.body = body
         self.trailer = trailer
     }
     
-    func validateBody() throws {
+    public func validateBody() throws {
         if body.count != U2F_CHAL_SIZE + U2F_APPID_SIZE {
             throw ResponseStatus.WrongLength
         }

@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct CommandHeader: RawConvertible, MessagePart {
+public struct CommandHeader: RawConvertible, MessagePart {
     public let cla: CommandClass
     public let ins: CommandCode
     public let p1: UInt8
     public let p2: UInt8
     public let dataLength: Int
 
-    var raw: Data {
+    public var raw: Data {
         let writer = DataWriter()
 
         writer.write(cla.rawValue)
@@ -31,7 +31,7 @@ struct CommandHeader: RawConvertible, MessagePart {
         return writer.buffer
     }
 
-    init(reader: DataReader) throws {
+    public init(reader: DataReader) throws {
         do {
             let claByte: UInt8 = try reader.read()
             guard let tmpCla = CommandClass(rawValue: claByte) else { throw ResponseStatus.ClassNotSupported }
