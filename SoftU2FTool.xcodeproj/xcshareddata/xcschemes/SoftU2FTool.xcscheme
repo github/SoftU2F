@@ -20,6 +20,20 @@
                ReferencedContainer = "container:SoftU2FTool.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5143B0AA1E282828005717AD"
+               BuildableName = "softu2f.kext"
+               BlueprintName = "Driver"
+               ReferencedContainer = "container:SoftU2F/SoftU2F.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

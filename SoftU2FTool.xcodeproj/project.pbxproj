@@ -67,7 +67,6 @@
 		F738F5621E4A31DE005680A2 /* SelfSignedCertificate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F738F5671E4A3204005680A2 /* SelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = F738F5661E4A3204005680A2 /* SelfSignedCertificate.m */; };
 		F738F5691E4A3230005680A2 /* SelfSignedCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = F738F5681E4A322B005680A2 /* SelfSignedCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F738F56C1E4A32C9005680A2 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A0DA161E3813B900152E9B /* libcrypto.a */; };
 		F738F5741E4A3328005680A2 /* SelfSignedCertificateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5731E4A3328005680A2 /* SelfSignedCertificateTests.swift */; };
 		F738F5761E4A3328005680A2 /* SelfSignedCertificate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */; };
 		F738F57E1E4A34EE005680A2 /* private.h in Headers */ = {isa = PBXBuildFile; fileRef = F738F57D1E4A34EE005680A2 /* private.h */; };
@@ -190,7 +189,6 @@
 		514F3D861E43E828008FA513 /* KeyPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
 		518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPresence.swift; sourceTree = "<group>"; };
-		51A0DA161E3813B900152E9B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/Cellar/openssl/1.0.2j/lib/libcrypto.a; sourceTree = "<group>"; };
 		51A5E3A01E3FC7BA0028E2D1 /* SoftU2F.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoftU2F.xcodeproj; path = SoftU2F/SoftU2F.xcodeproj; sourceTree = "<group>"; };
 		51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FAuthenticator.swift; sourceTree = "<group>"; };
 		51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FToolTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -290,7 +288,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F738F56C1E4A32C9005680A2 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				5131C1B11E3B9EA1006A820C /* libu2f-host.a */,
-				51A0DA161E3813B900152E9B /* libcrypto.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -622,7 +618,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = VEKTX9H2N7;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -1004,14 +1000,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SoftU2FTool/SoftU2FTool.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SoftU2F/SoftU2F/**";
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0d639ce7-4261-41e5-8e5d-8a39cdfc8c41";
+				PROVISIONING_PROFILE_SPECIFIER = SoftU2FTool;
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2FTool-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1025,14 +1024,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SoftU2FTool/SoftU2FTool.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SoftU2F/SoftU2F/**";
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FTool;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0d639ce7-4261-41e5-8e5d-8a39cdfc8c41";
+				PROVISIONING_PROFILE_SPECIFIER = SoftU2FTool;
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2FTool-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1104,6 +1106,7 @@
 				INFOPLIST_FILE = APDU/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDU;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1131,6 +1134,7 @@
 				INFOPLIST_FILE = APDU/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDU;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1190,8 +1194,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/openssl/1.0.2k/lib,
+					"$(PROJECT_DIR)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				OTHER_LDFLAGS = /usr/local/opt/openssl/lib/libcrypto.a;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1220,8 +1226,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/openssl/1.0.2k/lib,
+					"$(PROJECT_DIR)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				OTHER_LDFLAGS = /usr/local/opt/openssl/lib/libcrypto.a;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

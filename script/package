@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+BUILD_DIR=$REPO_DIR/build
+
+rm -rf $BUILD_DIR
+mkdir $BUILD_DIR
+
+xcodebuild -scheme SoftU2FTool install DSTROOT=$BUILD_DIR/bundles
+
+cd $BUILD_DIR
+pkgbuild --analyze --root ./bundles/ SoftU2FTool.plist
+pkgbuild --sign "Developer ID Installer: GitHub" --identifier com.GitHub.SoftU2FTool --root ./bundles/ --component-plist ./SoftU2FTool.plist ./SoftU2FTool.pkg
