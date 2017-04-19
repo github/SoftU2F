@@ -27,7 +27,7 @@ class UserPresence: NSObject {
         } else {
             // Fail any outstanding test.
             current?.complete(false)
-
+            
             // Backup previous delegate to restore on completion.
             let delegateWas = NSUserNotificationCenter.default.delegate
 

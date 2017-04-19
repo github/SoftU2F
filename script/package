@@ -11,5 +11,12 @@ mkdir $BUILD_DIR
 xcodebuild -scheme SoftU2FTool install DSTROOT=$BUILD_DIR/bundles
 
 cd $BUILD_DIR
+
+# The installer would fail if we included these because /System and /usr cannot
+# be written to. Not sure how to prevent them from being created in the first
+# place.
+rm -rf ./bundles/System
+rm -rf ./bundles/usr
+
 pkgbuild --analyze --root ./bundles/ SoftU2FTool.plist
 pkgbuild --sign "Developer ID Installer: GitHub" --identifier com.GitHub.SoftU2FTool --root ./bundles/ --component-plist ./SoftU2FTool.plist ./SoftU2FTool.pkg
