@@ -8,7 +8,7 @@
 
 import Cocoa
 
-//@NSApplicationMain
+@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // TODO: Remove this.
@@ -21,11 +21,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !U2FAuthenticator.start() {
             print("Error starting authenticator")
         }
+
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         if !U2FAuthenticator.stop() {
             print("Error stopping authenticator")
         }
+    }
+    
+    func applicationDidBecomeActive(_ notification: Notification) {
+        // Chrome gives ignores our U2F responses if it isn't active when we send them.
+        // This hack should give focus back to Chrome immediately after the user interacts
+        // with our notification.
+        NSApplication.shared().hide(nil)
     }
 }
