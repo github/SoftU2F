@@ -35,7 +35,7 @@ class U2FHID {
             return nil
         }
 
-        ctx = softu2f_init(softu2f_init_flags(rawValue: 0))
+        ctx = softu2f_init(SOFTU2F_DEBUG)
 
         if ctx == nil {
             return nil
@@ -58,7 +58,9 @@ class U2FHID {
         msg.cmd = MessageType.Msg.rawValue
         msg.bcnt = UInt16(data.count)
         msg.cid = cid
-        msg.data = Unmanaged.passUnretained(data as CFData)
+        
+        let cfd = data as CFData
+        msg.data = Unmanaged.passUnretained(cfd)
 
         return withUnsafeMutablePointer(to: &msg) { msgPtr in
             return softu2f_hid_msg_send(ctx, msgPtr)
