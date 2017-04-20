@@ -40,7 +40,7 @@ Delete the `.app`
 $ sudo rm -rf /Applications/SoftU2FTool.app/
 ```
 
-Unload the kernel extension
+Unload the kernel extension (this may fail if a browser is still talking to the driver. Deleting the `.kext` and restarting the system will fix this)
 
 ```
 $ sudo kextunload /Library/Extensions/softu2f.kext
