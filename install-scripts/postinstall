@@ -1,0 +1,38 @@
+#!/bin/bash
+set -e
+
+KEXT="/Library/Extensions/softu2f.kext"
+LAUNCH_AGENT_PLIST="$HOME/Library/LaunchAgents/com.github.SoftU2FTool.plist"
+
+# Make sure the kext is loaded
+kextutil $KEXT
+
+# Write a LaunchAgent plist so app starts at login
+cat > $LAUNCH_AGENT_PLIST << EOT
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>Label</key>
+		<string>com.github.SoftU2FTool</string>
+		<key>Program</key>
+		<string>/Applications/SoftU2FTool.app/Contents/MacOS/SoftU2FTool</string>
+		<key>ProgramArguments</key>
+		<array>
+			<string>/Applications/SoftU2FTool.app/Contents/MacOS/SoftU2FTool</string>
+		</array>
+		<key>RunAtLoad</key>
+		<true/>
+		<key>KeepAlive</key>
+		<true/>
+	</dict>
+</plist>
+EOT
+
+# Make sure the plist is owned by the user (otherwise it runs as root)
+chown ${USER}:staff $LAUNCH_AGENT_PLIST
+
+# Launch the app
+sudo -u${USER} launchctl load $LAUNCH_AGENT_PLIST
+
+exit 0

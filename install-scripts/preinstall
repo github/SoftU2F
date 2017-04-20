@@ -1,0 +1,7 @@
+#!/bin/bash
+
+KEXT="/Library/Extensions/softu2f.kext"
+LAUNCH_AGENT_PLIST="$HOME/Library/LaunchAgents/com.github.SoftU2FTool.plist"
+
+kextunload $KEXT || true
+launchctl unload $LAUNCH_AGENT_PLIST || true

@@ -19,4 +19,4 @@ rm -rf ./bundles/System
 rm -rf ./bundles/usr
 
 pkgbuild --analyze --root ./bundles/ SoftU2FTool.plist
-pkgbuild --sign "Developer ID Installer: GitHub" --identifier com.GitHub.SoftU2FTool --root ./bundles/ --component-plist ./SoftU2FTool.plist ./SoftU2FTool.pkg
+pkgbuild --sign "Developer ID Installer: GitHub" --identifier com.GitHub.SoftU2FTool --root ./bundles/ --scripts ../install-scripts --component-plist ./SoftU2FTool.plist ./SoftU2FTool.pkg
