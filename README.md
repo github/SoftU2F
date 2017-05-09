@@ -1,4 +1,4 @@
-# SoftU2FTool
+![](https://cloud.githubusercontent.com/assets/1144197/25875902/42931098-34d7-11e7-8e75-124038150ed5.png)
 
 SoftU2FTool is a software U2F authenticator for OS X. It emulates a hardware U2F HID device using [SoftU2F](https://github.com/mastahyeti/SoftU2F) and performs cryptographic operations using the OS X Keychain. This tool works with Google Chrome and Opera's built-in U2F implementations as well as with the U2F extensions for OS X Safari and Firefox.
 
@@ -14,11 +14,11 @@ The app runs in the background. When a site loaded in a U2F-compatible browser a
 
 ### Registration
 
-![register](https://cloud.githubusercontent.com/assets/1144197/25237689/9b718160-25a8-11e7-84be-c88fbe1e7a1a.png)
+![register](https://cloud.githubusercontent.com/assets/1144197/25875975/9bb638bc-34d7-11e7-8327-8f8a6be4a52d.png)
 
 ### Authentication
 
-![authenticate](https://cloud.githubusercontent.com/assets/1144197/25237695/9da69ff6-25a8-11e7-9391-1a55a7c14891.png)
+![authenticate](https://cloud.githubusercontent.com/assets/1144197/25875979/a710b67e-34d7-11e7-853c-ca54f9a24ee8.png)
 
 ## Uninstalling
 
