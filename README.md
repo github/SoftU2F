@@ -6,7 +6,7 @@ SoftU2FTool is a software U2F authenticator for OS X. It emulates a hardware U2F
 
 **Disclaimer:** *This app is dangerous and shouldn't be used. It includes a kernel extension that was written by a novice C programmer. This could permanently damage your system. Additionally, while the app was written by a security nerd, it hasn't received outside security review and shouldn't be trusted for authenticating with actual sites.*
 
-You can download the installer [here](https://github.com/mastahyeti/SoftU2FTool/releases/download/0.0.1/SoftU2FTool.pkg).
+You can download the installer [here](https://github.com/mastahyeti/SoftU2FTool/releases/download/0.0.3/SoftU2FTool.pkg).
 
 ## Usage
 
