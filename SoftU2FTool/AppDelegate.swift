@@ -11,13 +11,6 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // TODO: Remove this.
-        if U2FRegistration.deleteAll() {
-            print("Deleted all registrations")
-        } else {
-            print("Error deleting registrations")
-        }
-
         if !U2FAuthenticator.start() {
             print("Error starting authenticator")
         }
