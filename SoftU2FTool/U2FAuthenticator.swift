@@ -78,7 +78,7 @@ class U2FAuthenticator {
 
         UserPresence.test(notification) { success in
             if !success {
-                self.sendError(status: .ConditionsNotSatisfied, cid: cid)
+                // Send no response. Otherwise Chrome will re-prompt immediately.
                 return
             }
 
@@ -134,7 +134,7 @@ class U2FAuthenticator {
 
         UserPresence.test(notification) { success in
             if !success {
-                self.sendError(status: .ConditionsNotSatisfied, cid: cid)
+                // Send no response. Otherwise Chrome will re-prompt immediately.
                 return
             }
 
