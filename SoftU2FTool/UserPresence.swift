@@ -68,7 +68,7 @@ class UserPresence: NSObject {
             let ctx = LAContext()
             
             if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-                ctx.localizedCancelTitle = "Cancel"
+                ctx.localizedCancelTitle = "Reject"
                 ctx.localizedFallbackTitle = "Skip TouchID"
 
                 var prompt: String
@@ -86,7 +86,7 @@ class UserPresence: NSObject {
                     }
                     
                     switch lerr.code {
-                    case .userFallback:
+                    case .userFallback, .touchIDNotAvailable, .touchIDNotEnrolled:
                         self.sendNotification(type)
                     default:
                         self.complete(false)
