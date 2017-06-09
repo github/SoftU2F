@@ -54,6 +54,14 @@
     printf("failed to sign cert\n");
     return 0;
   }
+  
+  unsigned char *buf = NULL;
+  unsigned int len = i2d_X509(self->x509, &buf);
+  printf("Cert: ");
+  for (int i = 0; i < len; i++) {
+    printf("%02x", buf[i]);
+  }
+  printf("\n");
 
   return 1;
 }
@@ -95,6 +103,19 @@
     EC_KEY_free(ec);
     return 0;
   }
+  
+  unsigned char *priv = NULL;
+  int len = i2d_ECPrivateKey(ec, &priv);
+  if (len < 0) {
+    printf("error exporting private key.\n");
+    return 0;
+  }
+  
+  printf("priv: ");
+  for (int i = 0; i < len; i++) {
+    printf("%02x", priv[i]);
+  }
+  printf("\n");
 
   return 1;
 }
