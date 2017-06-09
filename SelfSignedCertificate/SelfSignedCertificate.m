@@ -9,6 +9,10 @@
 #import "private.h"
 #import "public.h"
 
+// Yes, this is the private key from our cert. Yes, this sucks.
+// But, U2F requires that the cert/key be shared between "devices"
+// to prevent user-tracking. Fortunately, "theft" of this key doesn't
+// get you anything...
 const unsigned char *priv = (unsigned char*)
   "\x30\x77\x02\x01\x01\x04\x20\x03\x84\x2a\xc7\xf4\xcd\xe3\x67\xde"
   "\xa0\x56\xc6\x4f\x7f\x3b\x15\xea\x7d\x4b\xc4\x83\xca\xc6\x97\x9f"
@@ -48,8 +52,9 @@ const int cert_len = 281;
   int len;
   unsigned char *buf;
   X509 *x509;
+  const unsigned char *crt_cpy = cert;
   
-  x509 = d2i_X509(NULL, &cert, cert_len);
+  x509 = d2i_X509(NULL, &crt_cpy, cert_len);
   if (x509 == NULL) {
     printf("failed to parse cert\n");
     return nil;
@@ -75,8 +80,9 @@ const int cert_len = 281;
   unsigned int len;
   EC_KEY *ec;
   EVP_PKEY *pkey;
+  const unsigned char *priv_cpy = priv;
   
-  ec = d2i_ECPrivateKey(NULL, &priv, priv_len);
+  ec = d2i_ECPrivateKey(NULL, &priv_cpy, priv_len);
   if (ec == NULL) {
     printf("error importing private key\n");
     return nil;
@@ -135,11 +141,11 @@ const int cert_len = 281;
 
 + (bool)parseX509:(NSData *)data consumed:(NSInteger *)consumed;
 {
-  X509 *crt = NULL;
+  X509 *crt;
   const unsigned char *crtStart, *crtEnd;
   crtStart = crtEnd = [data bytes];
 
-  d2i_X509(&crt, &crtEnd, [data length]);
+  crt = d2i_X509(NULL, &crtEnd, [data length]);
 
   if (crt == NULL) {
     return false;
