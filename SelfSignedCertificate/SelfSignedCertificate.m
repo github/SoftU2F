@@ -11,6 +11,39 @@
 #import "private.h"
 #import "public.h"
 
+const unsigned char *priv = (unsigned char*)
+  "\x30\x77\x02\x01\x01\x04\x20\x03\x84\x2a\xc7\xf4\xcd\xe3\x67\xde"
+  "\xa0\x56\xc6\x4f\x7f\x3b\x15\xea\x7d\x4b\xc4\x83\xca\xc6\x97\x9f"
+  "\x2a\x31\x93\xad\x57\x31\x09\xa0\x0a\x06\x08\x2a\x86\x48\xce\x3d"
+  "\x03\x01\x07\xa1\x44\x03\x42\x00\x04\xf6\x9c\xab\x24\x14\x4b\xb4"
+  "\xef\x87\xf7\x0f\x23\x1c\x5c\xd4\xf5\x78\x04\xac\xf8\xe0\xc6\xb2"
+  "\xb3\xe3\x52\x18\x3d\x80\x39\x1f\x6b\xd2\x79\xd2\x6a\x4c\x83\x64"
+  "\x74\xe6\xc2\xda\x23\x93\xff\xac\x1d\x50\x34\x6c\x5c\x23\x90\x65"
+  "\x57\x93\x3e\xcb\x93\xff\x6e\xde\xd1";
+
+const unsigned char *cert = (unsigned char*)
+  "\x30\x82\x01\x15\x30\x81\xbd\xa0\x03\x02\x01\x02\x02\x01\x01\x30"
+  "\x0a\x06\x08\x2a\x86\x48\xce\x3d\x04\x03\x02\x30\x15\x31\x13\x30"
+  "\x11\x06\x03\x55\x04\x03\x0c\x0a\x6d\x61\x73\x74\x61\x68\x79\x65"
+  "\x74\x69\x30\x1e\x17\x0d\x31\x37\x30\x36\x30\x39\x31\x34\x30\x38"
+  "\x31\x37\x5a\x17\x0d\x31\x37\x30\x36\x31\x30\x31\x34\x30\x38\x31"
+  "\x37\x5a\x30\x15\x31\x13\x30\x11\x06\x03\x55\x04\x03\x0c\x0a\x6d"
+  "\x61\x73\x74\x61\x68\x79\x65\x74\x69\x30\x59\x30\x13\x06\x07\x2a"
+  "\x86\x48\xce\x3d\x02\x01\x06\x08\x2a\x86\x48\xce\x3d\x03\x01\x07"
+  "\x03\x42\x00\x04\xf6\x9c\xab\x24\x14\x4b\xb4\xef\x87\xf7\x0f\x23"
+  "\x1c\x5c\xd4\xf5\x78\x04\xac\xf8\xe0\xc6\xb2\xb3\xe3\x52\x18\x3d"
+  "\x80\x39\x1f\x6b\xd2\x79\xd2\x6a\x4c\x83\x64\x74\xe6\xc2\xda\x23"
+  "\x93\xff\xac\x1d\x50\x34\x6c\x5c\x23\x90\x65\x57\x93\x3e\xcb\x93"
+  "\xff\x6e\xde\xd1\x30\x0a\x06\x08\x2a\x86\x48\xce\x3d\x04\x03\x02"
+  "\x03\x47\x00\x30\x44\x02\x20\x7c\xa5\x9b\x1e\x3a\x0e\xc4\xe1\xff"
+  "\x67\x76\xd3\xde\x93\xbc\x11\x02\xef\xbb\x1b\x18\x52\x32\x03\x07"
+  "\xf0\xea\xb1\xfa\x36\x70\x33\x02\x20\x3f\x92\xec\x0c\xbe\xc6\xd5"
+  "\xe8\x57\x92\x43\xe4\x3e\x4a\xdd\xd4\xd0\x8c\x7b\x6c\x02\x6c\xfd"
+  "\x1e\x8f\x84\x34\x2f\xdf\x81\xe1\x36";
+
+const int priv_len = 121;
+const int cert_len = 281;
+
 @implementation SelfSignedCertificate {
     EVP_PKEY *pkey;
     X509 *x509;
@@ -29,93 +62,42 @@
 }
 
 - (int)generateX509 {
-  self->x509 = X509_new();
+  self->x509 = d2i_X509(NULL, &cert, cert_len);
   if (self->x509 == NULL) {
-    printf("failed to init x509\n");
+    printf("failed to parse cert\n");
     return 0;
   }
-
-  X509_set_version(self->x509, 2);
-  ASN1_INTEGER_set(X509_get_serialNumber(self->x509), 1);
-  X509_gmtime_adj(X509_get_notBefore(self->x509), 0);
-  X509_gmtime_adj(X509_get_notAfter(self->x509), (long)60 * 60 * 24 * 1);
-
-  X509_NAME *name = X509_get_subject_name(self->x509);
-  X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC, (const unsigned char *)"mastahyeti", -1, -1, 0);
-
-  X509_set_issuer_name(self->x509, name);
-
-  if (!X509_set_pubkey(self->x509, self->pkey)) {
-    printf("failed to set public key.\n");
-    return 0;
-  }
-
-  if (!X509_sign(self->x509, self->pkey, EVP_sha256())) {
-    printf("failed to sign cert\n");
-    return 0;
-  }
-  
-  unsigned char *buf = NULL;
-  unsigned int len = i2d_X509(self->x509, &buf);
-  printf("Cert: ");
-  for (int i = 0; i < len; i++) {
-    printf("%02x", buf[i]);
-  }
-  printf("\n");
 
   return 1;
 }
 
 - (int)generateKeyPair {
-  self->pkey = EVP_PKEY_new();
-  if (self->pkey == NULL) {
-    printf("failed to init pkey\n");
-    return 0;
-  }
-
-  EC_KEY *ec = EC_KEY_new();
+  EC_KEY *ec = d2i_ECPrivateKey(NULL, &priv, priv_len);
   if (ec == NULL) {
-    printf("EC_KEY_new failed\n");
-    return 0;
-  }
-
-  EC_GROUP *ecg = EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1);
-  if (ecg == NULL) {
-    printf("EC_GROUP_new_by_curve_name failed\n");
-    return 0;
-  }
-
-  EC_GROUP_set_asn1_flag(ecg, NID_X9_62_prime256v1);
-  EC_KEY_set_group(ec, ecg);
-
-  if (EC_KEY_generate_key(ec) != 1) {
-    printf("couldn't generate ec key\n");
+    printf("error importing private key\n");
     return 0;
   }
 
   if (EC_KEY_check_key(ec) != 1) {
     printf("error checking key\n");
+    EC_KEY_free(ec);
     return 0;
   }
 
-  if (EVP_PKEY_assign_EC_KEY(self->pkey, ec) != 1) {
-    printf("failed to assing ec to pkey\n");
+  self->pkey = EVP_PKEY_new();
+  if (self->pkey == NULL) {
+    printf("failed to init pkey\n");
     EC_KEY_free(ec);
     return 0;
   }
   
-  unsigned char *priv = NULL;
-  int len = i2d_ECPrivateKey(ec, &priv);
-  if (len < 0) {
-    printf("error exporting private key.\n");
+  if (EVP_PKEY_assign_EC_KEY(self->pkey, ec) != 1) {
+    printf("failed to assing ec to pkey\n");
+    EC_KEY_free(ec);
+    EVP_PKEY_free(self->pkey);
+    self->pkey = NULL;
     return 0;
   }
-  
-  printf("priv: ");
-  for (int i = 0; i < len; i++) {
-    printf("%02x", priv[i]);
-  }
-  printf("\n");
 
   return 1;
 }
@@ -154,10 +136,15 @@
 }
 
 - (void)dealloc {
-  X509_free(self->x509);
-  self->x509 = NULL;
-  EVP_PKEY_free(self->pkey);
-  self->pkey = NULL;
+  if (self->x509 != NULL) {
+    X509_free(self->x509);
+    self->x509 = NULL;
+  }
+
+  if (self->pkey != NULL) {
+    EVP_PKEY_free(self->pkey);
+    self->pkey = NULL;
+  }
 }
 
 + (bool)parseX509:(NSData *)data consumed:(NSInteger *)consumed;
