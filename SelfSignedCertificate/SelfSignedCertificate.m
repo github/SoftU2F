@@ -6,8 +6,6 @@
 //  Copyright © 2017 GitHub, inc. All rights reserved.
 //
 
-// http://opensource.apple.com/source/OpenSSL/OpenSSL-22/openssl/demos/x509/mkcert.c
-
 #import "private.h"
 #import "public.h"
 
@@ -44,107 +42,95 @@ const unsigned char *cert = (unsigned char*)
 const int priv_len = 121;
 const int cert_len = 281;
 
-@implementation SelfSignedCertificate {
-    EVP_PKEY *pkey;
-    X509 *x509;
-}
+@implementation SelfSignedCertificate {}
 
-- (id)init {
-  self = [super init];
-  if (self) {
-    if ([self generateKeyPair] && [self generateX509]) {
-      printf("SelfSignedCertificate initialized\n");
-    } else {
-      printf("Error initializing SelfSignedCertificate\n");
-    }
-  }
-  return self;
-}
-
-- (int)generateX509 {
-  self->x509 = d2i_X509(NULL, &cert, cert_len);
-  if (self->x509 == NULL) {
++ (NSData *)toDer {
+  int len;
+  unsigned char *buf;
+  X509 *x509;
+  
+  x509 = d2i_X509(NULL, &cert, cert_len);
+  if (x509 == NULL) {
     printf("failed to parse cert\n");
-    return 0;
+    return nil;
   }
 
-  return 1;
-}
-
-- (int)generateKeyPair {
-  EC_KEY *ec = d2i_ECPrivateKey(NULL, &priv, priv_len);
-  if (ec == NULL) {
-    printf("error importing private key\n");
-    return 0;
-  }
-
-  if (EC_KEY_check_key(ec) != 1) {
-    printf("error checking key\n");
-    EC_KEY_free(ec);
-    return 0;
-  }
-
-  self->pkey = EVP_PKEY_new();
-  if (self->pkey == NULL) {
-    printf("failed to init pkey\n");
-    EC_KEY_free(ec);
-    return 0;
+  buf = NULL;
+  len = i2d_X509(x509, &buf);
+  if (len < 0) {
+    printf("failed to export cert\n");
+    X509_free(x509);
+    return nil;
   }
   
-  if (EVP_PKEY_assign_EC_KEY(self->pkey, ec) != 1) {
-    printf("failed to assing ec to pkey\n");
-    EC_KEY_free(ec);
-    EVP_PKEY_free(self->pkey);
-    self->pkey = NULL;
-    return 0;
-  }
-
-  return 1;
-}
-
-- (NSData *)toDer {
-  unsigned char *buf = NULL;
-  unsigned int len = i2d_X509(self->x509, &buf);
+  X509_free(x509);
+  
   return [[NSData alloc] initWithBytes:buf length:len];
 }
 
-- (NSData *)signData:(NSData *)msg {
++ (NSData *)signData:(NSData *)msg {
   EVP_MD_CTX ctx;
   const unsigned char *cmsg = (const unsigned char *)[msg bytes];
-  unsigned char *sig = (unsigned char *)malloc(EVP_PKEY_size(self->pkey));
+  unsigned char *sig;
   unsigned int len;
+  EC_KEY *ec;
+  EVP_PKEY *pkey;
+  
+  ec = d2i_ECPrivateKey(NULL, &priv, priv_len);
+  if (ec == NULL) {
+    printf("error importing private key\n");
+    return nil;
+  }
+  
+  if (EC_KEY_check_key(ec) != 1) {
+    printf("error checking key\n");
+    EC_KEY_free(ec);
+    return nil;
+  }
+  
+  pkey = EVP_PKEY_new();
+  if (pkey == NULL) {
+    printf("failed to init pkey\n");
+    EC_KEY_free(ec);
+    return nil;
+  }
+  
+  if (EVP_PKEY_assign_EC_KEY(pkey, ec) != 1) {
+    printf("failed to assing ec to pkey\n");
+    EC_KEY_free(ec);
+    EVP_PKEY_free(pkey);
+    return nil;
+  }
+  
+  // `ec` memory is managed by `pkey` from here.
 
   if (EVP_SignInit(&ctx, EVP_sha256()) != 1) {
-    free(sig);
     printf("failed to init signing context\n");
+    EVP_PKEY_free(pkey);
     return nil;
   };
 
   if (EVP_SignUpdate(&ctx, cmsg, (unsigned int)[msg length]) != 1) {
-    free(sig);
     printf("failed to update digest\n");
+    EVP_PKEY_free(pkey);
+    return nil;
+  }
+  
+  sig = (unsigned char *)malloc(EVP_PKEY_size(pkey));
+  if (sig == NULL) {
+    printf("failed to malloc for sig\n");
+    EVP_PKEY_free(pkey);
     return nil;
   }
 
-  if (EVP_SignFinal(&ctx, sig, &len, self->pkey) != 1) {
-    free(sig);
+  if (EVP_SignFinal(&ctx, sig, &len, pkey) != 1) {
     printf("failed to finalize digest\n");
+    free(sig);
+    EVP_PKEY_free(pkey);
     return nil;
   }
 
   return [[NSData alloc] initWithBytes:sig length:len];
-}
-
-- (void)dealloc {
-  if (self->x509 != NULL) {
-    X509_free(self->x509);
-    self->x509 = NULL;
-  }
-
-  if (self->pkey != NULL) {
-    EVP_PKEY_free(self->pkey);
-    self->pkey = NULL;
-  }
 }
 
 + (bool)parseX509:(NSData *)data consumed:(NSInteger *)consumed;

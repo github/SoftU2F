@@ -26,8 +26,6 @@ class U2FAuthenticator {
         return ua.stop()
     }
 
-    let certificate = SelfSignedCertificate()!
-
     init?() {
         guard let uh: U2FHID = U2FHID.shared else { return nil }
 
@@ -103,13 +101,13 @@ class U2FAuthenticator {
             sigPayload.append(reg.keyHandle)
             sigPayload.append(publicKey)
 
-            guard let sig = self.certificate.sign(sigPayload) else {
+            guard let sig = SelfSignedCertificate.sign(sigPayload) else {
                 print("Error signing with certificate")
                 self.sendError(status: .OtherError, cid: cid)
                 return
             }
 
-            let resp = RegisterResponse(publicKey: publicKey, keyHandle: reg.keyHandle, certificate: self.certificate.toDer(), signature: sig)
+            let resp = RegisterResponse(publicKey: publicKey, keyHandle: reg.keyHandle, certificate: SelfSignedCertificate.toDer(), signature: sig)
 
             self.sendMsg(msg: resp, cid: cid)
         }

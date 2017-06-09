@@ -13,9 +13,8 @@
 
 @interface SelfSignedCertificate : NSObject
 
-- (id)init;
-- (NSData *)toDer;
-- (NSData *)signData:(NSData *)msg;
++ (NSData *)toDer;
++ (NSData *)signData:(NSData *)msg;
 + (bool)parseX509:(NSData *)data consumed:(NSInteger *)consumed;
 
 @end
