@@ -17,8 +17,24 @@ class UserPresence: NSObject {
 
     typealias Callback = (_ success: Bool) -> Void
 
-    static var current: UserPresence?
     static var skip = false
+
+    // Hacks to avoid a race between reads/writes to current.
+    static let currentAccessQueue = DispatchQueue(label: "currentAccessQueue")
+    static var _current: UserPresence?
+    static var current: UserPresence? {
+        get {
+            return currentAccessQueue.sync {
+                return _current
+            }
+        }
+
+        set(newValue) {
+            currentAccessQueue.sync {
+                _current = newValue
+            }
+        }
+    }
 
     // Display a notification, wait for the user to click it, and call the callback with `true`.
     // Calls callback with `false` if another test is done while we're waiting for this one.
