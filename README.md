@@ -83,3 +83,8 @@ There are two parts to Soft U2F: the driver and the app. To use a modified versi
 ## Known app-IDs/facets
 
 Every website using U2F has an app-ID. For example, the app-ID of [Yubico's U2F demo page](https://demo.yubico.com/u2f) is `https://demo.yubico.com`. When the low-level U2F authenticator receives a request to register/authenticate a website, it doesn't receive the friendly app-ID string. Instead, it receives a SHA256 digest of the app-ID. To be able to show a helpful alert message when a website is trying to register/authenticate, a list of app-ID digests is maintained in this repository. You can find the list [here](https://github.com/github/SoftU2F/blob/master/SoftU2FTool/KnownFacets.swift). If your company's app-ID is missing from this list, open a pull request to add it.
+
+
+## License
+
+This project is MIT licensed, except for the files in [`/inc`](https://github.com/github/SoftU2F/tree/master/inc), which are included with their own licenses.
