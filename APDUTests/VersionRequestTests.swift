@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 2/6/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import XCTest
@@ -13,7 +12,7 @@ class VersionRequestTests: XCTestCase {
     func testChromeRequest() throws {
         let r = Data(base64Encoded: "AAMAAAAAAA==")!
         let c = try VersionRequest(raw: r)
-        
+
         XCTAssertEqual(c.header.cla, CommandClass.Reserved)
         XCTAssertEqual(c.header.ins, CommandCode.Version)
         XCTAssertEqual(c.header.p1, 0x00)
@@ -23,7 +22,7 @@ class VersionRequestTests: XCTestCase {
         XCTAssertEqual(c.trailer.maxResponse, MaxResponseSize)
         XCTAssertEqual(c.raw, r)
     }
-    
+
     func testRequest() {
         let c = VersionRequest()
 

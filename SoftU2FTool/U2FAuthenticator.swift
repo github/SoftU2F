@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/25/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -44,7 +43,7 @@ class U2FAuthenticator {
     func installMsgHandler() {
         u2fhid.handle(.Msg) { (_ msg: softu2f_hid_message) -> Bool in
             let data = msg.data.takeUnretainedValue() as Data
-            
+
             do {
                 let ins = try APDU.commandType(raw: data)
 
@@ -63,14 +62,14 @@ class U2FAuthenticator {
             } catch {
                 self.sendError(status: .OtherError, cid: msg.cid)
             }
-            
+
             return true
         }
     }
 
     func handleRegisterRequest(_ raw: Data, cid: UInt32) throws {
         let req = try APDU.RegisterRequest(raw: raw)
-        
+
         let facet = KnownFacets[req.applicationParameter]
         let notification = UserPresence.Notification.Register(facet: facet)
 
@@ -94,7 +93,7 @@ class U2FAuthenticator {
 
             let payloadSize = 1 + req.applicationParameter.count + req.challengeParameter.count + reg.keyHandle.count + publicKey.count
             var sigPayload = Data(capacity: payloadSize)
-            
+
             sigPayload.append(UInt8(0x00)) // reserved
             sigPayload.append(req.applicationParameter)
             sigPayload.append(req.challengeParameter)
@@ -115,7 +114,7 @@ class U2FAuthenticator {
 
     func handleAuthenticationRequest(_ raw: Data, cid: UInt32) throws {
         let req = try APDU.AuthenticationRequest(raw: raw)
-        
+
         guard let reg = U2FRegistration(keyHandle: req.keyHandle, applicationParameter: req.applicationParameter) else {
             sendError(status: .WrongData, cid: cid)
             return
@@ -138,7 +137,7 @@ class U2FAuthenticator {
 
             let counter = reg.counter
             var ctrBigEndian = counter.bigEndian
-            
+
             let payloadSize = req.applicationParameter.count + 1 + MemoryLayout<UInt32>.size + req.challengeParameter.count
             var sigPayload = Data(capacity: payloadSize)
 

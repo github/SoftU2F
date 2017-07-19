@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/30/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -50,14 +49,14 @@ class U2FRegistration {
 
         // Read our application parameter from the keychain and make sure it matches.
         guard let appTag = keyPair.applicationTag else { return nil }
-        
+
         let counterSize = MemoryLayout<UInt32>.size
         let appTagSize = Int(U2F_APPID_SIZE)
-        
+
         if appTag.count != counterSize + appTagSize {
             return nil
         }
-        
+
         counter = appTag.withUnsafeBytes { (ptr:UnsafePointer<UInt32>) -> UInt32 in
             return ptr.pointee.bigEndian
         }
@@ -93,7 +92,7 @@ class U2FRegistration {
         let appTagSize = Int(U2F_APPID_SIZE)
         var data = Data(capacity: counterSize + appTagSize)
         var ctrBigEndian = counter.bigEndian
-        
+
         data.append(Data(bytes: &ctrBigEndian, count: counterSize))
         data.append(applicationParameter)
 

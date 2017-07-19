@@ -3,7 +3,6 @@
 //  SelfSignedCertificate
 //
 //  Created by Benjamin P Toews on 8/19/16.
-//  Copyright © 2017 GitHub, inc. All rights reserved.
 //
 
 #ifndef public_h

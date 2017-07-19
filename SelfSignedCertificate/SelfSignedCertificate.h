@@ -3,7 +3,6 @@
 //  SelfSignedCertificate
 //
 //  Created by Benjamin P Toews on 2/7/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -15,5 +14,3 @@ FOUNDATION_EXPORT double SelfSignedCertificateVersionNumber;
 FOUNDATION_EXPORT const unsigned char SelfSignedCertificateVersionString[];
 
 #import "public.h"
-
-

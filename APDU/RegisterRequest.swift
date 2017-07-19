@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 9/10/16.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +11,7 @@ public struct RegisterRequest: RawConvertible {
     public let header: CommandHeader
     public let body: Data
     public let trailer: CommandTrailer
-    
+
     public var challengeParameter: Data {
         let lowerBound = 0
         let upperBound = lowerBound + U2F_CHAL_SIZE
@@ -29,7 +28,7 @@ public struct RegisterRequest: RawConvertible {
         let writer = DataWriter()
         writer.writeData(challengeParameter)
         writer.writeData(applicationParameter)
-        
+
         self.body = writer.buffer
         self.header = CommandHeader(ins: .Register, dataLength: body.count)
         self.trailer = CommandTrailer(noBody: false)
@@ -42,7 +41,7 @@ extension RegisterRequest: Command {
         self.body = body
         self.trailer = trailer
     }
-    
+
     public func validateBody() throws {
         if body.count != U2F_CHAL_SIZE + U2F_APPID_SIZE {
             throw ResponseStatus.WrongLength

@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/24/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Cocoa
@@ -22,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             print("Error stopping authenticator")
         }
     }
-    
+
     func applicationDidBecomeActive(_ notification: Notification) {
         // Chrome gives ignores our U2F responses if it isn't active when we send them.
         // This hack should give focus back to Chrome immediately after the user interacts

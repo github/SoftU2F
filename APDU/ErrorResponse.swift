@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/26/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -23,7 +22,7 @@ extension ErrorResponse: Response {
         self.body = body
         self.trailer = trailer
     }
-    
+
     func validateBody() throws {
         if body.count != 0 {
             throw ResponseError.BadSize

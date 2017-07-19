@@ -3,7 +3,6 @@
 //  SecurityKey
 //
 //  Created by Benjamin P Toews on 8/19/16.
-//  Copyright © 2017 GitHub, inc. All rights reserved.
 //
 
 #import "private.h"
@@ -53,7 +52,7 @@ const int cert_len = 281;
   unsigned char *buf;
   X509 *x509;
   const unsigned char *crt_cpy = cert;
-  
+
   x509 = d2i_X509(NULL, &crt_cpy, cert_len);
   if (x509 == NULL) {
     printf("failed to parse cert\n");
@@ -67,9 +66,9 @@ const int cert_len = 281;
     X509_free(x509);
     return nil;
   }
-  
+
   X509_free(x509);
-  
+
   return [[NSData alloc] initWithBytes:buf length:len];
 }
 
@@ -81,33 +80,33 @@ const int cert_len = 281;
   EC_KEY *ec;
   EVP_PKEY *pkey;
   const unsigned char *priv_cpy = priv;
-  
+
   ec = d2i_ECPrivateKey(NULL, &priv_cpy, priv_len);
   if (ec == NULL) {
     printf("error importing private key\n");
     return nil;
   }
-  
+
   if (EC_KEY_check_key(ec) != 1) {
     printf("error checking key\n");
     EC_KEY_free(ec);
     return nil;
   }
-  
+
   pkey = EVP_PKEY_new();
   if (pkey == NULL) {
     printf("failed to init pkey\n");
     EC_KEY_free(ec);
     return nil;
   }
-  
+
   if (EVP_PKEY_assign_EC_KEY(pkey, ec) != 1) {
     printf("failed to assing ec to pkey\n");
     EC_KEY_free(ec);
     EVP_PKEY_free(pkey);
     return nil;
   }
-  
+
   // `ec` memory is managed by `pkey` from here.
 
   if (EVP_SignInit(&ctx, EVP_sha256()) != 1) {
@@ -121,7 +120,7 @@ const int cert_len = 281;
     EVP_PKEY_free(pkey);
     return nil;
   }
-  
+
   sig = (unsigned char *)malloc(EVP_PKEY_size(pkey));
   if (sig == NULL) {
     printf("failed to malloc for sig\n");
