@@ -4,9 +4,19 @@ set -e
 
 REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
 BUILD_DIR=$REPO_DIR/build
+KEXT_PATH=$BUILD_DIR/Debug/softu2f.kext
 
-# Build softu2f.kext
-$REPO_DIR/SoftU2F/script/build
+if [ -d $KEXT_PATH ] && [ ! -w $KEXT_PATH ]; then
+  echo "softu2f.kext owned by root. Removing before build."
+  sudo rm -rf $KEXT_PATH
+fi
+
+echo "Building softu2f.kext"
+if ! xcodebuild -scheme SoftU2FDriver SYMROOT=$BUILD_DIR &> /dev/null; then
+  echo "Error building softu2f.kext"
+  exit 1
+fi
+echo "Built softu2f.kext"
 
 echo "Building SoftU2FTool.app"
 if ! xcodebuild -scheme SoftU2FTool -project SoftU2FTool.xcodeproj SYMROOT=$BUILD_DIR &> /dev/null; then

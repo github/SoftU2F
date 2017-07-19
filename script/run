@@ -4,9 +4,25 @@ set -e
 
 REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
 BUILD_DIR=$REPO_DIR/build
+KEXT_PATH=$BUILD_DIR/Debug/softu2f.kext
+BUNDLE_ID=com.github.SoftU2FDriver
 
-# Load softu2f.kext
-$REPO_DIR/SoftU2F/script/load
+if kextstat -b $BUNDLE_ID | grep $BUNDLE_ID &> /dev/null; then
+  echo "Unloading softu2f.kext"
+  if ! sudo kextunload -b $BUNDLE_ID &> /dev/null; then
+    echo "Error unloading softu2f.kext. Kill any applications using it and try again."
+    exit 1
+  fi
+fi
+
+# Ensure kext is owned by root.
+sudo chown -R root:wheel $KEXT_PATH
+
+echo "Loading softu2f.kext"
+if ! sudo kextutil $KEXT_PATH; then
+  echo "Error loading softu2f.kext"
+  exit 1
+fi
 
 # Run it
 $BUILD_DIR/Debug/SoftU2FTool.app/Contents/MacOS/SoftU2FTool
