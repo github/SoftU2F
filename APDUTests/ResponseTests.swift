@@ -13,7 +13,7 @@ class ResponseTests: XCTestCase {
     func testRegisterResponse() throws {
         let pk = randData(length: U2F_EC_POINT_SIZE)
         let kh = randData(length: 50)
-        let crt: Data = SelfSignedCertificate().toDer()
+        let crt: Data = SelfSignedCertificate.toDer()
         let sig = randData(length: 20)
 
         let r = RegisterResponse(publicKey: pk, keyHandle: kh, certificate: crt, signature: sig)
