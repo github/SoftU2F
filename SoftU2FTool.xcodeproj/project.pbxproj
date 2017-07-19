@@ -716,8 +716,9 @@
 					};
 					51F0901C1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = VEKTX9H2N7;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 51F0900B1E37E8C600F03AD3;
 					};
 					F725EBC31F1FAD3C000A003C = {
@@ -1142,9 +1143,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/inc";
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -1165,9 +1166,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VEKTX9H2N7;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/inc";
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";

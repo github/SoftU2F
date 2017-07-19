@@ -51,6 +51,11 @@
                BlueprintName = "SoftU2FToolTests"
                ReferencedContainer = "container:SoftU2FTool.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "IntegrationTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
