@@ -1,6 +1,6 @@
 ![](https://user-images.githubusercontent.com/1144197/28190263-470a80d2-67e7-11e7-81e6-17895d70bf75.png)
 
-SoftU2FTool is a software U2F authenticator for OS X. It emulates a hardware U2F HID device using [SoftU2F](https://github.com/mastahyeti/SoftU2F) and performs cryptographic operations using the OS X Keychain. This tool works with Google Chrome and Opera's built-in U2F implementations as well as with the U2F extensions for OS X Safari and Firefox.
+Soft U2F is a software U2F authenticator for OS X. It emulates a hardware U2F HID device and performs cryptographic operations using the OS X Keychain. This tool works with Google Chrome and Opera's built-in U2F implementations as well as with the U2F extensions for OS X Safari and Firefox.
 
 ## Installing
 
@@ -68,7 +68,7 @@ script/build
 
 ### Running
 
-There are two parts to SoftU2FTool: the kext and the app. To use a modified version of the kext, you must [disable System Integrity Protection](https://developer.apple.com/library/content/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html#//apple_ref/doc/uid/TP40016462-CH5-SW1). The app can be modified and run via Xcode normally.
+There are two parts to Soft U2F: the driver and the app. To use a modified version of the driver, you must [disable System Integrity Protection](https://developer.apple.com/library/content/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html#//apple_ref/doc/uid/TP40016462-CH5-SW1). The app can be modified and run via Xcode normally.
 
 ## Known app-IDs/facets
 

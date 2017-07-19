@@ -5,7 +5,7 @@ set -e
 REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
 BUILD_DIR=$REPO_DIR/build
 
-rm -rf $BUILD_DIR
+sudo rm -rf $BUILD_DIR
 mkdir $BUILD_DIR
 
 xcodebuild -scheme SoftU2FTool install DSTROOT=$BUILD_DIR/bundles

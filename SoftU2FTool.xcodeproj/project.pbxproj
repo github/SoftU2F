@@ -1100,7 +1100,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SoftU2F/SoftU2F/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/inc/**";
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
@@ -1124,7 +1124,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SoftU2F/SoftU2F/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/inc/**";
 				INFOPLIST_FILE = SoftU2FTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
@@ -1471,6 +1471,7 @@
 				F725EBE41F1FB09D000A003C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F738F4FA1E4A2CCC005680A2 /* Build configuration list for PBXNativeTarget "APDU" */ = {
 			isa = XCConfigurationList;
