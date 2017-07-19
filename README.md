@@ -2,6 +2,8 @@
 
 Soft U2F is a software U2F authenticator for OS X. It emulates a hardware U2F HID device and performs cryptographic operations using the OS X Keychain. This tool works with Google Chrome and Opera's built-in U2F implementations as well as with the U2F extensions for OS X Safari and Firefox.
 
+We take security the security of this project seriously. Report any security vulnerabilities to the [GitHub Bug Bounty Program](https://hackerone.com/github).
+
 ## Installing
 
 You can download the installer [here](https://github.com/github/SoftU2F/releases/download/0.0.4/SoftU2F.pkg).
@@ -51,6 +53,14 @@ $ sudo rm -rf /Library/Extensions/softu2f.kext
 ```
 
 Done
+
+## Security considerations
+
+A USB authenticator stores key material in hardware, whereas Soft U2F stores its keys in the macOS Keychain. There is an argument to be made that it is more secure to store keys in hardware since malware running on your computer can access the contents of your Keychain but cannot export the contents of a hardware authenticator. On the other hand, malware can also access your browser's cookies and has full access to all authenticated website sessions, regardless of where U2F keys are stored.
+
+In the case of malware installed on your computer, one meaningful difference between hardware and software key storage for U2F is the duration of the compromise. With hardware key storage, you are only compromised while the malware is running on your computer. With software key storage, you could continue to be compromised, even after the malware has been removed.
+
+Some people may decide the attack scenario above is worth the usability tradeoff of hardware key storage. But, for many, the security of software-based U2F is sufficient and helps to mitigate against many common attacks such as password dumps, brute force attacks, and phishing related exploits.
 
 ## Hacking
 
