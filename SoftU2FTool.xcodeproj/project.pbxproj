@@ -1146,10 +1146,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
-				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
-					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
-				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/inc";
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/libu2f-host/1.1.3/lib";
@@ -1171,10 +1168,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VEKTX9H2N7;
-				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/SoftU2F/SoftU2F/**",
-					"$(PROJECT_DIR)/SoftU2FToolTests/inc",
-				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/inc";
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/libu2f-host/1.1.3/lib";
