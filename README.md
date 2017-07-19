@@ -23,19 +23,19 @@ The app runs in the background. When a site loaded in a U2F-compatible browser a
 Unload the launchd agent
 
 ```
-$ launchctl unload ~/Library/LaunchAgents/com.github.SoftU2FTool.plist
+$ launchctl unload ~/Library/LaunchAgents/com.github.SoftU2F.plist
 ```
 
 Delete the launch agent plist
 
 ```
-$ rm ~/Library/LaunchAgents/com.github.SoftU2FTool.plist
+$ rm ~/Library/LaunchAgents/com.github.SoftU2F.plist
 ```
 
 Delete the `.app`
 
 ```
-$ sudo rm -rf /Applications/SoftU2FTool.app/
+$ sudo rm -rf /Applications/SoftU2F.app/
 ```
 
 Unload the kernel extension (this may fail if a browser is still talking to the driver. Deleting the `.kext` and restarting the system will fix this)
@@ -62,7 +62,7 @@ You must have Xcode Command Line Tools installed to build this project.
 # Install Commaned Line Tools
 xcode-select --install
 
-# Build softu2f.kext and SoftU2FTool.app.
+# Build softu2f.kext and SoftU2F.app.
 script/build
 ```
 

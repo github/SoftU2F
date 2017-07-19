@@ -1,6 +1,6 @@
 //
 //  RegisterResponse.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 9/11/16.
 //  Copyright © 2017 GitHub. All rights reserved.

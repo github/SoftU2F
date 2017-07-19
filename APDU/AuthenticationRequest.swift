@@ -1,6 +1,6 @@
 //
 //  AuthenticationRequest.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 9/14/16.
 //  Copyright © 2017 GitHub. All rights reserved.
@@ -12,7 +12,7 @@ public struct AuthenticationRequest: RawConvertible {
     public let header: CommandHeader
     public let body: Data
     public let trailer: CommandTrailer
-    
+
     public var control: Control {
         return Control(rawValue: header.p1) ?? .Invalid
     }
@@ -28,7 +28,7 @@ public struct AuthenticationRequest: RawConvertible {
         let upperBound = lowerBound + U2F_APPID_SIZE
         return body.subdata(in: lowerBound..<upperBound)
     }
-    
+
     var keyHandleLength: Int {
         return Int(body[U2F_CHAL_SIZE + U2F_APPID_SIZE])
     }
@@ -45,7 +45,7 @@ public struct AuthenticationRequest: RawConvertible {
         writer.writeData(applicationParameter)
         writer.write(UInt8(keyHandle.count))
         writer.writeData(keyHandle)
-        
+
         self.body = writer.buffer
         self.header = CommandHeader(ins: .Authenticate, p1: control.rawValue, dataLength: body.count)
         self.trailer = CommandTrailer(noBody: false)
@@ -58,17 +58,17 @@ extension AuthenticationRequest: Command {
         self.body = body
         self.trailer = trailer
     }
-    
+
     public func validateBody() throws {
         // Make sure it's at least long enough to have key-handle length.
         if body.count < U2F_CHAL_SIZE + U2F_APPID_SIZE + 1 {
             throw ResponseStatus.WrongLength
         }
-        
+
         if body.count != U2F_CHAL_SIZE + U2F_APPID_SIZE + 1 + keyHandleLength {
             throw ResponseStatus.WrongLength
         }
-        
+
         if control == .Invalid {
             throw ResponseStatus.OtherError
         }

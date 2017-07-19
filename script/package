@@ -8,7 +8,7 @@ BUILD_DIR=$REPO_DIR/build
 sudo rm -rf $BUILD_DIR
 mkdir $BUILD_DIR
 
-xcodebuild -scheme SoftU2FTool install DSTROOT=$BUILD_DIR/bundles
+xcodebuild -scheme SoftU2F install DSTROOT=$BUILD_DIR/bundles
 
 cd $BUILD_DIR
 
@@ -18,5 +18,5 @@ cd $BUILD_DIR
 rm -rf ./bundles/System
 rm -rf ./bundles/usr
 
-pkgbuild --analyze --root ./bundles/ SoftU2FTool.plist
-pkgbuild --sign "Developer ID Installer: GitHub" --identifier com.GitHub.SoftU2FTool --root ./bundles/ --scripts ../install-scripts --component-plist ./SoftU2FTool.plist ./SoftU2FTool.pkg
+pkgbuild --analyze --root ./bundles/ SoftU2F.plist
+pkgbuild --sign "Developer ID Installer: GitHub" --identifier com.GitHub.SoftU2F --root ./bundles/ --scripts ../install-scripts --component-plist ./SoftU2F.plist ./SoftU2F.pkg

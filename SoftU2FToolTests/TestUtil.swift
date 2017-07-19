@@ -1,13 +1,13 @@
 //
 //  Util.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 9/10/16.
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import XCTest
-@testable import SoftU2FTool
+@testable import SoftU2F
 
 func tupleDigestEqual(_ a: SHA256.TupleDigest, _ b: SHA256.TupleDigest) -> Bool {
     return a.0 == b.0 &&

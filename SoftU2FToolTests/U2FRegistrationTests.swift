@@ -1,13 +1,13 @@
 //
 //  U2FRegistrationTests.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/31/17.
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import XCTest
-@testable import SoftU2FTool
+@testable import SoftU2F
 
 class U2FRegistrationTests: SoftU2FTestCase {
     var makeKey: U2FRegistration? { return U2FRegistration(applicationParameter: randData(length: 32)) }

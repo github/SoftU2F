@@ -1,13 +1,13 @@
 //
 //  UtilsTests.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 2/1/17.
 //  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import XCTest
-@testable import SoftU2FTool
+@testable import SoftU2F
 
 class UtilsTests: XCTestCase {
     func testPadUnpadKeyHandle() {

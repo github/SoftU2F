@@ -2,7 +2,7 @@
 set -e
 
 KEXT="/Library/Extensions/softu2f.kext"
-LAUNCH_AGENT_PLIST="$HOME/Library/LaunchAgents/com.github.SoftU2FTool.plist"
+LAUNCH_AGENT_PLIST="$HOME/Library/LaunchAgents/com.github.SoftU2F.plist"
 
 # Make sure the kext is loaded
 kextutil $KEXT
@@ -14,12 +14,12 @@ cat > $LAUNCH_AGENT_PLIST << EOT
 <plist version="1.0">
 	<dict>
 		<key>Label</key>
-		<string>com.github.SoftU2FTool</string>
+		<string>com.github.SoftU2F</string>
 		<key>Program</key>
-		<string>/Applications/SoftU2FTool.app/Contents/MacOS/SoftU2FTool</string>
+		<string>/Applications/SoftU2F.app/Contents/MacOS/SoftU2F</string>
 		<key>ProgramArguments</key>
 		<array>
-			<string>/Applications/SoftU2FTool.app/Contents/MacOS/SoftU2FTool</string>
+			<string>/Applications/SoftU2F.app/Contents/MacOS/SoftU2F</string>
 		</array>
 		<key>RunAtLoad</key>
 		<true/>

@@ -18,9 +18,9 @@ if ! xcodebuild -scheme SoftU2FDriver SYMROOT=$BUILD_DIR &> /dev/null; then
 fi
 echo "Built softu2f.kext"
 
-echo "Building SoftU2FTool.app"
-if ! xcodebuild -scheme SoftU2FTool -project SoftU2FTool.xcodeproj SYMROOT=$BUILD_DIR &> /dev/null; then
-  echo "Error building SoftU2FTool.app"
+echo "Building SoftU2F.app"
+if ! xcodebuild -scheme SoftU2F -project SoftU2F.xcodeproj SYMROOT=$BUILD_DIR &> /dev/null; then
+  echo "Error building SoftU2F.app"
   exit 1
 fi
-echo "Built SoftU2FTool.app"
+echo "Built SoftU2F.app"

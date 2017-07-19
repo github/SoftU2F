@@ -176,19 +176,19 @@
 		5131C1B11E3B9EA1006A820C /* libu2f-host.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libu2f-host.a"; path = "../../../../usr/local/Cellar/libu2f-host/1.1.3/lib/libu2f-host.a"; sourceTree = "<group>"; };
 		514F3D811E43C833008FA513 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		514F3D861E43E828008FA513 /* KeyPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
-		518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FTool-Bridging-Header.h"; sourceTree = "<group>"; };
+		518537BF1E380E4600600911 /* SoftU2F-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2F-Bridging-Header.h"; sourceTree = "<group>"; };
 		5190B6111E3BFE3D00E6FE06 /* UserPresence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPresence.swift; sourceTree = "<group>"; };
 		51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FAuthenticator.swift; sourceTree = "<group>"; };
-		51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FToolTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		51E214531E3822B8005B2864 /* SoftU2FTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoftU2FTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		51E2145D1E3823E0005B2864 /* SHA256Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256Tests.swift; sourceTree = "<group>"; };
 		51E2145F1E3823E7005B2864 /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		51E214611E382521005B2864 /* WebSafeBase64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSafeBase64.swift; sourceTree = "<group>"; };
 		51E214631E382529005B2864 /* WebSafeBase64Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSafeBase64Tests.swift; sourceTree = "<group>"; };
 		51EF60B11E427EE200D429F2 /* UtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
-		51F0900C1E37E8C600F03AD3 /* SoftU2FTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoftU2FTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		51F0900C1E37E8C600F03AD3 /* SoftU2F.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoftU2F.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F0900F1E37E8C600F03AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51F090181E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftU2FToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		51F0901D1E37E8C600F03AD3 /* SoftU2FTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftU2FTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F090231E37E8C600F03AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FRegistration.swift; sourceTree = "<group>"; };
 		51FE30EE1E40F3DB00BAE824 /* U2FRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = U2FRegistrationTests.swift; sourceTree = "<group>"; };
@@ -331,8 +331,8 @@
 			children = (
 				F725EBC51F1FAD3C000A003C /* SoftU2FDriver */,
 				F725EBE71F1FB0BD000A003C /* SoftU2FDriverLib */,
-				51F0900E1E37E8C600F03AD3 /* SoftU2FTool */,
-				51F090201E37E8C600F03AD3 /* SoftU2FToolTests */,
+				51F0900E1E37E8C600F03AD3 /* SoftU2F */,
+				51F090201E37E8C600F03AD3 /* SoftU2FTests */,
 				F738F4F21E4A2CCB005680A2 /* APDU */,
 				F738F5301E4A2E8A005680A2 /* APDUTests */,
 				F738F55B1E4A31DE005680A2 /* SelfSignedCertificate */,
@@ -345,8 +345,8 @@
 		51F0900D1E37E8C600F03AD3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				51F0900C1E37E8C600F03AD3 /* SoftU2FTool.app */,
-				51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */,
+				51F0900C1E37E8C600F03AD3 /* SoftU2F.app */,
+				51F0901D1E37E8C600F03AD3 /* SoftU2FTests.xctest */,
 				F738F4F11E4A2CCB005680A2 /* APDU.framework */,
 				F738F52F1E4A2E8A005680A2 /* APDUTests.xctest */,
 				F738F55A1E4A31DE005680A2 /* SelfSignedCertificate.framework */,
@@ -357,7 +357,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		51F0900E1E37E8C600F03AD3 /* SoftU2FTool */ = {
+		51F0900E1E37E8C600F03AD3 /* SoftU2F */ = {
 			isa = PBXGroup;
 			children = (
 				F7ABD9BD1E80603D00768FEC /* Assets.xcassets */,
@@ -374,13 +374,14 @@
 				51213EC51E3916EB005454E0 /* U2FHID.swift */,
 				51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */,
 				51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */,
-				518537BF1E380E4600600911 /* SoftU2FTool-Bridging-Header.h */,
+				518537BF1E380E4600600911 /* SoftU2F-Bridging-Header.h */,
 				51F090181E37E8C600F03AD3 /* Info.plist */,
 			);
+			name = SoftU2F;
 			path = SoftU2FTool;
 			sourceTree = "<group>";
 		};
-		51F090201E37E8C600F03AD3 /* SoftU2FToolTests */ = {
+		51F090201E37E8C600F03AD3 /* SoftU2FTests */ = {
 			isa = PBXGroup;
 			children = (
 				51FE30EE1E40F3DB00BAE824 /* U2FRegistrationTests.swift */,
@@ -391,9 +392,10 @@
 				51FFC71E1E3FEAA4006275E2 /* SoftU2FTestCase.swift */,
 				51EF60B11E427EE200D429F2 /* UtilsTests.swift */,
 				51213EC11E3834F8005454E0 /* TestUtil.swift */,
-				51E214531E3822B8005B2864 /* SoftU2FToolTests-Bridging-Header.h */,
+				51E214531E3822B8005B2864 /* SoftU2FTests-Bridging-Header.h */,
 				51F090231E37E8C600F03AD3 /* Info.plist */,
 			);
+			name = SoftU2FTests;
 			path = SoftU2FToolTests;
 			sourceTree = "<group>";
 		};
@@ -546,9 +548,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		51F0900B1E37E8C600F03AD3 /* SoftU2FTool */ = {
+		51F0900B1E37E8C600F03AD3 /* SoftU2F */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 51F090261E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2FTool" */;
+			buildConfigurationList = 51F090261E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2F" */;
 			buildPhases = (
 				51F090081E37E8C600F03AD3 /* Sources */,
 				51F090091E37E8C600F03AD3 /* Frameworks */,
@@ -562,14 +564,14 @@
 				F738F4F71E4A2CCC005680A2 /* PBXTargetDependency */,
 				F738F5601E4A31DE005680A2 /* PBXTargetDependency */,
 			);
-			name = SoftU2FTool;
+			name = SoftU2F;
 			productName = SoftU2FTool;
-			productReference = 51F0900C1E37E8C600F03AD3 /* SoftU2FTool.app */;
+			productReference = 51F0900C1E37E8C600F03AD3 /* SoftU2F.app */;
 			productType = "com.apple.product-type.application";
 		};
-		51F0901C1E37E8C600F03AD3 /* SoftU2FToolTests */ = {
+		51F0901C1E37E8C600F03AD3 /* SoftU2FTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 51F090291E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2FToolTests" */;
+			buildConfigurationList = 51F090291E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2FTests" */;
 			buildPhases = (
 				51F090191E37E8C600F03AD3 /* Sources */,
 				51F0901A1E37E8C600F03AD3 /* Frameworks */,
@@ -580,9 +582,9 @@
 			dependencies = (
 				51F0901F1E37E8C600F03AD3 /* PBXTargetDependency */,
 			);
-			name = SoftU2FToolTests;
+			name = SoftU2FTests;
 			productName = SoftU2FToolTests;
-			productReference = 51F0901D1E37E8C600F03AD3 /* SoftU2FToolTests.xctest */;
+			productReference = 51F0901D1E37E8C600F03AD3 /* SoftU2FTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		F725EBC31F1FAD3C000A003C /* SoftU2FDriver */ = {
@@ -754,7 +756,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 51F090071E37E8C500F03AD3 /* Build configuration list for PBXProject "SoftU2FTool" */;
+			buildConfigurationList = 51F090071E37E8C500F03AD3 /* Build configuration list for PBXProject "SoftU2F" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -767,8 +769,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				51F0900B1E37E8C600F03AD3 /* SoftU2FTool */,
-				51F0901C1E37E8C600F03AD3 /* SoftU2FToolTests */,
+				51F0900B1E37E8C600F03AD3 /* SoftU2F */,
+				51F0901C1E37E8C600F03AD3 /* SoftU2FTests */,
 				F738F4F01E4A2CCB005680A2 /* APDU */,
 				F738F52E1E4A2E8A005680A2 /* APDUTests */,
 				F738F5591E4A31DE005680A2 /* SelfSignedCertificate */,
@@ -964,7 +966,7 @@
 /* Begin PBXTargetDependency section */
 		51F0901F1E37E8C600F03AD3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 51F0900B1E37E8C600F03AD3 /* SoftU2FTool */;
+			target = 51F0900B1E37E8C600F03AD3 /* SoftU2F */;
 			targetProxy = 51F0901E1E37E8C600F03AD3 /* PBXContainerItemProxy */;
 		};
 		F725EBF41F1FB15E000A003C /* PBXTargetDependency */ = {
@@ -1108,7 +1110,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0d639ce7-4261-41e5-8e5d-8a39cdfc8c41";
 				PROVISIONING_PROFILE_SPECIFIER = SoftU2FTool;
-				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2FTool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2F-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1132,7 +1134,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0d639ce7-4261-41e5-8e5d-8a39cdfc8c41";
 				PROVISIONING_PROFILE_SPECIFIER = SoftU2FTool;
-				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2FTool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2F-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -1153,10 +1155,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FToolTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2FTool.app/Contents/MacOS/SoftU2FTool";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2F.app/Contents/MacOS/SoftU2F";
 			};
 			name = Debug;
 		};
@@ -1176,9 +1178,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FToolTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2FTool.app/Contents/MacOS/SoftU2FTool";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2F.app/Contents/MacOS/SoftU2F";
 			};
 			name = Release;
 		};
@@ -1424,7 +1426,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		51F090071E37E8C500F03AD3 /* Build configuration list for PBXProject "SoftU2FTool" */ = {
+		51F090071E37E8C500F03AD3 /* Build configuration list for PBXProject "SoftU2F" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				51F090241E37E8C600F03AD3 /* Debug */,
@@ -1433,7 +1435,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		51F090261E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2FTool" */ = {
+		51F090261E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2F" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				51F090271E37E8C600F03AD3 /* Debug */,
@@ -1442,7 +1444,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		51F090291E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2FToolTests" */ = {
+		51F090291E37E8C600F03AD3 /* Build configuration list for PBXNativeTarget "SoftU2FTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				51F0902A1E37E8C600F03AD3 /* Debug */,

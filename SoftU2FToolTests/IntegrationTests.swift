@@ -1,6 +1,6 @@
 //
 //  IntegrationTests.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/27/17.
 //  Copyright © 2017 GitHub. All rights reserved.
@@ -9,7 +9,7 @@
 import XCTest
 import APDU
 
-@testable import SoftU2FTool
+@testable import SoftU2F
 class IntegrationTests: SoftU2FTestCase {
     override func tearDown() {
         let _ = U2FRegistration.deleteAll()

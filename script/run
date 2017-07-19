@@ -7,12 +7,16 @@ BUILD_DIR=$REPO_DIR/build
 KEXT_PATH=$BUILD_DIR/Debug/softu2f.kext
 BUNDLE_ID=com.github.SoftU2FDriver
 
-if kextstat -b $BUNDLE_ID | grep $BUNDLE_ID &> /dev/null; then
+function unload_kext {
   echo "Unloading softu2f.kext"
   if ! sudo kextunload -b $BUNDLE_ID &> /dev/null; then
     echo "Error unloading softu2f.kext. Kill any applications using it and try again."
     exit 1
   fi
+}
+
+if kextstat -b $BUNDLE_ID | grep $BUNDLE_ID &> /dev/null; then
+  unload_kext
 fi
 
 # Ensure kext is owned by root.
@@ -24,5 +28,7 @@ if ! sudo kextutil $KEXT_PATH; then
   exit 1
 fi
 
+trap unload_kext EXIT
+
 # Run it
-$BUILD_DIR/Debug/SoftU2FTool.app/Contents/MacOS/SoftU2FTool
+$BUILD_DIR/Debug/SoftU2F.app/Contents/MacOS/SoftU2F

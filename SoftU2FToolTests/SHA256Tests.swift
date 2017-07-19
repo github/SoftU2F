@@ -1,6 +1,6 @@
 //
 //  SHA256Tests.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 9/10/16.
 //  Copyright © 2017 GitHub. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import SoftU2FTool
+@testable import SoftU2F
 class SHA256Tests: XCTestCase {
     func testDigestFormats() throws {
         let hash = SHA256(data: "hello world".data(using: .utf8)!)

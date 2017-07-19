@@ -17,7 +17,7 @@
                BlueprintIdentifier = "F738F4F01E4A2CCB005680A2"
                BuildableName = "APDU.framework"
                BlueprintName = "APDU"
-               ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+               ReferencedContainer = "container:SoftU2F.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "F738F52E1E4A2E8A005680A2"
                BuildableName = "APDUTests.xctest"
                BlueprintName = "APDUTests"
-               ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+               ReferencedContainer = "container:SoftU2F.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "F738F4F01E4A2CCB005680A2"
             BuildableName = "APDU.framework"
             BlueprintName = "APDU"
-            ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+            ReferencedContainer = "container:SoftU2F.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,7 +67,7 @@
             BlueprintIdentifier = "F738F4F01E4A2CCB005680A2"
             BuildableName = "APDU.framework"
             BlueprintName = "APDU"
-            ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+            ReferencedContainer = "container:SoftU2F.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,7 +85,7 @@
             BlueprintIdentifier = "F738F4F01E4A2CCB005680A2"
             BuildableName = "APDU.framework"
             BlueprintName = "APDU"
-            ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+            ReferencedContainer = "container:SoftU2F.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

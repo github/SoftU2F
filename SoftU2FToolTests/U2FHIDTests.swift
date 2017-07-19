@@ -1,6 +1,6 @@
 //
 //  U2FHIDTests.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/25/17.
 //  Copyright © 2017 GitHub. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import SoftU2FTool
+@testable import SoftU2F
 class U2FHIDTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(U2FHID.shared)

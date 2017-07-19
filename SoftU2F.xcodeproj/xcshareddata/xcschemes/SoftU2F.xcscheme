@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "51F0900B1E37E8C600F03AD3"
-               BuildableName = "SoftU2FTool.app"
-               BlueprintName = "SoftU2FTool"
-               ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+               BuildableName = "SoftU2F.app"
+               BlueprintName = "SoftU2F"
+               ReferencedContainer = "container:SoftU2F.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "F725EBC31F1FAD3C000A003C"
                BuildableName = "softu2f.kext"
                BlueprintName = "SoftU2FDriver"
-               ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+               ReferencedContainer = "container:SoftU2F.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "51F0901C1E37E8C600F03AD3"
-               BuildableName = "SoftU2FToolTests.xctest"
-               BlueprintName = "SoftU2FToolTests"
-               ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+               BuildableName = "SoftU2FTests.xctest"
+               BlueprintName = "SoftU2FTests"
+               ReferencedContainer = "container:SoftU2F.xcodeproj">
             </BuildableReference>
             <SkippedTests>
                <Test
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "51F0900B1E37E8C600F03AD3"
-            BuildableName = "SoftU2FTool.app"
-            BlueprintName = "SoftU2FTool"
-            ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+            BuildableName = "SoftU2F.app"
+            BlueprintName = "SoftU2F"
+            ReferencedContainer = "container:SoftU2F.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "51F0900B1E37E8C600F03AD3"
-            BuildableName = "SoftU2FTool.app"
-            BlueprintName = "SoftU2FTool"
-            ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+            BuildableName = "SoftU2F.app"
+            BlueprintName = "SoftU2F"
+            ReferencedContainer = "container:SoftU2F.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -104,9 +104,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "51F0900B1E37E8C600F03AD3"
-            BuildableName = "SoftU2FTool.app"
-            BlueprintName = "SoftU2FTool"
-            ReferencedContainer = "container:SoftU2FTool.xcodeproj">
+            BuildableName = "SoftU2F.app"
+            BlueprintName = "SoftU2F"
+            ReferencedContainer = "container:SoftU2F.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

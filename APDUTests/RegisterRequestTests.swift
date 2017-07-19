@@ -1,6 +1,6 @@
 //
 //  RegisterRequestTests.swift
-//  SoftU2FTool
+//  SoftU2F
 //
 //  Created by Benjamin P Toews on 2/6/17.
 //  Copyright © 2017 GitHub. All rights reserved.
