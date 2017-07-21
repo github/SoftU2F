@@ -18,15 +18,15 @@ typedef unsigned long int uint64_t;
 extern "C" {
 #endif
 
-// Size of HID reports 
+// Size of HID reports
 
 #define HID_RPT_SIZE            64      // Default size of raw HID report
-    
+
 // Frame layout - command- and continuation frames
 
 #define CID_BROADCAST           0xffffffff // Broadcast channel id
 
-#define TYPE_MASK               0x80    // Frame type mask 
+#define TYPE_MASK               0x80    // Frame type mask
 #define TYPE_INIT               0x80    // Initial frame identifier
 #define TYPE_CONT               0x00    // Continuation frame identifier
 
@@ -58,8 +58,8 @@ typedef struct __attribute__((packed)) {
 #define FIDO_USAGE_U2FHID       0x01    // U2FHID usage for top-level collection
 #define FIDO_USAGE_DATA_IN      0x20    // Raw IN data report
 #define FIDO_USAGE_DATA_OUT     0x21    // Raw OUT data report
-        
-// General constants    
+
+// General constants
 
 #define U2FHID_IF_VERSION       2       // Current interface implementation version
 #define U2FHID_TRANS_TIMEOUT    3000    // Default message timeout in ms
@@ -76,7 +76,7 @@ typedef struct __attribute__((packed)) {
 
 #define U2FHID_VENDOR_FIRST (TYPE_INIT | 0x40)  // First vendor defined command
 #define U2FHID_VENDOR_LAST  (TYPE_INIT | 0x7f)  // Last vendor defined command
-    
+
 // U2FHID_INIT command defines
 
 #define INIT_NONCE_SIZE         8       // Size of channel initialization challenge
@@ -89,12 +89,12 @@ typedef struct __attribute__((packed)) {
 
 typedef struct __attribute__((packed)) {
   uint8_t nonce[INIT_NONCE_SIZE];       // Client application nonce
-  uint32_t cid;                         // Channel identifier  
+  uint32_t cid;                         // Channel identifier
   uint8_t versionInterface;             // Interface version
   uint8_t versionMajor;                 // Major version number
   uint8_t versionMinor;                 // Minor version number
   uint8_t versionBuild;                 // Build version number
-  uint8_t capFlags;                     // Capabilities flags  
+  uint8_t capFlags;                     // Capabilities flags
 } U2FHID_INIT_RESP;
 
 // U2FHID_SYNC command defines
