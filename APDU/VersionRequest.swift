@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/25/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +11,7 @@ public struct VersionRequest: RawConvertible {
     public let header: CommandHeader
     public let body: Data
     public let trailer: CommandTrailer
-    
+
     init() {
         self.header = CommandHeader(ins: .Version, dataLength: 0)
         self.body = Data()
@@ -26,7 +25,7 @@ extension VersionRequest: Command {
         self.body = body
         self.trailer = trailer
     }
-    
+
     public func validateBody() throws {
         if body.count > 0 {
             throw ResponseStatus.WrongLength

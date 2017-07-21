@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/25/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -54,7 +53,7 @@ public struct CommandTrailer: RawConvertible, MessagePart {
             throw ResponseStatus.WrongLength
         }
     }
-    
+
     init(noBody: Bool, maxResponse: Int = MaxResponseSize) {
         self.noBody = noBody
         self.maxResponse = maxResponse

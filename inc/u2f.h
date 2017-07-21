@@ -1,6 +1,11 @@
-// Common U2F raw message format header - Review Draft
-// 2014-10-08
-// Editor: Jakob Ehrensvard, Yubico, jakob@yubico.com
+/**
+ * Copyright FIDO Alliance, 2017
+ *
+ * Licensed under CC-BY:
+ * https://creativecommons.org/licenses/by/4.0/legalcode
+ *
+ * Editor: Jakob Ehrensvard, Yubico, jakob@yubico.com
+ */
 
 #ifndef __U2F_H_INCLUDED__
 #define __U2F_H_INCLUDED__

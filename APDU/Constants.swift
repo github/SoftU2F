@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 2/7/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -31,7 +30,7 @@ public enum CommandCode: UInt8 {
 public enum Control: UInt8 {
     case EnforceUserPresenceAndSign = 0x03
     case CheckOnly = 0x07
-    
+
     // Used internally.
     case Invalid = 0xFF
 }
@@ -39,7 +38,7 @@ public enum Control: UInt8 {
 // ISO7816-4
 public enum ResponseStatus: UInt16, EndianEnumProtocol, Error {
     public typealias RawValue = UInt16
-    
+
     case NoError = 0x9000
     case WrongData = 0x6A80
     case ConditionsNotSatisfied = 0x6985

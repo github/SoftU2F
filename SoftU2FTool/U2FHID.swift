@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/25/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -58,7 +57,7 @@ class U2FHID {
         msg.cmd = MessageType.Msg.rawValue
         msg.bcnt = UInt16(data.count)
         msg.cid = cid
-        
+
         let cfd = data as CFData
         msg.data = Unmanaged.passUnretained(cfd)
 

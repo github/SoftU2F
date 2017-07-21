@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 9/11/16.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -16,11 +15,11 @@ public struct RegisterResponse: RawConvertible {
     var reserved: UInt8 {
         return body.subdata(in: reservedRange)[0]
     }
-    
+
     public var publicKey: Data {
         return body.subdata(in: publicKeyRange)
     }
-    
+
     var keyHandleLength: Int {
         return Int(body.subdata(in: keyHandleLengthRange)[0])
     }
@@ -28,7 +27,7 @@ public struct RegisterResponse: RawConvertible {
     public var keyHandle: Data {
         return body.subdata(in: keyHandleRange)
     }
-    
+
     public var certificate: Data {
         return body.subdata(in: certificateRange)
     }
@@ -42,13 +41,13 @@ public struct RegisterResponse: RawConvertible {
         let upperBound = MemoryLayout<UInt8>.size
         return lowerBound..<upperBound
     }
-    
+
     var publicKeyRange: Range<Int> {
         let lowerBound = reservedRange.upperBound
         let upperBound = lowerBound + U2F_EC_POINT_SIZE
         return lowerBound..<upperBound
     }
-    
+
     var keyHandleLengthRange: Range<Int> {
         let lowerBound = publicKeyRange.upperBound
         let upperBound = lowerBound + MemoryLayout<UInt8>.size
@@ -60,7 +59,7 @@ public struct RegisterResponse: RawConvertible {
         let upperBound = lowerBound + keyHandleLength
         return lowerBound..<upperBound
     }
-    
+
     var certificateSize: Int {
         let remainingRange: Range<Int> = keyHandleRange.upperBound..<body.count
         let remaining = body.subdata(in: remainingRange)
@@ -72,19 +71,19 @@ public struct RegisterResponse: RawConvertible {
             return 0
         }
     }
-    
+
     var certificateRange: Range<Int> {
         let lowerBound = keyHandleRange.upperBound
         let upperBound = lowerBound + certificateSize
         return lowerBound..<upperBound
     }
-    
+
     var signatureRange: Range<Int> {
         let lowerBound = certificateRange.upperBound
         let upperBound = body.count
         return lowerBound..<upperBound
     }
-    
+
     public init(publicKey: Data, keyHandle: Data, certificate: Data, signature: Data) {
         let writer = DataWriter()
         writer.write(UInt8(0x05)) // reserved
@@ -104,7 +103,7 @@ extension RegisterResponse: Response {
         self.body = body
         self.trailer = trailer
     }
-    
+
     func validateBody() throws {
         // Check that we at least have key-handle length.
         var min = MemoryLayout<UInt8>.size + U2F_EC_POINT_SIZE + MemoryLayout<UInt8>.size
@@ -118,12 +117,12 @@ extension RegisterResponse: Response {
         if body.count < min {
             throw ResponseError.BadSize
         }
-        
+
         // Check that cert is parsable.
         if certificateSize == 0 {
             throw ResponseError.BadCertificate
         }
-        
+
         // Check that we at least have one byte of signature.
         // TODO: minimum signature size?
         min += certificateSize + 1
@@ -134,7 +133,7 @@ extension RegisterResponse: Response {
         if reserved != 0x05 {
             throw ResponseError.BadData
         }
-        
+
         if trailer != .NoError {
             throw ResponseError.BadStatus
         }

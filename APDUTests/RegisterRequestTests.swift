@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 2/6/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import XCTest
@@ -13,7 +12,7 @@ class RegisterRequestTests: XCTestCase {
     func testChromeRequest() throws {
         let r = Data(base64Encoded: "AAEDAAAAQEr8hj61EL83BjxGaqSnMUyWyXeBIAhGhQ2zbkFcgOzbcGF9/tBlhjr0fBVVbJF5iICCjMQH/fcK6FARVpRloHUAAA==")!
         let c = try RegisterRequest(raw: r)
-        
+
         XCTAssertEqual(c.header.cla, CommandClass.Reserved)
         XCTAssertEqual(c.header.ins, CommandCode.Register)
         XCTAssertEqual(c.header.p1, Control.EnforceUserPresenceAndSign.rawValue)
@@ -21,7 +20,7 @@ class RegisterRequestTests: XCTestCase {
         XCTAssertEqual(c.trailer.maxResponse, MaxResponseSize)
         XCTAssertEqual(c.raw, r)
     }
-    
+
     func testRequest() throws {
         let c = Data(repeating: 0xAA, count: 32)
         let a = Data(repeating: 0xBB, count: 32)
@@ -47,7 +46,7 @@ class RegisterRequestTests: XCTestCase {
             0x00,
             0x00
         ]))
-        
+
         let cmd2 = try RegisterRequest(raw: cmd.raw)
         XCTAssertEqual(cmd.header.cla, cmd2.header.cla)
         XCTAssertEqual(cmd.header.ins, cmd2.header.ins)

@@ -3,7 +3,6 @@
 //  APDU
 //
 //  Created by Benjamin P Toews on 2/7/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -15,5 +14,3 @@ FOUNDATION_EXPORT double APDUVersionNumber;
 FOUNDATION_EXPORT const unsigned char APDUVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <APDU/PublicHeader.h>
-
-

@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 9/11/16.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -64,7 +63,7 @@ public struct CommandHeader: RawConvertible, MessagePart {
             throw ResponseStatus.WrongLength
         }
     }
-    
+
     init(cla: CommandClass = .Reserved, ins: CommandCode, p1: UInt8 = 0x00, p2: UInt8 = 0x00, dataLength: Int) {
         self.cla = cla
         self.ins = ins

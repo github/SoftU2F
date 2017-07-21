@@ -3,7 +3,6 @@
 //  SoftU2F
 //
 //  Created by Benjamin P Toews on 1/27/17.
-//  Copyright © 2017 GitHub. All rights reserved.
 //
 
 import Foundation
@@ -44,7 +43,7 @@ class UserPresence: NSObject {
         } else {
             // Fail any outstanding test.
             current?.complete(false)
-            
+
             // Backup previous delegate to restore on completion.
             let delegateWas = NSUserNotificationCenter.default.delegate
 
@@ -82,7 +81,7 @@ class UserPresence: NSObject {
     func test(_ type: Notification) {
         if #available(OSX 10.12.2, *) {
             let ctx = LAContext()
-            
+
             if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
                 ctx.localizedCancelTitle = "Reject"
                 ctx.localizedFallbackTitle = "Skip TouchID"
@@ -94,13 +93,13 @@ class UserPresence: NSObject {
                 case let .Authenticate(facet):
                     prompt = "authenticate with " + (facet ?? "site")
                 }
-                
+
                 ctx.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: prompt) { (success, err) in
                     guard let lerr = err as? LAError else {
                         self.complete(success)
                         return
                     }
-                    
+
                     switch lerr.code {
                     case .userFallback, .touchIDNotAvailable, .touchIDNotEnrolled:
                         self.sendNotification(type)
