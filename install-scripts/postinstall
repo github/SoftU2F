@@ -30,9 +30,9 @@ cat > $LAUNCH_AGENT_PLIST << EOT
 EOT
 
 # Make sure the plist is owned by the user (otherwise it runs as root)
-chown ${USER}:staff $LAUNCH_AGENT_PLIST
+chown "${USER}:staff" $LAUNCH_AGENT_PLIST
 
 # Launch the app
-sudo -u${USER} launchctl load $LAUNCH_AGENT_PLIST
+sudo -u "${USER}" launchctl load $LAUNCH_AGENT_PLIST
 
 exit 0
