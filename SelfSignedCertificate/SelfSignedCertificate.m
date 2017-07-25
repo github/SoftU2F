@@ -22,6 +22,36 @@ const unsigned char *priv = (unsigned char*)
   "\x74\xe6\xc2\xda\x23\x93\xff\xac\x1d\x50\x34\x6c\x5c\x23\x90\x65"
   "\x57\x93\x3e\xcb\x93\xff\x6e\xde\xd1";
 
+/*
+Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number: 1 (0x1)
+        Signature Algorithm: ecdsa-with-SHA256
+        Issuer: CN=Soft U2F, O=GitHub Inc., OU=Security
+        Validity
+            Not Before: Jul 24 23:38:27 2017 GMT
+            Not After : Jul 22 23:38:27 2027 GMT
+        Subject: CN=Soft U2F, O=GitHub Inc., OU=Security
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+            EC Public Key:
+                pub:
+                    04:f6:9c:ab:24:14:4b:b4:ef:87:f7:0f:23:1c:5c:
+                    d4:f5:78:04:ac:f8:e0:c6:b2:b3:e3:52:18:3d:80:
+                    39:1f:6b:d2:79:d2:6a:4c:83:64:74:e6:c2:da:23:
+                    93:ff:ac:1d:50:34:6c:5c:23:90:65:57:93:3e:cb:
+                    93:ff:6e:de:d1
+                ASN1 OID: prime256v1
+        X509v3 extensions:
+            1.3.6.1.4.1.45724.2.1.1:
+                ....
+    Signature Algorithm: ecdsa-with-SHA256
+        30:45:02:21:00:f6:c8:fd:40:c2:32:b4:d2:a6:15:24:10:44:
+        5f:b0:78:6c:63:69:74:d4:fd:f0:53:c5:46:be:c9:9a:c7:02:
+        67:02:20:40:b5:f1:a4:5f:c7:fc:06:d4:88:9d:de:fb:8c:dc:
+        23:ba:b0:42:d9:f0:83:3d:fd:06:29:7f:07:9d:81:f1:8a
+*/
 const unsigned char *cert = (unsigned char*)
   "\x30\x82\x01\x79\x30\x82\x01\x1f\x02\x01\x01\x30\x0a\x06\x08\x2a"
   "\x86\x48\xce\x3d\x04\x03\x02\x30\x3c\x31\x11\x30\x0f\x06\x03\x55"
