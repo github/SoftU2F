@@ -94,8 +94,6 @@ bool SoftU2FUserClient::start(IOService *provider) {
   if (!device->start(this))
     goto fail_device_start;
 
-  device->release();
-
   workLoop = getWorkLoop();
   if (!workLoop)
     goto fail_no_workloop;
@@ -106,6 +104,10 @@ bool SoftU2FUserClient::start(IOService *provider) {
 
   if (workLoop->addEventSource(_commandGate) != kIOReturnSuccess)
     goto fail_add_event_source;
+
+  // Our call to device->attach took a retain on the device when it was added to the registry.
+  // That will be released when the device is detached from the registry.
+  device->release();
 
   return true;
 
