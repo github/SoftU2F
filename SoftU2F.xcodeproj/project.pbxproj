@@ -403,12 +403,12 @@
 			isa = PBXGroup;
 			children = (
 				F725EBCE1F1FAD9B000A003C /* UserKernelShared.h */,
-				F725EBCF1F1FAD9B000A003C /* SoftU2FDevice.hpp */,
 				F725EBD01F1FAD9B000A003C /* SoftU2FDriver.hpp */,
-				F725EBD11F1FAD9B000A003C /* SoftU2FUserClient.hpp */,
-				F725EBD21F1FAD9B000A003C /* SoftU2FDevice.cpp */,
 				F725EBD31F1FAD9B000A003C /* SoftU2FDriver.cpp */,
+				F725EBD11F1FAD9B000A003C /* SoftU2FUserClient.hpp */,
 				F725EBD41F1FAD9B000A003C /* SoftU2FUserClient.cpp */,
+				F725EBCF1F1FAD9B000A003C /* SoftU2FDevice.hpp */,
+				F725EBD21F1FAD9B000A003C /* SoftU2FDevice.cpp */,
 				F725EBD51F1FAD9B000A003C /* Info.plist */,
 			);
 			path = SoftU2FDriver;

@@ -8,6 +8,7 @@
 #include "SoftU2FDevice.hpp"
 #include "SoftU2FUserClient.hpp"
 #include <IOKit/IOLib.h>
+#include "u2f_hid.h"
 
 #define super IOHIDDevice
 OSDefineMetaClassAndStructors(SoftU2FDevice, IOHIDDevice)
@@ -66,6 +67,10 @@ OSNumber *SoftU2FDevice::newProductIDNumber() const {
   return OSNumber::withNumber(123, 32);
 }
 
+OSNumber* SoftU2FDevice::newPrimaryUsagePageNumber() const {
+  return OSNumber::withNumber(FIDO_USAGE_PAGE, 32);
+}
+
 OSNumber* SoftU2FDevice::newPrimaryUsageNumber() const {
-  return OSNumber::withNumber(kHIDUsage_PID_TriggerButton, 32);
+  return OSNumber::withNumber(FIDO_USAGE_U2FHID, 32);
 }
