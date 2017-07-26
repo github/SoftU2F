@@ -174,12 +174,17 @@ class UserPresence: NSObject {
 
 extension UserPresence: NSUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: NSUserNotificationCenter, didDeliver notification: NSUserNotification) {
-        if notification.isPresented {
+        if #available(OSX 10.13, *) {
+          // notification.isPresented is always false on the latest 10.13 beta.
+          installTimer()
+        } else {
+          if notification.isPresented {
             // Alert is showing to user. Watch to see if it's dismissed.
             installTimer()
-        } else {
+          } else {
             // Alert wasn't shown to user. Fail.
             complete(false)
+          }
         }
     }
 
