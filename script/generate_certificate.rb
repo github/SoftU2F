@@ -46,6 +46,7 @@ def generate_cert(private_key:, subject:, transports:)
   private_key.define_singleton_method(:public?) { public_key? }
 
   OpenSSL::X509::Certificate.new().tap do |cert|
+    cert.version = 2
     cert.serial = 1
     cert.subject = cert.issuer = OpenSSL::X509::Name.parse(subject)
     cert.not_before = Time.now
