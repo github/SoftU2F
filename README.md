@@ -6,7 +6,7 @@ We take the security of this project seriously. Report any security vulnerabilit
 
 ## Installing
 
-You can download the installer [here](https://github.com/github/SoftU2F/releases/download/0.0.8/SoftU2F.pkg).
+You can download the installer [here](https://github.com/github/SoftU2F/releases/latest).
 
 ## Usage
 
