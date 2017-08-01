@@ -12,12 +12,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if !U2FAuthenticator.start() {
             print("Error starting authenticator")
+            NSApplication.shared().terminate(self)
         }
 
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        if !U2FAuthenticator.stop() {
+        if U2FAuthenticator.shared != nil && !U2FAuthenticator.stop() {
             print("Error stopping authenticator")
         }
     }
