@@ -35,3 +35,15 @@ void SoftU2FDriver::free() {
 IOWorkLoop* SoftU2FDriver::getWorkLoop() const {
   return _workLoop;
 }
+
+IOReturn SoftU2FDriver::newUserClient(task_t owningTask, void *securityID, UInt32 type, OSDictionary *properties, IOUserClient **handler) {
+  IOLog("%s[%p]::%s()\n", getName(), this, __FUNCTION__);
+
+  // Check that another client isn't already connected.
+  if (getClient()) {
+    IOLog("%s[%p]::%s() -> kIOReturnExclusiveAccess\n", getName(), this, __FUNCTION__);
+    return kIOReturnExclusiveAccess;
+  }
+
+  return super::newUserClient(owningTask, securityID, type, properties, handler);
+}

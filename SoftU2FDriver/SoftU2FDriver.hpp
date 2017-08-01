@@ -20,6 +20,8 @@ public :
   virtual bool start(IOService *provider) override;
   void free() override;
   IOWorkLoop* getWorkLoop() const override;
+
+  virtual IOReturn newUserClient(task_t owningTask, void *securityID, UInt32 type, OSDictionary *properties, IOUserClient **handler) override;
 };
 
 #endif /* SoftU2F_hpp */
