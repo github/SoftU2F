@@ -14,6 +14,13 @@ class U2FAuthenticator {
     private static var hasShared = false
 
     private let u2fhid: U2FHID
+    
+    var running: Bool
+    
+    static var running: Bool {
+        guard let ua: U2FAuthenticator = shared else { return false }
+        return ua.running
+    }
 
     static func start() -> Bool {
         guard let ua: U2FAuthenticator = shared else { return false }
@@ -28,16 +35,27 @@ class U2FAuthenticator {
     init?() {
         guard let uh: U2FHID = U2FHID.shared else { return nil }
 
+        running = false
         u2fhid = uh
         installMsgHandler()
     }
 
     func start() -> Bool {
-        return u2fhid.run()
+        if u2fhid.run() {
+            running = true
+            return true
+        }
+        
+        return false
     }
 
     func stop() -> Bool {
-        return u2fhid.stop()
+        if u2fhid.stop() {
+            running = false
+            return true
+        }
+        
+        return false
     }
 
     func installMsgHandler() {

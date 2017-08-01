@@ -151,6 +151,34 @@ class Keychain {
 
         return opaqueResult as! CFData as Data
     }
+    
+    // Lookup all keys with the given label.
+    static func getSecKeys(attrLabel: CFString) -> [SecKey] {
+        let query = makeCFDictionary(
+            (kSecClass, kSecClassKey),
+            (kSecAttrKeyType, kSecAttrKeyTypeEC),
+            (kSecAttrLabel, attrLabel),
+            (kSecReturnRef, kCFBooleanTrue),
+            (kSecMatchLimit, 1000 as CFNumber)
+        )
+        
+        var optionalOpaqueResult: CFTypeRef? = nil
+        let err = SecItemCopyMatching(query, &optionalOpaqueResult)
+        
+        if err != errSecSuccess {
+            print("Error from keychain: \(err)")
+            return []
+        }
+        
+        guard let opaqueResult = optionalOpaqueResult else {
+            print("Unexpected nil returned from keychain")
+            return []
+        }
+        
+        let result = opaqueResult as! [SecKey]
+        
+        return result
+    }
 
     static func getSecKey(attrAppLabel: CFData, keyClass: CFString) -> SecKey? {
         // Lookup public key.
