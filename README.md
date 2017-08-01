@@ -52,6 +52,12 @@ Delete the kernel extension
 $ sudo rm -rf /Library/Extensions/softu2f.kext
 ```
 
+Tell macOS to forget about the installation
+
+```
+$ sudo pkgutil --forget com.GitHub.SoftU2F
+```
+
 Done
 
 ## Security considerations
