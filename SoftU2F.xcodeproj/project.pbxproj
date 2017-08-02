@@ -97,6 +97,8 @@
 		F7B5DBC31E4A85EB00E5ABD4 /* VersionRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5DBBF1E4A85EB00E5ABD4 /* VersionRequestTests.swift */; };
 		F7B5DBC91E4A8CF000E5ABD4 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5DBC81E4A8CF000E5ABD4 /* Response.swift */; };
 		F7B5DBCA1E4A8CF000E5ABD4 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5DBC81E4A8CF000E5ABD4 /* Response.swift */; };
+		F7DD7DE81F313E65007F056E /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD7DE71F313E65007F056E /* CLI.swift */; };
+		F7DD7DEA1F324EE0007F056E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD7DE91F324EE0007F056E /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +251,8 @@
 		F7B5DBBE1E4A85EB00E5ABD4 /* RegisterRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRequestTests.swift; sourceTree = "<group>"; };
 		F7B5DBBF1E4A85EB00E5ABD4 /* VersionRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionRequestTests.swift; sourceTree = "<group>"; };
 		F7B5DBC81E4A8CF000E5ABD4 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		F7DD7DE71F313E65007F056E /* CLI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
+		F7DD7DE91F324EE0007F056E /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +378,8 @@
 				51213EC51E3916EB005454E0 /* U2FHID.swift */,
 				51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */,
 				51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */,
+				F7DD7DE71F313E65007F056E /* CLI.swift */,
+				F7DD7DE91F324EE0007F056E /* Settings.swift */,
 				518537BF1E380E4600600911 /* SoftU2F-Bridging-Header.h */,
 				51F090181E37E8C600F03AD3 /* Info.plist */,
 			);
@@ -843,12 +849,14 @@
 			files = (
 				5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */,
 				51FE30F11E410B3D00BAE824 /* Utils.swift in Sources */,
+				F7DD7DEA1F324EE0007F056E /* Settings.swift in Sources */,
 				5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
 				51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */,
 				51E214601E3823E7005B2864 /* SHA256.swift in Sources */,
 				51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */,
 				514F3D821E43C833008FA513 /* Keychain.swift in Sources */,
+				F7DD7DE81F313E65007F056E /* CLI.swift in Sources */,
 				51FE30ED1E403DA000BAE824 /* U2FRegistration.swift in Sources */,
 				51E214621E382521005B2864 /* WebSafeBase64.swift in Sources */,
 				514F3D871E43E828008FA513 /* KeyPair.swift in Sources */,

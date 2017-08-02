@@ -7,24 +7,15 @@
 
 import Cocoa
 
-let listKeysArgument = "--list"
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        if CommandLine.arguments.contains(listKeysArgument) {
-            listKeys()
+        if CLI(CommandLine.arguments).run() {
             quit()
-            return
-        }
-      
-      
-        if !U2FAuthenticator.start() {
+        } else if !U2FAuthenticator.start(){
             print("Error starting authenticator")
             quit()
-            return
         }
-
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -39,28 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // with our notification.
         NSApplication.shared().hide(nil)
     }
-    
+
     private func quit() {
         NSApplication.shared().terminate(self)
-    }
-  
-    private func listKeys() {
-        if let numRegs = U2FRegistration.count {
-            print("Registrations: ", numRegs)
-        }
-        
-        U2FRegistration.all.forEach { reg in
-            print("base64(key handle): ", reg.keyHandle.base64EncodedString())
-            print("base64(sha256(appid)): ", reg.applicationParameter.base64EncodedString())
-            
-            if let kf = KnownFacets[reg.applicationParameter] {
-                print("site: ", kf)
-            } else {
-                print("site: unknown")
-            }
-            
-            print("counter: ", reg.counter)
-            print("")
-        }
     }
 }
