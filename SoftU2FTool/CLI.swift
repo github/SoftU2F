@@ -45,6 +45,7 @@ class CLI {
         print("  - Application parameter: This is the sha256 of the app-id of the site.")
         print("  - Known facet: For some sites we know the application parameter → site name mapping.")
         print("  - Counter: How many times this registration has been used.")
+        print("  — In SEP: Whether this registration's private key is stored in the SEP.")
         print("")
 
         U2FRegistration.all.forEach { reg in
@@ -58,6 +59,7 @@ class CLI {
             }
 
             print("Counter: ", reg.counter)
+            print("In SEP: ", reg.inSEP)
             print("")
         }
     }

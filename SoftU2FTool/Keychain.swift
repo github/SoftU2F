@@ -99,7 +99,6 @@ class Keychain {
         }
 
         guard let opaqueResult = dict[name as String] else {
-            print("Missing key in dictionary")
             return nil
         }
 
@@ -208,25 +207,49 @@ class Keychain {
         return result
     }
 
-    static func generateKeyPair(attrLabel: CFString) -> (SecKey, SecKey)? {
+    static func generateKeyPair(attrLabel: CFString, inSEP: Bool) -> (SecKey, SecKey)? {
+        // Make ACL controlling access to generated keys.
+        let acl: SecAccessControl?
         var err: Unmanaged<CFError>? = nil
         defer { err?.release() }
 
-        // Make ACL controlling access to generated keys.
-        let acl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenUnlocked, SecAccessControlCreateFlags(rawValue: 0), &err)
+        if inSEP {
+            if #available(OSX 10.12.1, *) {
+                acl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, [.privateKeyUsage, .touchIDCurrentSet], &err)
+            } else {
+                print("Cannot generate keys in SEP on macOS<10.12.1")
+                return nil
+            }
+        } else {
+            acl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenUnlocked, [], &err)
+        }
+
         if acl == nil || err != nil {
             print("Error generating ACL for key generation")
             return nil
         }
 
         // Make parameters for generating keys.
-        let params = makeCFDictionary(
-                                      (kSecAttrKeyType, kSecAttrKeyTypeEC),
-                                      (kSecAttrKeySizeInBits, 256 as CFNumber),
-                                      (kSecAttrAccessControl, acl!),
-                                      (kSecAttrIsPermanent, kCFBooleanTrue),
-                                      (kSecAttrLabel, attrLabel)
-        )
+        let params: CFDictionary
+
+        if inSEP {
+            params = makeCFDictionary(
+                (kSecAttrKeyType, kSecAttrKeyTypeEC),
+                (kSecAttrKeySizeInBits, 256 as CFNumber),
+                (kSecAttrAccessControl, acl!),
+                (kSecAttrIsPermanent, kCFBooleanTrue),
+                (kSecAttrLabel, attrLabel),
+                (kSecAttrTokenID, kSecAttrTokenIDSecureEnclave)
+            )
+        } else {
+            params = makeCFDictionary(
+                (kSecAttrKeyType, kSecAttrKeyTypeEC),
+                (kSecAttrKeySizeInBits, 256 as CFNumber),
+                (kSecAttrAccessControl, acl!),
+                (kSecAttrIsPermanent, kCFBooleanTrue),
+                (kSecAttrLabel, attrLabel)
+            )
+        }
 
         // Generate key pair.
         var pub: SecKey? = nil
@@ -251,7 +274,7 @@ class Keychain {
         var err: Unmanaged<CFError>? = nil
         defer { err?.release() }
 
-        let sig = SecKeyCreateSignature(key, .ecdsaSignatureMessageX962SHA256, data as CFData, &err) as? Data
+        let sig = SecKeyCreateSignature(key, .ecdsaSignatureMessageX962SHA256, data as CFData, &err) as Data?
 
         if err != nil {
             print("Error creating signature: \(err!.takeUnretainedValue().localizedDescription)")

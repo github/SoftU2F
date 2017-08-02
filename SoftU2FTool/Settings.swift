@@ -6,19 +6,33 @@
 //
 
 import Foundation
+import LocalAuthentication
 
 class Settings {
     private static let sepEnabledKey = "sepEnabled"
 
     static var sepEnabled: Bool {
-        return UserDefaults.standard.bool(forKey: sepEnabledKey)
+        return sepAvailable && UserDefaults.standard.bool(forKey: sepEnabledKey)
     }
 
-    static func enableSEP() {
-        return UserDefaults.standard.set(true, forKey: sepEnabledKey)
+    static func enableSEP() -> Bool {
+        if sepAvailable {
+            UserDefaults.standard.set(true, forKey: sepEnabledKey)
+            return true
+        } else {
+            return false
+        }
     }
 
     static func disableSEP() {
-        return UserDefaults.standard.set(false, forKey: sepEnabledKey)
+        UserDefaults.standard.set(false, forKey: sepEnabledKey)
+    }
+
+    private static var sepAvailable: Bool {
+        if #available(OSX 10.12.2, *) {
+            return LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+        } else {
+            return false
+        }
     }
 }

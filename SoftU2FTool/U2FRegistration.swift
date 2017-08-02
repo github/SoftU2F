@@ -45,12 +45,16 @@ class U2FRegistration {
     var keyHandle: Data {
         return padKeyHandle(keyPair.applicationLabel)
     }
+    
+    var inSEP: Bool {
+        return keyPair.inSEP
+    }
 
     // Generate a new registration.
-    init?(applicationParameter ap: Data) {
+    init?(applicationParameter ap: Data, inSEP sep: Bool) {
         applicationParameter = ap
 
-        guard let kp = KeyPair(label: U2FRegistration.namespace) else { return nil }
+        guard let kp = KeyPair(label: U2FRegistration.namespace, inSEP: sep) else { return nil }
         keyPair = kp
 
         counter = 1

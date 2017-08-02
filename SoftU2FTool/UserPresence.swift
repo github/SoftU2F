@@ -37,8 +37,8 @@ class UserPresence: NSObject {
 
     // Display a notification, wait for the user to click it, and call the callback with `true`.
     // Calls callback with `false` if another test is done while we're waiting for this one.
-    static func test(_ type: Notification, with callback: @escaping Callback) {
-        if skip {
+    static func test(_ type: Notification, skip skipOnce: Bool = false, with callback: @escaping Callback) {
+        if skip || skipOnce {
             callback(true)
         } else {
             // Fail any outstanding test.
