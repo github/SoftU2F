@@ -10,14 +10,16 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        if !U2FAuthenticator.start() {
+        if CLI(CommandLine.arguments).run() {
+            quit()
+        } else if !U2FAuthenticator.start(){
             print("Error starting authenticator")
+            quit()
         }
-
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        if !U2FAuthenticator.stop() {
+        if U2FAuthenticator.running && !U2FAuthenticator.stop() {
             print("Error stopping authenticator")
         }
     }
@@ -27,5 +29,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // This hack should give focus back to Chrome immediately after the user interacts
         // with our notification.
         NSApplication.shared().hide(nil)
+    }
+
+    private func quit() {
+        NSApplication.shared().terminate(self)
     }
 }
