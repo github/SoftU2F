@@ -30,10 +30,13 @@ class CLI {
             return true
         } else if args.contains(showTouchidFlag) {
             showTouchid()
+            return true
         } else if args.contains(enableTouchidFlag) {
             enableTouchid()
+            return true
         } else if args.contains(disableTouchidFlag) {
             disableTouchid()
+            return true
         }
 
         return false
@@ -78,9 +81,9 @@ class CLI {
 
     private func showTouchid() {
         if Settings.touchidDisabled {
-            print("SEP storage is enabled")
+            print("TouchID is disabled")
         } else {
-            print("SEP storage is disabled")
+            print("TouchID is enabled")
         }
     }
 
@@ -94,6 +97,6 @@ class CLI {
 
     private func disableTouchid() {
         Settings.disableTouchid()
-        print("TouchID is now disabled for")
+        print("TouchID is now disabled")
     }
 }

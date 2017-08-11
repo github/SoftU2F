@@ -17,7 +17,7 @@ class Settings {
 
     static func enableTouchid() -> Bool {
         if touchidAvailable {
-            UserDefaults.standard.set(true, forKey: touchidDisabledKey)
+            UserDefaults.standard.set(false, forKey: touchidDisabledKey)
             return true
         } else {
             return false
@@ -25,7 +25,7 @@ class Settings {
     }
 
     static func disableTouchid() {
-        UserDefaults.standard.set(false, forKey: touchidDisabledKey)
+        UserDefaults.standard.set(true, forKey: touchidDisabledKey)
     }
 
     private static var touchidAvailable: Bool {
