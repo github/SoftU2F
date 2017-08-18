@@ -10,6 +10,8 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        U2FRegistration.repair()
+
         if CLI(CommandLine.arguments).run() {
             quit()
         } else if !U2FAuthenticator.start(){

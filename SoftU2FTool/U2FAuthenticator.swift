@@ -90,9 +90,8 @@ class U2FAuthenticator {
 
         let facet = KnownFacets[req.applicationParameter]
         let notification = UserPresence.Notification.Register(facet: facet)
-        let skipTUP = Settings.sepEnabled
 
-        UserPresence.test(notification, skip: skipTUP) { tupSuccess in
+        UserPresence.test(notification) { tupSuccess in
             if !tupSuccess {
                 // Send no response. Otherwise Chrome will re-prompt immediately.
                 return

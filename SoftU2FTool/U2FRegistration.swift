@@ -31,6 +31,10 @@ class U2FRegistration {
     static var count: Int? {
         return KeyPair.count(label: namespace)
     }
+    
+    static func repair() {
+        KeyPair.repair(label: namespace)
+    }
 
     // Delete all SoftU2F keys from keychain.
     static func deleteAll() -> Bool {
@@ -122,9 +126,6 @@ class U2FRegistration {
     func incrementCounter() {
         counter += 1
         writeApplicationTag()
-    }
-
-    func readApplicationTag(appTag: Data?) {
     }
 
     // Persist the applicationParameter and counter in the keychain.

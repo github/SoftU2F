@@ -7,73 +7,31 @@
 
 import Foundation
 
-fileprivate class tmpKeyPair {
-    var label: String
-    var applicationLabel: Data
-    var publicKey: SecKey?
-    var privateKey: SecKey?
-
-    var keyPair: KeyPair? {
-        guard let pub = publicKey else { return nil }
-        guard let priv = privateKey else { return nil }
-
-        return KeyPair(label: label, appLabel: applicationLabel, publicKey: pub, privateKey: priv)
-    }
-
-    init(label l: String, applicationLabel al: Data) {
-        label = l
-        applicationLabel = al
-    }
-}
-
 class KeyPair {
+    static func repair(label: String) {
+        Keychain.repair(attrLabel: label as CFString)
+    }
+    
     /// Get all KeyPairs with the given label.
     static func all(label: String) -> [KeyPair] {
-        let secKeys = Keychain.getSecKeys(attrLabel: label as CFString)
-        var tmpKeyPairs: [tmpKeyPair] = []
+        let secKeys = Keychain.getPrivateSecKeys(attrLabel: label as CFString)
         var keyPairs: [KeyPair] = []
 
-        secKeys.forEach { secKey in
-            guard let appLabel: CFData = Keychain.getSecKeyAttr(key: secKey, attr: kSecAttrApplicationLabel) else { return }
-
-            let applicationLabel = appLabel as Data
-            var tmpKP: tmpKeyPair
-
-            if let kp = tmpKeyPairs.first(where: { $0.applicationLabel == applicationLabel }) {
-                tmpKP = kp
-            } else {
-                tmpKP = tmpKeyPair.init(label: label, applicationLabel: applicationLabel)
-                tmpKeyPairs.append(tmpKP)
-            }
-
-            guard let klass: CFString = Keychain.getSecKeyAttr(key: secKey, attr: kSecAttrKeyClass) else { return }
-
-            if klass == kSecAttrKeyClassPublic {
-                tmpKP.publicKey = secKey
-            } else {
-                tmpKP.privateKey = secKey
-            }
-        }
-
-        tmpKeyPairs.forEach { tmpKP in
-            guard let kp = tmpKP.keyPair else { return }
-
+        secKeys.forEach { priv in
+            guard let pub = SecKeyCopyPublicKey(priv) else { return }
+            guard let appLabel: CFData = Keychain.getSecKeyAttr(key: priv, attr: kSecAttrApplicationLabel) else { return }
+            
+            let kp = KeyPair(label: label, appLabel: appLabel as Data, publicKey: pub, privateKey: priv)
+            
             keyPairs.append(kp)
         }
 
         return keyPairs
     }
 
-    // The number of key pairs (keys/2) in the keychain.
+    // The number of private keys in the keychain.
     static func count(label: String) -> Int? {
-        guard let c = Keychain.count(attrLabel: label as CFString) else { return nil }
-
-        if c % 2 != 0 {
-            print("Uneven number of keys in the keychain.")
-            return nil
-        }
-
-        return c / 2
+        return Keychain.count(attrLabel: label as CFString)
     }
 
     // Delete all keys with the given label from the keychain.
@@ -97,12 +55,12 @@ class KeyPair {
 
         set {
             let value = (newValue ?? Data())
-            Keychain.setSecItemAttr(attrAppLabel: applicationLabel as CFData, name: kSecAttrApplicationTag, value: value as CFData)
+            _ = Keychain.setSecItemAttr(attrAppLabel: applicationLabel as CFData, name: kSecAttrApplicationTag, value: value as CFData)
         }
     }
 
     var publicKeyData: Data? {
-        return Keychain.getSecItemData(attrAppLabel: applicationLabel)
+        return Keychain.exportSecKey(publicKey)
     }
 
     var inSEP: Bool {
@@ -128,13 +86,13 @@ class KeyPair {
         label = l
         applicationLabel = al
 
-        // Lookup public key.
-        guard let pub = Keychain.getSecKey(attrAppLabel: applicationLabel as CFData, keyClass: kSecAttrKeyClassPublic) else { return nil }
-        publicKey = pub
-
         // Lookup private key.
-        guard let priv = Keychain.getSecKey(attrAppLabel: applicationLabel as CFData, keyClass: kSecAttrKeyClassPrivate) else { return nil }
+        guard let priv = Keychain.getPrivateSecKey(attrAppLabel: applicationLabel as CFData) else { return nil }
         privateKey = priv
+        
+        // Generate public key from private key
+        guard let pub = SecKeyCopyPublicKey(priv) else { return nil }
+        publicKey = pub
     }
 
     // Initialize a key pair with all the necessary data.
