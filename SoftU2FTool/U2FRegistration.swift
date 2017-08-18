@@ -68,7 +68,11 @@ class U2FRegistration {
     // Find a registration with the given key handle.
     init?(keyHandle kh: Data, applicationParameter ap: Data) {
         let appLabel = unpadKeyHandle(kh)
-        guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel) else { return nil }
+
+        let kf = KnownFacets[ap] ?? "site"
+        let prompt = "authenticate with \(kf)"
+
+        guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel, signPrompt: prompt) else { return nil }
         keyPair = kp
 
         // Read our application parameter from the keychain and make sure it matches.

@@ -82,12 +82,12 @@ class KeyPair {
     }
 
     // Find a key pair with the given label and application label.
-    init?(label l: String, appLabel al: Data) {
+    init?(label l: String, appLabel al: Data, signPrompt sp: String) {
         label = l
         applicationLabel = al
 
         // Lookup private key.
-        guard let priv = Keychain.getPrivateSecKey(attrAppLabel: applicationLabel as CFData) else { return nil }
+        guard let priv = Keychain.getPrivateSecKey(attrAppLabel: applicationLabel as CFData, signPrompt: sp as CFString) else { return nil }
         privateKey = priv
         
         // Generate public key from private key

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import LocalAuthentication
 
 class UserPresence: NSObject {
     enum Notification {

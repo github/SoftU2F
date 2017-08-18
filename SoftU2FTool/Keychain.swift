@@ -170,13 +170,14 @@ class Keychain {
         return result
     }
 
-    static func getPrivateSecKey(attrAppLabel: CFData) -> SecKey? {
+    static func getPrivateSecKey(attrAppLabel: CFData, signPrompt: CFString) -> SecKey? {
         let query = makeCFDictionary(
-                                     (kSecClass, kSecClassKey),
-                                     (kSecAttrKeyType, kSecAttrKeyTypeEC),
-                                     (kSecAttrKeyClass, kSecAttrKeyClassPrivate),
-                                     (kSecAttrApplicationLabel, attrAppLabel),
-                                     (kSecReturnRef, kCFBooleanTrue)
+            (kSecClass, kSecClassKey),
+            (kSecAttrKeyType, kSecAttrKeyTypeEC),
+            (kSecAttrKeyClass, kSecAttrKeyClassPrivate),
+            (kSecAttrApplicationLabel, attrAppLabel),
+            (kSecReturnRef, kCFBooleanTrue),
+            (kSecUseOperationPrompt, signPrompt as CFString)
         )
 
         var optionalOpaqueResult: CFTypeRef? = nil
@@ -332,7 +333,7 @@ class Keychain {
                 return
             }
             
-            guard let _ = getPrivateSecKey(attrAppLabel: attrAppLabel as CFData) else {
+            guard let _ = getPrivateSecKey(attrAppLabel: attrAppLabel as CFData, signPrompt: "" as CFString) else {
                 print("error getting private key for public key")
                 return
             }
