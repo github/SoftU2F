@@ -236,25 +236,29 @@ class Keychain {
             params = makeCFDictionary(
                 (kSecAttrKeyType, kSecAttrKeyTypeEC),
                 (kSecAttrKeySizeInBits, 256 as CFNumber),
-                (kSecAttrAccessControl, acl!),
-                (kSecAttrIsPermanent, kCFBooleanTrue),
-                (kSecAttrLabel, attrLabel),
-                (kSecAttrTokenID, kSecAttrTokenIDSecureEnclave)
+                (kSecAttrTokenID, kSecAttrTokenIDSecureEnclave),
+                (kSecPrivateKeyAttrs, makeCFDictionary(
+                    (kSecAttrAccessControl, acl!),
+                    (kSecAttrLabel, attrLabel),
+                    (kSecAttrIsPermanent, kCFBooleanTrue)
+                ))
             )
         } else {
             params = makeCFDictionary(
                 (kSecAttrKeyType, kSecAttrKeyTypeEC),
                 (kSecAttrKeySizeInBits, 256 as CFNumber),
-                (kSecAttrAccessControl, acl!),
-                (kSecAttrIsPermanent, kCFBooleanTrue),
-                (kSecAttrLabel, attrLabel)
+                (kSecPrivateKeyAttrs, makeCFDictionary(
+                    (kSecAttrAccessControl, acl!),
+                    (kSecAttrLabel, attrLabel),
+                    (kSecAttrIsPermanent, kCFBooleanTrue)
+                ))
             )
         }
 
         // Generate key pair.
         var pub: SecKey? = nil
         var priv: SecKey? = nil
-        let status = SecKeyGeneratePair(params, &pub, &priv)
+        var status = SecKeyGeneratePair(params, &pub, &priv)
 
         if status != errSecSuccess {
             print("Error calling SecKeyGeneratePair: \(status)")
@@ -263,6 +267,22 @@ class Keychain {
 
         if pub == nil || priv == nil {
             print("Keys not returned from SecKeyGeneratePair")
+            return nil
+        }
+        
+        // We can't make the public key permanent during generation with
+        // SEP, so we have to save the public key as a separate step.
+        let addParams = makeCFDictionary(
+            (kSecClass, kSecClassKey),
+            (kSecAttrKeyType, kSecAttrKeyTypeEC),
+            (kSecAttrKeyClass, kSecAttrKeyClassPublic),
+            (kSecAttrLabel, attrLabel),
+            (kSecValueRef, pub!)
+        )
+        
+        status = SecItemAdd(addParams, nil)
+        if status != errSecSuccess {
+            print("Error calling SecItemAdd: \(status)")
             return nil
         }
 

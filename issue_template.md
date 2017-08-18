@@ -4,6 +4,10 @@ Thanks for using Soft U2F. I'm sorry that you've encountered a bug.
 
 To aide in debugging, please provide the output from running the following commands:
 
+#### What browser are you using?
+
+FIDO U2F only works natively using Chrome and Opera. Browser extensions enabling U2F are available for Safari and Firefox.
+
 #### `sw_vers`
 
 This tells us the version of macOS you are running. Soft U2F only works on macOS Sierra (10.12) and newer.

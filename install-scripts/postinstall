@@ -2,10 +2,15 @@
 set -e
 
 KEXT="/Library/Extensions/softu2f.kext"
-LAUNCH_AGENT_PLIST="$HOME/Library/LaunchAgents/com.github.SoftU2F.plist"
+LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
+LAUNCH_AGENT_PLIST="$LAUNCH_AGENTS_DIR/com.github.SoftU2F.plist"
 
 # Make sure the kext is loaded
 kextutil $KEXT
+
+# This directory should already exist, but some users have had issues with it
+# being missing.
+mkdir -p $LAUNCH_AGENTS_DIR
 
 # Write a LaunchAgent plist so app starts at login
 cat > $LAUNCH_AGENT_PLIST << EOT

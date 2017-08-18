@@ -13,9 +13,9 @@ fileprivate let deleteAllFlag = "--delete-all"
 fileprivate let showSEPFlag = "--show-sep"
 fileprivate let enableSEPFlag = "--enable-sep"
 fileprivate let disableSEPFlag = "--disable-sep"
-
-// Settings keys
-fileprivate let useSEPKey = "useSEP"
+fileprivate let showTouchidFlag = "--show-touchid"
+fileprivate let enableTouchidFlag = "--enable-touchid"
+fileprivate let disableTouchidFlag = "--disable-touchid"
 
 class CLI {
     private let args: [String]
@@ -31,8 +31,23 @@ class CLI {
         } else if args.contains(deleteAllFlag) {
             deleteAll()
             return true
+        } else if args.contains(showTouchidFlag) {
+            showTouchid()
+            return true
+        } else if args.contains(enableTouchidFlag) {
+            enableTouchid()
+            return true
+        } else if args.contains(disableTouchidFlag) {
+            disableTouchid()
+            return true
         } else if args.contains(showSEPFlag) {
             showSEP()
+            return true
+        } else if args.contains(enableSEPFlag) {
+            enableSEP()
+            return true
+        } else if args.contains(disableSEPFlag) {
+            disableSEP()
             return true
         }
 
@@ -78,6 +93,27 @@ class CLI {
         print("Deleted ", initialCount, " registrations")
     }
 
+    private func showTouchid() {
+        if Settings.touchidDisabled {
+            print("TouchID is disabled")
+        } else {
+            print("TouchID is enabled")
+        }
+    }
+
+    private func enableTouchid() {
+        if Settings.enableTouchid() {
+            print("TouchID is now enabled")
+        } else {
+            print("Error enabling TouchID. Does your system support it?")
+        }
+    }
+
+    private func disableTouchid() {
+        Settings.disableTouchid()
+        print("TouchID is now disabled")
+    }
+
     private func showSEP() {
         if Settings.sepEnabled {
             print("SEP storage is enabled for new keys")
@@ -87,8 +123,11 @@ class CLI {
     }
 
     private func enableSEP() {
-        Settings.enableSEP()
-        print("SEP storage is now enabled for new keys")
+        if Settings.enableSEP() {
+            print("SEP storage is now enabled for new keys")
+        } else {
+            print("Error enabling SEP storage for new keys. Does your system support it?")
+        }
     }
 
     private func disableSEP() {
