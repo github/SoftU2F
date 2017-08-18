@@ -79,40 +79,6 @@ class UserPresence: NSObject {
 
     // Send a notification popup to the user.
     func test(_ type: Notification) {
-        if #available(OSX 10.12.2, *) {
-            if !Settings.touchidDisabled {
-                let ctx = LAContext()
-                
-                if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-                    ctx.localizedCancelTitle = "Reject"
-                    ctx.localizedFallbackTitle = "Skip TouchID"
-                    
-                    var prompt: String
-                    switch type {
-                    case let .Register(facet):
-                        prompt = "register with " + (facet ?? "site")
-                    case let .Authenticate(facet):
-                        prompt = "authenticate with " + (facet ?? "site")
-                    }
-                    
-                    ctx.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: prompt) { (success, err) in
-                        guard let lerr = err as? LAError else {
-                            self.complete(success)
-                            return
-                        }
-                        
-                        switch lerr.code {
-                        case .userFallback, .touchIDNotAvailable, .touchIDNotEnrolled:
-                            self.sendNotification(type)
-                        default:
-                            self.complete(false)
-                        }
-                    }
-                    return
-                }
-            }
-        }
-
         sendNotification(type)
     }
 

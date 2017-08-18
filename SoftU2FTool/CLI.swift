@@ -13,9 +13,6 @@ fileprivate let deleteAllFlag = "--delete-all"
 fileprivate let showSEPFlag = "--show-sep"
 fileprivate let enableSEPFlag = "--enable-sep"
 fileprivate let disableSEPFlag = "--disable-sep"
-fileprivate let showTouchidFlag = "--show-touchid"
-fileprivate let enableTouchidFlag = "--enable-touchid"
-fileprivate let disableTouchidFlag = "--disable-touchid"
 
 class CLI {
     private let args: [String]
@@ -30,15 +27,6 @@ class CLI {
             return true
         } else if args.contains(deleteAllFlag) {
             deleteAll()
-            return true
-        } else if args.contains(showTouchidFlag) {
-            showTouchid()
-            return true
-        } else if args.contains(enableTouchidFlag) {
-            enableTouchid()
-            return true
-        } else if args.contains(disableTouchidFlag) {
-            disableTouchid()
             return true
         } else if args.contains(showSEPFlag) {
             showSEP()
@@ -91,27 +79,6 @@ class CLI {
         }
 
         print("Deleted ", initialCount, " registrations")
-    }
-
-    private func showTouchid() {
-        if Settings.touchidDisabled {
-            print("TouchID is disabled")
-        } else {
-            print("TouchID is enabled")
-        }
-    }
-
-    private func enableTouchid() {
-        if Settings.enableTouchid() {
-            print("TouchID is now enabled")
-        } else {
-            print("Error enabling TouchID. Does your system support it?")
-        }
-    }
-
-    private func disableTouchid() {
-        Settings.disableTouchid()
-        print("TouchID is now disabled")
     }
 
     private func showSEP() {
