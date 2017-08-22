@@ -10,9 +10,9 @@ import Foundation
 // Command line flags
 fileprivate let listFlag = "--list"
 fileprivate let deleteAllFlag = "--delete-all"
-fileprivate let showTouchidFlag = "--show-touchid"
-fileprivate let enableTouchidFlag = "--enable-touchid"
-fileprivate let disableTouchidFlag = "--disable-touchid"
+fileprivate let showSEPFlag = "--show-sep"
+fileprivate let enableSEPFlag = "--enable-sep"
+fileprivate let disableSEPFlag = "--disable-sep"
 
 class CLI {
     private let args: [String]
@@ -28,14 +28,14 @@ class CLI {
         } else if args.contains(deleteAllFlag) {
             deleteAll()
             return true
-        } else if args.contains(showTouchidFlag) {
-            showTouchid()
+        } else if args.contains(showSEPFlag) {
+            showSEP()
             return true
-        } else if args.contains(enableTouchidFlag) {
-            enableTouchid()
+        } else if args.contains(enableSEPFlag) {
+            enableSEP()
             return true
-        } else if args.contains(disableTouchidFlag) {
-            disableTouchid()
+        } else if args.contains(disableSEPFlag) {
+            disableSEP()
             return true
         }
 
@@ -43,14 +43,21 @@ class CLI {
     }
 
     private func listRegistrations() {
+        let registrations = U2FRegistration.all
+        if registrations.count == 0 {
+            print("No registrations to list")
+            return
+        }
+        
         print("The following is a list of U2F registrations stored in your keychain. Each key contains several fields:")
         print("  - Key handle: This is the key handle that we registered with a website. For Soft U2F, the key handle is simply a hash of the public key.")
         print("  - Application parameter: This is the sha256 of the app-id of the site.")
         print("  - Known facet: For some sites we know the application parameter → site name mapping.")
         print("  - Counter: How many times this registration has been used.")
+        print("  — In SEP: Whether this registration's private key is stored in the SEP.")
         print("")
 
-        U2FRegistration.all.forEach { reg in
+        registrations.forEach { reg in
             print("Key handle: ", reg.keyHandle.base64EncodedString())
             print("Application parameter: ", reg.applicationParameter.base64EncodedString())
 
@@ -61,6 +68,7 @@ class CLI {
             }
 
             print("Counter: ", reg.counter)
+            print("In SEP: ", reg.inSEP)
             print("")
         }
     }
@@ -79,24 +87,24 @@ class CLI {
         print("Deleted ", initialCount, " registrations")
     }
 
-    private func showTouchid() {
-        if Settings.touchidDisabled {
-            print("TouchID is disabled")
+    private func showSEP() {
+        if Settings.sepEnabled {
+            print("SEP storage is enabled for new keys")
         } else {
-            print("TouchID is enabled")
+            print("SEP storage is disabled for new keys")
         }
     }
 
-    private func enableTouchid() {
-        if Settings.enableTouchid() {
-            print("TouchID is now enabled")
+    private func enableSEP() {
+        if Settings.enableSEP() {
+            print("SEP storage is now enabled for new keys")
         } else {
-            print("Error enabling TouchID. Does your system support it?")
+            print("Error enabling SEP storage for new keys. Does your system support it?")
         }
     }
 
-    private func disableTouchid() {
-        Settings.disableTouchid()
-        print("TouchID is now disabled")
+    private func disableSEP() {
+        Settings.disableSEP()
+        print("SEP storage is now disabled for new keys")
     }
 }

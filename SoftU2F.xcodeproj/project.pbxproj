@@ -85,8 +85,8 @@
 		F738F5871E4A3C09005680A2 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5851E4A3C09005680A2 /* DataReaderTests.swift */; };
 		F738F5881E4A3C09005680A2 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5861E4A3C09005680A2 /* DataWriterTests.swift */; };
 		F738F58A1E4A3C21005680A2 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5891E4A3C21005680A2 /* TestUtil.swift */; };
-		F78BEF5F1F3E654A0005B3D5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78BEF5E1F3E654A0005B3D5 /* Settings.swift */; };
-		F78BEF611F3E65510005B3D5 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78BEF601F3E65510005B3D5 /* CLI.swift */; };
+		F7713A5F1F477BA90036A0D5 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7713A5D1F477BA90036A0D5 /* CLI.swift */; };
+		F7713A601F477BA90036A0D5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7713A5E1F477BA90036A0D5 /* Settings.swift */; };
 		F7ABD9BE1E80603D00768FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7ABD9BD1E80603D00768FEC /* Assets.xcassets */; };
 		F7B5DBAD1E4A5CED00E5ABD4 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5DBAC1E4A5CED00E5ABD4 /* Command.swift */; };
 		F7B5DBAF1E4A815700E5ABD4 /* RawConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5DBAE1E4A815700E5ABD4 /* RawConvertible.swift */; };
@@ -243,8 +243,8 @@
 		F738F5851E4A3C09005680A2 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
 		F738F5861E4A3C09005680A2 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
 		F738F5891E4A3C21005680A2 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
-		F78BEF5E1F3E654A0005B3D5 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		F78BEF601F3E65510005B3D5 /* CLI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
+		F7713A5D1F477BA90036A0D5 /* CLI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
+		F7713A5E1F477BA90036A0D5 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		F7ABD9BD1E80603D00768FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7B5DBAC1E4A5CED00E5ABD4 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		F7B5DBAE1E4A815700E5ABD4 /* RawConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawConvertible.swift; sourceTree = "<group>"; };
@@ -378,8 +378,8 @@
 				51213EC51E3916EB005454E0 /* U2FHID.swift */,
 				51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */,
 				51FE30EC1E403DA000BAE824 /* U2FRegistration.swift */,
-				F78BEF601F3E65510005B3D5 /* CLI.swift */,
-				F78BEF5E1F3E654A0005B3D5 /* Settings.swift */,
+				F7713A5D1F477BA90036A0D5 /* CLI.swift */,
+				F7713A5E1F477BA90036A0D5 /* Settings.swift */,
 				518537BF1E380E4600600911 /* SoftU2F-Bridging-Header.h */,
 				51F090181E37E8C600F03AD3 /* Info.plist */,
 			);
@@ -847,16 +847,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F78BEF611F3E65510005B3D5 /* CLI.swift in Sources */,
 				5190B6121E3BFE3D00E6FE06 /* UserPresence.swift in Sources */,
 				51FE30F11E410B3D00BAE824 /* Utils.swift in Sources */,
+				F7713A601F477BA90036A0D5 /* Settings.swift in Sources */,
 				5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
 				51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */,
 				51E214601E3823E7005B2864 /* SHA256.swift in Sources */,
-				F78BEF5F1F3E654A0005B3D5 /* Settings.swift in Sources */,
 				51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */,
 				514F3D821E43C833008FA513 /* Keychain.swift in Sources */,
+				F7713A5F1F477BA90036A0D5 /* CLI.swift in Sources */,
 				51FE30ED1E403DA000BAE824 /* U2FRegistration.swift in Sources */,
 				51E214621E382521005B2864 /* WebSafeBase64.swift in Sources */,
 				514F3D871E43E828008FA513 /* KeyPair.swift in Sources */,

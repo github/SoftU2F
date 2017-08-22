@@ -91,13 +91,13 @@ class U2FAuthenticator {
         let facet = KnownFacets[req.applicationParameter]
         let notification = UserPresence.Notification.Register(facet: facet)
 
-        UserPresence.test(notification) { success in
-            if !success {
+        UserPresence.test(notification) { tupSuccess in
+            if !tupSuccess {
                 // Send no response. Otherwise Chrome will re-prompt immediately.
                 return
             }
 
-            guard let reg = U2FRegistration(applicationParameter: req.applicationParameter) else {
+            guard let reg = U2FRegistration(applicationParameter: req.applicationParameter, inSEP: Settings.sepEnabled) else {
                 print("Error creating registration.")
                 self.sendError(status: .OtherError, cid: cid)
                 return
@@ -146,9 +146,10 @@ class U2FAuthenticator {
 
         let facet = KnownFacets[req.applicationParameter]
         let notification = UserPresence.Notification.Authenticate(facet: facet)
+        let skipTUP = reg.inSEP
 
-        UserPresence.test(notification) { success in
-            if !success {
+        UserPresence.test(notification, skip: skipTUP) { tupSuccess in
+            if !tupSuccess {
                 // Send no response. Otherwise Chrome will re-prompt immediately.
                 return
             }

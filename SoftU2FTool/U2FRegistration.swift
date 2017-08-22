@@ -32,6 +32,11 @@ class U2FRegistration {
         return KeyPair.count(label: namespace)
     }
 
+    // Fix up legacy keychain items.
+    static func repair() {
+        KeyPair.repair(label: namespace)
+    }
+
     // Delete all SoftU2F keys from keychain.
     static func deleteAll() -> Bool {
         return KeyPair.delete(label: namespace)
@@ -46,11 +51,15 @@ class U2FRegistration {
         return padKeyHandle(keyPair.applicationLabel)
     }
 
+    var inSEP: Bool {
+        return keyPair.inSEP
+    }
+
     // Generate a new registration.
-    init?(applicationParameter ap: Data) {
+    init?(applicationParameter ap: Data, inSEP sep: Bool) {
         applicationParameter = ap
 
-        guard let kp = KeyPair(label: U2FRegistration.namespace) else { return nil }
+        guard let kp = KeyPair(label: U2FRegistration.namespace, inSEP: sep) else { return nil }
         keyPair = kp
 
         counter = 1
@@ -60,7 +69,11 @@ class U2FRegistration {
     // Find a registration with the given key handle.
     init?(keyHandle kh: Data, applicationParameter ap: Data) {
         let appLabel = unpadKeyHandle(kh)
-        guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel) else { return nil }
+
+        let kf = KnownFacets[ap] ?? "site"
+        let prompt = "authenticate with \(kf)"
+
+        guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel, signPrompt: prompt) else { return nil }
         keyPair = kp
 
         // Read our application parameter from the keychain and make sure it matches.
@@ -118,9 +131,6 @@ class U2FRegistration {
     func incrementCounter() {
         counter += 1
         writeApplicationTag()
-    }
-
-    func readApplicationTag(appTag: Data?) {
     }
 
     // Persist the applicationParameter and counter in the keychain.
