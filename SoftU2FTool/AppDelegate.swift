@@ -10,6 +10,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Fix up legacy keychain items.
         U2FRegistration.repair()
 
         if CLI(CommandLine.arguments).run() {
@@ -27,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ notification: Notification) {
-        // Chrome gives ignores our U2F responses if it isn't active when we send them.
+        // Chrome ignores our U2F responses if it isn't active when we send them.
         // This hack should give focus back to Chrome immediately after the user interacts
         // with our notification.
         NSApplication.shared().hide(nil)

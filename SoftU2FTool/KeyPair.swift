@@ -8,6 +8,7 @@
 import Foundation
 
 class KeyPair {
+    // Fix up legacy keychain items.
     static func repair(label: String) {
         Keychain.repair(attrLabel: label as CFString)
     }

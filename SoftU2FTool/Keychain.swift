@@ -124,23 +124,23 @@ class Keychain {
             print("Error from keychain: \(err)")
             return false
         }
-        
+
         return true
     }
-    
+
     // Get the raw data from the key.
     static func exportSecKey(_ key: SecKey) -> Data? {
         var err: Unmanaged<CFError>? = nil
         let data = SecKeyCopyExternalRepresentation(key, &err)
-        
+
         if err != nil {
             print("Error exporting key")
             return nil
         }
-        
+
         return data as Data?
     }
-    
+
     // Lookup all private keys with the given label.
     static func getPrivateSecKeys(attrLabel: CFString) -> [SecKey] {
         let query = makeCFDictionary(
@@ -151,22 +151,26 @@ class Keychain {
             (kSecReturnRef, kCFBooleanTrue),
             (kSecMatchLimit, 1000 as CFNumber)
         )
-        
+
         var optionalOpaqueResult: CFTypeRef? = nil
         let err = SecItemCopyMatching(query, &optionalOpaqueResult)
-        
+
+        if err == errSecItemNotFound {
+            return []
+        }
+
         if err != errSecSuccess {
             print("Error from keychain: \(err)")
             return []
         }
-        
+
         guard let opaqueResult = optionalOpaqueResult else {
             print("Unexpected nil returned from keychain")
             return []
         }
-        
+
         let result = opaqueResult as! [SecKey]
-        
+
         return result
     }
 
@@ -294,9 +298,16 @@ class Keychain {
 
         return ret
     }
-    
+
+    // Previously, we had been storing both the public and private key in the keychain and
+    // using the application tag attribute on the public key for smuggling the U2F
+    // registration's counter. When generating a private key in the SEP, the public key
+    // isn't persisted in the keychain. From now on, we're using the application tag
+    // attribute on the private key for storing the counter and just deriving the public
+    // key from the private key whenever we need it. This function makes legacy keys
+    // consistent by deleting the public key from the keychain and copying its application
+    // tag into the private key.
     static func repair(attrLabel: CFString) {
-        // Lookup public keys
         let query = makeCFDictionary(
             (kSecClass, kSecClassKey),
             (kSecAttrKeyType, kSecAttrKeyTypeEC),
@@ -305,20 +316,24 @@ class Keychain {
             (kSecReturnAttributes, kCFBooleanTrue),
             (kSecMatchLimit, 100 as CFNumber)
         )
-        
+
         var optionalOpaqueResult: CFTypeRef? = nil
         let err = SecItemCopyMatching(query, &optionalOpaqueResult)
-        
+
+        if err == errSecItemNotFound {
+            return
+        }
+
         if err != errSecSuccess {
             print("Error from keychain: \(err)")
             return
         }
-        
+
         guard let opaqueResult = optionalOpaqueResult else {
             print("Unexpected nil returned from keychain")
             return
         }
-        
+
         let publicKeys = opaqueResult as! [[String:AnyObject]]
 
         publicKeys.forEach { publicKey in
@@ -328,12 +343,12 @@ class Keychain {
                 print("error getting kSecAttrApplicationTag for public key")
                 return
             }
-            
+
             guard let attrAppLabel = publicKey[kSecAttrApplicationLabel as String] as? Data else {
                 print("error getting kSecAttrApplicationLabel for public key")
                 return
             }
-            
+
             guard let _ = getPrivateSecKey(attrAppLabel: attrAppLabel as CFData, signPrompt: "" as CFString) else {
                 print("error getting private key for public key")
                 return
@@ -343,18 +358,18 @@ class Keychain {
                 print("Error copying kSecAttrApplicationTag to private key")
                 return
             }
-            
+
             let ok = delete(
                 (kSecClass, kSecClassKey),
                 (kSecAttrKeyClass, kSecAttrKeyClassPublic),
                 (kSecAttrApplicationLabel, attrAppLabel as CFData)
             )
-            
+
             if !ok {
                 print("Error deleting public keys")
                 return
             }
-            
+
             print("Success")
         }
     }

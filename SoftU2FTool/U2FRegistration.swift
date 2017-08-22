@@ -10,11 +10,11 @@ import Foundation
 class U2FRegistration {
     // Allow using separate keychain namespace for tests.
     static var namespace = "SoftU2F Security Key"
-    
+
     static var all: [U2FRegistration] {
         let kps = KeyPair.all(label: namespace)
         var regs: [U2FRegistration] = []
-        
+
         kps.forEach { kp in
             guard let reg = U2FRegistration(keyPair: kp) else {
                 print("Error initializing U2FRegistration")
@@ -23,7 +23,7 @@ class U2FRegistration {
 
             regs.append(reg)
         }
-        
+
         return regs
     }
 
@@ -31,7 +31,8 @@ class U2FRegistration {
     static var count: Int? {
         return KeyPair.count(label: namespace)
     }
-    
+
+    // Fix up legacy keychain items.
     static func repair() {
         KeyPair.repair(label: namespace)
     }
@@ -49,7 +50,7 @@ class U2FRegistration {
     var keyHandle: Data {
         return padKeyHandle(keyPair.applicationLabel)
     }
-    
+
     var inSEP: Bool {
         return keyPair.inSEP
     }
@@ -96,25 +97,25 @@ class U2FRegistration {
             return nil
         }
     }
-    
+
     // Initialize a registration with all the necessary data.
     init?(keyPair kp: KeyPair) {
         keyPair = kp
-        
+
         // Read our application parameter from the keychain.
         guard let appTag = keyPair.applicationTag else { return nil }
-        
+
         let counterSize = MemoryLayout<UInt32>.size
         let appTagSize = Int(U2F_APPID_SIZE)
-        
+
         if appTag.count != counterSize + appTagSize {
             return nil
         }
-        
+
         counter = appTag.withUnsafeBytes { (ptr:UnsafePointer<UInt32>) -> UInt32 in
             return ptr.pointee.bigEndian
         }
-        
+
         applicationParameter = appTag.subdata(in: counterSize..<(counterSize + appTagSize))
     }
 

@@ -43,6 +43,12 @@ class CLI {
     }
 
     private func listRegistrations() {
+        let registrations = U2FRegistration.all
+        if registrations.count == 0 {
+            print("No registrations to list")
+            return
+        }
+        
         print("The following is a list of U2F registrations stored in your keychain. Each key contains several fields:")
         print("  - Key handle: This is the key handle that we registered with a website. For Soft U2F, the key handle is simply a hash of the public key.")
         print("  - Application parameter: This is the sha256 of the app-id of the site.")
@@ -51,7 +57,7 @@ class CLI {
         print("  — In SEP: Whether this registration's private key is stored in the SEP.")
         print("")
 
-        U2FRegistration.all.forEach { reg in
+        registrations.forEach { reg in
             print("Key handle: ", reg.keyHandle.base64EncodedString())
             print("Application parameter: ", reg.applicationParameter.base64EncodedString())
 
