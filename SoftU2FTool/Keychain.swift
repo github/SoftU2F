@@ -206,7 +206,7 @@ class Keychain {
 
         if inSEP {
             if #available(OSX 10.12.1, *) {
-                acl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, [.privateKeyUsage, .touchIDCurrentSet], &err)
+                acl = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenUnlocked, [.privateKeyUsage, .touchIDAny], &err)
             } else {
                 print("Cannot generate keys in SEP on macOS<10.12.1")
                 return nil
@@ -231,7 +231,8 @@ class Keychain {
                 (kSecPrivateKeyAttrs, makeCFDictionary(
                     (kSecAttrAccessControl, acl!),
                     (kSecAttrLabel, attrLabel),
-                    (kSecAttrIsPermanent, kCFBooleanTrue)
+                    (kSecAttrIsPermanent, kCFBooleanTrue),
+                    (kSecAttrSynchronizable, kCFBooleanFalse)
                 ))
             )
         } else {
