@@ -32,6 +32,15 @@ class U2FAuthenticator {
         return ua.stop()
     }
 
+    private var laptopIsOpen: Bool {
+        guard let screens = NSScreen.screens() else { return true }
+
+        return screens.contains { screen in
+            guard let screenID = screen.deviceDescription["NSScreenNumber"] as? uint32 else { return true }
+            return CGDisplayIsBuiltin(screenID) == 1
+        }
+    }
+
     init?() {
         guard let uh: U2FHID = U2FHID.shared else { return nil }
 
@@ -141,6 +150,12 @@ class U2FAuthenticator {
         if req.control == .CheckOnly {
             // success -> error response. It's weird...
             sendError(status: .ConditionsNotSatisfied, cid: cid)
+            return
+        }
+
+        if reg.inSEP && !laptopIsOpen {
+            // Can't use SEP/TouchID if laptop is closed.
+            sendError(status: .OtherError, cid: cid)
             return
         }
 
