@@ -14,5 +14,6 @@ let KnownFacets: [Data: String] = [
     SHA256.digest("https://www.gstatic.com/securitykey/origins.json"): "https://google.com",
     SHA256.digest("https://vault.bitwarden.com/app-id.json"): "https://vault.bitwarden.com",
     SHA256.digest("https://keepersecurity.com"): "https://keepersecurity.com",
-    SHA256.digest("https://api-9dcf9b83.duosecurity.com"): "https://api-9dcf9b83.duosecurity.com"
+    SHA256.digest("https://api-9dcf9b83.duosecurity.com"): "https://api-9dcf9b83.duosecurity.com",
+    SHA256.digest("https://dashboard.stripe.com"): "https://dashboard.stripe.com"
 ]
