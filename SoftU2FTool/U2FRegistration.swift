@@ -35,6 +35,38 @@ class U2FRegistration {
     // Fix up legacy keychain items.
     static func repair() {
         KeyPair.repair(label: namespace)
+
+        let legacyCounterSize = MemoryLayout<UInt32>.size
+        let appTagSize = Int(U2F_APPID_SIZE)
+        var maxCtr = Counter.current ?? 0
+
+        for kp in KeyPair.all(label: namespace) {
+            guard let appTag = kp.applicationTag else { continue }
+
+            switch appTag.count {
+            case appTagSize:
+                continue
+            case legacyCounterSize + appTagSize:
+                // Find the maximum legacy counter.
+                let ctr = appTag.withUnsafeBytes { (ptr:UnsafePointer<UInt32>) -> UInt32 in
+                    return ptr.pointee.bigEndian
+                }
+                if ctr > maxCtr {
+                    maxCtr = ctr
+                }
+
+                // remove legacy counter from the application tag.
+                kp.applicationTag = appTag.subdata(in: legacyCounterSize..<(legacyCounterSize + appTagSize))
+            default:
+                print("bad applicationTag size")
+                continue
+            }
+        }
+
+        // Use the highest per-registration counter value as our global counter value.
+        if maxCtr > 0 {
+            Counter.current = maxCtr
+        }
     }
 
     // Delete all SoftU2F keys from keychain.
@@ -59,7 +91,7 @@ class U2FRegistration {
         // TODO Specify applicationTag during creation. Alternatively, detect if setting tag fails.
         guard let kp = KeyPair(label: U2FRegistration.namespace, inSEP: sep) else { return nil }
         kp.applicationTag = ap
-        
+
         applicationParameter = ap
         keyPair = kp
     }
