@@ -53,7 +53,6 @@ class CLI {
         print("  - Key handle: This is the key handle that we registered with a website. For Soft U2F, the key handle is simply a hash of the public key.")
         print("  - Application parameter: This is the sha256 of the app-id of the site.")
         print("  - Known facet: For some sites we know the application parameter → site name mapping.")
-        print("  - Counter: How many times this registration has been used.")
         print("  — In SEP: Whether this registration's private key is stored in the SEP.")
         print("")
 
@@ -67,7 +66,6 @@ class CLI {
                 print("Known facet: N/A")
             }
 
-            print("Counter: ", reg.counter)
             print("In SEP: ", reg.inSEP)
             print("")
         }
