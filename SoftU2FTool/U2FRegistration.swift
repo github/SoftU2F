@@ -63,9 +63,10 @@ class U2FRegistration {
             }
         }
 
-        // Use the highest per-registration counter value as our global counter value.
+        // Use the highest per-registration counter value plus one as our global
+        // counter value.
         if maxCtr > 0 {
-            Counter.current = maxCtr
+            Counter.current = maxCtr + 1
         }
     }
 
@@ -77,7 +78,8 @@ class U2FRegistration {
     let keyPair: KeyPair
     let applicationParameter: Data
 
-    // Key handle is application label plus 50 bytes of padding. Conformance tests require key handle to be >64 bytes.
+    // Key handle is application label plus 50 bytes of padding. Conformance
+    // tests require key handle to be >64 bytes.
     var keyHandle: Data {
         return padKeyHandle(keyPair.applicationLabel)
     }
@@ -88,7 +90,8 @@ class U2FRegistration {
 
     // Generate a new registration.
     init?(applicationParameter ap: Data, inSEP sep: Bool) {
-        // TODO Specify applicationTag during creation. Alternatively, detect if setting tag fails.
+        // TODO Specify applicationTag during creation. Alternatively, detect if
+        // setting tag fails.
         guard let kp = KeyPair(label: U2FRegistration.namespace, inSEP: sep) else { return nil }
         kp.applicationTag = ap
 
@@ -106,7 +109,8 @@ class U2FRegistration {
         guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel, signPrompt: prompt) else { return nil }
         keyPair = kp
 
-        // Read our application parameter from the keychain and make sure it matches.
+        // Read our application parameter from the keychain and make sure it
+        // matches.
         guard let appTag = keyPair.applicationTag else { return nil }
         applicationParameter = appTag
 
