@@ -18,19 +18,19 @@ class UserPresence: NSObject {
     static var skip = false
 
     // Hacks to avoid a race between reads/writes to current.
-    static let currentAccessQueue = DispatchQueue(label: "currentAccessQueue")
+    static let mtx = Mutex()
     static var _current: UserPresence?
     static var current: UserPresence? {
         get {
-            return currentAccessQueue.sync {
-                return _current
-            }
+            mtx.lock()
+            defer { mtx.unlock() }
+            return _current
         }
 
         set(newValue) {
-            currentAccessQueue.sync {
-                _current = newValue
-            }
+            mtx.lock()
+            defer { mtx.unlock() }
+            _current = newValue
         }
     }
 

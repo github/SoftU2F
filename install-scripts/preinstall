@@ -1,12 +1,11 @@
 #!/bin/bash
 
-KEXT_DIR="/Library/Extensions"
-KEXT="$KEXT_DIR/softu2f.kext"
+KEXT_BUNDLE="com.github.SoftU2FDriver"
 LAUNCH_AGENT_PLIST="$HOME/Library/LaunchAgents/com.github.SoftU2F.plist"
 
 # This directory should already exist, but some users have had issues with it
 # being missing.
 mkdir -p $KEXT_DIR
 
-kextunload $KEXT || true
+kextunload -b $KEXT_BUNDLE || true
 sudo -u "${USER}" launchctl unload $LAUNCH_AGENT_PLIST || true

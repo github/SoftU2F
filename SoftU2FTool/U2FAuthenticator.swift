@@ -98,6 +98,14 @@ class U2FAuthenticator {
         let req = try APDU.RegisterRequest(raw: raw)
 
         let facet = KnownFacets[req.applicationParameter]
+
+        // When we return an error during authentication, Chrome will send a registration request with
+        // a bogus AppID.
+        if facet == "bogus" {
+            self.sendError(status: .OtherError, cid: cid)
+            return
+        }
+
         let notification = UserPresence.Notification.Register(facet: facet)
 
         UserPresence.test(notification) { tupSuccess in
@@ -155,7 +163,7 @@ class U2FAuthenticator {
 
         if reg.inSEP && !laptopIsOpen {
             // Can't use SEP/TouchID if laptop is closed.
-            sendError(status: .OtherError, cid: cid)
+            sendError(status: .ConditionsNotSatisfied, cid: cid)
             return
         }
 
@@ -169,8 +177,8 @@ class U2FAuthenticator {
                 return
             }
 
-            let counter = reg.counter
-            var ctrBigEndian = counter.bigEndian
+            let ctr = Counter.next
+            var ctrBigEndian = ctr.bigEndian
 
             let payloadSize = req.applicationParameter.count + 1 + MemoryLayout<UInt32>.size + req.challengeParameter.count
             var sigPayload = Data(capacity: payloadSize)
@@ -185,7 +193,7 @@ class U2FAuthenticator {
                 return
             }
 
-            let resp = AuthenticationResponse(userPresence: 0x01, counter: counter, signature: sig)
+            let resp = AuthenticationResponse(userPresence: 0x01, counter: ctr, signature: sig)
             self.sendMsg(msg: resp, cid: cid)
             return
         }

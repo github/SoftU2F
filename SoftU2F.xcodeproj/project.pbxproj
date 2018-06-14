@@ -85,6 +85,9 @@
 		F738F5871E4A3C09005680A2 /* DataReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5851E4A3C09005680A2 /* DataReaderTests.swift */; };
 		F738F5881E4A3C09005680A2 /* DataWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5861E4A3C09005680A2 /* DataWriterTests.swift */; };
 		F738F58A1E4A3C21005680A2 /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738F5891E4A3C21005680A2 /* TestUtil.swift */; };
+		F761094D2056FE3F006BB8B0 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761094C2056FE3F006BB8B0 /* Counter.swift */; };
+		F761094F2057198A006BB8B0 /* CounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761094E2057198A006BB8B0 /* CounterTests.swift */; };
+		F761095120572117006BB8B0 /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F761095020572117006BB8B0 /* Mutex.swift */; };
 		F7713A5F1F477BA90036A0D5 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7713A5D1F477BA90036A0D5 /* CLI.swift */; };
 		F7713A601F477BA90036A0D5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7713A5E1F477BA90036A0D5 /* Settings.swift */; };
 		F7ABD9BE1E80603D00768FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7ABD9BD1E80603D00768FEC /* Assets.xcassets */; };
@@ -243,6 +246,9 @@
 		F738F5851E4A3C09005680A2 /* DataReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataReaderTests.swift; path = DataTests/DataReaderTests.swift; sourceTree = "<group>"; };
 		F738F5861E4A3C09005680A2 /* DataWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataWriterTests.swift; path = DataTests/DataWriterTests.swift; sourceTree = "<group>"; };
 		F738F5891E4A3C21005680A2 /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
+		F761094C2056FE3F006BB8B0 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		F761094E2057198A006BB8B0 /* CounterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTests.swift; sourceTree = "<group>"; };
+		F761095020572117006BB8B0 /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
 		F7713A5D1F477BA90036A0D5 /* CLI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
 		F7713A5E1F477BA90036A0D5 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		F7ABD9BD1E80603D00768FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -374,6 +380,8 @@
 				5119862D1E3C1519006A3BBB /* KnownFacets.swift */,
 				514F3D811E43C833008FA513 /* Keychain.swift */,
 				514F3D861E43E828008FA513 /* KeyPair.swift */,
+				F761094C2056FE3F006BB8B0 /* Counter.swift */,
+				F761095020572117006BB8B0 /* Mutex.swift */,
 				51FE30F01E410B3D00BAE824 /* Utils.swift */,
 				51213EC51E3916EB005454E0 /* U2FHID.swift */,
 				51B289E41E39903F00AD90CC /* U2FAuthenticator.swift */,
@@ -390,6 +398,7 @@
 		51F090201E37E8C600F03AD3 /* SoftU2FTests */ = {
 			isa = PBXGroup;
 			children = (
+				F761094E2057198A006BB8B0 /* CounterTests.swift */,
 				51FE30EE1E40F3DB00BAE824 /* U2FRegistrationTests.swift */,
 				51E2145D1E3823E0005B2864 /* SHA256Tests.swift */,
 				51203C381E39234000F661DF /* U2FHIDTests.swift */,
@@ -852,7 +861,9 @@
 				F7713A601F477BA90036A0D5 /* Settings.swift in Sources */,
 				5119862E1E3C1519006A3BBB /* KnownFacets.swift in Sources */,
 				51F090101E37E8C600F03AD3 /* AppDelegate.swift in Sources */,
+				F761095120572117006BB8B0 /* Mutex.swift in Sources */,
 				51213EC61E3916EB005454E0 /* U2FHID.swift in Sources */,
+				F761094D2056FE3F006BB8B0 /* Counter.swift in Sources */,
 				51E214601E3823E7005B2864 /* SHA256.swift in Sources */,
 				51B289E51E39903F00AD90CC /* U2FAuthenticator.swift in Sources */,
 				514F3D821E43C833008FA513 /* Keychain.swift in Sources */,
@@ -867,6 +878,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F761094F2057198A006BB8B0 /* CounterTests.swift in Sources */,
 				51E214641E382529005B2864 /* WebSafeBase64Tests.swift in Sources */,
 				5131C1B01E3B9C62006A820C /* IntegrationTests.swift in Sources */,
 				51E2145E1E3823E0005B2864 /* SHA256Tests.swift in Sources */,
@@ -1159,7 +1171,7 @@
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/inc";
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/libu2f-host/1.1.3/lib";
+				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/libu2f-host/1.1.5/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1182,7 +1194,7 @@
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/inc";
 				INFOPLIST_FILE = SoftU2FToolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/libu2f-host/1.1.3/lib";
+				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/libu2f-host/1.1.5/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SoftU2FToolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

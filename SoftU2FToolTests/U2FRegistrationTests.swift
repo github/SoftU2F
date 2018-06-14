@@ -111,25 +111,4 @@ class U2FRegistrationTests: SoftU2FTestCase {
 
         XCTAssertTrue(key.keyPair.verify(data: msg, signature: sig))
     }
-
-    func testCounterIncrementsAfterSign() {
-        let msg = "hello, world!".data(using: .utf8)!
-
-        guard let key = makeKey else {
-            XCTFail("Couldn't make key")
-            return
-        }
-
-        XCTAssertEqual(key.counter, 1)
-        XCTAssertEqual(key.counter, 1)
-
-        for i in 2...6 {
-            guard let _ = key.sign(msg) else {
-                XCTFail("Couldn't sing data")
-                return
-            }
-
-            XCTAssertEqual(key.counter, UInt32(i))
-        }
-    }
 }

@@ -35,6 +35,39 @@ class U2FRegistration {
     // Fix up legacy keychain items.
     static func repair() {
         KeyPair.repair(label: namespace)
+
+        let legacyCounterSize = MemoryLayout<UInt32>.size
+        let appTagSize = Int(U2F_APPID_SIZE)
+        var maxCtr = Counter.current ?? 0
+
+        for kp in KeyPair.all(label: namespace) {
+            guard let appTag = kp.applicationTag else { continue }
+
+            switch appTag.count {
+            case appTagSize:
+                continue
+            case legacyCounterSize + appTagSize:
+                // Find the maximum legacy counter.
+                let ctr = appTag.withUnsafeBytes { (ptr:UnsafePointer<UInt32>) -> UInt32 in
+                    return ptr.pointee.bigEndian
+                }
+                if ctr > maxCtr {
+                    maxCtr = ctr
+                }
+
+                // remove legacy counter from the application tag.
+                kp.applicationTag = appTag.subdata(in: legacyCounterSize..<(legacyCounterSize + appTagSize))
+            default:
+                print("bad applicationTag size")
+                continue
+            }
+        }
+
+        // Use the highest per-registration counter value plus one as our global
+        // counter value.
+        if maxCtr > 0 {
+            Counter.current = maxCtr + 1
+        }
     }
 
     // Delete all SoftU2F keys from keychain.
@@ -44,9 +77,9 @@ class U2FRegistration {
 
     let keyPair: KeyPair
     let applicationParameter: Data
-    var counter: UInt32
 
-    // Key handle is application label plus 50 bytes of padding. Conformance tests require key handle to be >64 bytes.
+    // Key handle is application label plus 50 bytes of padding. Conformance
+    // tests require key handle to be >64 bytes.
     var keyHandle: Data {
         return padKeyHandle(keyPair.applicationLabel)
     }
@@ -57,13 +90,13 @@ class U2FRegistration {
 
     // Generate a new registration.
     init?(applicationParameter ap: Data, inSEP sep: Bool) {
-        applicationParameter = ap
-
+        // TODO Specify applicationTag during creation. Alternatively, detect if
+        // setting tag fails.
         guard let kp = KeyPair(label: U2FRegistration.namespace, inSEP: sep) else { return nil }
-        keyPair = kp
+        kp.applicationTag = ap
 
-        counter = 1
-        writeApplicationTag()
+        applicationParameter = ap
+        keyPair = kp
     }
 
     // Find a registration with the given key handle.
@@ -76,21 +109,10 @@ class U2FRegistration {
         guard let kp = KeyPair(label: U2FRegistration.namespace, appLabel: appLabel, signPrompt: prompt) else { return nil }
         keyPair = kp
 
-        // Read our application parameter from the keychain and make sure it matches.
+        // Read our application parameter from the keychain and make sure it
+        // matches.
         guard let appTag = keyPair.applicationTag else { return nil }
-
-        let counterSize = MemoryLayout<UInt32>.size
-        let appTagSize = Int(U2F_APPID_SIZE)
-
-        if appTag.count != counterSize + appTagSize {
-            return nil
-        }
-
-        counter = appTag.withUnsafeBytes { (ptr:UnsafePointer<UInt32>) -> UInt32 in
-            return ptr.pointee.bigEndian
-        }
-
-        applicationParameter = appTag.subdata(in: counterSize..<(counterSize + appTagSize))
+        applicationParameter = appTag
 
         if applicationParameter != ap {
             print("Bad applicationParameter")
@@ -102,47 +124,12 @@ class U2FRegistration {
     init?(keyPair kp: KeyPair) {
         keyPair = kp
 
-        // Read our application parameter from the keychain.
         guard let appTag = keyPair.applicationTag else { return nil }
-
-        let counterSize = MemoryLayout<UInt32>.size
-        let appTagSize = Int(U2F_APPID_SIZE)
-
-        if appTag.count != counterSize + appTagSize {
-            return nil
-        }
-
-        counter = appTag.withUnsafeBytes { (ptr:UnsafePointer<UInt32>) -> UInt32 in
-            return ptr.pointee.bigEndian
-        }
-
-        applicationParameter = appTag.subdata(in: counterSize..<(counterSize + appTagSize))
+        applicationParameter = appTag
     }
 
     // Sign some data with the private key and increment our counter.
     func sign(_ data: Data) -> Data? {
-        guard let sig = keyPair.sign(data) else { return nil }
-
-        incrementCounter()
-
-        return sig
-    }
-
-    func incrementCounter() {
-        counter += 1
-        writeApplicationTag()
-    }
-
-    // Persist the applicationParameter and counter in the keychain.
-    func writeApplicationTag() {
-        let counterSize = MemoryLayout<UInt32>.size
-        let appTagSize = Int(U2F_APPID_SIZE)
-        var data = Data(capacity: counterSize + appTagSize)
-        var ctrBigEndian = counter.bigEndian
-
-        data.append(Data(bytes: &ctrBigEndian, count: counterSize))
-        data.append(applicationParameter)
-
-        keyPair.applicationTag = data
+        return keyPair.sign(data)
     }
 }
