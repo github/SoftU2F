@@ -20,10 +20,10 @@ if kextstat -b $BUNDLE_ID | grep $BUNDLE_ID &> /dev/null; then
 fi
 
 # Ensure kext is owned by root.
-sudo chown -R root:wheel $KEXT_PATH
+sudo chown -R root:wheel "${KEXT_PATH}"
 
 echo "Loading softu2f.kext"
-if ! sudo kextutil $KEXT_PATH; then
+if ! sudo kextutil "${KEXT_PATH}"; then
   echo "Error loading softu2f.kext"
   exit 1
 fi

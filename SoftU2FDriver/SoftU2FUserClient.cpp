@@ -158,21 +158,22 @@ void SoftU2FUserClient::frameReceivedGated(IOMemoryDescriptor *report) {
 
   IOMemoryMap *reportMap = nullptr;
 
-  if (isInactive())
+  if (isInactive() || !_notifyRef)
     return;
 
-  if (report->prepare() != kIOReturnSuccess)
+  if (report->getLength() != sizeof(U2FHID_FRAME) || report->prepare() != kIOReturnSuccess)
     return;
 
+  // Map report into kernel space.
   reportMap = report->map();
 
-  // Notify userland that we got a report.
-  if (_notifyRef && reportMap->getLength() == sizeof(U2FHID_FRAME)) {
+  if (reportMap != nullptr) {
+    // Notify userland that we got a report.
     io_user_reference_t *args = (io_user_reference_t *)reportMap->getAddress();
     sendAsyncResult64(*_notifyRef, kIOReturnSuccess, args, sizeof(U2FHID_FRAME) / sizeof(io_user_reference_t));
+    reportMap->release();
   }
 
-  reportMap->release();
   report->complete();
 }
 
