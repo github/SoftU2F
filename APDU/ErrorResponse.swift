@@ -8,8 +8,8 @@
 import Foundation
 
 public struct ErrorResponse: RawConvertible {
-    let body: Data
-    let trailer: ResponseStatus
+    public let body: Data
+    public let trailer: ResponseStatus
 
     public init(status s: ResponseStatus) {
         body = Data()
@@ -18,12 +18,12 @@ public struct ErrorResponse: RawConvertible {
 }
 
 extension ErrorResponse: Response {
-    init(body: Data, trailer: ResponseStatus) {
+    public init(body: Data, trailer: ResponseStatus) {
         self.body = body
         self.trailer = trailer
     }
 
-    func validateBody() throws {
+    public func validateBody() throws {
         if body.count != 0 {
             throw ResponseError.BadSize
         }

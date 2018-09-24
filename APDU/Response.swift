@@ -14,7 +14,7 @@ enum ResponseError: Error {
     case BadData
 }
 
-protocol Response {
+public protocol Response {
     var body: Data { get }
     var trailer: ResponseStatus { get }
 
@@ -24,7 +24,7 @@ protocol Response {
 }
 
 // Implement RawConvertible
-extension Response {
+public extension Response {
     public var raw: Data {
         let writer = DataWriter()
         writer.writeData(body)
@@ -41,14 +41,5 @@ extension Response {
         self.init(body: body, trailer: trailer)
 
         try validateBody()
-    }
-
-    // For testing with libu2f-host
-    public init(raw: Data, bodyOnly: Bool) throws {
-        if bodyOnly {
-            self.init(body: raw, trailer: .NoError)
-        } else {
-            try self.init(raw: raw)
-        }
     }
 }
