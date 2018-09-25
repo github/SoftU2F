@@ -31,10 +31,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Chrome ignores our U2F responses if it isn't active when we send them.
         // This hack should give focus back to Chrome immediately after the user interacts
         // with our notification.
-        NSApplication.shared().hide(nil)
+        NSApplication.shared.hide(nil)
     }
 
     private func quit() {
-        NSApplication.shared().terminate(self)
+        NSApplication.shared.terminate(self)
     }
 }

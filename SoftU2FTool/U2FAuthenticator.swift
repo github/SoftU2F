@@ -33,10 +33,8 @@ class U2FAuthenticator {
     }
 
     private var laptopIsOpen: Bool {
-        guard let screens = NSScreen.screens() else { return true }
-
-        return screens.contains { screen in
-            guard let screenID = screen.deviceDescription["NSScreenNumber"] as? uint32 else { return true }
+        return NSScreen.screens.contains { screen in
+            guard let screenID = convertFromNSDeviceDescriptionKeyDictionary(screen.deviceDescription)["NSScreenNumber"] as? uint32 else { return true }
             return CGDisplayIsBuiltin(screenID) == 1
         }
     }
@@ -213,4 +211,9 @@ class U2FAuthenticator {
     func sendMsg(msg: APDU.RawConvertible, cid: UInt32) {
         let _ = u2fhid.sendMsg(cid: cid, data: msg.raw)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSDeviceDescriptionKeyDictionary(_ input: [NSDeviceDescriptionKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
 }

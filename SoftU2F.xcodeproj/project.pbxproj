@@ -723,7 +723,7 @@
 					51F0900B1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = VEKTX9H2N7;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -734,7 +734,7 @@
 					51F0901C1E37E8C600F03AD3 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = VEKTX9H2N7;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 						TestTargetID = 51F0900B1E37E8C600F03AD3;
 					};
@@ -751,12 +751,13 @@
 					F738F4F01E4A2CCB005680A2 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = VEKTX9H2N7;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					F738F52E1E4A2E8A005680A2 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = VEKTX9H2N7;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					F738F5591E4A31DE005680A2 = {
@@ -767,6 +768,7 @@
 					F738F5701E4A3328005680A2 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = VEKTX9H2N7;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1132,7 +1134,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = SoftU2FTool;
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2F-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1155,7 +1158,8 @@
 				PROVISIONING_PROFILE = "0d639ce7-4261-41e5-8e5d-8a39cdfc8c41";
 				PROVISIONING_PROFILE_SPECIFIER = SoftU2FTool;
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FTool/SoftU2F-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1177,7 +1181,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2F.app/Contents/MacOS/SoftU2F";
 			};
 			name = Debug;
@@ -1199,7 +1204,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoftU2FToolTests/SoftU2FTests-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoftU2F.app/Contents/MacOS/SoftU2F";
 			};
 			name = Release;
@@ -1286,7 +1292,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1313,7 +1320,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDU;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1330,7 +1338,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDUTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1345,7 +1354,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.APDUTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1424,7 +1434,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificateTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1439,7 +1450,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.SelfSignedCertificateTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

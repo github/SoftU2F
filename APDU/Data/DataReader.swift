@@ -88,25 +88,21 @@ public class DataReader {
     }
 
     // Read n bytes from the data, advancing our offset into the data.
-    func readData<I:Integer>(_ n: I) throws -> Data {
-        let intN = Int(n.toIntMax())
-
-        guard let d = peekData(intN) else {
+    func readData<I:BinaryInteger>(_ n: I) throws -> Data {
+        guard let d = peekData(n) else {
             throw DataReaderError.End
         }
 
-        offset += intN
+        offset += Int(n)
         return d
     }
 
     // Read n bytes from the data, without advancing our offset into the data.
-    func peekData<I:Integer>(_ n: I) -> Data? {
-        let intN = Int(n.toIntMax())
-
-        if remaining < intN {
+    func peekData<I:BinaryInteger>(_ n: I) -> Data? {
+        if remaining < n {
             return nil
         }
 
-        return rest.subdata(in: 0..<intN)
+        return rest.subdata(in: 0..<Int(n))
     }
 }
