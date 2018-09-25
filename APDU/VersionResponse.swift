@@ -8,8 +8,8 @@
 import Foundation
 
 public struct VersionResponse: RawConvertible {
-    let body: Data
-    let trailer: ResponseStatus
+    public let body: Data
+    public let trailer: ResponseStatus
 
     public var version: String {
         return String(data: body, encoding: .utf8) ?? ""
@@ -22,12 +22,12 @@ public struct VersionResponse: RawConvertible {
 }
 
 extension VersionResponse: Response {
-    init(body: Data, trailer: ResponseStatus) {
+    public init(body: Data, trailer: ResponseStatus) {
         self.body = body
         self.trailer = trailer
     }
 
-    func validateBody() throws {
+    public func validateBody() throws {
         if version.lengthOfBytes(using: .utf8) < 1 {
             throw ResponseError.BadSize
         }

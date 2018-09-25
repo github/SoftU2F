@@ -9,8 +9,8 @@ import Foundation
 import SelfSignedCertificate
 
 public struct RegisterResponse: RawConvertible {
-    let body: Data
-    let trailer: ResponseStatus
+    public let body: Data
+    public let trailer: ResponseStatus
 
     var reserved: UInt8 {
         return body.subdata(in: reservedRange)[0]
@@ -99,12 +99,12 @@ public struct RegisterResponse: RawConvertible {
 }
 
 extension RegisterResponse: Response {
-    init(body: Data, trailer: ResponseStatus) {
+    public init(body: Data, trailer: ResponseStatus) {
         self.body = body
         self.trailer = trailer
     }
 
-    func validateBody() throws {
+    public func validateBody() throws {
         // Check that we at least have key-handle length.
         var min = MemoryLayout<UInt8>.size + U2F_EC_POINT_SIZE + MemoryLayout<UInt8>.size
         if body.count < min {
