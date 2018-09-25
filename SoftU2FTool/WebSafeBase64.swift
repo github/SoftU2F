@@ -22,7 +22,7 @@ class WebSafeBase64 {
 
         let padding: Int
 
-        switch b64.characters.count % 4 {
+        switch b64.count % 4 {
         case 0:
             padding = 0
         case 2:
