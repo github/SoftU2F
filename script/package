@@ -1,12 +1,10 @@
 #!/bin/bash
 
-set -e
-
 REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
-BUILD_DIR=$REPO_DIR/build
+source $REPO_DIR/script/bootstrap
 
-sudo rm -rf $BUILD_DIR
-mkdir $BUILD_DIR
+sudo rm -rf $BUILD_DIR/bundles
+mkdir -p $BUILD_DIR
 
 xcodebuild -scheme SoftU2F install DSTROOT=$BUILD_DIR/bundles
 

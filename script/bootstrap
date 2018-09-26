@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+# SDK for oldest supported macOS version
+SDK_VERSION=10.12
+SDK_SHA=0628a563de14020c2600beb1d991547c6b492eb82e0cac4b11104d33faaa00e6
+
+REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+BUILD_DIR=$REPO_DIR/build
+SDK_PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$SDK_VERSION.sdk
+
+mkdir -p $BUILD_DIR
+
+# symlink the sdk into the xcode application, but clean up after ourselves
+if [ ! -d $SDK_PATH ]; then
+    LOCAL_SDK_PATH=$BUILD_DIR/MacOSX$SDK_VERSION.sdk
+    if [ ! -d $LOCAL_SDK_PATH ]; then
+        echo "Downloading SDK"
+        SDK_ARCHIVE_PATH=$LOCAL_SDK_PATH.tar.xz
+        curl -L -s -o $SDK_ARCHIVE_PATH https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX$SDK_VERSION.sdk.tar.xz
+        shasum -a256 $SDK_ARCHIVE_PATH | grep $SDK_SHA > /dev/null
+
+        echo "Extracting SDK"
+        tar -C $BUILD_DIR -xf $SDK_ARCHIVE_PATH
+        rm $SDK_ARCHIVE_PATH
+    fi
+
+    # download SDK, if missing
+    echo "Symlinking SDK into Xcode"
+    sudo ln -s $LOCAL_SDK_PATH $SDK_PATH
+fi
