@@ -1,6 +1,6 @@
 ![](https://user-images.githubusercontent.com/1144197/28190263-470a80d2-67e7-11e7-81e6-17895d70bf75.png)
 
-Soft U2F is a software U2F authenticator for OS X. It emulates a hardware U2F HID device and performs cryptographic operations using the OS X Keychain. This tool works with Google Chrome and Opera's built-in U2F implementations as well as with the U2F extensions for [OS X Safari](https://github.com/Safari-FIDO-U2F/Safari-FIDO-U2F) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/u2f-support-add-on/).
+Soft U2F is a software U2F authenticator for macOS. It emulates a hardware U2F HID device and performs cryptographic operations using the macOS Keychain. This tool works with Google Chrome/Chromium, Safari, Firefox and Opera's built-in U2F implementations.
 
 We take the security of this project seriously. Report any security vulnerabilities to the [GitHub Bug Bounty Program](https://hackerone.com/github).
 
