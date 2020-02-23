@@ -18,6 +18,7 @@ let KnownFacets: [Data: String] = [
     SHA256.digest("https://dashboard.stripe.com"): "https://dashboard.stripe.com",
     SHA256.digest("https://id.fedoraproject.org/u2f-origins.json"): "https://id.fedoraproject.org",
     SHA256.digest("https://lastpass.com"): "https://lastpass.com",
+    SHA256.digest("https://u2f.aws.amazon.com/app-id.json"): "https://aws.amazon.com",
 
     // When we return an error during authentication, Chrome will send a registration request with
     // a bogus AppID.
