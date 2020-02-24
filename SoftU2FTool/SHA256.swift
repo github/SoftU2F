@@ -41,7 +41,7 @@ class SHA256 {
         return SHA256(data: data).webSafeB64Digest
     }
 
-    let digest: Data
+    var digest: Data
 
     var tupleDigest: TupleDigest {
         return digest.withUnsafeBytes { digestPtr in
