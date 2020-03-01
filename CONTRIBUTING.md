@@ -16,7 +16,7 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 0. Make your change, add tests, and make sure the tests still pass
 0. Push to your fork and [submit a pull request][pr]
 0. Pat your self on the back and wait for your pull request to be reviewed and merged.
-0. **If you are submitting a patch for a security vulnerability please report it to the [bounty tracker](https://hackerone.com/github**)
+#### **If you are submitting a patch for a security vulnerability please report it to the [bounty tracker](https://hackerone.com/github**)**
 
 Here are a few things you can do that will increase the likelihood of your pull request being accepted:
 
@@ -32,7 +32,7 @@ Here are a few things you can do that will increase the likelihood of your pull 
 0. Tell us about what issues you are experiencing.
 0. Tell us how to reproduce your issue(s)
 0. Stay active in your issue in case a repository maintainer needs additional information
-0. **If you are submitting an issue about a security vulnerability please do so [here](https://hackerone.com/github)**
+#### **If you are submitting an issue about a security vulnerability please do so [here](https://hackerone.com/github)**
 
 ## Resources
 
