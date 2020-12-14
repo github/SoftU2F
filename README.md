@@ -41,7 +41,7 @@ The app runs in the background. When a site loaded in a U2F-compatible browser a
 
 ## Uninstalling
 
-Unload the launchd agent
+Unload the launch agent
 
 ```
 $ launchctl unload ~/Library/LaunchAgents/com.github.SoftU2F.plist
@@ -94,8 +94,8 @@ Some people may decide the attack scenario above is worth the usability tradeoff
 You must have Xcode Command Line Tools installed to build this project.
 
 ```bash
-# Install Commaned Line Tools
-xcode-select --install
+# Install Command Line Tools
+Xcode-select --install
 
 # Build softu2f.kext and SoftU2F.app.
 script/build
