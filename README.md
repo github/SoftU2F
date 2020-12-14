@@ -1,3 +1,22 @@
+# SoftU2F is no longer supported
+
+The SoftU2F project is deprecated and no longer supported. SoftU2F was created
+to support Touch ID for U2F when browsers did not support it, but the functionality is now
+available on macOS using Touch ID in:
+
+- Safari (macOS 11.0 Big Sur)
+- Google Chrome
+
+SoftU2F has several compatibility issues that will not be fixed, so we recommend
+switching to one of these alternatives.
+
+Thanks to everyone who used SoftU2F over the years, and special thanks to Ben
+Toews for writing and maintaining the original implementation!
+
+<br><br><br><br><br><br>
+--------
+<br><br><br><br><br><br>
+
 ![](https://user-images.githubusercontent.com/1144197/28190263-470a80d2-67e7-11e7-81e6-17895d70bf75.png)
 
 Soft U2F is a software U2F authenticator for macOS. It emulates a hardware U2F HID device and performs cryptographic operations using the macOS Keychain. This tool works with Google Chrome/Chromium, Safari, Firefox and Opera's built-in U2F implementations.
